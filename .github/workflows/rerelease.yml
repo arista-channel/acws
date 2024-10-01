@@ -1,0 +1,63 @@
+---
+name: Re-Release A Version of Lab Guides
+
+on:
+  workflow_dispatch:
+    inputs:
+      cvp_version:
+        required: true
+        type: string
+        description: Which ATD CVP major version are being re-released? Example 2023.2
+      branch_target:
+        required: true
+        type: choice
+        description: Select the target guide branch ( dev or prod ).
+        options:
+        - guides-prod
+        - guides-dev
+
+jobs:
+  're_release':
+    name: 'Re-Release Lab Guides'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: doc-check
+      cancel-in-progress: true
+    steps:
+      - name: Set release
+        run: echo "RELEASE=$(echo ${{ github.event.inputs.cvp_version }} | grep -o -P '(\d+).(\d+)')" >> $GITHUB_ENV
+        id: release-match
+
+      - name:  check version
+        run: echo ${{ env.RELEASE }}
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+
+      - name: 'Setup Python 3 on runner'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Git config
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: 'Build mkdocs content and re-deploy'
+        run: |
+          pip install -r .devcontainer/requirements.txt
+          git pull
+          cd ${{ env.RELEASE }}
+          mike deploy --push ${{ env.RELEASE }} -b ${{ github.event.inputs.branch_target }}
+          git reset --hard && git pull
+
+      - name: Repository Dispatch
+        uses: actions/github-script@v7
+        with:
+          script: |
+              github.rest.repos.createDispatchEvent({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  event_type: "${{ github.event.inputs.branch_target }}"
+              })

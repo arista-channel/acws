@@ -1,0 +1,57 @@
+---
+name: Create New Version Of Lab Guides
+
+on:
+    workflow_dispatch:
+      inputs:
+        previous_version:
+          required: true
+          type: string
+          description: What is the most recent lab guides CVP version? Example 2023.2
+        new_version:
+          required: true
+          type: string
+          description: Which ATD CVP major version are these labs for? Example 2024.1
+
+jobs:
+    'copy_guides':
+        name: 'Create New Version Directory and Content'
+        runs-on: ubuntu-latest
+        concurrency:
+            group: doc-check
+            cancel-in-progress: true
+        steps:
+            - name: Set Previous Release
+              run: echo "PREVVERSIONE=$(echo ${{ github.event.inputs.previous_version }} | grep -o -P '(\d+).(\d+)')" >> $GITHUB_ENV
+              id: pre-release-match
+
+            - name: Set New Release
+              run: echo "NEWVERSION=$(echo ${{ github.event.inputs.new_version }} | grep -o -P '(\d+).(\d+)')" >> $GITHUB_ENV
+              id: new-release-match
+
+            - name:  Check Previous Version
+              run: echo ${{ env.PREVVERSIONE }}
+
+            - name:  Check New Version
+              run: echo ${{ env.NEWVERSION }}
+
+            - name: Checkout docs repo
+              uses: actions/checkout@v4
+
+            - name: 'Setup Python 3 on runner'
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.11'
+
+            - name: Setup Git config
+              run: |
+                  git config --global user.name 'github-actions[bot]'
+                  git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+            - name: 'Create New Directory'
+              run: |
+                sudo mkdir ${{ env.NEWVERSION }}
+                sudo cp -r ${{ env.PREVVERSIONE }}/* ${{ env.NEWVERSION }}/
+                git add .
+                git commit -m "Creating new DIR for guide version ${{ env.NEWVERSION }}"
+                git push

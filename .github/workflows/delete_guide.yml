@@ -1,0 +1,66 @@
+---
+name: Delete Lab Guides
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_name:
+        required: true
+        type: string
+        description: Which CVP version guides would you like to remove? Example 2023.2
+      branch_target:
+        required: true
+        type: choice
+        description: Select the target guide branch ( dev or prod ).
+        options:
+        - guides-prod
+        - guides-dev
+          
+
+jobs:
+  'remove_guides':
+    name: 'Remove Old ATD Lab Guide'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: doc-check
+      cancel-in-progress: true
+    steps:
+      - name: Set Version
+        run: echo "VERSION=$(echo ${{ github.event.inputs.version_name }} | grep -o -P '(\d+).(\d+)')" >> $GITHUB_ENV
+        id: pre-release-match
+
+      - name:  Check Version To Be Removed
+        run: echo ${{ env.VERSION }}
+
+      - name: Checkout docs repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 'Setup Python 3 on runner'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Setup Git config
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: 'Build Environment'
+        run: pip install -r .devcontainer/requirements.txt
+
+      - name: 'Remove Lab Guide Version ${{ env.VERSION }} from mike and ${{ github.event.inputs.branch_target }} branch'
+        run: |
+          mike delete --push ${{ env.VERSION }} --config-file ${{ env.VERSION }}/mkdocs.yml -b ${{ github.event.inputs.branch_target }}
+
+      - name: Repository Dispatch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDispatchEvent({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              event_type: "${{ github.event.inputs.branch_target }}"
+            })
+
