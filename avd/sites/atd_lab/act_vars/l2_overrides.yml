@@ -1,0 +1,6 @@
+# Global vars structured config
+act_intferface_default_mtu: 1500
+
+act_p2p_mtu: 1500
+
+act_enabled: true

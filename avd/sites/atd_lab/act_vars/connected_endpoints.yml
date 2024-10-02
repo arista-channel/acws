@@ -1,0 +1,58 @@
+# # Override Network Ports
+# network_ports:
+
+# # Override Server Conenctivity
+# servers:
+#   - name: a-host-01
+#     adapters:
+#       - endpoint_ports: [ Ethernet1, Ethernet2 ]
+#         switch_ports: [ Ethernet1, Ethernet1 ]
+#         switches: [ a-leaf-01, a-leaf02 ]
+#         profile: COMPUTE_ACCESS_PORT
+#         port_channel:
+#           description: COMPUTE-HOST
+#           mode: active
+
+#   - name: a-host-02
+#     adapters:
+#       - endpoint_ports: [ Ethernet1 ]
+#         switch_ports: [ Ethernet1 ]
+#         switches: [ a-leaf-04 ]
+#         profile: COMPUTE_ACCESS_PORT
+#         description: a-host-02
+
+#   - name: a-host-03
+#     adapters:
+#       - endpoint_ports: [ Ethernet1 ]
+#         switch_ports: [ Ethernet1 ]
+#         switches: [ a-leaf-05]
+#         profile: COMPUTE_ACCESS_PORT
+#         description: a-host-03
+
+#   - name: a-host-04
+#     adapters:
+#       - endpoint_ports: [ Ethernet1, Ethernet2 ]
+#         switch_ports: [ Ethernet2, Ethernet2 ]
+#         switches: [ a-leaf-01, a-leaf02 ]
+#         profile: STORAGE_ACCESS_PORT
+#         port_channel:
+#           description: STORAGE-HOST
+#           mode: active
+#         description: a-host-04
+
+#   - name: a-host-05
+#     adapters:
+#       - endpoint_ports: [ Ethernet1 ]
+#         switch_ports: [ Ethernet1 ]
+#         switches: [ a-leaf-06]
+#         profile: STORAGE_ACCESS_PORT
+#         description: a-host-05
+
+#   - name: a-host-06
+#     adapters:
+#       - endpoint_ports: [ Ethernet1 ]
+#         switch_ports: [ Ethernet1 ]
+#         switches: [ a-leaf-07 ]
+#         profile: STORAGE_ACCESS_PORT
+#         description: a-host-06
+

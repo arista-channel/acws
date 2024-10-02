@@ -1,0 +1,55 @@
+
+act_device_platform: vEOS-lab
+act_inband_override: true
+act_vrf: default
+
+# Override TerminAttr String
+daemon_terminattr:
+  
+  # Address of the gRPC server on CloudVision, TCP 9910 is used on on-prem, TCP 443 is used on CV as a Service
+  cvaddrs: ["{{ lookup('env', 'CV_MGMT') }}:9910"]
+  # Authentication scheme used to connect to CloudVision
+  cvauth:
+    method: token
+    token_file: "/tmp/token"
+
+  # The default compression scheme when streaming to CloudVision is gzip since TerminAttr 1.6.1 and CVP 2019.1.0. There is no need to change the compression scheme.
+  # Name of the VRF to use to connect to CloudVision
+  cvvrf: "{{ act_vrf | default('mgmt') }}"
+
+  # Exclude paths from Sysdb on the ingest side
+  ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
+
+  # Exclude paths from the shared memory table
+  smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
+
+  # Enable log file collection; /var/log/messages is streamed by default if no path is set.
+  taillogs: "/var/log/messages"
+  disable_aaa: true
+
+# Override with ACT users
+local_users: 
+  - name: admin
+    disabled: true
+  - name: cvpadmin
+    privilege: 15
+    role: network-admin
+    sha512_password: $6$NlmtPdtlfwnBoT4.$c33KpurCw1ceTZz2.ZAyntIJ3sC9vlRIjb/d1SXq3iZDfupSZhZaZVlYaSYL78q1ernaet0pgzpqPdy2t/O7I.
+  - name: ec2-user
+    shell: /bin/bash
+    no_password: true
+    ssh_key: ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCxUlawsJhGI5ZDw8jvMTBTUvGYlhe6nQ54T2C2Bmws+PHsc2uC7BslDTpwmD9zgwR2jQCIhgEgqE2N/mgfGTTBzjgHNABZlp8AGhtChGIKIM6Jx8BRmoxpn1vRIErXYDT3SH6SxA1oS6hAMpUAGqCl3pXfbb23BhXDpRdqmyHB+Hv4wNFWdPSbIdN6gDjnS81NK4ASZ0cJxtTh7RQKv/tISA8mIP4snrtg9ENZ6Z2Qb8T7RaLWcuvgCDnDJ+B1NPm3OISaTTrWjxRDfqbCxNGAcSX3RJw2MOAvOt/HNYvYDOC7DdUkxGhPlxszU1NPrbSUzP6Jk04H6Pu+PY3zo45fOj4NQ+twuoNDmc4diFxJV1d8XmkaLAl174A4ss8r6xNSuEoIYN6abSQXpSonAuyMLDMh4qT+g4YxH6xLwdpGAfKdOlYRmJy7MMZxbDACgQDX3vrTy06uPSEC+Lm5FIrxUOKDMCzb6TUkV6ole4VqBvJASLI6waNmok16m01l9gk= root@buildkitsandbox
+  - name: gcp-user
+    shell: /bin/bash
+    no_password: true
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDGPEoZ2l67eEEwrlGfBAHPMx44IoqhyfjqXj2Ka4PxLuHgi1mv131VuCRlyWjOjddccyFUilfR1Bprdmd1Tj7o4Q11YQ138LOqFWJT3h0pxgHFdIHo70y4rI8aL15ixukZYa+g9KX8qTN+ZpFfea2d3CEFzMp+Y3xVPiWwLKzalq1JwT5J4MK2VHCbcnpN3zRON+gca/iZH9upA0WaXWJXNBnYXrgXFVGCJFk6Yl1ZXIGnEcKGe44c77zWgF4C66VhltsW999XD5vF31f6TTs25qxGScsiKMDg2uM1AzVg5KfxxhVy5HKd23YJJMytvUXL9h5Wq1HEEluSCcFtNI81
+  - name: mircea
+    no_password: true
+    ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDw26o1dbfin+wgiYhiHybYebcYlS1EpucVdzfZASTkaMnCiaGy61mLtCaiZA82MEMNbkHLr9WgO2f9pHN2fiIiJc2gmlZPAUvSDzOHQapGuWzoPbeoKTaPyEzkDD5IzerV8wgMooaJOIWU9dWRjVPpUyj2GJ3JirC3HiLRnhkHFh3F+vUkEL81lMzJ/0HdnW3WrIjU6JnuOnpjiJ+np1OEPSbBdANT89tzaEm87QUioPQF7hHknKFUYK2Zqh5SXR6vQaLEcIhRqlAvZyjc95vDtYFWzqrdrHTdznyr8Hs/R2OeLmPGArGm6V8sGC9Q1bGfbhwjxvoWH9igUO6d82HKL2h8PJ1gXJU4XCb6Dkft7y0M4CDx6tIOo9jDxwFRtim9oC0uwxsRoXL4xCDYGH+jO4RAQSVxP6MQsJBEOvXez6whUev1lR91CiXmtUwQfzfmol03U8xMsBkdZ+Y4B7AkBUIpi/+8aEbMwRACyDZJB0+FzkYuWIYpiqoQ4pwUVw8=
+  - name: service
+    no_password: true
+    shell: /bin/bash
+    sha512_password: $6$ZXmZ6vwgtFYX8iAB$HjhsMXMRwmKKkmXZPxF/Is0z4EUQBbATVRlPEvJ.kHtJiRtcZYZY1qbZXgBIRs/u3seI0xxytbJdBtwq.gjUm.
+
+# Override all platform settings
+platform_settings:

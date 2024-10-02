@@ -1,0 +1,31 @@
+---
+
+- name: Build Switch configuration
+  hosts: "{{ target_hosts }}"
+  connection: local
+  gather_facts: false
+  collections:
+    - arista.avd
+    - arista.cvp
+
+  tasks:
+
+    - name: "INCLUDE_VARS: Load ACT Specific Variables"
+      ansible.builtin.include_vars:
+        dir: "{{ inventory_dir | dirname }}/{{ fabric }}/act_vars"
+      tags: [act]
+
+    - name: "INCLUDE_VARS: Load Valuted Credentials"
+      ansible.builtin.include_vars:
+        file: "{{ inventory_dir | dirname }}/{{ fabric }}/vault.yml"
+      tags: [act, build, generate]
+
+    - name: "AVD_DESIGNS: Generate intended variables"
+      ansible.builtin.import_role:
+        name: arista.avd.eos_designs
+      tags: [act, build, generate]
+
+    - name: "AVD_CONFIG_GEN: Generate device intended config and documentation"
+      ansible.builtin.import_role:
+        name: arista.avd.eos_cli_config_gen
+      tags: [act, build, generate]

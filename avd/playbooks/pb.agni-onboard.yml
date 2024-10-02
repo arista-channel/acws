@@ -1,0 +1,17 @@
+- name: Configure SSL profile for AGNI RadSec on EOS Switches
+  hosts: FABRIC
+  gather_facts: no
+  tasks:
+    - name: Load and run the role eos_agni_radsec
+      ansible.builtin.import_role:
+        name: eos_agni_radsec
+      vars:
+        agni_base_url: "beta.agni.arista.io"
+        eos_csr_info:
+          country: "US"
+          state: "TX"
+          locality: "SAT"
+          organization: "Home"
+          organizational_unit: "Lab"
+          domain: "bella.local"
+        eos_radius_server: true

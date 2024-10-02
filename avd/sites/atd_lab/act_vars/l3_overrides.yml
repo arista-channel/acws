@@ -1,0 +1,9 @@
+
+# Custom override vars
+act_wait_install: false
+
+agents:
+  - name: KernelFib
+    environment_variables:
+      - name: KERNELFIB_PROGRAM_ALL_ECMP
+        value: "'true'"

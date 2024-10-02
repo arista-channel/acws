@@ -1,0 +1,107 @@
+---
+
+prompt: !unsafe "%H%v[%D{%H:%M:%S}]%P"
+
+timezone: CST6CDT
+
+source_interfaces:
+  domain_lookup:
+    mgmt_interface: true
+  http_client:
+    mgmt_interface: true
+  ssh_client:
+    mgmt_interface: true
+  tacacs:
+    mgmt_interface: true
+  radius:
+    mgmt_interface: true
+
+dns_domain: "{{ centx.dns_domain }}"
+
+name_servers: "{{ centx.name_servers }}"
+
+ntp:
+  local_interface:
+    name: "{{ hostvars[inventory_hostname]['management_interfaces'][0]['name'] }}"
+    vrf: "{{ act_vrf | default('mgmt') }}"
+  servers: "{{ centx.ntp_servers }}"
+
+local_users: 
+  - name: admin
+    privilege: 15
+    role: network-admin
+    no_password: true
+  - name: "{{ labs.common.eos_user }}"
+    privilege: 15
+    role: network-admin
+    sha512_password: "{{ labs.common.eos_password }}"
+
+enable_password:
+  hash_algorithm: sha512
+  key: "{{ vault.enable.password }}"
+
+# cvp_instance_ips: "{{ centx.cvp_instance_ips }}"
+
+cvp_token_file: /tmp/token
+
+ip_tacacs_source_interfaces:
+  - name: "{{ hostvars[inventory_hostname]['management_interfaces'][0]['name'] }}"
+    vrf: "{{ act_vrf | default('mgmt') }}"
+
+
+tacacs_servers:
+  policy_unknown_mandatory_attribute_ignore: true
+  hosts:
+    - host: 0.0.0.0
+      key: "{{ labs.common.agni_password }}"
+
+radius_server:
+  hosts:
+    - host: radsec.beta.agni.arista.io tls ssl-profile agni-server
+      timeout: 10
+      retransmit: 3
+
+aaa_server_groups:
+  - name: agni-radius
+    type: radius
+    servers:
+      - server: radsec.beta.agni.arista.io tls
+  - name: agni-tacacs
+    type: tacacs+
+    servers:
+      - server: 0.0.0.0
+
+aaa_accounting:
+  commands:
+    default:
+      - commands: all
+        type: start-stop
+        group: agni-tacacs
+
+  dot1x:
+    default:
+      type: start-stop
+      group: agni-radius
+
+aaa_authentication:
+  login: 
+    default: group agni-tacacs local
+  enable:
+    default: none
+  dot1x:
+    default: group agni-radius
+
+dot1x:
+  system_auth_control: true
+  protocol_lldp_bypass: true
+  dynamic_authorization: true
+
+banners:
+  login: |
+    ||||||||||||||||||||||||||||||||||||||||||||||
+    |                                            |
+    |          Welcome to Arista Labs !!         |
+    |      All your base are belong to us :)~    |
+    |                                            |
+    ||||||||||||||||||||||||||||||||||||||||||||||
+    EOF

@@ -1,0 +1,34 @@
+daemon_terminattr:
+  
+  # Address of the gRPC server on CloudVision, TCP 9910 is used on on-prem, TCP 443 is used on CV as a Service
+  cvaddrs: [ "apiserver.arista.io:443" ]
+
+  # Authentication scheme used to connect to CloudVision
+  cvauth:
+    method: token-secure
+    token_file: "/tmp/cv-onboarding-token"
+
+  # Exclude paths from Sysdb on the ingest side
+  ingestexclude: "/Sysdb/cell/1/agent,/Sysdb/cell/2/agent"
+
+  # Exclude paths from the shared memory table
+  smashexcludes: "ale,flexCounter,hardware,kni,pulse,strata"
+
+  # Enable log file collection; /var/log/messages is streamed by default if no path is set.
+  taillogs: "/var/log/messages"
+  disable_aaa: true
+
+logging:
+  format:
+    timestamp: high-resolution
+    hostname: fqdn
+
+sflow:
+  sample: 1
+  run: true
+  vrfs:
+    - name: default
+      destinations:
+        - destination: 127.0.0.1
+      source_interface: "{{ hostvars[inventory_hostname]['management_interfaces'][0]['name'] }}"
+

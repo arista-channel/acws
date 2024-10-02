@@ -25,6 +25,7 @@ mkdocs-include-dir-to-nav
 mkdocs-material==9.5.17
 mkdocs-material-extensions
 mkdocs-pymdownx-material-extras
+mkdocs-print-site-plugin
 natsort
 netaddr
 packaging

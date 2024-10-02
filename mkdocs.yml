@@ -1,0 +1,124 @@
+site_name: Arista Campus Workshop
+site_description: Arista Campus Workshop
+watch: ["docs", "mkdocs.yml"]
+
+nav:
+    - Campus Workshop:
+        - Getting Started: index.md
+        - Marketing: marketing/index.md
+        - Lab Setup: 
+            - CVaaS: setup/index.md
+            - Device Config:
+                - AVD Option: setup/cvaas_avd.md
+                - Studios Option: setup/cvaas_studios.md
+                - Configlets Option: setup/cvaas_configlets.md
+            - CV-CUE: setup/cvcue.md
+            - AGNI: setup/agni.md
+copyright: Copyright &copy; 2024 Arista Networks
+
+extra:
+    social:
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/AristaNetworks
+    - icon: fontawesome/solid/globe
+      link: https://www.arista.com
+    version:
+        provider: mike
+
+theme:
+    name: material
+    custom_dir: docs/overrides
+    highlightjs: true
+    hljs_languages:
+        - yaml
+
+    features:
+        - content.code.annotate
+        - content.code.copy
+        - content.tabs.link
+        - content.tooltips
+        - header.autohide
+        - navigation.path
+        - navigation.top
+        - navigation.tabs
+        - navigation.tabs.sticky
+        - navigation.tracking
+        # - tables
+        - toc.follow
+        # - toc.integrate
+
+    favicon: assets/logo.png
+
+    font:
+        text: Roboto
+        code: Fira Mono
+
+    language: en
+
+    logo: assets/logo.png
+
+    palette:
+    # Palette toggle for light mode
+        - scheme: default
+          primary: custom
+          toggle:
+            icon: material/weather-night
+            name: Switch to dark mode
+
+    # Palette toggle for dark mode
+        - scheme: slate
+          primary: custom
+          toggle:
+            icon: material/weather-sunny
+            name: Switch to light mode
+
+markdown_extensions:
+    - abbr
+    - admonition
+    - attr_list
+    - def_list
+    - footnotes
+    - md_in_html
+    - pymdownx.arithmatex
+    - pymdownx.caret
+    - pymdownx.critic
+    - pymdownx.details
+    - pymdownx.emoji:
+        emoji_index: !!python/name:material.extensions.emoji.twemoji
+        emoji_generator: !!python/name:material.extensions.emoji.to_svg
+        options:
+          custom_icons:
+            - overrides/.icons
+    - pymdownx.highlight:
+        anchor_linenums: true
+    - pymdownx.inlinehilite
+    - pymdownx.keys
+    - pymdownx.mark
+    - pymdownx.smartsymbols
+    - pymdownx.snippets
+    - pymdownx.superfences
+    - pymdownx.tabbed:
+        alternate_style: true
+    - pymdownx.tasklist:
+        custom_checkbox: true
+    - pymdownx.arithmatex:
+        generic: true
+    - pymdownx.tilde
+    - tables
+    - toc:
+        permalink: true
+        toc_depth: 3
+
+plugins:
+    - search
+    - git-revision-date
+    - glightbox
+    - search:
+        lang: en
+    - mike:
+        alias_type: redirect
+    - print-site:
+        path_to_pdf: "print_page"
+
+extra_css:
+    - stylesheets/extra.css

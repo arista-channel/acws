@@ -1,0 +1,91 @@
+all:
+  children:
+    CVP:
+      hosts:
+        cvp-01:
+          ansible_password: "{{ labs.101.cv_password }}"
+        cvp-02:
+          ansible_password: "{{ labs.102.cv_password }}"
+      vars:
+        ansible_user: "{{ labs.common.cv_user }}"
+        ansible_host: "{{ labs.common.cv_url }}"
+        ansible_network_os: eos
+        ansible_httpapi_port: 443
+        ansible_connection: httpapi
+        ansible_httpapi_use_ssl: true
+        ansible_httpapi_validate_certs: false
+        cv_collection: v3
+    ATD_LAB:
+      children:
+        SPINE:
+          hosts:
+            core-7280SR-48C6:
+        LEAFS:
+          children:
+            ATD01:
+              hosts:
+                710p-01:
+            ATD02:
+              hosts:
+                710p-02:
+            ATD03:
+              hosts:
+                710p-03:
+            ATD04:
+              hosts:
+                710p-04:
+            ATD05:
+              hosts:
+                710p-05:
+            ATD06:
+              hosts:
+                710p-06:
+            ATD07:
+              hosts:
+                710p-07:
+            ATD08:
+              hosts:
+                710p-08:
+            ATD09:
+              hosts:
+                710p-09:
+            ATD010:
+              hosts:
+                710p-10:
+            ATD011:
+              hosts:
+                710p-11:
+            ATD012:
+              hosts:
+                710p-12:
+            ATD13:
+              hosts:
+                710p-13:
+            ATD14:
+              hosts:
+                710p-14:
+            ATD15:
+              hosts:
+                710p-15:
+            ATD16:
+              hosts:
+                710p-16:
+            ATD17:
+              hosts:
+                710p-17:
+            ATD18:
+              hosts:
+                710p-18:
+            ATD19:
+              hosts:
+                710p-19:
+            ATD20:
+              hosts:
+                710p-20:
+            INSTRUCTOR:
+              hosts:
+                710p-24:
+    LAB:
+      hosts:
+        lab-sw-02:
+          ansible_host: 10.0.100.252
