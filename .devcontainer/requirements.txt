@@ -1,3 +1,4 @@
+ansible-core
 asgiref
 black==22.8.0
 certifi

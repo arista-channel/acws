@@ -1,13 +1,15 @@
 {
-    "build": {
-        "dockerfile": "./Dockerfile",
-        "context": ".",
-        "args": {
-            "FROM_IMAGE": "mcr.microsoft.com/devcontainers/base",
-            "FROM_VARIANT": "ubuntu-22.04",
-            "USERNAME": "vscode"
-        }
-    },
+    
+    "image": "ghcr.io/aristanetworks/avd/universal:python3.11-avd-v4.10.0",
+    // "build": {
+    //     "dockerfile": "./Dockerfile",
+    //     "context": ".",
+    //     "args": {
+    //         "FROM_IMAGE": "mcr.microsoft.com/devcontainers/base",
+    //         "FROM_VARIANT": "ubuntu-22.04",
+    //         "USERNAME": "vscode"
+    //     }
+    // },
     "features": {
 		"ghcr.io/shinepukur/devcontainer-features/vale:1": {},
         "ghcr.io/devcontainers/features/github-cli:1": {}

@@ -33,9 +33,11 @@ Configure the applications using the API keys/values:
 
     ---
 
-    Add the API Key generated from Launchpad to the Arista CV-CUE concourse application
+    Add API Key generated from Launchpad to the Arista CV-CUE concourse application
 
     ![AGNI Concourse Applications](./assets/agni/app-cue.png)
+
+    [:octicons-arrow-right-24: Generate CV-CUE API Key](#generate-launchpad-api-key){ .md-button .md-button--primary }
 
 - :cvp:{ .lg .middle .arista } **CloudVision App**
 
@@ -44,3 +46,45 @@ Configure the applications using the API keys/values:
     Add the API Key generated from CVaaS Service Account to the Arista CloudVision concourse application
 
     ![AGNI Concourse Applications](./assets/agni/app-cvaas.png)
+
+    [:octicons-arrow-right-24: Generate CVaaS API Key](#generate-cvaas-api-key){ .md-button .md-button--primary }
+
+</div>
+
+### Generate Launchpad API Key
+
+To generate a Launchpad API key
+
+1. Login to Launchpad
+2. Select `Admin` in the top navigation
+3. Select the student tenant on the left
+4. Select `Keys` in the menu above
+5. Click `New Key` and give it the name `AGNI API`
+6. Note the ID and Key Value, this will be supplied in AGNI and CVaaS Cloud Connector
+
+### Generate CVaaS API Key
+
+To generate a CVaaS API key
+
+1. Login to CVaaS
+
+    ![CVaaS Login](./assets/cvaas/login-2.png){ width="300" }
+
+2. Navigate to `Settings > Service Account`
+
+    ![CVaaS Login](./assets/cvaas/service-accounts.png)
+
+3. Click on `New Service Account`
+4. Create a new user with the below attributes for `AGNI API` and select `Create`
+
+    ![CVaaS Login](./assets/cvaas/service-account.png)
+
+5. Generate a service account token and note it down
+
+## Certificate Export
+
+Base AGNI cofiguration for RPi Certificate Export
+
+## AP Rasec Certificate Generation/Radius Profile Creation
+
+

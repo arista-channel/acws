@@ -14,6 +14,7 @@ nav:
                 - Configlets Option: setup/cvaas_configlets.md
             - CV-CUE: setup/cvcue.md
             - AGNI: setup/agni.md
+        - Lab Documentation: lab/fabric/atd_lab.md
 copyright: Copyright &copy; 2024 Arista Networks
 
 extra:
@@ -24,7 +25,6 @@ extra:
       link: https://www.arista.com
     version:
         provider: mike
-
 theme:
     name: material
     custom_dir: docs/overrides

@@ -455,8 +455,8 @@ tenants:
       ip_helpers:
       - ip_helper: 127.0.0.1
       - ip_helper: 192.168.119.1
-inventory_file: /workspaces/campus-atd-setup/sites/atd_lab/inventory.yml
-inventory_dir: /workspaces/campus-atd-setup/sites/atd_lab
+inventory_file: /workspaces/campus-workshop/avd/sites/atd_lab/inventory.yml
+inventory_dir: /workspaces/campus-workshop/avd/sites/atd_lab
 inventory_hostname: 710p-19
 inventory_hostname_short: 710p-19
 group_names:
@@ -1905,13 +1905,14 @@ avd_requirements:
   changed: false
 target_hosts: ATD_LAB
 fabric: atd_lab
-playbook_dir: /workspaces/campus-atd-setup/playbooks
+playbook_dir: /workspaces/campus-workshop/avd/playbooks
 ansible_playbook_python: /usr/local/bin/python
-ansible_config_file: /workspaces/campus-atd-setup/ansible.cfg
+ansible_config_file: /workspaces/campus-workshop/avd/ansible.cfg
 groups:
   all:
   - cvp-01
   - cvp-02
+  - lab-sw-02
   - core-7280SR-48C6
   - 710p-01
   - 710p-02
@@ -2027,18 +2028,20 @@ groups:
   - 710p-20
   INSTRUCTOR:
   - 710p-24
-omit: __omit_place_holder__bda9dae5edbec745317bbcf77dae6ec25b284156
+  LAB:
+  - lab-sw-02
+omit: __omit_place_holder__903f40940b12323e50fb7380b3b281a41a88eca2
 ansible_version:
-  string: 2.17.1
-  full: 2.17.1
+  string: 2.17.2
+  full: 2.17.2
   major: 2
   minor: 17
-  revision: 1
+  revision: 2
 ansible_check_mode: false
 ansible_diff_mode: false
 ansible_forks: 8
 ansible_inventory_sources:
-- /workspaces/campus-atd-setup/sites/atd_lab/inventory.yml
+- /workspaces/campus-workshop/avd/sites/atd_lab/inventory.yml
 ansible_skip_tags: []
 ansible_run_tags:
 - generate
