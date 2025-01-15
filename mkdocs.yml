@@ -7,7 +7,8 @@ nav:
         - Getting Started: index.md
         - Marketing: marketing/index.md
         - Lab Setup: 
-            - CVaaS: setup/index.md
+            - Login: setup/index.md
+            - CVaaS: setup/cvaas.md
             - Device Config:
                 - AVD Option: setup/cvaas_avd.md
                 - Studios Option: setup/cvaas_studios.md

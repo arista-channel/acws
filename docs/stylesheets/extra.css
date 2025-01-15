@@ -1,11 +1,21 @@
 :root > * {
-  --md-primary-fg-color:        #16325B;
-  --md-typeset-a-color:          #d47122;
+  --md-primary-fg-color:  #16325B;
+  --md-typeset-a-color:   #d47122;
+  --md-accent-fg-color:   #d47122;
 }
 
 .md-grid {
   max-width: 1440px; 
 }
+
+.cloudvision {
+  color: #146095;
+}
+
+.md-typeset code, .md-typeset kbd, .md-typeset pre {
+  color:   #4473a9;
+}
+
 /* .md-content img {
     border-width: 1px;
     border-style: solid;
