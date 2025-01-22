@@ -1,9 +1,0 @@
-- name: Configure SSL profile for AGNI RadSec on EOS Switches
-  hosts: LAB
-  gather_facts: false
-  tasks:
-    - name: "Load the CUE Role"
-      ansible.builtin.import_role:
-        name: cue_agni_radsec
-      vars:
-        cue_base_url: "awm13004-c4.srv.wifi.arista.com/wifi/api"

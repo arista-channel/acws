@@ -1,35 +1,6 @@
-# Campus A-01 | Wired Lab Guide
+# A-01 | Provisioning a Campus Fabric
 
-Provisioning a Campus Fabric
-[Download Lab Guide](download)
-[GitHub Content](https://github.com/arista-rockies/Workshops/tree/main/Campus)
-
-## Topology
-
-=== "Student Lab"
-    ![ATD Student Pod](../assets/images/atd_student-light.png#only-light)
-    ![ATD Student Pod](../assets/images/atd_student-dark.png#only-dark)
-
-=== "Full Lab topology"
-    ![ATD Low Level](../assets/images/atd_low_level.png)
-
-## 01 | Login CloudVision
-
-Lets start by loging into CloudVision
-
-1. Navigate to the [Arista CloudVision as a Service (CVaaS) instance](https://www.cv-staging.corp.arista.io/) for your lab to access: [https://www.cv-staging.corp.arista.io/](https://www.cv-staging.corp.arista.io/)
-
-    [:cloudvision: Open CVaaS](https://www.cv-staging.corp.arista.io/){ .md-button .md-button--primary target=_blank}
-
-2. In the `Organization` box enter the Organization name `tola-atd-##`  where `##` is a 2 digit character between 01-12 that was assigned to your lab/pod, then click “Enter”.
-
-    ![CloudVision Login](../assets/images/00_cvaas_login.png)
-
-3. Click the `Log in with Launchpad` button and provide your assigned lab/pod email address and password:
-
-    ![Launchpad Login](../assets/images/01_launchpad_login.png)
-
-## 02 | Onboarding Device
+## Overview
 
 In this lab you will be configuring the switches through CloudVision Studios. Today you will be adding a Leaf Switch to an existing Campus Fabric/POD.
 
@@ -39,37 +10,27 @@ In this lab you will be configuring the switches through CloudVision Studios. To
 
     The switches themselves are in Zero Touch Provisioning (ZTP) mode as they would come from the factory.
 
-1. You should be logged into CloudVision and at the `Campus Dashboard`
+--8<--
+docs/snippets/topology.md
+docs/snippets/login_cv.md
+docs/snippets/workspace.md
+--8<--
 
-    ![Campus Dashboard](./assets/images/a01/00-dashboad.png)
+## 01 | Onboarding Device
 
-2. Click on the `Provisioning` :fontawesome-solid-wrench: on the left side, then choose `Studios`.
-
-    ![Campus Dashboard](./assets/images/a01/01_studios_main.png)
-
-3. We are going to create a workspace to propose changes to the Network Infrastructure.  A workspace acts as a sandbox where you can stage your configuration changes before deploying them.
-
-    ??? tip "What is a Workspace?"
-
-        To make a comparison, a workspace is like a [`configuration session`](https://www.arista.com/en/um-eos/eos-configure-session) in EOS or a branch in Git?
-
-4. Click `Create a Workspace`, give it any name you would like and click `Create`.
-
-    ![Campus Workspace](./assets/images/a01/02_create_workspace.png)
-
-5. Navigate to the Network Fabric Studio `Campus Farbric (L2/L3/EVPN)
+1. Navigate to the Network Fabric Studio `Campus Farbric (L2/L3/EVPN)
 
     ![Campus Fabric Studo](./assets/images/a01/03_studio_campus_fabric.png)
 
-6. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides the onboarding somewhere to place the switch in the topology
+2. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides the onboarding somewhere to place the switch in the topology
 
     ![Campus Fabrics](./assets/images/a01/04_campus_fabric_main.png)
 
-7. Click on the `Add Campus Devices` to launch the workflow
+3. Click on the `Add Campus Devices` to launch the workflow
 
     ![Campus Add Devices](./assets/images/a01/05_add_campus_devices.png)
 
-8. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
+4. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
 
     !!! tip "Select your pod"
 
@@ -90,48 +51,48 @@ In this lab you will be configuring the switches through CloudVision Studios. To
     === "Step 4"
         ![Campus Review Changes](./assets/images/a01/06_add_device_quick_action_step4.png)
 
-9. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
+5. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
 
     ![Campus Review Workspace](./assets/images/a01/07_review_workspace.png)
 
-10. We should see the detailed view of what's changing
+6.  We should see the detailed view of what's changing
 
     ![Campus Add Devices](./assets/images/a01/08_review_detail.png)
 
-11. In the workspace note the top leaf `Summary` box, there are several studios modified:
+7.  In the workspace note the top leaf `Summary` box, there are several studios modified:
     1. `Inventory and Topology`: Devices selected are simply added to the Campus inventory
     2. `Software Management`: As part of adding to the inventory, software can be added (for upgrade/downgrade) based on needs. While we should not have selected software, the device is part of the software managment studio now
     3. `Campus Fabric (L2/L3/EVPN)`: Devices we're added to their respective Campus Access Pod `IDF1` and will inherit configuration from that part of the campus.
 
-12. Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration
+8.  Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration
 
 ## 03 | Applying Configuration
 
-1. click on `Static Configuration`
+1. Click on `Static Configuration`
 
     ![Campus Static Configuration Studio](./assets/images/a01/09_static_studio.png)
 
-2.  Click on the `Add +` and select `Device`
+2. Click on the `Add +` and select `Device`
 
     ![Campus Add Device](./assets/images/a01/10_static_studios.png)
 
-3.  Select your devices you recently added through the worflow
+3. Select your devices you recently added through the worflow
 
     ![Campus Device Selection](./assets/images/a01/11_add_devices.png)
 
-4.  Select a device and on the right click the `+ Configlet` and select `Configlet Library`
+4. Select a device and on the right click the `+ Configlet` and select `Configlet Library`
 
     ![Campus Device Selection](./assets/images/a01/12_add_config.png)
 
-5.  Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop
+5. Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop
 
     ![Campus Device Selection](./assets/images/a01/13_add_configlet.png)
 
-6.  Click `Review Workspace` once all devices have been given a configuration
+6. Click `Review Workspace` once all devices have been given a configuration
 
     ![Campus Device Selection](./assets/images/a01/14_review.png)
 
-7.  You can review the configuration changes to the devices
+7. You can review the configuration changes to the devices
 
     !!! info "ZTP Configuration"
 
@@ -139,7 +100,7 @@ In this lab you will be configuring the switches through CloudVision Studios. To
 
     ![Campus Final Review](./assets/images/a01/15_submit_workspace.png)
 
-8.  Click `Submit Workspace` to generate the Change Control
+8. Click `Submit Workspace` to generate the Change Control
 
     !!! warning "Is this pushing configuration!?"
 
@@ -147,7 +108,7 @@ In this lab you will be configuring the switches through CloudVision Studios. To
 
     ![Campus Final Review](./assets/images/a01/16_submit_highlight.png)
 
-9.  Click on `View Change Control`
+9. Click on `View Change Control`
 
     ![Campus Final Review](./assets/images/a01/17_view_cc.png)
 
@@ -171,3 +132,6 @@ In this lab you will be configuring the switches through CloudVision Studios. To
 
 4. You should get a :material-check: on the device task once complete.
 5. Your new campus switch went from out of the box ZTP mode to a configured member of the Campus fabric. We're going to explore further changes to this switch in the next lab!
+
+
+--8<-- "includes/abbreviations.md"

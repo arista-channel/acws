@@ -107,3 +107,5 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
     [:material-login: Hop into C-03](./wired/c03_lab.md){ .md-button .md-button--primary }
 
 </div>
+
+--8<-- "includes/abbreviations.md"

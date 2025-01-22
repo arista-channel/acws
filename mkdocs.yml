@@ -3,20 +3,26 @@ site_description: Arista Campus Workshop
 watch: ["docs", "mkdocs.yml"]
 
 nav:
-    - Campus Workshop:
-        - Getting Started: index.md
-        - Marketing: marketing/index.md
-        - Lab Setup: 
-            - Login: setup/index.md
-            - CVaaS: setup/cvaas.md
-            - Device Config:
-                - AVD Option: setup/cvaas_avd.md
-                - Studios Option: setup/cvaas_studios.md
-                - Configlets Option: setup/cvaas_configlets.md
-            - CV-CUE: setup/cvcue.md
-            - AGNI: setup/agni.md
-        - Lab Documentation: lab/fabric/atd_lab.md
-copyright: Copyright &copy; 2024 Arista Networks
+    - Home:
+        - Welcome: index.md
+        - Lab Access: lab_access.md
+    - Lab Guides:
+        - Wired Lab Guides:
+            - Day 1 Operations: wired/a01_lab.md
+            - Day 2 Operations: wired/a02_lab.md
+            - Operations and Monitoring: wired/a03_lab.md
+        - Wireless Lab Guides:
+            - Day 1 Operations: wireless/b01_lab.md
+            - Day 2 Operations: wireless/b02_lab.md
+            - Smart System Upgrade: wireless/b03_lab.md
+        - Security Lab Guides:
+            - Day 1 Operations: security/c01_lab.md
+            - Day 2 Operations: security/c02_lab.md
+            - Operations and Monitoring: security/c03_lab.md
+    - References:
+        - Onboarding Wifi Devices: wireless/b00_lab.md
+
+copyright: Copyright &copy; 2025 Arista Networks
 
 extra:
     social:
@@ -40,9 +46,9 @@ theme:
         - content.tooltips
         - header.autohide
         - navigation.path
-        - navigation.top
-        - navigation.tabs
-        - navigation.tabs.sticky
+        # - navigation.top
+        # - navigation.tabs
+        # - navigation.tabs.sticky
         - navigation.tracking
         # - tables
         - toc.follow
@@ -60,18 +66,18 @@ theme:
 
     palette:
     # Palette toggle for light mode
-        - scheme: default
-          primary: custom
-          toggle:
-            icon: material/weather-night
-            name: Switch to dark mode
+        # - scheme: default
+        #   primary: custom
+        #   toggle:
+        #     icon: material/weather-night
+        #     name: Switch to dark mode
 
     # Palette toggle for dark mode
         - scheme: slate
           primary: custom
-          toggle:
-            icon: material/weather-sunny
-            name: Switch to light mode
+        #   toggle:
+        #     icon: material/weather-sunny
+        #     name: Switch to light mode
 
 markdown_extensions:
     - abbr
@@ -111,7 +117,6 @@ markdown_extensions:
         toc_depth: 3
 
 plugins:
-    - search
     - git-revision-date
     - glightbox
     - search:

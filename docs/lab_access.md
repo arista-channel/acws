@@ -52,18 +52,22 @@ There are three peices of software (wired, wirless, and NAC) we interact with, b
 
 2. In the `Organization` box enter the Organization name `tola-atd-##`  where `##` is a 2 digit character between 01-12 that was assigned to your lab/pod, then click “Enter”.
 
-    ![CloudVision Login](../assets/images/00_cvaas_login.png)
+    ![CloudVision Login](../assets/images/login/00_cvaas_login.png)
 
 3. Click the `Log in with Launchpad` button and provide your assigned lab/pod email address and password:
 
-    ![Launchpad Login](../assets/images/01_launchpad_login.png)
+    ![Launchpad Login](../assets/images/login/01_launchpad_login.png)
 
 ## Topoology
 
 === "Student Lab"
 
-    ![ATD Student Pod](./assets/images/atd_student.png)
+    ![ATD Student Pod](../assets/images/login/atd_student-light.png#only-light)
+    ![ATD Student Pod](../assets/images/login/atd_student-dark.png#only-dark)
+
 
 === "Full Lab topology"
 
-    ![ATD Low Level](./assets/images/atd_low_level.png)
+    ![ATD Low Level](./assets/images/login/atd_low_level.png)
+
+--8<-- "includes/abbreviations.md"
