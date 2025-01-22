@@ -7,20 +7,23 @@ nav:
         - Welcome: index.md
         - Lab Access: lab_access.md
     - Lab Guides:
-        - Wired Lab Guides:
+        - A-Wired Lab Guides:
             - Day 1 Operations: wired/a01_lab.md
             - Day 2 Operations: wired/a02_lab.md
             - Operations and Monitoring: wired/a03_lab.md
-        - Wireless Lab Guides:
-            - Day 1 Operations: wireless/b01_lab.md
-            - Day 2 Operations: wireless/b02_lab.md
+        - B-Wireless Lab Guides:
+            - Wireless Setup: wireless/b01_lab.md
+            - Guest Wifi with WIPS: wireless/b02_lab.md
             - Smart System Upgrade: wireless/b03_lab.md
-        - Security Lab Guides:
-            - Day 1 Operations: security/c01_lab.md
-            - Day 2 Operations: security/c02_lab.md
-            - Operations and Monitoring: security/c03_lab.md
+        - C-Security Lab Guides:
+            - EAP-TLS Wireless Policy: security/c01_lab.md
+            - UPSK Wireless Policy: security/c02_lab.md
+            - EASP-TLS Wired Policy: security/c03_lab.md
     - References:
-        - Onboarding Wifi Devices: wireless/b00_lab.md
+        - Onboarding Wifi Devices: references/wireless_onboard.md
+        - Configuring RadSec: references/radsec.md
+        - Configuring Radius: references/radius.md
+        - Wireless Captive Portal: references/captive_portal.md
 
 copyright: Copyright &copy; 2025 Arista Networks
 

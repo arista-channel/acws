@@ -1,4 +1,4 @@
-## CloudVision Login
+## CV-CUE Login
 
 If you're not already logged into CV-CUE, navigate to the [Arista Launchpad](https://launchpad.wifi.arista.com/) for your lab.
 
@@ -12,6 +12,6 @@ If you're not already logged into CV-CUE, navigate to the [Arista Launchpad](htt
 
 === "Login Step 2"
     
-    You will see the various tools tied to your tenant, this includes CVP, AGNI (NAC), and CV-CUE for wirless. Click into CV-CUE to begin this lab.
+    You will see the various tools tied to your tenant, this includes CVP, AGNI (NAC), and CV-CUE for wirless. Click into `CV-CUE (CloudVision Wifi)` tile to begin this lab.
 
-    ![Launchpad](../assets/images/login/02_launchpad.png)
+    ![Launchpad](../assets/images/login/04_launchpad_cue.png)

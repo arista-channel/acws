@@ -37,6 +37,7 @@
 *[SAFI]: Subsequent Address Family Identifier
 *[SSU]: Smart System Upgrade (or ASU)
 *[STUN]: Session Traversal Utilities for NAT (RFC5389)
+*[TPM]: Trusted Platform Module
 *[Type2]: MAC-IP Route (RFC7432)
 *[Type3]: IMET Route (RFC7432)
 *[Type5]: IP-Prefix Route (RFC9136)
@@ -51,4 +52,5 @@
 *[VTEP]: VXLAN Tunnel Endpoint
 *[VTEPs]: VXLAN Tunnel Endpoints
 *[VXLAN]: Virtual eXtensible Local Area Network (RFC7348)
+*[WIPS]: Wireless Intrusion Prevention System
 *[ZTP]: Zero-Touch Provisioning

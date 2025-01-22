@@ -39,12 +39,14 @@ Each Arista Campus Pod is equiped with the hardware in front of you and the soft
 
 Each lab is assigned with the following login information
 
-| Student 1 Email | tola.atd1+pod##@gmail.com |
-| Student 2 Email | tola.atd2+pod##@gmail.com |
-| Password | `will be provided` |
-| Launchpad Access | https://login.wifi.arista.com/ | 
+|                  |                                |
+| ---------------- | ------------------------------ |
+| Student 1 Email  | tola.atd1+pod##@gmail.com      |
+| Student 2 Email  | tola.atd2+pod##@gmail.com      |
+| Password         | `will be provided`             |
+| Launchpad Access | https://login.wifi.arista.com/ |
 
-There are three peices of software (wired, wirless, and NAC) we interact with, but all is configured with SSO and managed within Arista Luanchpad. Follow the steps below to get logged in.
+There are three pieces of software (wired, wireless, and NAC) we interact with, but all is configured with SSO and managed within Arista Launchpad. Follow the steps below to get logged in.
 
 1. Navigate to the [Arista CloudVision as a Service (CVaaS) instance](https://www.cv-staging.corp.arista.io/) for your lab to access: [https://www.cv-staging.corp.arista.io/](https://www.cv-staging.corp.arista.io/)
 
@@ -62,12 +64,12 @@ There are three peices of software (wired, wirless, and NAC) we interact with, b
 
 === "Student Lab"
 
-    ![ATD Student Pod](../assets/images/login/atd_student-light.png#only-light)
-    ![ATD Student Pod](../assets/images/login/atd_student-dark.png#only-dark)
+    ![ATD Student Pod](../assets/images/topology/atd_student-light.png#only-light)
+    ![ATD Student Pod](../assets/images/topology/atd_student-dark.png#only-dark)
 
 
 === "Full Lab topology"
 
-    ![ATD Low Level](./assets/images/login/atd_low_level.png)
+    ![ATD Low Level](./assets/images/topology/atd_low_level.png)
 
 --8<-- "includes/abbreviations.md"

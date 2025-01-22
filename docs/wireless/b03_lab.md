@@ -2,17 +2,13 @@
 
 ## Overview
 
-Arista's Smart System Upgrade is a feature to minimize traffic loss when upgrading from one SSU-supported EOS version to a newer SSU-supported EOS version. SSU is also referred to as ‘hitless’ upgrades. The SSU feature allows a switch to maintain packet forwarding (Data Plane) while the management/Control plane performs an OS upgrade.  
+Arista's Smart System Upgrade (SSU) is a feature to minimize traffic loss when upgrading from one SSU-supported EOS version to a newer SSU-supported EOS version. SSU is also referred to as ‘hitless’ upgrades. The SSU feature allows a switch to maintain packet forwarding (Data Plane) while the management/Control plane performs an OS upgrade.  
 
 !!! info "Arista Smart System Upgrade"
 
     Additional information about this feature can be found in the [Arista TOI for Smart System Upgrade](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu)
 
 In our workshop lab topology you will see that each leaf in your pod is directly connected to the  access point and RaspberryPi client. Traditionally, a firmware upgrade on the lead in the pod would cause the access point, wireless clients connected to the access point, and the raspberry pi client to lose network connectivity. In this lab, we will use Arista SSU on the leaf switch in your pod to perform a firmware upgrade without causing network connectivity loss on wireless clients connected to the pod access point or loss on any wired client connected to the switch.
-
---8<--
-docs/snippets/login_cv.md
---8<--
 
 ## Prerequisites
 

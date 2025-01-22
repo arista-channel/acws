@@ -1,4 +1,4 @@
-# B-02 | Wireless WIPS
+# B-02 | Guest Wireless & WIPS
 
 ## Overview
 

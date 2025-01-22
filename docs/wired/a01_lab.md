@@ -133,5 +133,4 @@ docs/snippets/workspace.md
 4. You should get a :material-check: on the device task once complete.
 5. Your new campus switch went from out of the box ZTP mode to a configured member of the Campus fabric. We're going to explore further changes to this switch in the next lab!
 
-
 --8<-- "includes/abbreviations.md"
