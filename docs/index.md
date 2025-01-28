@@ -58,7 +58,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Deploy and explore the deployment of new APs in the environment using CV-CUE
 
-    [:material-login: Hop into B-01](./wired/b01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-01](./wireless/b01_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **B02-Lab: Wifi and WIPS**
 
@@ -66,7 +66,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Configure Wifi and WIPS
 
-    [:material-login: Hop into B-02](./wired/b02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-02](./wireless/b02_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **B03-Lab: Smart System Upgrade (SSU)**
 
@@ -74,7 +74,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Using Arista EOS Smart System Upgrade (SSU) we can avoid downtime when upgrading our wired network!
 
-    [:material-login: Hop into B-03](./wired/b03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-03](./wireless/b03_lab.md){ .md-button .md-button--primary }
 
 </div>
 
@@ -88,7 +88,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Deploy and explore the deployment of new APs in the environment using CV-CUE
 
-    [:material-login: Hop into C-01](./wired/c01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-01](./security/c01_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **C02-Lab: Wifi and WIPS**
 
@@ -96,7 +96,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Configure Wifi and WIPS
 
-    [:material-login: Hop into C-02](./wired/c02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-02](./security/c02_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **C03-Lab: Smart System Upgrade (SSU)**
 
@@ -104,7 +104,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Using Arista EOS Smart System Upgrade (SSU) we can avoid downtime when upgrading our wired network!
 
-    [:material-login: Hop into C-03](./wired/c03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-03](./security/c03_lab.md){ .md-button .md-button--primary }
 
 </div>
 

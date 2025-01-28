@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this lab you will be configuring the switches through CloudVision Studios. Today you will be adding a Leaf Switch to an existing Campus Fabric/POD.
+In this lab you will be configuring your switches using CloudVision Studios. You will be adding new campus leaf switches to an existing Campus Fabric.
 
 !!! tip "Configuration"
 

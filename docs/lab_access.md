@@ -33,6 +33,18 @@ Each Arista Campus Pod is equiped with the hardware in front of you and the soft
       - [x] 2 x 710P-16P
       - [x] 2 x Raspberry Pi 
 
+- :cloudvision: **Student Equipment**
+
+    ---
+
+    As part of this lab workshop, it was recommended to have brought the following:
+
+      - [x] Laptop
+      - [x] Extra screen (optional)
+      - [x] USB/USB-C Ethernet dongle
+      - [x] Ethernet Cable
+      - [x] Console Cable
+
 </div>
 
 ## Login

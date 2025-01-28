@@ -23,6 +23,7 @@ nav:
         - Onboarding Wifi Devices: references/wireless_onboard.md
         - Configuring RadSec: references/radsec.md
         - Configuring Radius: references/radius.md
+        - Interface Diagnostics: references/interface_diag.md
         - Wireless Captive Portal: references/captive_portal.md
 
 copyright: Copyright &copy; 2025 Arista Networks
@@ -69,18 +70,18 @@ theme:
 
     palette:
     # Palette toggle for light mode
-        # - scheme: default
-        #   primary: custom
-        #   toggle:
-        #     icon: material/weather-night
-        #     name: Switch to dark mode
+        - scheme: default
+          primary: custom
+          toggle:
+            icon: material/weather-night
+            name: Switch to dark mode
 
     # Palette toggle for dark mode
         - scheme: slate
           primary: custom
-        #   toggle:
-        #     icon: material/weather-sunny
-        #     name: Switch to light mode
+          toggle:
+            icon: material/weather-sunny
+            name: Switch to light mode
 
 markdown_extensions:
     - abbr
@@ -126,8 +127,8 @@ plugins:
         lang: en
     - mike:
         alias_type: redirect
-    - print-site:
-        path_to_pdf: "print_page"
+    # - print-site:
+    #     path_to_pdf: "print_page"
 
 extra_css:
     - stylesheets/extra.css

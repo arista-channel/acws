@@ -6,7 +6,7 @@ If you're not already logged into CloudVision, navigate to the [Arista CloudVisi
 
 === "Login Step 1"
 
-    In the `Organization` box enter the Organization name `tola-atd-##`  where `##` is a 2 digit character between 01-12 that was assigned to your lab/pod, then click “Enter”.
+    In the `Organization` box enter the Organization name provided by the event staff, where `##` is going to be your 2 digit pod number that was assigned to your lab/pod, then click “Enter”.
 
     ![CloudVision Login](../assets/images/login/00_cvaas_login.png)
 
