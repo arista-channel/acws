@@ -14,7 +14,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     How to get logged into the lab
 
-    [:material-login: Let's get started!](./lab_access.md){ .md-button .md-button--primary }
+    [:material-login: Let's get started!](./lab/access.md){ .md-button .md-button--primary }
 
 </div>
 

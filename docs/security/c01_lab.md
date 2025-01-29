@@ -21,14 +21,6 @@ The `Configure` section of CV-CUE is composed of multiple parts, including WiFi,
 1. Hover your cursor over the `Configure` menu option on the left side of the screen, then click `WiFi`
 2. At the top of the screen, you will see where you are in the location hierarchy. If you aren’t on “Corp”, click on the three lines (hamburger icon) next to “Locations” to expand the hierarchy and choose/highlight the “Corp” folder.  Now click the “Add SSID” button on the right hand side of the screen.
 
-=== "Collapsed"
-
-    ![Hierarchy Collapsed]()
-
-=== "Expanded"
-
-    ![Hierarchy Expanded]()
-
 3. Once on the “SSID” page, configuration sub-category menu options will appear across the top of the page related to WiFi (the defaults are “Basic”, “Security”, and “Network”). You can click on these sub-category names to change configuration items related to that area of the configuration.
 
 To make additional categories visible, click on the 3 dots next to "Network" and you can see the other categories that are available to configure (i.e. “Analytics”, “Captive Portal”, etc.).

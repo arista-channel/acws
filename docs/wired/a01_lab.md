@@ -2,13 +2,27 @@
 
 ## Overview
 
-In this lab you will be configuring your switches using CloudVision Studios. You will be adding new campus leaf switches to an existing Campus Fabric.
+In this lab you will be onboarding your switch using CloudVision Studios, adding your new campus leaf switch to an existing Campus Fabric. 
 
-!!! tip "Configuration"
+Your environment has been pre-configured with a sample Campus to assist with these new concepts. Studios is equipped with flexible constructs that give you the ability to describe your campus footprint. These will be common throughout this workshop:
 
-    The campus, building, and access-pod objects have been added in advance. This would be a real life scenario where physical layout is pre-configured in Studios waiting for new devices.
+- **Campus Fabrics**: Your campus `Workshop` has been created, this would be equivalent to a site or region.
+- **Campus Pod**: Your pod `Home Office` could be a building or MDF
+- **Access Pod**: Your access pod `IDF1` could be a floor or IDF  
 
-    The switches themselves are in Zero Touch Provisioning (ZTP) mode as they would come from the factory.
+??? example "Show me an example!"
+
+    CloudVision Network Hierarchy gives a better visual representation of how this might look in a real environment.
+
+    ![Network Hierarchy](./assets/images/a01/00_hierarchy.png)
+
+A customer would typically create these constructs ahead of time, waiting for switches to be shipped, racked, and powered on.
+
+The switch in front of you is in Zero-Touch Provisioning (ZTP) mode as they would come from the factory. We will take this new switch from out of the box to provisioned without the use of CLI or the trusty console cable.
+
+??? tip "Out with the console cable"
+
+    Zero-Touch Provisioning in this lab is performed using a bootstrap script delivered over DHCP option 67. This tells your device where to begin streaming for onboarding, you can read more on the [CloudVision Help Center](https://www.cv-staging.corp.arista.io/help/articles/ZGV2aWNlcy5kZXZpY2VSZWdpc3RyYXRpb24ub25ib2FyZA==#onboard-devices)
 
 --8<--
 docs/snippets/topology.md
@@ -18,38 +32,69 @@ docs/snippets/workspace.md
 
 ## 01 | Onboarding Device
 
-1. Navigate to the Network Fabric Studio `Campus Farbric (L2/L3/EVPN)
+1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices, identify the hostname and serial number. We ill use these to chose which switch is `leaf1a` and `leaf1b`
+
+    !!! danger "Single Workspace"
+
+        You and your fellow student will work together to onboard your switch pair in a **single workspace**.
+        
+        Your CloudVision is tied to **your pod**, anywhere it says `pod-##` you will replace with your assigned pod number.
+
+    !!! tip "What's that hostname?"
+
+        The ZTP process used here will use the DHCP ip address as a suffix and produce a `sw-X.X.X.X` hostname. This is a good indication a switch is in ZTP.
+
+    
+    ![Campus Fabric Studo](./assets/images/a01/01_device_inventory.png)
+
+2. Navigate to the Network Fabric Studio `Campus Farbric (L2/L3/EVPN)
 
     ![Campus Fabric Studo](./assets/images/a01/03_studio_campus_fabric.png)
 
-2. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides the onboarding somewhere to place the switch in the topology
+3. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides a location to place the switch.
 
     ![Campus Fabrics](./assets/images/a01/04_campus_fabric_main.png)
 
-3. Click on the `Add Campus Devices` to launch the workflow
+4. Click on the `Add Campus Devices` to launch the workflow
 
     ![Campus Add Devices](./assets/images/a01/05_add_campus_devices.png)
 
-4. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
+5. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
 
-    !!! tip "Select your pod"
-
-        Remember anywhere it says `pod-##` you will replace with your assigned pod number
 
     === "Step 1"
 
-        ![Campus Add Devices](./assets/images/a01/06_add_device_quick_action_step1.png)
+        Select the `Workshop > Home Office > IDF1` and add your assigned device from the `Available Devices`
+
+        ![Campus Add Devices](./assets/images/a01/06_add_device_qa_step1.png)
 
     === "Step 2"
 
-        ![Campus Set Device Hostname and ROle](./assets/images/a01/06_add_device_quick_action_step2.png)
+
+        In the `Role Assignment` click on the `Hostname` field and name your switch `pod##-leaf1X`. Where ## is your pod number and `X` is either student A or B. Also select the role as `Leaf` and `Continue`
+
+        ![Campus Set Device Hostname and ROle](./assets/images/a01/06_add_device_qa_step2.png)
 
     === "Step 3"
 
-        ![Campus Add Management Network](./assets/images/a01/06_add_device_quick_action_step3.png)
+        Validate your `Inband Management Subnet` and `Inband Management VLAN` match your assigned pod number. 
+        
+        - **Subnet**: `10.1.#.0/24` where `#` is the pod number
+        - **VLAN**: `1##` where `#` is the pod number
+
+        ![Campus Add Management Network](./assets/images/a01/06_add_device_qa_step3.png)
 
     === "Step 4"
-        ![Campus Review Changes](./assets/images/a01/06_add_device_quick_action_step4.png)
+
+        This is a review of what you have configured to onboard your device, click on `Build Workspace` when you are ready.
+
+        ![Campus Review Changes](./assets/images/a01/06_add_device_qa_step4.png)
+
+    === "Step 5"
+
+        During this step, the Quick Action is adding your devices to the Studios inventory anf generating configuration for your new MLAG pair. If we had selected an EOS image, a task would have been created to upgrade the device during our onboarding.
+
+        ![Campus Review Changes](./assets/images/a01/06_add_device_qa_step5.png)
 
 5. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
 
@@ -61,76 +106,128 @@ docs/snippets/workspace.md
 
 7.  In the workspace note the top leaf `Summary` box, there are several studios modified:
     1. `Inventory and Topology`: Devices selected are simply added to the Campus inventory
-    2. `Software Management`: As part of adding to the inventory, software can be added (for upgrade/downgrade) based on needs. While we should not have selected software, the device is part of the software managment studio now
-    3. `Campus Fabric (L2/L3/EVPN)`: Devices we're added to their respective Campus Access Pod `IDF1` and will inherit configuration from that part of the campus.
+    2. `Campus Fabric (L2/L3/EVPN)`: Devices we're added to their respective Campus Access Pod `IDF1` and will inherit configuration from that part of the campus.
+    <!-- 2. `Software Management`: As part of adding to the inventory, software can be added (for upgrade/downgrade) based on needs. While we should not have selected software, the device is part of the software managment studio now -->
+8.  Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration.
 
-8.  Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration
+    !!! tip "You may need to click twice"
 
+        Studios will take you back to where you left off, you may need to click `Studios` on the side bar twice, or select `Studios` near the top left of your screen.
+
+    ![Return to Studios](./assets/images/a01/09_return_studios.png)
+    
 ## 03 | Applying Configuration
 
 1. Click on `Static Configuration`
 
-    ![Campus Static Configuration Studio](./assets/images/a01/09_static_studio.png)
+    ![Campus Static Configuration Studio](./assets/images/a01/10_static_studio.png)
 
-2. Click on the `Add +` and select `Device`
+2. Let's add our new devices to this studio using the steps below
 
-    ![Campus Add Device](./assets/images/a01/10_static_studios.png)
+    === "Add Devices Step 1"
 
-3. Select your devices you recently added through the worflow
+        Click on the `Add +` and select `Devices`
 
-    ![Campus Device Selection](./assets/images/a01/11_add_devices.png)
+        ![Campus Add Device](./assets/images/a01/11_add_devices_1.png)
 
-4. Select a device and on the right click the `+ Configlet` and select `Configlet Library`
+    === "Add Devices Step 2"
+    
+        Select your devices you recently added through the workflow
+        
+        ![Campus Add Device](./assets/images/a01/11_add_devices_2.png)
 
-    ![Campus Device Selection](./assets/images/a01/12_add_config.png)
+3. Now let's add our base configuration to these devices, this will include items like logging, banners, etc. for the lab. Use the steps below
 
-5. Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop
+    !!! tip "Device Configuration"
 
-    ![Campus Device Selection](./assets/images/a01/13_add_configlet.png)
+        Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop. This was done using [Arista Validated Designs (AVD)](https://avd.arista.com/5.1/index.html)
 
-6. Click `Review Workspace` once all devices have been given a configuration
+    === "Add Config Step 1"
 
-    ![Campus Device Selection](./assets/images/a01/14_review.png)
+        Select a device and on the left and click the `+ Configlet` to the right and select `Configlet Library`
 
-7. You can review the configuration changes to the devices
+        ![Campus Add Config](./assets/images/a01/12_add_config_1.png)
 
-    !!! info "ZTP Configuration"
+    === "Add Config Step 2 (Leaf1A)"
 
-        We are replacing the Zero Touch configuration with a combination of base configuration (generated using AVD) and more dynamic configuration using Campus Studios
+        Select the correct configuration for the device selected.
 
-    ![Campus Final Review](./assets/images/a01/15_submit_workspace.png)
+        ![Campus Add Config](./assets/images/a01/12_add_config_2.png)
 
-8. Click `Submit Workspace` to generate the Change Control
+    === "Add Config Step 3"
 
-    !!! warning "Is this pushing configuration!?"
+        Ensure the configuration has applied!
 
-        This is not pushing the configuration just yet, we are creating a change control workflow that can be further reviewed, changed, enhanced and pushed now or in the future.
+        ![Campus Add Config](./assets/images/a01/12_add_config_3.png)
 
-    ![Campus Final Review](./assets/images/a01/16_submit_highlight.png)
+    === "Add Config Step 4 (Leaf1B)"
 
-9. Click on `View Change Control`
+        Do the same for the other leaf, selecting the correct configuration file.
+        
+        ![Campus Add Config](./assets/images/a01/12_add_config_4.png)
+
+
+4. Let's now review our workspace and the changes we've made by clicking on `Review Workspace`
+
+    ![Campus Config Review](./assets/images/a01/15_review.png)
+
+
+5. You can review the configuration changes to the devices
+
+    ??? info "What happens to the ZTP Configuration?!"
+
+        We are replacing the Zero Touch configuration with a combination of base configuration (generated using AVD) and some dynamic configuration using Campus Studios
+
+    ![Campus Final Review](./assets/images/a01/16_workspace_review.png)
+
+6. Click `Submit Workspace` to generate the Change Control
 
     ![Campus Final Review](./assets/images/a01/17_view_cc.png)
 
-## 04 | Exectuting Change Control
+7.  Click on `View Change Control` and let's explore executing a change control in the next section.
+
+## 04 | Executing a Change Control
 
 1.  Within the Change Control, you can review the configurations as we just did in the workspace. This is geared towards encouraging or enforcing review of changes prior to execution.
 
-    ![Campus Final Review](./assets/images/a01/18_cc_step1.png)
+    ![Campus Final Review](./assets/images/a01/18_change_control.png)
 
 2.  When you are ready, you can review `Review and Approve` at the top right, select the `Execute Immediately` toggle, and `Approve and Execute`.
 
     ??? tip "I approved my own change?!"
 
-        You can change this in settings and toggle the ability to approve your own change control. This ensures another set of eyes approves your change before that eventual change window!
+        Yes, for this workshop we have enabled the ability to approve your change. You can change this in setting and disable the ability for someone to approve thei own change. This ensures another set of eyes reviews your change before that eventual change window!
 
-    ![Campus Final Review](./assets/images/a01/19_cc_step2.png)
+    ![Campus Final Review](./assets/images/a01/19_review_approve.png)
 
-3.  While the change control runs, you can view logs by clicking on a stage or specific device and selecting `Logs`.
+3.  Let's explore what is going on during the execution of the change control, while this is happening, feel free to click `Logs` near the top right to watch what's happening.
 
-    ![Campus Final Review](./assets/images/a01/20_cc_step3.png)
+    === "CC Start"
+    
+        So what is the device doing?! There are a number of things that device goes through through a ZTP onboard
 
-4. You should get a :material-check: on the device task once complete.
-5. Your new campus switch went from out of the box ZTP mode to a configured member of the Campus fabric. We're going to explore further changes to this switch in the next lab!
+        1. The device configuration will be applied to the device
+        2. The switch will reboot to bring the device out of ZTP mode (this will take about 10 mins)
+        3. We did not upgrade the device, but if we had, software upgrade would then take place and reboot once more. 
+
+        ![Campus Final Review](./assets/images/a01/20_task_1.png)
+
+    === "CC Finish"
+    
+        Now that change control has finished, you will see a summary of any tasks that failed.
+
+        ![Campus Final Review](./assets/images/a01/20_task_2.png)
+
+    === "CC Device Logs"
+
+        There are a number of logs you can review, the list is long, but great detail about what's going on behind the scenes.
+
+        ![Campus Final Review](./assets/images/a01/20_task_3.png)
+
+4. You can now return the the `Devices` tab on the left and see our devices should be streaming with it's new hostname! 
+
+    ![Campus Final Review](./assets/images/a01/21_device_review.png)
+
+5. That's it! Your new campus switch went from out of the box ZTP mode to a configured member of the Campus fabric. We're going to explore further changes to this switch in the next lab!
 
 --8<-- "includes/abbreviations.md"

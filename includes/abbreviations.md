@@ -17,10 +17,12 @@
 *[ESI]: Ethernet Segment Identifier
 *[EVI]: EVPN Instance
 *[EVPN]: Ethernet VPN (RFC7432, RFC8365)
+*[IDF]: Intermediate Distribution Frame
 *[IMET]: Inclusive Multicast Ethernet Tag (RFC7432)
 *[IRB]: Integrated Routing and Bridging
 *[MAB]: MAC Authentication Bypass
 *[MBA]: MAC-Based Authentication
+*[MDF]: Main Distribution Frame
 *[MLAG]: Multi-Chassis Link Aggregation
 *[MST]: Multiple Spanning Tree
 *[MTU]: Maximum Transmission Unit
