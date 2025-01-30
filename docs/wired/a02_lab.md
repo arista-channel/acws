@@ -85,9 +85,9 @@ docs/snippets/workspace.md
 
 ## 02 | Assigning Port Profiles
 
-!!! danger "Single Workspace"
+!!! danger "No Workspace"
 
-    Now that you have port profiles, you can each individually assign ports to your assigned switch! No workspace required here 😄
+    Now that you have port profiles, you can each individually configure ports on your assigned switch! No workspace required here 😄
 
 1. We are going to assign our new port port profiles to our switch, specifically assign ports for
    
@@ -192,6 +192,6 @@ docs/snippets/workspace.md
 
 12. Quick actions is using the same CloudVision Change Control workflow, the exception here is it's auto approved to allow low risk/impact changes easier. You can view this change control in the `Change Control` tab and see the generated task.
 
-    ![Campus Dashboard](./assets/images/a02/12_access.png)
+    ![Campus Dashboard](./assets/images/a02/11_review_cc.png)
 
 --8<-- "includes/abbreviations.md"

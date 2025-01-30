@@ -14,46 +14,44 @@ docs/snippets/workspace.md
 
 Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fabric Studio to add an incremental configuration (add a VLAN). This VLAN will be specific to your pod and not routable outside.
 
+!!! danger "Single Workspace"
+
+    You and your fellow student will work together to create a new VLAN in your campus fabric using a **single workspace**.
+
 1. Once the workspace is created, open the existing `Campus Fabric (L2/L3/EVPN)` studio.
 
-    ![Campus Studio](./assets/images/a03/00_ops.png)
+    ![Campus Studio](./assets/images/a03/vlan/01_vlan.png)
 
     1. Validate that the `Device Selection` still applies to `All Devices`
 
-    2. `Within the Campus Services (Non-VXLAN)` select the `Campus-Pod: Workshop` arrow :material-greater-than: on the right
+    2. `Within the Campus Services (Non-VXLAN)` navigate to `Campus: Workshop > Campus-Pod: Home Office` using the arrow :material-greater-than: on the right
 
-    ![Campus Studio](./assets/images/a03/01_ops.png)
+    === "Workshop"
 
-2. Add new VLAN and add to the `Home Office` Campus POD.
-    1. Within the `Campus: Workshop` section, click the `Campus-Pod: Home Office` name or the right arrow :material-greater-than:
+        ![Campus Studio](./assets/images/a03/vlan/02_vlan.png)
 
-    ![Campus Studio](./assets/images/a03/02_ops.png)
+    === "Home Office"
 
-    2. Click the `+ Add VLAN` button
+        ![Campus Studio](./assets/images/a03/vlan/03_vlan.png)
 
-    ![Campus Studio](./assets/images/a03/03_ops.png)
+2. We are going to add a new VLAN and add to the `Home Office` Campus POD.
 
-    3. Once an entry is added for `VLAN 2##`, click the right arrow :material-greater-than:
+    1. Click the `+ Add VLAN` button
 
-    ???+ example "Wireless-Access-Point"
-
-        | Student | VLAN |
-        | ------- | ---- |
-        | 1       | 201  |
-        | 2       | 202  |
-
-    4. Customize the new VLAN by giving it a `Name`
-    5. Add the VLAN to the Access-Pod by clicking `+ Add Pod` and selecting `IDF1`
-
-    ![Campus Studio](./assets/images/a03/04_ops.png)
+    2. Add the `VLAN 2##`, where `##` is your pod number and click the right arrow :material-greater-than:
     
-    6. You can skip entries for all of the remaining section.
+    ![Campus Studio](./assets/images/a03/vlan/04_vlan.png)
+
+    3. Customize the new VLAN by giving it a `Name`
+    4. Add the VLAN to the Access-Pod by clicking `+ Add Pod` and selecting `IDF1`
+
+    ![Campus Studio](./assets/images/a03/vlan/05_vlan.png)
+    
+    5. Let's click `Review Workspace` to submit the staged changes.
 
 3. Review and Submit Workspace
 
-    1. Click `Review Workspace` to submit the staged changes.
-
-    2. Notice that the Studio is adding the VLAN to all three devices within the Pod.
+    1. Notice that the Studio is adding the VLAN to all three devices within the Pod.
 
         !!! tip "Pruning VLANS"
 
@@ -63,46 +61,88 @@ Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fab
 
             If you are not seeing any proposed changes, make sure you selected an `Access-Pod` within the VLAN configuration. (See step 2e)
 
-    3. Once you review the changes, click `Submit Workspace`
+    2. Once you review the changes, click `Submit Workspace`
 
-    4. Click View `Change Control`
+    ![Campus Studio](./assets/images/a03/vlan/06_vlan.png)
 
-    5. Review the Change Control and select `Review and Approve`
 
-    6. Toggle the `Execute Immediately` button and select `Approve and Execute`
+    3. Click View `Change Control`
 
-4. Verify the VLAN has been added to the device configuration by using the Devices Comparison function.
+    ![Campus Studio](./assets/images/a03/vlan/07_vlan.png)
 
-    1. Click Devices then Comparison menu, and select a Time Comparison
+    4. Review the Change Control and select `Review and Approve`
+    
+    ![Campus Studio](./assets/images/a03/vlan/08_vlan.png)
 
-    2. Select Time Comparison and under Select device… choose a device from the list, such as leaf1c
+    5. Toggle the `Execute Immediately` button and select `Approve and Execute`
+    
+    ![Campus Studio](./assets/images/a03/vlan/09_vlan.png)
 
-    3. Select a time period, for example 30 minutes ago and click the Compare button
+4. Verify the VLAN has been added to the device configuration by using the Device `Comparison` function.
 
-    4. The first screen presented shows the overview is unchanged
+    1. Click `Devices`, the click on `Comparison`, and select a `Time Comparison`
+    
+    ![Campus Studio](./assets/images/a03/vlan/10_vlan.png)
+
+    2. Choose a device from the list, such as `leaf1a`
+
+    3. Select a time period, for example `30 minutes ago` and click the `Compare` button
+
+    ![Campus Studio](./assets/images/a03/vlan/11_vlan.png)
+
+    4. The first screen presented shows the overview, navigate to the `Configuration` tab on the left
+
+    ![Campus Studio](./assets/images/a03/vlan/12_vlan.png)
 
     5. Select the Configuration section
 
-    !!! note "Configuration Updated"
+    !!! tip "Timeseries in CloudVision"
 
-        Notice that the configuration has been updated. Feel free to explore other comparisons by feature. Since this VLAN was localized only, no new IP routes or MAC addresses should be learned.
+        We expect the configuration changed within the last 30 minutes, but all streaming data from the switch (including configuration) is stored in a timeseries database. So anything from routing table, MAC, ARP, and more is accessible for historical review and comparisons like this! 
 
+    ![Campus Studio](./assets/images/a03/vlan/13_vlan.png)
+    
 5.  Lab section completed! In the next lab section you will see how to roll back a previous change control
 
 ## 02 | Rollback a Change Control
 
-A common operational task is to roll back a specific configuration and restore back to previous state. You may need to do this for all devices affected by a change, or only a subset of devices under troubleshooting.
+There is no question at some point in  your career, there has been a situation you've been asked to roll back a configuration change and restore back to previous state. You may need to do this for all devices affected by a change, or only a subset of devices under troubleshooting.
 
-CloudVision change controls allow this flexibility for granular change management per device and fleet-wide
+CloudVision Change Controls are built with with this flexibility in mind, granular change management per device or fleet-wide. Specifically targeting actions or tasks that have taken place can be identified and rolled back when needed.
 
 1. Let’s roll back the change control we used to add a VLAN via Studios.
-2. First go to Provisioning then Change Control menu. Select the change control corresponding to your VLAN addition
-3. Click the Rollback button
-4. In the next screen, select the top list check mark to select all the devices and click Create Rollback Change Control
-5. Verify the Configuration Changes section by clicking “View Diff”  Once you have reviewed the change, click the Review and Approve button
-6. You’ll be presented with one more opportunity to review the changes. Select Execute Immediately if not already toggled on and Approve and Execute
-7. Monitor the change control for completion to ensure the added VLAN is cleaned up on all three switches.
-8.  You have now successfully added a VLAN through Studios and then rolled back that change across all switches.
+
+2. First go to `Provisioning` then `Change Control`. Select the change control corresponding to your VLAN addition
+
+    ![Campus Studio](./assets/images/a03/cc/01_cc.png)
+
+3. Click the `Rollback` button
+
+    ![Campus Studio](./assets/images/a03/cc/02_cc.png)
+
+4. In the next screen, select the top list check mark to select all the devices and click `Create Rollback Change Control`
+
+    ![Campus Studio](./assets/images/a03/cc/03_cc.png)
+
+5. Verify the Configuration Changes section by clicking `Diff Summary`  Once you have reviewed the change, click the `Review and Approve` button
+
+    ![Campus Studio](./assets/images/a03/cc/04_cc.png)
+
+6. Again, you'll be presented with one more opportunity to review the changes. Select `Execute Immediately` if not already toggled on and `Approve and Execute`
+
+    ![Campus Studio](./assets/images/a03/cc/05_cc.png)
+
+7. Monitor the change control for completion to ensure the added VLAN is cleaned up on all switches.
+
+    === "Start"
+        
+        ![Campus Studio](./assets/images/a03/cc/06_cc.png)
+
+    === "Finish"
+        
+        ![Campus Studio](./assets/images/a03/cc/07_cc.png)
+
+8. You have now successfully added a VLAN through Studios and then rolled back that change across all switches.
 
 ## 03 | Dashboards (Built-in and Custom)
 

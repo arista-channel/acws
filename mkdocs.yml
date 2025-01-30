@@ -18,7 +18,7 @@ nav:
         - C-Security Lab Guides:
             - EAP-TLS Wireless Policy: security/c01_lab.md
             - UPSK Wireless Policy: security/c02_lab.md
-            - EASP-TLS Wired Policy: security/c03_lab.md
+            - EAP-TLS Wired Policy: security/c03_lab.md
     - References:
         - Onboarding Wifi Devices: references/wireless_onboard.md
         - Configuring RadSec: references/radsec.md
