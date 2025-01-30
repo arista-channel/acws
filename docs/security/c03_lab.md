@@ -130,7 +130,7 @@ docs/snippets/login_agni.md
         | Description                    | Wired-EAP-TLS                                                 |
         | Condition #1                   | `Network:Name is Wired-EAP-TLS`                               |
         | Condition #2                   | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
-        | Action #1            | `Allow Access`                                 |
+        | Action #1                      | `Allow Access`                                                |
         | Fallback to mac Authentication | Enabled                                                       |
         | MAC Authentication Type        | Allow Registered Clients Only                                 |
         | Onboarding                     | Enabled                                                       |
