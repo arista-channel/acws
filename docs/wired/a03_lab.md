@@ -146,12 +146,22 @@ CloudVision Change Controls are built with with this flexibility in mind, granul
 
 ## 03 | Dashboards (Built-in and Custom)
 
-Dashboards are an important way to visualize commonly requested information. This lab section shows you how to navigate the built-in dashboards and customize your own.
+Dashboards are an important way to visualize commonly requested information, we've already seen the Campus Health Dashboard a few times in previous labs. This lab section shows you how to navigate the built-in dashboards and customize your own.
 
 1. Built in Dashboard: “Campus Health Overview”
-      1. Open the Dashboards Section to arrive at the Dashboards landing page.
-      2. Select the built-in Campus Health Overview dashboard
+
+      1. Open the Dashboards Section and we will see the Campus Health Overview dashboard is set to our home dashboard.
+
+        !!! tip "Dashboard Home Page"
+
+            CloudVision has a couple features that customize a users experience. There is a built in profile for `Campus Monitoring` that can be applied to a user role, this will set the "Campus Health Overview" dashboard as the primary. A user can also select any built-in or custom dashboard as the home/primary dashboard.
+
+        ![Campus Studio](./assets/images/a03/dashboards/01_dashboard.png)
+
       3. You’ll be presented with a curated selection of common campus related monitoring tools
+      
+        ![Campus Studio](./assets/images/a03/dashboards/02_dashboard.png)
+
       4. *Note: We will explore the Quick Actions interactive functions of this dashboard in another lab section. 
       5. Feel free to explore the Campus Health dashboard briefly and then navigate back to the Dashboards landing page by selecting Dashboards in the upper left.
    

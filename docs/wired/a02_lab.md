@@ -131,7 +131,7 @@ docs/snippets/workspace.md
       
         Make sure to select your device, see the tabs below! 
         
-        NOTE: You will see a slightly different front panel layout, this is the difference between the 710P-12P and the 710P-16P you have in front of you."
+        **NOTE**: You will see a slightly different front panel layout, this is the difference between the 710P-12P and the 710P-16P you have in front of you.
 
     === "Student 1"
 
