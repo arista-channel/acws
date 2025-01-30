@@ -3,44 +3,100 @@
 In this lab...
 --8<--
 docs/snippets/topology.md
-docs/snippets/login_agni.md
 --8<--
+
+??? tip "Reminder on logging in and creating a workspace"
+
+    --8<--
+    docs/snippets/login_cv.md
+    docs/snippets/workspace.md
+    --8<--
 
 ## Enable RadSec
 
-In this lab you will be configuring RadSec on the campus-podXX-leaf1c switches by adding the RadSec configuration to the leaf1c switches via the Static Configuration Studio.  
+In this lab you will be configuring RadSec on your lab switches by adding the RadSec configuration to the switches via the Static Configuration Studio.  
 
-1. Login to CloudVision, then click on the “Provisioning” menu option, then choose “Studios”.
-2. Create a workspace to propose changes to the Network Infrastructure. A workspace acts as a sandbox where you can stage your configuration changes before deploying them. 
-3. Click “Create a Workspace”, give it any name you would like and click “Create”. 
-4. Apply the static configuration to the campus-podXX-leaf1c switch using Static Configuration Studio
-5. Click on Studios at the Top OR Left side navigation pane
-6. Launch the Static Configuration Studios
-7. Expand the Device Container Tree and select the “campus-pod<xx>-leaf1c” switch.
-8. In the Device Container window, click on  “+ Configlet” followed by “Configlet Library”.  Select the Configlet named “Studios-campus-pod<xx>-radsec-config” and click Assign to add the configlet to the “campus-pod<xx>-leaf1c” switch. 
-9. Click Review Workspace to review all the changes proposed to the CloudVision Studio
-10. Review and Submit the Workspace
-11. Review the workspace details showing the summary of modified studios, the build status, and the proposed configuration changes for each device.
-12. Click “Submit Workspace”
-13. Click “View Change Control”
-14. Review, Approve and Execute the Change Control to apply the configuration changes
-15. Click “Review and Approve”
-16. Select “Execute immediately” an click “Approve and Execute”
-17. The change control will execute and apply all the RadSec configuration changes to the device. This will enable RadSec connectivity between the campus-pod<xx>-leaf1c switch and AGNI.
+1. Click on the `Provisioning` menu option, then choose `Studios`.   
+2. Let's open the `Static Configuration Studio`
+ 
+   ![Campus Studio](./assets/images/c03/01_radsec.png)
+
+3. Select your respective switch
+4. In the `Device Container` window, click on `+ Configlet` followed by `Configlet Library`.
+   
+   ![Campus Studio](./assets/images/c03/02_radsec.png)
+   
+5. Select the configlet named for your switch, should be `pod##-leaf1X-radsec` and click `Assign` to add the configlet to the switch
+   
+   ![Campus Studio](./assets/images/c03/03_radsec.png)
+   
+6. Click `Review Workspace` to review all the changes proposed to the CloudVision Studio
+   
+7. Review the workspace details showing the summary of modified studios, the build status, and the proposed configuration changes for each device. When ready click `Submit Workspace`
+   
+    ![Campus Studio](./assets/images/c03/05_radsec.png)
+
+    ??? "What does this configuration do?!"
+
+        Click below on the lines to understand what each line does
+
+        ```yaml
+        !
+        management security
+            ssl profile agni-server #(1)!
+                certificate pod00-leaf1a.crt key agni-private.key #(2)!
+                trust certificate radsec_ca_certificate.pem #(3)!
+        !
+        radius-server host radsec.beta.agni.arista.io tls ssl-profile agni-server #(4)!
+        !
+        aaa group server radius agni-server-group #(5)!
+            server radsec.beta.agni.arista.io tls
+        !
+        aaa authentication dot1x default group agni-server-group
+        aaa accounting dot1x default start-stop group agni-server-group
+        !
+        ```
+
+        1. Create an SSL profile
+        2. This is the switch key and certificate, this certificate was generated on EOS, signed by AGNI, and installed in the store.
+        3. This is the trusted certificate downloaded from AGNI and installed on the EOS certificate store
+        4. This enabled RadSec on the device, configured to using our SSL profile
+        5. Create the AAA radius server group, we use this to enforce client authentication via dot1x later on in this lab
+
+8.  Click `View Change Control` and review the Change Control, hit `Review and Approve` when ready.
+
+    ![Campus Studio](./assets/images/c03/07_radsec.png)
+
+9.  Select `Execute immediately` and click `Approve and Execute`
+
+    ![Campus Studio](./assets/images/c03/08_radsec.png)
+
+10. The change control will execute and apply all the RadSec configuration changes to the device. This will enable RadSec connectivity between the switch and AGNI.
 
     !!! tip "Automating Certificates"
         
-        The switch device certificate and the AGNI RadSec root certificate have already been provisioned on the switch.This was completed using automation, specifically ansible and leveraging both the switch eAPI and AGNI API to generate, sign, and install certificates.
+        The switch and AGNI certs were generated, signed, and installed using automation before hand. Specifically ansible and leveraging both the switch eAPI and AGNI API. You can read more on how this role works [EOS AGNI Radsec (GitHub)](https://github.com/carl-baillargeon/eos_agni_radsec/tree/main)
 
-18. See Section B. Configuring RadSec profile in EOS for additional information.
+    ![Campus Studio](./assets/images/c03/09_radsec.png)
+
+11. See the [Configuring RadSec](../references/radsec.md) in EOS for additional information. You can
+
+--8<--
+docs/snippets/login_agni.md
+--8<--
 
 ## Create Wired EAP-TLS Network and Segment
 
-1. Click on Access Devices - Devices to confirm the RadSec connection is up.
-2. Create Wired EAP-TLS Network and Segment
-3.  In this section we will create a Network and Segment in Cloudvision AGNI to utilize a certificate based TLS authentication method on a wired connection with a Raspberry Pi. 
-4.  Click on Networks and select + Add Network
-5.  Fill in and select the Following fields on the “Add Network” page.
+1. Click on `Access Devices > Devices` to confirm the RadSec connection is up.
+
+    ![Campus Studio](./assets/images/c03/agni/01_agni.png)
+
+2. In this section we will create a Network and Segment in CloudVision AGNI to utilize a certificate based TLS authentication method on a wired connection with a Raspberry Pi. 
+4. Click on `Networks` and select `+ Add Network`
+
+    ![Campus Studio](./assets/images/c03/agni/02_agni.png)
+
+5. Fill in and select the Following fields on the `Add Network` page.
 
     ???+ example "Settings"
         
@@ -48,43 +104,85 @@ In this lab you will be configuring RadSec on the campus-podXX-leaf1c switches b
         | ------------------------------ | ----------------------------- |
         | Name                           | Wired-EAP-TLS                 |
         | Connection Type                | Wired                         |
-        | Access Device Group            | Switches                      |
-        | Status                         | enabled                       |
-        | Authentication type            | Client Certificate (Eap-TLS)  |
+        | Access Device Group            | WIRED_A                       |
+        | Status                         | Enabled                       |
+        | Authentication type            | Client Certificate (EAP-TLS)  |
         | Fallback to mac Authentication | Enabled                       |
         | MAC Authentication Type        | Allow Registered Clients Only |
         | Onboarding                     | Enabled                       |
         | Authorized User Groups         | Employees                     |
 
+    ![Campus Studio](./assets/images/c03/agni/03_agni.png)
 
-25. Click on Add Network at the bottom of the screen.  
-26. Next, click on Segments and then + Add Segment
-27. Next, type in the name: Wired-EAP-TLS and the Description as well.
-28. Next, let’s Add Conditions.  Note: Adding more than one condition means MATCH ALL 
-29. Select, Network, Name, Is, Wired-EAP-TLS from the drop down lists. 
-30. Let’s add one more condition.
-31. Select, Network, Authentication Type, Is, Client Certificate (EAP-TLS) from the drop down lists. 
-32. Your Conditions should now look like this.
-33. Under Actions select Add Action.
-34. Select Allow Access.
-35. Finally, select Add Segment at the bottom of the page. 
-36. You should now be able to expand and review your segment.
-37. Next, unplug and plug your raspberry Pi into port 2 on the switch and click on Sessions to see if your ATD Raspberry Pi has a connection via the Wired connection.  *Note: The Client Certificate has already been applied to the Raspberry Pi.
+
+6. When done, click on `Add Network` at the bottom of the screen.  
+7. Next, click on `Segments` and then `+ Add Segment`
+
+    ![Campus Studio](./assets/images/c03/agni/04_agni.png)
+
+8. Configure the netowrk segment with the following settings:
+
+    ???+ example "Settings"
+        
+        | Field                          | Value                                                         |
+        | ------------------------------ | ------------------------------------------------------------- |
+        | Name                           | Wired-EAP-TLS                                                 |
+        | Description                    | Wired-EAP-TLS                                                 |
+        | Condition #1                   | `Network:Name is Wired-EAP-TLS`                               |
+        | Condition #2                   | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
+        | Action #1            | `Allow Access`                                 |
+        | Fallback to mac Authentication | Enabled                                                       |
+        | MAC Authentication Type        | Allow Registered Clients Only                                 |
+        | Onboarding                     | Enabled                                                       |
+        | Authorized User Groups         | Employees                                                     |
+
+    ![Campus Studio](./assets/images/c03/agni/06_agni.png)
+
+        
+9.  Finally, select `Add Segment` at the bottom of the page.
+
+10. You should now be able to expand and review your segment.
+    
+    ![Campus Studio](./assets/images/c03/agni/07_agni.png)
+
+11. Next, unplug your raspberry Pi from `Ethernet1` and into `Ethernet2` on the switch and click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
+
+    TODO: Get screenshot
+
+    ![Campus Studio](./assets/images/c03/agni/07_agni.png)
+
+
+    !!! note "Client Certificate"
+    
+        The Client Certificate has already been applied to the Raspberry Pi.
 
 ## Validate and Verify Wired EAP-TLS Device
+
+### AGNI
+
 1. Once the device is connected you will be able to view the status of the connection and additional session details if you click on the Eye to the right of the device. 
 2. AGNI will then display more in depth session information regarding the device and connection. 
+
+### CloudVision
+
+TODO - add screenshots from endpoint overview
+
+### EOS CLI
+
 3. You can also validate the session on the switch by issuing the following commands in the switch CLI
 
     ```yaml
     show dot1x host
+    show dot1x host mac d83a.dd98.6183 detail
     ```
 
-    ```yaml
+    ```yaml hl_lines="4 8 10-12"
+    pod00-leaf1a#show dot1x host
     Port      Supplicant MAC Auth  State                   Fallback               VLAN
     --------- -------------- ----- ----------------------- ---------------------- ----
     Et2       d83a.dd98.6183 EAPOL SUCCESS                 NONE                       
-    710P-16P#sh dot1x host mac d83a.dd98.6183 detail
+
+    pod00-leaf1a#show dot1x host mac d83a.dd98.6183 detail
     Operational:
     Supplicant MAC: d83a.dd98.6183
     User name: aristaatd01@outlook.com

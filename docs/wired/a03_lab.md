@@ -10,7 +10,7 @@ docs/login_cv_md
 docs/snippets/workspace.md
 --8<--
 
-## 01 | Adding a VLAN
+## Adding a VLAN
 
 Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fabric Studio to add an incremental configuration (add a VLAN). This VLAN will be specific to your pod and not routable outside.
 
@@ -104,7 +104,7 @@ Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fab
     
 5.  Lab section completed! In the next lab section you will see how to roll back a previous change control
 
-## 02 | Rollback a Change Control
+## Rollback a Change Control
 
 There is no question at some point in  your career, there has been a situation you've been asked to roll back a configuration change and restore back to previous state. You may need to do this for all devices affected by a change, or only a subset of devices under troubleshooting.
 
@@ -144,7 +144,7 @@ CloudVision Change Controls are built with with this flexibility in mind, granul
 
 8. You have now successfully added a VLAN through Studios and then rolled back that change across all switches.
 
-## 03 | Dashboards (Built-in and Custom)
+## Dashboards (Built-in and Custom)
 
 Dashboards are an important way to visualize commonly requested information, we've already seen the Campus Health Dashboard a few times in previous labs. This lab section shows you how to navigate the built-in dashboards and customize your own.
 
@@ -198,7 +198,7 @@ Dashboards are an important way to visualize commonly requested information, we'
       7.  The import function is shown as reference only, it is not required to upload any file here. Alternatively you can use this function to share a dashboard customized with your lab partner. If you wish to import, click Select File and select the file you download in the previous step.
 5.  Lab section completed!
 
-## 04 | Events
+## Events
 
 In this section, we will explore the Events stream and the tools and filters to help process and manage critical errors versus informational data.
 
@@ -219,7 +219,7 @@ In this section, we will explore the Events stream and the tools and filters to 
 
 The next section will show you how to customize the notifications (e.g. email, chat, SNMP, Syslog, etc) that the events generate. 
 
-## 05 | Customize Notifications
+## Customize Notifications
 
 In this lab, you will configure CloudVision to send an email alert to an email address using the built-in “SendGrid” email service.
 

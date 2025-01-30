@@ -10,7 +10,7 @@ docs/snippets/topology.md
 docs/snippets/workspace.md
 --8<--
 
-## 01 | Creating Port Profiles
+## Creating Port Profiles
 
 !!! danger "Single Workspace"
 
@@ -83,7 +83,7 @@ docs/snippets/workspace.md
 
     !!! warning "Note that device configuration has NOT changed after submitting this workspace. If you see something different, create a new workspace and try again or reach out to the event staff."
 
-## 02 | Assigning Port Profiles
+## Assigning Port Profiles
 
 !!! danger "No Workspace"
 
@@ -96,13 +96,13 @@ docs/snippets/workspace.md
 
 2. CloudVision offers a number of places to configure access interfaces, it doesn't matter which one you choose! These workflows exist in multiple places depending on the type of work you are performing (broad updates, troubleshooting, etc)
 
-   1. **Studios**: If you are already in the `Access Interface Configuration` studio, you can click the quick action to launch the quick action
-   2. **Dashboards**: you can launch the quick action directly from the Campus Health Dashboard
-   3. **Network Hierarchy**: Within this view, you can dig into a specific Campus, Pod, and Access Pod. Clicking on the `Front Panel` view, you can then configure port profiles on the right.
+      1. **Studios**: If you are already in the `Access Interface Configuration` studio, you can click the quick action to launch the quick action
+      2. **Dashboards**: you can launch the quick action directly from the Campus Health Dashboard
+      3. **Network Hierarchy**: Within this view, you can dig into a specific Campus, Pod, and Access Pod. Clicking on the `Front Panel` view, you can then configure port profiles on the right.
 
     === "Studios"
 
-        ![Campus Dashboard](./assets/images/a02/06_access_config_2.png)
+        ![Campus Dashboard](./assets/images/a02/06_access_config_3.png)
 
     === "Campus Dashboard"
 
@@ -110,7 +110,7 @@ docs/snippets/workspace.md
 
     === "Network Hierarchy"
 
-        ![Campus Dashboard](./assets/images/a02/06_access_config_3.png)
+        ![Campus Dashboard](./assets/images/a02/06_access_config_2.png)
         
 3. We're going to use the `Campus Dashboard` option, so click on `Dashboards` on the left side navigation. Locate the `Quick Actions` panel on the lower left of the screen and Click `Access Interface Configuration`
 

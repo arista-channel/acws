@@ -30,7 +30,7 @@ docs/snippets/login_cv.md
 docs/snippets/workspace.md
 --8<--
 
-## 01 | Onboarding Device
+## Onboarding Device
 
 1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices, identify the hostname and serial number. We ill use these to chose which switch is `leaf1a` and `leaf1b`
 
@@ -116,7 +116,7 @@ docs/snippets/workspace.md
 
     ![Return to Studios](./assets/images/a01/09_return_studios.png)
     
-## 03 | Applying Configuration
+## Applying Configuration
 
 1. Click on `Static Configuration`
 
@@ -186,7 +186,7 @@ docs/snippets/workspace.md
 
 7.  Click on `View Change Control` and let's explore executing a change control in the next section.
 
-## 04 | Executing a Change Control
+## Executing a Change Control
 
 1.  Within the Change Control, you can review the configurations as we just did in the workspace. This is geared towards encouraging or enforcing review of changes prior to execution.
 
