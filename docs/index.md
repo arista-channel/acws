@@ -42,7 +42,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     ---
 
-    The campus is deplopyed, explore the CloudVision observability, altering, troubleshooting, and more!
+    The campus is deployed, explore the CloudVision observability, altering, troubleshooting, and more!
 
     [:material-login: Hop into A-03](./wired/a03_lab.md){ .md-button .md-button--primary }
 
