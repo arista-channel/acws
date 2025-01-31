@@ -40,12 +40,12 @@ Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fab
 
     2. Add the `VLAN 2##`, where `##` is your pod number and click the right arrow :material-greater-than:
     
-    ![Campus Studio](./assets/images/a03/vlan/04_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/04_vlan.png)
 
     3. Customize the new VLAN by giving it a `Name`
     4. Add the VLAN to the Access-Pod by clicking `+ Add Pod` and selecting `IDF1`
 
-    ![Campus Studio](./assets/images/a03/vlan/05_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/05_vlan.png)
     
     5. Let's click `Review Workspace` to submit the staged changes.
 
@@ -63,44 +63,44 @@ Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fab
 
     2. Once you review the changes, click `Submit Workspace`
 
-    ![Campus Studio](./assets/images/a03/vlan/06_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/06_vlan.png)
 
 
     3. Click View `Change Control`
 
-    ![Campus Studio](./assets/images/a03/vlan/07_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/07_vlan.png)
 
     4. Review the Change Control and select `Review and Approve`
     
-    ![Campus Studio](./assets/images/a03/vlan/08_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/08_vlan.png)
 
     5. Toggle the `Execute Immediately` button and select `Approve and Execute`
     
-    ![Campus Studio](./assets/images/a03/vlan/09_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/09_vlan.png)
 
 4. Verify the VLAN has been added to the device configuration by using the Device `Comparison` function.
 
     1. Click `Devices`, the click on `Comparison`, and select a `Time Comparison`
     
-    ![Campus Studio](./assets/images/a03/vlan/10_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/10_vlan.png)
 
     2. Choose a device from the list, such as `leaf1a`
 
     3. Select a time period, for example `30 minutes ago` and click the `Compare` button
 
-    ![Campus Studio](./assets/images/a03/vlan/11_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/11_vlan.png)
 
     4. The first screen presented shows the overview, navigate to the `Configuration` tab on the left
 
-    ![Campus Studio](./assets/images/a03/vlan/12_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/12_vlan.png)
 
     5. Select the Configuration section
 
-    !!! tip "Timeseries in CloudVision"
+        !!! tip "Timeseries in CloudVision"
 
-        We expect the configuration changed within the last 30 minutes, but all streaming data from the switch (including configuration) is stored in a timeseries database. So anything from routing table, MAC, ARP, and more is accessible for historical review and comparisons like this! 
+            We expect the configuration changed within the last 30 minutes, but all streaming data from the switch (including configuration) is stored in a timeseries database. So anything from routing table, MAC, ARP, and more is accessible for historical review and comparisons like this! 
 
-    ![Campus Studio](./assets/images/a03/vlan/13_vlan.png)
+        ![Campus Studio](./assets/images/a03/vlan/13_vlan.png)
     
 5.  Lab section completed! In the next lab section you will see how to roll back a previous change control
 
@@ -144,59 +144,75 @@ CloudVision Change Controls are built with with this flexibility in mind, granul
 
 8. You have now successfully added a VLAN through Studios and then rolled back that change across all switches.
 
-## Dashboards (Built-in and Custom)
+## Network Hierarchy
+
+### Overview
+
+Let's explore the Campus Network Hierarchy 
+
+### Configuration Compliance
+
+Use the Network Hierarchy to showcase compliance panel and 2 devices should flagged (due to rollback above). This will open the compliance dashboard and we can sync the confing from there via Change Control.
+
+## Network Hierarchy
+
+Show Endpoint Overview, search for a device on the students pod, sflow will be enabled, should be able to see more info about authentication, traffic flows, and 
+
+## Dashboards
 
 Dashboards are an important way to visualize commonly requested information, we've already seen the Campus Health Dashboard a few times in previous labs. This lab section shows you how to navigate the built-in dashboards and customize your own.
 
-1. Built in Dashboard: “Campus Health Overview”
+### Campus Health Overview
 
-      1. Open the Dashboards Section and we will see the Campus Health Overview dashboard is set to our home dashboard.
+1. Open the Dashboards Section and we will see the Campus Health Overview dashboard is set to our home dashboard.
 
-        !!! tip "Dashboard Home Page"
+  !!! tip "Dashboard Home Page"
 
-            CloudVision has a couple features that customize a users experience. There is a built in profile for `Campus Monitoring` that can be applied to a user role, this will set the "Campus Health Overview" dashboard as the primary. A user can also select any built-in or custom dashboard as the home/primary dashboard.
+      CloudVision has a couple features that customize a users experience. There is a built in profile for `Campus Monitoring` that can be applied to a user role, this will set the "Campus Health Overview" dashboard as the primary. A user can also select any built-in or custom dashboard as the home/primary dashboard.
 
-        ![Campus Studio](./assets/images/a03/dashboards/01_dashboard.png)
+  ![Campus Studio](./assets/images/a03/dashboards/01_dashboard.png)
 
-      3. You’ll be presented with a curated selection of common campus related monitoring tools
-      
-        ![Campus Studio](./assets/images/a03/dashboards/02_dashboard.png)
+2. You’ll be presented with a curated selection of common campus related monitoring tools
 
-      4. *Note: We will explore the Quick Actions interactive functions of this dashboard in another lab section. 
-      5. Feel free to explore the Campus Health dashboard briefly and then navigate back to the Dashboards landing page by selecting Dashboards in the upper left.
+  ![Campus Studio](./assets/images/a03/dashboards/02_dashboard.png)
+
+3. *Note: We will explore the Quick Actions interactive functions of this dashboard in another lab section. 
+4. Feel free to explore the Campus Health dashboard briefly and then navigate back to the Dashboards landing page by selecting Dashboards in the upper left.
    
-2. Built in Dashboard: “Device Health”
-      1. Next, Select the Device Health dashboard
-      2.  By default, this dashboard selects all devices. Change the dashboard to select only leaf1-c by changing from “device: *” to device:  match single device
-      3.  Once you’ve selected an individual device, the dashboard will filter to results for only this device.
-      4.  Navigate back to the Dashboards landing page by clicking Dashboards in upper left.
-3. Next, let’s add a new customized dashboard.
-      1.  Click the New Dashboard button.
-      2. Provide a useful name for the Dashboard, such as “Pod-##” Security and Performance”
-      3. Next, let’s add a combination of visualizations which have both security and performance related metrics.First, click the drop down on the upper right and change from Metrics to Summaries
-      4. Within the Summaries list, Click on, or drag the Compliance widget into the dashboard canvas 
-      5. Within the Compliance tile now added to your dashboard, select the Click to Configure button
-      6. Within the right side menu bar, within Compliance Metric select Image Compliance
-      7. Dismiss the customization menu by clicking the X in upper right corner
-      8.  Next, change the Summaries menu back to Metrics 
-      9.  Within the Metrics menu, click Horizon Graph on the right side to add this tile to the canvas, then click the three-dots … menu and click Configure to customize the Horizon Graph.
-      10. Within View Type, select Single Metric for Multiple Sources. Select Metric CPU Utilization.
-      11. Dismiss the customization menu with the X button in upper right
-      
-        !!! tip "Drag the tiles"
+### Device Health
 
-            You can drag the tiles around by the respective menu bars and resize each tile using the lower right corner handles.
+1. Next, Select the Device Health dashboard
+2.  By default, this dashboard selects all devices. Change the dashboard to select only leaf1-c by changing from “device: *” to device:  match single device
+3.  Once you’ve selected an individual device, the dashboard will filter to results for only this device.
+4.  Navigate back to the Dashboards landing page by clicking Dashboards in upper left.
 
-      12. Save and completed the dashboard customization by clicking the Done button in upper menu bar
-4. Exporting and Importing Dashboards Sharing your Dashboard across Cloudvision systems!
-      1. Export a dashboard
-      2. To share your dashboard -  in the upper right corner, select the three-dots … menu and click Export as JSON
-      3. Click Download in the lower right corner. This will download a file you can share with others if they wish to use your customized dashboard.
-      4. Import a dashboard
-      5. Navigate back to the Dashboards landing page to view the import button
-      6.  Click on Import
-      7.  The import function is shown as reference only, it is not required to upload any file here. Alternatively you can use this function to share a dashboard customized with your lab partner. If you wish to import, click Select File and select the file you download in the previous step.
-5.  Lab section completed!
+### Custom Dashboard
+
+Next, let’s add a new customized dashboard. There are three main contructs we will touch on here
+
+- Metrics (Devices): telemetry data specific to a device
+- Metrics (Interfaces): telemetry data specific to the interfaces of a device
+- Summaries: a metric or set of metrics summarized into a single view 
+
+Let's get started:
+
+1. Click the New Dashboard button.
+2. Provide a useful name for the Dashboard, such as “Pod-##” Security and Performance”
+3. Next, let’s add a combination of visualizations which have both security and performance related metrics.First, click the drop down on the upper right and change from Metrics to Summaries
+4. Within the Summaries list, Click on, or drag the Compliance widget into the dashboard canvas 
+5. Within the Compliance tile now added to your dashboard, select the Click to Configure button
+6. Within the right side menu bar, within Compliance Metric select Image Compliance
+7. Dismiss the customization menu by clicking the X in upper right corner
+8. Next, change the Summaries menu back to Metrics 
+9. Within the Metrics menu, click Horizon Graph on the right side to add this tile to the canvas, then click the three-dots … menu and click Configure to customize the Horizon Graph.
+10. Within View Type, select Single Metric for Multiple Sources. Select Metric CPU Utilization.
+11. Dismiss the customization menu with the X button in upper right
+    
+    !!! tip "Drag the tiles"
+
+        You can drag the tiles around by the respective menu bars and resize each tile using the lower right corner handles.
+
+    1.  Save and completed the dashboard customization by clicking the Done button in upper menu bar
 
 ## Events
 
