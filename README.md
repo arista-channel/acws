@@ -46,5 +46,5 @@ Contributing to the guides is welcome, you can follow the steps below to contrib
 
 ## Maintainers
 
-Kyle Bush ([kbush@arista.com](mailto:kbush@arista.com))
-Larry Gomez ([larry@arista.com](mailto:larry@arista.com))
+- Kyle Bush ([kbush@arista.com](mailto:kbush@arista.com))
+- Larry Gomez ([larry@arista.com](mailto:larry@arista.com))
