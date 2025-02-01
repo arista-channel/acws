@@ -42,7 +42,20 @@ Contributing to the guides is welcome, you can follow the steps below to contrib
 
 4. Make your changes and push to your branch
 
-5. Finally, open a PR on GitHub and notify the maintainers
+    ```bash
+    git add --all
+    git commit -m "Funny commit message"
+    git push
+    ```
+
+5. If pre-commit catches any errors, fix the errors to commit. Some formatting fixes are done for you and must be re-committed
+
+    ```bash
+    git commit -am "Funny commit message"
+    git push
+    ```
+
+6. Finally, open a PR on GitHub and notify the maintainers
 
 ## Maintainers
 
