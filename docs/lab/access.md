@@ -1,15 +1,15 @@
 # Lab Access
 
-Welcome to the Arista Cmapus ATD Workshop! 
+Welcome to the Arista Campus ATD Workshop!
 
 ## Labs
 
-As part of this workshop, you will be copnfiguring and interacting with Arista's campus ecosystem. Each pod is con
+As part of this workshop, you will be configuring and interacting with Arista's campus ecosystem. Each pod is con
 
 - [x] 12 x Arista Campus Pods
 - [x] 2 x Students assigned per pod
 
-Each Arista Campus Pod is equiped with the hardware in front of you and the software
+Each Arista Campus Pod is equipped with the hardware in front of you and the software
 
 <div class="grid cards" markdown>
 
@@ -29,9 +29,9 @@ Each Arista Campus Pod is equiped with the hardware in front of you and the soft
 
     Each pod will be provided the following hardware:
 
-      - [x] 2 x C-360 
+      - [x] 2 x C-360
       - [x] 2 x 710P-16P
-      - [x] 2 x Raspberry Pi 
+      - [x] 2 x Raspberry Pi
 
 - :fontawesome-solid-user: **Student Equipment**
 
@@ -59,5 +59,9 @@ Each Arista Campus Pod is equiped with the hardware in front of you and the soft
 
 --8<--
 docs/snippets/login_cv.md
-docs/snippets/topology.md
 --8<--
+
+## Topology
+
+![ATD Student Pod](../assets/images/topology/atd_student-light.png#only-light)
+![ATD Student Pod](../assets/images/topology/atd_student-dark.png#only-dark)
