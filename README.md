@@ -24,19 +24,19 @@ Contributing to the guides is welcome, you can follow the steps below to contrib
 
 1. Clone the repository, it's recommended to [setup GitHub SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
 
-    ```yaml
+    ```bash
     git clone git@github.com:kpbush30/campus-workshop.git
     ```
 
 2. Create a branch, try naming the branch after the docs you are modifying.
 
-    ```yaml
+    ```bash
     git branch -c your-branch
     ```
 
 3. Install pre-commit
 
-    ```yaml
+    ```bash
     pre-commit install
     ```
 
