@@ -70,8 +70,6 @@ When you open the launcher, you are presented with multiple applications. Each i
 
     ![Campus Studio](./assets/images/b01/launchpad/04_launchpad.png)
 
-4. End of lab section.
-
 ## CV-CUE CloudVision Wifi Access
 
 CloudVision CUE - Cognitive Unified Edge, provides the management plane and monitoring functions for the Arista WiFi solution.
@@ -103,55 +101,41 @@ CloudVision CUE - Cognitive Unified Edge, provides the management plane and moni
 
     ![Campus Studio](./assets/images/b01/cue/04_cue.png)
 
-6. End of lab section.
-
 ## Assign AP Name
 
 Access points that successfully receive an IP address, DNS, and default gateway via DHCP, and have connectivity over HTTPS/TCP/443 to CV-CUE.
 
 1. Using the left navigation bar in CV-CUE, navigate to `Monitor > WiFi`.
 
-    ![Campus Studio](./assets/images/b01/ap/01_ap.png){ width=300" }
+    ![Campus Studio](./assets/images/b01/ap/01_ap.png){ width=600" }
 
 2. Select the Access Points section and observe the discovered AP and default name `Arista_` and the last 3 bytes of the MAC address.
 
 3. Customize the AP’s name by clicking the 3-dots menu and Rename
 
-    <div class="grid cards" markdown>
-
-    - ![Campus Studio](./assets/images/b01/ap/02_ap.png)
-    - ![Campus Studio](./assets/images/b01/ap/03_ap.png)
-
-    </div>
+    ![Campus Studio](./assets/images/b01/ap/02_ap.png){ width=600" }
 
 4. Give the AP a name such as: `POD-##-AP1` or `POD-##-AP2` where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod.
 
-    ![Campus Studio](./assets/images/b01/ap/04_ap.png)
+    ![Campus Studio](./assets/images/b01/ap/03_ap.png)
 
-5. End of lab section.
+    ![Campus Studio](./assets/images/b01/ap/04_ap.png)
 
 ## Managing the Configuration Hierarchy
 
 Within CV-CUE, much of the configuration is hierarchical, so everything you configure will be inherited from that level and it's children. Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. Now select the three dots :material-dots-horizontal: to the left of `Locations` and click on `Manage Navigator`.
 
-<div class="grid cards" markdown>
-
-- ![Campus Studio](./assets/images/b01/config/01_config.png)
-- ![Campus Studio](./assets/images/b01/config/02_config.png)
-
-</div>
+![Campus Studio](./assets/images/b01/config/01_config.png){ width=600" }
 
 1. `Manage Navigator` is where you create Folders, Floors, and Groups.
       1. **Folders** typically represent a company, branch office name or division.
       2. **Floors** are straightforward and are where maps are placed.
       3. **Groups** are a way to make a configuration more granular. Let’s say you want a branch location to have all of the same configuration but Outdoor APs need to vary from that. You would create a group for the Outdoor APs, put the APs into that group and override the part of the configuration that is unique. Think of your company and how you would want to lay it out.
-2. Add a `Folder` for your Company Name. In the `Navigator`, select the 3 dots :material-dots-horizontal: next to `Locations`
+2. Add a `Folder` for your Company Name. In the `Navigator`, select the 3 dots :material-dots-horizontal: next to `Locations`. Select `Add Folder/Floor`
 
-    ![Campus Studio](./assets/images/b01/config/03_config.png)
+    ![Campus Studio](./assets/images/b01/config/02_config.png){ width=600" }
 
-3. Select `Add Folder/Floor` and then name your new Folder:
-
-    ![Campus Studio](./assets/images/b01/config/04_config.png)
+3. Add a new folder using the settings below, depending on your student assignment
 
     ???+ example "Folder Name"
 
@@ -160,44 +144,56 @@ Within CV-CUE, much of the configuration is hierarchical, so everything you conf
         | Student 1 |   `ACorp`   |
         | Student 2 |   `BCorp`   |
 
-    ![Campus Studio](./assets/images/b01/config/05_config.png)
+    ![Campus Studio](./assets/images/b01/config/03_config.png){ width=600" }
 
 4. Next, create 2 more folders called `1st Floor` and `2nd Floor`.  Right click on the word `Corp` to expose the menu.
 
-    ![Campus Studio](./assets/images/b01/config/06_config.png)
+    ![Campus Studio](./assets/images/b01/config/04_config.png){ width=600" }
 
     ??? tip "Add Multiple Floors"
 
         It’s also possible to add multiple floors at once using the `Add Multiple Folders/Floors` menu option
 
         ![Campus Studio](./assets/images/b01/config/07_config.png)
-
         ![Campus Studio](./assets/images/b01/config/08_config.png)
 
         *Use the `*` key to create floors instead of folders*
 
 5. Next, move your AP into the `1st Floor` folder you created. To move your AP from the staging area, right click on the `Staging Area` folder, and select `Show Available Devices`.
 
-    ![Campus Studio](./assets/images/b01/config/09_config.png)
+    ![Campus Studio](./assets/images/b01/config/05_config.png)
 
 6. Next, right click on the AP name, select `Move` and then select the `1st Floor` folder you created earlier, and then click the `Move` button at the bottom of the screen.
 
-    <div class="grid cards" markdown>
+    === "Step 1: AP Move"
 
-    - ![Campus Studio](./assets/images/b01/config/10_config.png)
-    - ![Campus Studio](./assets/images/b01/config/11_config.png)
+        ![Campus Studio](./assets/images/b01/config/06_config-1.png)
 
-    </div>
+    === "Step 2: AP Move"
+
+        ![Campus Studio](./assets/images/b01/config/06_config-2.png)
+
+    === "Step 3: AP Move"
+
+        ![Campus Studio](./assets/images/b01/config/06_config-3.png)
 
 7. You’ll see a pop-up message to confirm the move. Click `Move` again to finish the process
 
 8. You can verify the move by selecting the `1st Floor` folder and then `Show Available Devices`.
 
-    ![Campus Studio](./assets/images/b01/config/12_config.png)
+    ![Campus Studio](./assets/images/b01/config/09_config.png)
 
 ### Assign Floor Plan
 
-Check the email you received as part of this Arista Test Drive session, you will find an image attached to the email to use as a floor plan. Save that image to your computer, we are going to now import this into CV-CUE.
+Let's assign a floor plan to our `1st Floor` for our respective corporation. Depending on the lab guide format, you can either save the image here or download from the email. We are going to use this image and import it into CV-CUE.
+
+!!! info ":simple-materialformkdocs: Download MkDocs Site"
+
+    If you are viewing this guide as a MkDocs site, simply right click the image below and `Save Image As` to your Desktop.
+
+!!! info ":fontawesome-solid-file-pdf: PDF Emailed Floor Plan"
+
+    If you are viewing this as a PDF, check the email you received as part of this Arista Test Drive session. You will find an image attached to the email to use as a floor plan. Save that image to your computer
 
 ![Campus Studio](./assets/images/b01/config/13_config.png)
 
