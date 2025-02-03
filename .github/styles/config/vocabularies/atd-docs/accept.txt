@@ -35,6 +35,7 @@ Colvin
 config
 core_interfaces
 cron
+cutover
 csr
 ctrl
 cvaas
@@ -78,6 +79,7 @@ group_vars
 gw
 hairpinning
 hemann
+hitless
 holdtime
 host_vars
 hostname

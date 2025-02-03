@@ -349,47 +349,149 @@ Let's get started:
 
 In this section, we will explore the Events stream and the tools and filters to help process and manage critical errors versus informational data.
 
-1. First Open the Events section from the menu bar:
-2. Next, select a different time frame for the summary visualization, click the current time selection and change this to 1-hour
-    1. You can also toggle between a bar graph and event count display
-3. Focusing on the Event List next, Note the Export button to download the current Event list as CSV. Notice you can download All Events or only Selected:
-4. Next, select the Gear icon to toggle Event List Roll Up. This setting combines repeated events into groups. Toggle this On and Off, watch the effect this has on the list of Events.
-5. Next, utilizing the Event Filters on the right pane is important to reduce the amount of data displayed.
-    1. Toggle Off the Warning and Info event Severity. Leave Critical and Error events selected.
-    2. In the Type field, enter the string “Unexpected Link Shutdown” and any other interesting event types you are looking for, such as “Device clock out of Sync”
-6. Acknowledge and Unacknowledging events
-    1. To acknowledge from the filtered event list, select specific events and Acknowledge them.
-    2. Adding a note is optional, select the Acknowledge button to mark these selected events.
-    3. Acknowledged events are not deleted from the event list, only flagged as acknowledged and can be referenced by changing the filtered Acknowledgement State. Click Acknowledgement State and select Acknowledged
-    4. Un-acknowledging an event can be done in the same way, click the box to the left of the Acknowledged event, and click Unacknowledge at the top of the event list.
-7. Events and filtering lab section complete!
+1. First, open `Events` from the menu bar
 
-The next section will show you how to customize the notifications (Example: email, chat, SNMP, Syslog, etc) that the events generate.
+    ![Campus Studio](./assets/images/a03/events/01_events.png)
+
+2. Next, select a different time frame for the summary visualization, click the current time selection and change this to `1 Hour`
+
+    ![Campus Studio](./assets/images/a03/events/02_events.png)
+
+3. You can also toggle between a bar graph and event count display
+
+    === "Events Graph"
+
+        ![Campus Studio](./assets/images/a03/events/03_events.png)
+
+    === "Events Table"
+
+        ![Campus Studio](./assets/images/a03/events/04_events.png)
+
+4. Focusing on the `Event List` next, Note the `Export` button to download the current Event list as CSV. Notice you can download `All Events` or only `Selected`
+
+    ![Campus Studio](./assets/images/a03/events/05_events.png)
+
+5. Next, select the Gear :octicons-gear-24: icon to toggle `Event List Roll Up`. This setting combines repeated events into groups. Toggle this On and Off, watch the effect this has on the list of Events.
+
+    ![Campus Studio](./assets/images/a03/events/06_events.png)
+
+6. Next, utilizing the Event Filters on the right pane is important to reduce the amount of data displayed.
+
+    ???+ "Filter Settings"
+
+        | Key      | Value                      |
+        | -------- | -------------------------- |
+        | Severity | `Critical`, `Error`        |
+        | Type #1  | `Unexpected Link Shutdown  |
+        | Type #2  | `Device Clock Out of Sync` |
+
+    ![Campus Studio](./assets/images/a03/events/07_events.png)
+
+7. Acknowledge and Unacknowledging events
+    1. To acknowledge from the filtered event list, select specific events and Acknowledge them.
+
+        ![Campus Studio](./assets/images/a03/events/08_events.png)
+
+    2. Adding a note is optional, select the `Acknowledge` button to mark these selected events.
+
+        ![Campus Studio](./assets/images/a03/events/09_events.png)
+
+    3. Acknowledged events are not deleted from the event list, only flagged as acknowledged and can be referenced by changing the filtered `Acknowledgement State`. Click `Acknowledgement State` and select `Acknowledged`
+
+        ![Campus Studio](./assets/images/a03/events/10_events.png)
+
+    4. Un-acknowledging an event can be done in the same way, click the box to the left of the `Acknowledged event`, and click `Unacknowledge` at the top of the event list.
+
+        ![Campus Studio](./assets/images/a03/events/11_events.png)
+
+8. Events and filtering lab section complete!
 
 ## Customize Notifications
 
-In this lab, you will configure CloudVision to send an email alert to an email address using the built-in “SendGrid” email service.
+In this lab, you will configure CloudVision to send an email alert to an email address using the built-in “SendGrid” email service. There are other notification systems natively supported in CloudVision, but we'll focus on email for this lab (Example: email, chat, SNMP, Syslog, etc).
 
-1. Configure “SendGrid” email service.
-    1. After logging in to CloudVision, click on the “Events” menu option.
-    2. Click on the “Notifications” button in the top right of the screen.
-    3. Check the system status for the “Config back-end” and “Relay back-end”. *Note: Before receivers and notifications are configured, the status will be “Unknown”.
-    4. Now, configure the SendGrid receiver by clicking on “Receivers” in the menu, then click on the “Add Receiver” button.
-    5. Name the receiver “SendGrid for Campus ATD”, then click the “Add Configuration” button and select “SendGrid” from the menu options.
-    6. Type in a valid email address that you can receive emails at during this lab and check the “Send notification when events are resolved” checkbox. Click the “Save” button in the upper right hand side of the screen to save your new receiver.
-    7. Once you are happy with receiver’s configuration, click the Save button at the top of the screen
-2. Next, configure a “Rule” to use the new receiver. Click on the “Rules” menu option, then click “Add Rule”
-    1. Configure “Rule Conditions” for this rule. Click on the “+ Device” button, then choose your leaf1c switch from the “Device” drop down box.
-    2. Now click on the “+ Event Type” button.
-    3. Add “Event Types” by choosing them from the drop down box as shown in the image below:
-    4. Select all of the severity options by clicking on the “+ Severity” button and choosing the options from the drop down box.
-    5. Next, choose your new “SendGrid for Campus ATD” receiver from the “Receiver” dropdown box, select the “Continue Checking Rules” box, and save your changes by clicking on the “Save” button.
-    6. Make sure to save your changes in this screen with the Save button along the top of your screen.
-3. Now test your new receiver and rule.
-    1. Click on the “Status” menu option. Configure the “Test Notification Sender” by changing the “Event Type” to be “Device Stopped Streaming” and selecting your leaf1c from the “Device” drop down box. Click the “Send Test Notification” button.
-    2. After a minute or two, you should receive the email alert at the email address you configured in the Receiver
-    3. Congratulations, you’ve completed the “Event Notification Lab” !
+1. Configure `SendGrid` email service.
+2. If you are not already, click on the `Events` menu option.
+3. Click on the `Notifications` button in the top right of the screen.
 
-!!! tip "🎉 CONGRATS! You have completed the labs! 🎉"
+    ![Campus Studio](./assets/images/a03/notify/01_notify.png)
+
+4. Check the system status for the `Config back-end` and `Relay back-end`
+
+    !!! warning "Status Unknown!?"
+
+        Before receivers and notifications are configured, the status will be “Unknown”.
+
+    === "Status Unknown"
+
+        ![Campus Studio](./assets/images/a03/notify/02_notify.png)
+
+    === "Status Ready"
+
+        ![Campus Studio](./assets/images/a03/notify/03_notify.png)
+
+5. Now, configure the SendGrid receiver by clicking on `Receivers` in the menu, then click on the `Add Receiver` button. Name the receiver `SendGrid for Campus ATD`, then click the `Add Configuration` button and select `SendGrid` from the menu options.
+
+    ![Campus Studio](./assets/images/a03/notify/04_notify_1.png)
+
+6. Type in a valid email address that you can receive emails at during this lab and check the `Send notification when events are resolved` checkbox. Click the `Save` button in the upper right hand side of the screen to save your new receiver.
+
+    ![Campus Studio](./assets/images/a03/notify/04_notify_2.png)
+
+7. Once you are happy with receiver’s configuration, click the `Save` button at the top of the screen
+
+8. Next, configure a `Rule` to use the new receiver. Click on the `Rules` menu option, then click `Add Rule`
+
+    ![Campus Studio](./assets/images/a03/notify/05_notify.png)
+
+9. Configure `Rule Conditions` for this rule. Click on the `+ Device` button, then choose your switch from the `Device` drop down box.
+
+    === "Add Device"
+
+        ![Campus Studio](./assets/images/a03/notify/06_notify.png)
+
+    === "Select Device"
+
+        ![Campus Studio](./assets/images/a03/notify/07_notify.png)
+
+10. Now click on the `+ Event Type` button. Add `Event Types` by choosing them from the drop down box as shown in the image below:
+
+    === "Add Event"
+
+        ![Campus Studio](./assets/images/a03/notify/08_notify.png)
+
+    === "Select Event"
+
+        ![Campus Studio](./assets/images/a03/notify/09_notify.png)
+
+11. Select all of the severity options by clicking on the `+ Severity` button and choosing the options from the drop down box.
+
+    ![Campus Studio](./assets/images/a03/notify/10_notify.png)
+
+12. Next, choose your new `SendGrid for Campus ATD` receiver from the `Receiver` dropdown box, select the `Continue Checking Rules` box, and save your changes by clicking on the `Save` button.
+
+    !!! tip "SAVE the changes!!"
+
+        Make sure to save your changes in this screen with the Save button along the top of your screen.
+
+    ![Campus Studio](./assets/images/a03/notify/11_notify.png)
+
+13. Now lets test your new receiver and rule
+
+14. Click on the `Status` menu option. Configure the `Test Notification Sender` by changing the `Event Type` to be `Device Stopped Streaming` and selecting your switch from the `Device` drop down box. Click the `Send Test Notification` button.
+
+    === "Send Notification"
+
+        ![Campus Studio](./assets/images/a03/notify/12_notify.png)
+
+    === "Notification Sent"
+
+        ![Campus Studio](./assets/images/a03/notify/13_notify.png)
+
+15. After a minute or two, you should receive the email alert at the email address you configured in the Receiver
+
+    ![Campus Studio](./assets/images/a03/notify/14_notify.png)
+
+!!! tip "🎉 CONGRATS! You have completed the Wired labs! 🎉"
 
 --8<-- "includes/abbreviations.md"
