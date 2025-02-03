@@ -2,9 +2,10 @@
 
 ## Overview
 
-What is this lab
+In this lab we are going to explore the Arista Launchpad in more depth, explain how Access Points are onboarded, configured, and troubleshot in a live environment.
 
 --8<--
+docs/snippets/topology.md
 docs/snippets/login_cvcue.md
 --8<--
 
