@@ -209,10 +209,6 @@ to showcase compliance panel and 2 devices should flagged (due to rollback above
 
         ![Campus Studio](./assets/images/a03/hierarchy/08_compliance_2.png)
 
-## Endpoint Overview
-
-Show Endpoint Overview, search for a device on the students pod, sflow will be enabled, should be able to see more info about authentication, traffic flows, and
-
 ## Dashboards
 
 Dashboards are an important way to visualize commonly requested information, we've already seen the Campus Health Dashboard a few times in previous labs. This lab section shows you how to navigate the built-in dashboards and customize your own.

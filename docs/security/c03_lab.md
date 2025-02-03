@@ -162,9 +162,9 @@ docs/snippets/login_agni.md
 1. Once the device is connected you will be able to view the status of the connection and additional session details if you click on the Eye to the right of the device.
 2. AGNI will then display more in depth session information regarding the device and connection.
 
-### CloudVision
+### CloudVision Endpoint Overview
 
-TODO - add screenshots from endpoint overview
+Show Endpoint Overview, search for a device on the students pod, sflow will be enabled, should be able to see more info about authentication, traffic flows, and
 
 ### EOS CLI
 

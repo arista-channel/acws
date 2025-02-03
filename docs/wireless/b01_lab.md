@@ -414,8 +414,4 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/tshoot/13_tshoot.png)
 
-!!! danger "STOP Client Protection"
-
-    🛑 When you are finished, **STOP** the client prevention so that you can use this test device in upcoming labs, optionally. 🛑
-
 --8<-- "includes/abbreviations.md"
