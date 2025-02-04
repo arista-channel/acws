@@ -32,7 +32,7 @@ docs/snippets/workspace.md
 
 ## Onboarding Device
 
-1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices, identify the hostname and serial number. We ill use these to chose which switch is `leaf1a` and `leaf1b`
+1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Sreaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to chose which switch is `leaf1a` and `leaf1b`
 
     !!! danger "Single Workspace"
 
@@ -74,7 +74,7 @@ docs/snippets/workspace.md
 
     === "Step 3"
 
-        Validate your `Inband Management Subnet` and `Inband Management VLAN` match your assigned pod number.
+        Validate your `Inband Management Subnet` and `Inband Management VLAN` match your assigned pod number, this will already be configured for you.
 
         - **Subnet**: `10.1.#.0/24` where `#` is the pod number
         - **VLAN**: `1##` where `#` is the pod number
