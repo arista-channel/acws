@@ -197,7 +197,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
 ![Campus Studio](./assets/images/b01/config/13_config.png)
 
-1. In the left hand menu, click on `Floor Plans`.  Make sure to set the location level to be `1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
+1. In the left hand menu, click on `Maps`.  Make sure to set the location level to be `1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
 
     ![Campus Studio](./assets/images/b01/config/14_config.png)
 
@@ -243,9 +243,27 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
 The `Configure` section of CV-CUE is broken into several parts, including `WiFi`, `Alerts`, and `WIPS`.
 
-- `Alerts` is where syslog and other alert related settings are configured
-- `WIPS` is where the policies are configured for the WIPS sensor.
-- `Wifi` is what we'll be working on in this lab to create an SSID
+<div class="grid cards" markdown>
+
+- :material-alert-rhombus-outline:{ .lg .middle } **Alerts**
+
+    ---
+
+    Is where syslog and other alert related settings are configured
+
+- :material-wifi-lock:{ .lg .middle } **WIPS**
+
+    ---
+
+    Is where the policies are configured for the WIPS sensor.
+
+- :material-wifi:{ .lg .middle } **Wifi**
+
+    ---
+
+    Is what we'll be working on in this lab to create an SSID
+
+</div>
 
 In this section of the lab, we will be working in the `WiFi` configuration area. We will create an SSID (WPA2 PSK) with your `ATD-##-PSK` as the name and `Wireless!123` as the passkey.
 
@@ -257,76 +275,80 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     === "Hierarchy Collapsed"
 
-        ![Campus Studio](./assets/images/b01/wifi/02_wifi.png)
+        ![Campus Studio](./assets/images/b01/wifi/02_wifi-2.png)
 
     === "Hierarchy Expanded"
 
-        ![Campus Studio](./assets/images/b01/wifi/03_wifi.png)
+        ![Campus Studio](./assets/images/b01/wifi/02_wifi-1.png)
 
 3. Once on the `SSID` page, configuration sub-category menu options will appear across the top of the page related to WiFi (the defaults are `Basic`, `Security`, and `Network`). You can click on these sub-category names to change configuration items related to that area of the configuration.
 
 4. To make additional categories visible, click on the 3 dots :material-dots-horizontal: next to `Network` and you can see the other categories that are available to configure (`Analytics`, `Captive Portal`, etc.).
 
-    ![Campus Studio](./assets/images/b01/wifi/04_wifi.png)
+    ![Campus Studio](./assets/images/b01/wifi/03_wifi.png)
 
-5. In the `Basic` sub-category option, name the SSID `ATD-##A/B-PSK` (where ## is the pod number you were assigned).  The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
-
-    ???+ example "SSID Name"
-
-        | Student   |   SSID Name   |
-        | --------- | :-----------: |
-        | Student 1 | `ATD-##A-PSK` |
-        | Student 2 | `ATD-##B-PSK` |
-
-    ![Campus Studio](./assets/images/b01/wifi/04_wifi.png)
-
-6. Since this is our corporate SSID, leave the `Select SSID Type` set to `Private`
-
-    !!! tip "Guest SSID"
-
-        Note: this is where you would change it to `Guest` if needed.
-
-7. Select `Next` at the bottom.
-8. In the `Security` sub-category, change the following settings, then select `Next` at the bottom of the screen.
+5. Walk through the steps (tabs) below to configure the SSID
 
     ???+ example "SSID Name"
 
-        | Setting                       |     Value      |
-        | ----------------------------- | :------------: |
-        | Association Type (drop down)  |      WPA2      |
-        | Authentication (radio button) |      PSK       |
-        | Passphrase                    | `Wireless!123` |
+        | Student                       |   Student 1    |   Student 2    |
+        | ----------------------------- | :------------: | :------------: |
+        | SSID Name                     | `ATD-##A-PSK`  | `ATD-##B-PSK`  |
+        | Profile Name                  |   Auto Fill    |   Auto Fill    |
+        | SSID Type                     |    Private     |    Private     |
+        | Association Type (drop down)  |      WPA2      |      WPA2      |
+        | Authentication (radio button) |      PSK       |      PSK       |
+        | Passphrase                    | `Wireless!123` | `Wireless!123` |
+
+    === "Step 1: SSIDBasic"
+
+        In the `Basic` sub-category option, name the SSID `ATD-##A/B-PSK` (where ## is the pod number you were assigned).  The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
+
+        Since this is our corporate SSID, leave the `Select SSID Type` set to `Private`
+
+        !!! tip "Guest SSID"
+
+            Note: this is where you would change it to `Guest` if needed.
+
+        ![Campus Studio](./assets/images/b01/wifi/04_wifi-1.png)
+
+    === "Step 2: SSID Security"
+
+        In the `Security` sub-category, change the following settings, then select `Next` at the bottom of the screen.
+
+        ![Campus Studio](./assets/images/b01/wifi/04_wifi-2.png)
+
+    === "Step 3: SSID Network"
+
+        In the `Network` configuration sub-category, we’ll leave the `VLAN ID` set to `0`, which means it will use the native VLAN. If the switchport the AP is attached to is trunked, you could change this setting to whichever VLAN you want the traffic dropped off on.
+        We are using `Bridged` mode in this lab. You could use the following for specific scenarios:
+
+        1. `NAT`: often done for Guest
+        2. `L2 Tunnel` / `L3 Tunnel`: as you would see for a Guest Anchor or tunneled corporate traffic
+
+        ![Campus Studio](./assets/images/b01/wifi/04_wifi-3.png)
+
+6. The rest of the settings can be left at the default values.
+7. Click the `Save & Turn SSID On` button at the bottom of the page.
+8. You will be prompted to customize before enabling, check the `Customize` button
 
     ![Campus Studio](./assets/images/b01/wifi/05_wifi.png)
 
-9. In the `Network` configuration sub-category, we’ll leave the `VLAN ID` set to `0`, which means it will use the native VLAN. If the switchport the AP is attached to is trunked, you could change this setting to whichever VLAN you want the traffic dropped off on.
-10. We are using `Bridged` mode in this lab. You could use the following for specific scenarios:
-    1. `NAT`: often done for Guest
-    2. `L2 Tunnel` / `L3 Tunnel`: as you would see for a Guest Anchor or tunneled corporate traffic
+9. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click “Turn SSID On”.
 
     ![Campus Studio](./assets/images/b01/wifi/06_wifi.png)
 
-11. The rest of the settings can be left at the default values.
-12. Click the `Save & Turn SSID On` button at the bottom of the page.
-13. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click “Turn SSID On”.
+10. After you turn on the SSID, hover your cursor over `Monitor` in the left hand side menu, and then click `WiFi`.
 
     ![Campus Studio](./assets/images/b01/wifi/07_wifi.png)
 
-14. After you turn on the SSID, hover your cursor over `Monitor` in the left hand side menu, and then click `WiFi`.
+11. Now, in the menu options at the top of the page, look at the `Radios` menu option. Is the 5 GHz radio :fontawesome-regular-thumbs-up: (Up) and 2.4 GHz radio :fontawesome-regular-thumbs-down: (down)? It may take a minute or two for the radio to become active.
 
     ![Campus Studio](./assets/images/b01/wifi/08_wifi.png)
 
-15. Now, in the menu options at the top of the page, look at the `Radios` menu option. Is the 5 GHz radio :fontawesome-regular-thumbs-up: (Up) and 2.4 GHz radio :fontawesome-regular-thumbs-down: (down)? It may take a minute or two for the radio to become active.
+12. Next, go ahead and connect your phone to the SSID (PSK is `Wireless!123`).  Navigate to the `Clients` menu at the top of the screen and you should see your device.
 
     ![Campus Studio](./assets/images/b01/wifi/09_wifi.png)
-
-16. Check the `Active SSIDs` menu at the top of the screen. Is your SSID listed?
-
-    ![Campus Studio](./assets/images/b01/wifi/10_wifi.png)
-
-17. Next, go ahead and connect your phone to the SSID (PSK is `Wireless!123`).  Navigate to the `Clients` menu at the top of the screen and you should see your device.
-
-    ![Campus Studio](./assets/images/b01/wifi/11_wifi.png)
 
 ## Troubleshooting
 
