@@ -241,14 +241,17 @@ Wi-Fi threats include an ever changing landscape of vulnerabilities, such as:
 
 Let's go ahead and configure WIPS on our Access Point
 
-1. In the menu on the left hand side of the screen, hover your cursor over “Monitor” and then click “WIPS”.  Now click on “Access Points” and “Clients” in the menu at the top of the screen and explore if any Rogue APs or Clients are connected to other APs in the area.
-2. Access points that have been detected by WIPS but are not managed within Arista CV-CUE, they are designated as Rogue or External Access Points.
-3. Next, let’s explore the information we can gather about the wireless environment using Arista’s WIPS.
-4. Select Monitor,  WIPS:
-5. In the simple lab environment, only your pod’s single AP is part of your managed wireless infrastructure. All of the other access points and clients on the network are like crowded neighbors or businesses in a shared office work space.
-6. Under Monitor, WIPS, Access Points you can see all of the detected Rogue Access points. From this screen you can reclassify, set auto-prevention, add to ban list, name or move the AP.
-7. Additional information about WIPS AP classification can be found here:
-8. https://www.arista.com/en/ug-cv-cue/cv-cue-wireless-intrusion-prevention-techniques
+1. In the menu on the left hand side of the screen, navigate to `Monitor > WIPS`
+2. Click on `Access Points` and `Clients` in the menu at the top of the screen and explore if any Rogue APs or Clients are connected to other APs in the area.
+3. Access points that have been detected by WIPS but are not managed within Arista CV-CUE, they are designated as Rogue or External Access Points.
+4. Next, let’s explore the information we can gather about the wireless environment using Arista’s WIPS.
+5. Select `Monitor > WIPS`
+6. In the simple lab environment, only your pod’s single AP is part of your managed wireless infrastructure. All of the other access points and clients on the network are like crowded neighbors or businesses in a shared office work space.
+7. Under Monitor, WIPS, Access Points you can see all of the detected Rogue Access points. From this screen you can reclassify, set auto-prevention, add to ban list, name or move the AP.
+
+    !!! info "Additional Information"
+
+        Additional information about WIPS AP classification and [Wireless Intrusion Prevention Techniques](https://www.arista.com/en/ug-cv-cue/cv-cue-wireless-intrusion-prevention-techniques)
 
 <div class="grid cards" markdown>
 
@@ -294,10 +297,10 @@ Let's go ahead and configure WIPS on our Access Point
 
 Next, let’s use the WIPS system to identify and prevent an example problematic client from connecting to your network.
 
-1. Within WIPS, Clients Menu.
-2. Find your smartphone device connected to the previous Lab PSK. Reconnect it now to the PSK SSID, if it has been disconnected.
-3. Since this client is associated with the correct PSK for the SSID, it is automatically classified as Authorized.
-4. Next, click the 3-dots menu for the device, Change Classification, Rogue
+1. Navigate to `WIPS > Clients`
+2. Find your smartphone device connected to the previous PSK SSID. Reconnect if it has been disconnected.
+3. Since this client is associated with the correct PSK for the SSID, it is automatically classified as `Authorized`.
+4. Next, click the 3-dots menu for the device, `Change Classification`, `Rogue`
 5. Now, sort the clients menu by Classification column (left) and find the red marked Rogue device.
 6. Next, Select the 3-dots menu for the Rogue client and click “Prevent This Device”
 7. Click Prevent to start the WIPS prevention mechanism to disrupt the selected client from sending and receiving traffic.
