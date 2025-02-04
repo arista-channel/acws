@@ -30,22 +30,49 @@
   color:   #1C7D4D;
 }
 
-/* Tab padding and coloring */
+.md-typeset .md-button--primary:hover {
+  background-color: #aad037;
+  border-color: #aad037;
+  color: #2e3340;
+}
+
 .md-typeset .tabbed-labels>label>[href]:first-child {
   /* background-color: #B2CF53; */
-  background-color: #3a3b3e;
+  background-color: #c7c7c7;
   border-radius: 4px 4px 0 0;
-  color: #efefef;
+  color: #2e3340;
   margin: 4px;
+  padding: 8px 20px 8px 20px;
 }
 
 /* Tab padding and coloring on hover */
 .md-typeset .tabbed-labels>label>[href]:first-child:hover {
+  background-color: #aad037;
+  /* background-color: #333333; */
+  border-radius: 4px 4px 0 0;
+  margin: 4px;
+  padding: 8px 20px 8px 20px;
+}
+
+/* Tab padding and coloring */
+[data-md-color-scheme="slate"]  .md-typeset .tabbed-labels>label>[href]:first-child {
+  /* background-color: #B2CF53; */
+  background-color: #2e3340;
+  border-radius: 4px 4px 0 0;
+  color: #efefef;
+  margin: 4px;
+  padding: 8px 20px 8px 20px;
+}
+
+
+/* Tab padding and coloring on hover */
+[data-md-color-scheme="slate"] .md-typeset .tabbed-labels>label>[href]:first-child:hover {
   background-color: #B2CF53;
   /* background-color: #333333; */
   border-radius: 4px 4px 0 0;
-  color: #333333;
+  color: #2e3340;
   margin: 4px;
+  padding: 8px 20px 8px 20px;
 }
 
 /* .md-content img {

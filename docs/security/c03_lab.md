@@ -100,11 +100,11 @@ docs/snippets/login_agni.md
 
 4. Fill in and select the Following fields on the `Add Network` page.
 
-    ???+ example "Settings"
+    ???+ example "Network Settings"
 
         | Field                          |           Student 1           |           Student 2           |
         | ------------------------------ | :---------------------------: | :---------------------------: |
-        | Name                           |         ATD-05A-WIRED         |         ATD-05B-WIRED         |
+        | Name                           |         ATD-##A-WIRED         |         ATD-##B-WIRED         |
         | Connection Type                |             Wired             |             Wired             |
         | Access Device Group            |            WIRED-A            |            WIRED-B            |
         | Status                         |            Enabled            |            Enabled            |
@@ -123,13 +123,13 @@ docs/snippets/login_agni.md
 
 7. Configure the network segment with the following settings:
 
-    ???+ example "Settings"
+    ???+ example "Segment Settings"
 
         | Field                          |                           Student 1                           |                           Student 2                           |
         | ------------------------------ | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
-        | Name                           |                         ATD-05A-WIRED                         |                         ATD-05B-WIRED                         |
-        | Description                    |                         ATD-05A-WIRED                         |                         ATD-05B-WIRED                         |
-        | Condition #1                   |                `Network:Name is ATD-05A-WIRED`                |                `Network:Name is ATD-05B-WIRED`                |
+        | Name                           |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
+        | Description                    |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
+        | Condition #1                   |                `Network:Name is ATD-##A-WIRED`                |                `Network:Name is ATD-##B-WIRED`                |
         | Condition #2                   | `Network:Authentication Type is Client Certificate (EAP-TLS)` | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
         | Action #1                      |                        `Allow Access`                         |                        `Allow Access`                         |
         | Fallback to mac Authentication |                            Enabled                            |                            Enabled                            |

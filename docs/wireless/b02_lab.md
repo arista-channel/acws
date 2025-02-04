@@ -6,89 +6,129 @@
 docs/snippets/login_agni.md
 --8<--
 
-## Create an AGNI Guest Captive Portal
+## AGNI Guest Captive Portal
 
-1. Next, we’ll configure a Guest Captive Portal using AGNI for wireless clients. To configure the guest portal, you must configure both AGNI and CV-CUE.
-2. Navigate to `Identity > Guest > Portals`.
-3. Click `+ Add Guest` Portal
-4. In the `Configuration` tab, provide the portal name (A/B-Portal)
-5. Leave the `Authentication` Type as `Clickthrough`.
-6. Click the Customization tab to customize the portal settings, and notice the elements.
+Let's configure a Guest Captive Portal using AGNI for wireless clients. To configure the guest portal, you must configure both AGNI and CV-CUE.
+
+1. Navigate to `Guest > Portals` under the section `Identity`.
+
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+2. Click `+ Add Guest Portal` and configure the following
+
+    ???+ example "Network Settings"
+        | Field                    |    Student 1    |    Student 2    |
+        | ------------------------ | :-------------: | :-------------: |
+        | Portal Name              | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | Authentication Types     |  Clickthrough   |  Clickthrough   |
+        | Re-Authuthenticate Guest |     Always      |     Always      |
+        | CAPTCHA                  |    Disabled     |    Disabled     |
+
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+3. Click the Customization tab to customize the portal settings, and notice the elements.
       - [x] Page
       - [x] Login Toggle
       - [x] Terms of Use and Privacy Policy
       - [x] Logo
       - [x] Guest Login Submit Button
       - [x] Etc
-7. When done, click `Add Guest Portal`. The portal gets listed in the portal listing.
-8. Click `Back`
-9. Navigate to the `Access Control > Networks`.
-10. Add a new network with following settings:
+4. When done, click `Add Guest Portal`. The portal gets listed in the portal listing.
+5. Click `Back`
+6. Navigate to the `Networks` under the section `Access Control`.
+7. Add a new network with following settings
 
     ???+ example "Network Settings"
-        | key                                     |              Student 1               |              Student 2               |
-        | --------------------------------------- | :----------------------------------: | :----------------------------------: |
-        | Name                                    |               A-GUEST                |               B-GUEST                |
-        | Connection Type                         |               Wireless               |               Wireless               |
-        | SSID                                    | Guest SSID in CV-CUE (ATD-##A-GUEST) | Guest SSID in CV-CUE (ATD-##B-GUEST) |
-        | Authentication Type                     |            Captive Portal            |            Captive Portal            |
-        | Captive Portal Type                     |               Internal               |               Internal               |
-        | Select Internal Portal                  |               A-Portal               |               B-Portal               |
-        | Internal Role for Portal Authentication |         Type “Portal A Role”         |         Type “Portal B Role”         |
+        | Field                                   |      Student 1       |      Student 2       |
+        | --------------------------------------- | :------------------: | :------------------: |
+        | Name                                    |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
+        | Connection Type                         |       Wireless       |       Wireless       |
+        | SSID                                    |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
+        | Authentication Type                     |    Captive Portal    |    Captive Portal    |
+        | Captive Portal Type                     |       Internal       |       Internal       |
+        | Select Internal Portal                  |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
+        | Internal Role for Portal Authentication | Type “Portal A Role” | Type “Portal B Role” |
 
-11. Click `Add Network`.
-12. Copy the portal URL at the bottom of the page.
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+8. Click `Add Network`.
+9. Copy the portal URL at the bottom of the page.
+
+    !!! tip "AGNI URL"
+
+        Make sure to **copy the AGNI Guest Portal URL**, we are going to use this in CV-CUE for Guest Portal Redirection.
 
 --8<--
 docs/snippets/login_cvcue.md
 --8<--
 
-## Configuring CV-CUE
+## Role Profile (CV-CUE)
 
-1. In CV-CUE, configure a role profile and the SSID settings. Ensure that the SSID is enabled for the captive portal with redirection to the portal URL.
-2. Configuring Portal and Guest Role Profiles
-3. Portal Role Profile
-4. Log in to CV-CUE and navigate to `Configure > Network Profiles > Role Profile`.
-5. Add Role Profile.
-6. Add the Role Name as Portal A Role/Portal B Role.
-7. Enable the Redirection check box and select Static Redirection.
-8. In the Redirect URL field, add the portal URL that you have copied from AGNI.
-9. Click SAVE at the bottom of the page.
+Let's configure a role profile and the SSID settings. Ensure that the SSID is enabled for the captive portal with redirection to the portal URL.
 
-    !!! note "Information"
+### Portal Role Profile
 
-        The Guest Role and Wireless-Guest-CP Segment are not required for Click Through Guest Access. If users are required to create a guest account or receive approval, then the Guest Role and Wireless-Guest-CP Segment are required.
+1. Log in to CV-CUE and navigate to `Configure > Network Profiles > Role Profile`.
+2. Add a `Role Profile` using the setting below
 
-!!! danger "NOT REQUIRED"
+    ???+ example "Network Settings"
+        | Field             |     Student 1      |     Student 2      |
+        | ----------------- | :----------------: | :----------------: |
+        | Role Name         |  `Portal A Role`   |  `Portal B Role`   |
+        | Profile Name      |  `Portal A Role`   |  `Portal B Role`   |
+        | Redirection       |      Enabled       |      Enabled       |
+        | Redirection Type  | Static Redirection | Static Redirection |
+        | Redirect URL      | `Copied from AGNI` | `Copied from AGNI` |
+        | HTTPS Redirection |      Enabled       |      Enabled       |
+        | Common Name       |   www.arista.com   |   www.arista.com   |
+        | Organization      |  Arista Networks   |  Arista Networks   |
+        | Organization Unit |  Arista Networks   |  Arista Networks   |
 
-    The sections below with `***` preceding the section are not required for Click Through Guest Access.
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+3. Click `Save` at the bottom of the page.
+
+<!--
+!!! note "Information"
+
+The Guest Role and Wireless-Guest-CP Segment are not required for Click Through Guest Access. If users are required to create a guest account or receive approval, then the Guest Role and Wireless-Guest-CP Segment are required.
+-->
 
 ### Guest Role Profile
 
-1. Next, we’ll configure a Guest Role in CV-CUE to assign to Guest Users post authentication.
-2. In CV-CUE, navigate to Configure > Network Profiles > Role Profile.
-3. Add Role Profile.
-4. Add the Role Name as Guest Role.
-5. Select the check box next to VLAN.
-6. Click `Save` at the bottom of the page
+Next, we’ll configure a Guest Role in CV-CUE to assign to Guest Users post authentication.
 
-#### Additional Information
+1. In CV-CUE, navigate to `Configure > Network Profiles > Role Profile`.
+
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+2. Click `Add Role Profile`.
+
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+3. Add the `Role Name` as `Guest Role` and select the check box next to `VLAN` (if not already selected)
+
+    ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+4. Click `Save` at the bottom of the page
+
+### Additional Information
 
 <div class="grid cards" markdown>
 
-- :material-access-point:{ .lg .middle } **VLAN**
+- :material-arrow-split-vertical:{ .lg .middle } **VLAN**
 
     ---
 
     In this lab the VLAN is set to 0. In production networks you would define the Guest VLAN ID or Name that you want to assign to the Guest Users.
 
-- :material-access-point:{ .lg .middle } **Firewall**
+- :material-wall:{ .lg .middle } **Firewall**
 
     ---
 
     Layer 3-4 and Application Firewall Rules can be assigned to the Guest User Role.
 
-- :material-access-point:{ .lg .middle } **User Bandwidth Control**
+- :fontawesome-solid-gauge-high:{ .lg .middle } **User Bandwidth Control**
 
     ---
 
@@ -96,59 +136,85 @@ docs/snippets/login_cvcue.md
 
 </div>
 
-### Configure AGNI Wireless-Guest-CP Segment
+## Portal Segment (AGNI)
 
-1. Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post authentication.
-2. Go back to AGNI and navigate to the Access Control > Segments.
-3. Add a new Segment with following settings:
-4. Name - ATD-##A/B-GUEST
-5. Conditions - Network Name is Wireless-Guest-CP
-6. Actions - Arista-WiFi - Role Profile - Guest Role
-7. Click on Segments and then `+ Add Segment`
-8. Next, type in the name:  `ATD-##A/B-GUEST`.
-9. Next, let’s Add Conditions
+Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post authentication.
+
+1. Go back to AGNI and navigate to the Access Control > Segments.
+2. Add a new Segment by clicking on `+ Add Segment`
 
     !!! note "Adding more than one condition means MATCH ALL"
 
-10. Select, Network, Name, Is, ATD-##A/B-GUEST from the drop down lists.
-11. Under Actions select Add Action.
-12. Select, Arista-WiFi - Role Profile - Type Guest A/B Role
-13. Finally, select Add Segment at the bottom of the page.
-14. Your Conditions should now look like this.
-15. Finally, select Add Segment at the bottom of the page.
+    ???+ example "Network Settings"
+        | Field               |             Student 1             |            Student 2            |
+        | ------------------- | :-------------------------------: | :-----------------------------: |
+        | Name                |          `ATD-##A-GUEST`          |         `ATD-##B-GUEST`         |
+        | Condition           |  `Network:Name is ATD-##A-GUEST`  | `Network:Name is ATD-##B-GUEST` |
+        | Action              | `Arista-Wifi:Assign Role Profile` |             Always              |
+        | Action Role Profile |          `Guest A Role`           |         `Guest B Role`          |
 
-### Configuring the Guest Captive Portal SSID
+3. Click `Add Segment` at the bottom of the page.
+4. Your conditions should now look like this.
 
-1. Next we’ll configure the Guest Captive Portal SSID and assign the pre and post authentication roles.
-2. Select Correct location `ACorp` or  `BCorp`
+## Guest Portal SSID (CV-CUE)
+
+Next we’ll configure the Guest Captive Portal SSID and assign the pre and post authentication roles.
+
+1. Let's navigate back to CV-CUE
+2. Select Correct location `ACorp` or `BCorp`
+
+    !!! warning "CV-CUE Locations"
+
+        Reminder, make sure you have selected your appropriate corporation before creating the SSID!
+
 3. Navigate to `Configure > WiFi`
-4. `Add SSID`
+4. Click on `Add SSID`
+5. Configure the SSID using the settings below
 
-    ??? example "Wifi Settings"
-        | Setting   |       Value       |
-        | --------- | :---------------: |
-        | SSID Name | `ATD-##A/B-GUEST` |
-        | SSID Type |      Private      |
+    ???+ example "SSID Basic Settings"
 
-5. Click the 3 dotsClick the Access Control tab.
-6. Enable the Client Authentication check box and select RADIUS MAC Authentication.
-7. Select RadSec
-8. Authentication Server - AGNI-XX
-9. Accounting Server - AGNI-XX
-10. Select AGNI for the Authentication and Accounting servers, and select the check box next to Send DHCP Options and HTTP User Agent.
-11. Select the Role Based Control checkbox and configure the following settings:
-12. Rule Type — 802.1X Default VSA
-13. Operand — Match
-14. Assign Role — Select All. You created the Portal and Guest Roles profile in the previous section.
+        | Setting   |    Student 1    |    Student 2    |
+        | --------- | :-------------: | :-------------: |
+        | SSID Name | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | SSID Type |     Private     |     Private     |
 
-### Save & Turn SSID On 5Ghz only
+6. Click the 3 dots and select `Access Control` tab.
+7. Configure using the settings below
 
-Once you are done, connect your phone to this SSID and select Connect from the Captive Portal page. The clients get connected and authenticated via the portal authentication.
+    ???+ example "SSID Access Control Settings"
 
-1. Verify connectivity in CUE and AGNI
-2. CUE in Monitor>Clients
-3. AGNI in Session
-4. Lab section complete.
+        | Setting                   |           Value           | Notes                                     |
+        | ------------------------- | :-----------------------: | ----------------------------------------- |
+        | **Client Authentication** |  :octicons-checkbox-16:   |                                           |
+        | Authentication Type       | Radius MAC Authentication |                                           |
+        | **RadSec**                |  :octicons-checkbox-16:   |                                           |
+        | Authentication Server     |         `AGNI-01`         | AGNI Radsec Server was configured already |
+        | Accounting     Server     |         `AGNI-01`         |                                           |
+        | **Role Based Control**    |  :octicons-checkbox-16:   |                                           |
+        | Rule Type                 |    802.1X Default VSA     |                                           |
+        | Operand                   |           Match           |                                           |
+        | Assign Role               |      `Portal A Role`      | Created in previous section               |
+
+8. Once all settings have been set, Click the `Save & Turn SSID On` button at the bottom of the page.
+9. You will be prompted to customize before enabling, select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click `Turn SSID On`.
+
+    ![Campus Studio](./assets/images/b01/wifi/06_wifi.png)
+
+10. Verify connectivity in CUE and AGNI
+
+    === "CV-CUE"
+
+        Navigate to `Monitor > Clients` in CV-CUE
+
+        ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+    === "AGNI"
+
+        Navigate to `Sessions` in AGNI
+
+        ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+
+11. Lab section complete.
 
 ## WIPS Wireless Intrusion Prevention System
 

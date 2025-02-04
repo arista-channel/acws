@@ -338,7 +338,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/wifi/05_wifi.png)
 
-9. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click “Turn SSID On”.
+9. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click `Turn SSID On`.
 
     ![Campus Studio](./assets/images/b01/wifi/06_wifi.png)
 
