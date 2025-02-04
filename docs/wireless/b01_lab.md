@@ -208,7 +208,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
         | Key    | Value |
         | ------ | :---: |
         | Unit   | Feet  |
-        | Length |  120  |
+        | Length |  120  |1
         | Width  |  50   |
 
     ![Campus Studio](./assets/images/b01/config/15_config.png)
@@ -220,9 +220,13 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
         If you do not see an AP, it is because your AP is assigned to another location (folder) and you’ll need to move it to the `1st Floor` folder (see steps above). Or, you may have the incorrect menu selected in the upper right hand corner of the screen.
 
-    ![Campus Studio](./assets/images/b01/config/16_config.png)
+    ![Campus Studio](./assets/images/b01/config/ap_drap.gif)
 
-    ![Campus Studio](./assets/images/b01/config/17_config.png)
+    ??? example "Screenshots"
+
+        ![Campus Studio](./assets/images/b01/config/16_config.png)
+
+        ![Campus Studio](./assets/images/b01/config/17_config.png)
 
 5. Hover over the AP image to get more information and then `right-click on the AP` image to see more options.
 
