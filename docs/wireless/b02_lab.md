@@ -226,16 +226,16 @@ Arista Wireless Intrusion Prevention System (WIPS) leverages RF broadcast and pr
 
 Wi-Fi threats include an ever changing landscape of vulnerabilities, such as:
 
-- Rogue APs
-- Unauthorized BYOD Client
-- Misconfigured APs
-- Client misassociation
-- Unauthorized association
-- Ad-hoc connections
-- Honeypot AP or evil twin “Pineapple”
-- AP MAC spoofing
-- DoS attack
-- Bridging client
+- :octicons-x-circle-fill-12: Rogue APs
+- :octicons-x-circle-fill-12: Unauthorized BYOD Client
+- :octicons-x-circle-fill-12: Misconfigured APs
+- :octicons-x-circle-fill-12: Client misassociation
+- :octicons-x-circle-fill-12: Unauthorized association
+- :octicons-x-circle-fill-12: Ad-hoc connections
+- :octicons-x-circle-fill-12: Honeypot AP or evil twin “Pineapple”
+- :octicons-x-circle-fill-12: AP MAC spoofing
+- :octicons-x-circle-fill-12: DoS attack
+- :octicons-x-circle-fill-12: Bridging client
 
 ### Configure WIPS
 
