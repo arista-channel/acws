@@ -5,7 +5,7 @@
   --md-code-hl-string-color: #7c9dc4;
   --md-code-hl-keyword-color: #d47122;
   --md-code-hl-name-color: #d47122;
-  /* --md-code-hl-number-color: 
+  /* --md-code-hl-number-color:
   --md-code-hl-special-color
   --md-code-hl-function-color
   --md-code-hl-constant-color
@@ -18,18 +18,35 @@
 }
 
 .md-grid {
-  max-width: 1440px; 
+  max-width: 1440px;
 }
 .cloudvision {
   color: #146095;
 }
 [data-md-color-scheme="slate"] .md-typeset code, .md-typeset kbd, .md-typeset pre {
-  color:   #aad037; 
+  color:   #aad037;
 }
 .md-typeset code, .md-typeset kbd, .md-typeset pre {
   color:   #1C7D4D;
 }
 
+/* Tab padding and coloring */
+.md-typeset .tabbed-labels>label>[href]:first-child {
+  /* background-color: #B2CF53; */
+  background-color: #3a3b3e;
+  border-radius: 8px 8px 0 0;
+  color: #efefef;
+  margin: 4px;
+}
+
+/* Tab padding and coloring */
+.md-typeset .tabbed-labels>label>[href]:first-child:hover {
+  background-color: #B2CF53;
+  /* background-color: #333333; */
+  border-radius: 8px 8px 0 0;
+  color: #333333;
+  margin: 4px;
+}
 /* .md-content img {
     border-width: 1px;
     border-style: solid;

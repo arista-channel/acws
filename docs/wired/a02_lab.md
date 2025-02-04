@@ -29,9 +29,9 @@ docs/snippets/workspace.md
 
        ![Campus Studios](./assets/images/a02/02_port_profile.png)
 
-    3. Enter the following values on this configuration page
+    3. Enter the following values on this configuration page, you can leave all other configuration items left as default. See the settings are configured in the screenshot below
 
-       ???+ example "Wireless-Access-Point"
+        ???+ example "Wireless-Access-Point"
 
             | Key                  | Value                                        |
             | -------------------- | -------------------------------------------- |
@@ -46,11 +46,9 @@ docs/snippets/workspace.md
 
             **VLAN pod numbers between 01-12 that was assigned to your lab/Pod. Example: `Pod01` is `VLAN101`, `Pod13` is `VLAN113`*
 
-    4. The settings are configured as seen here
-
        ![Campus Studios](./assets/images/a02/03_wireless_ap.png)
 
-    5. Once you are done with configuration, navigate back to `Access interface Configuration` near the top of the page, under the `Quick Actions`
+    4. Once you are done with configuration, navigate back to `Access interface Configuration` near the top of the page, under the `Quick Actions`
 
        ![Add Access Interface](./assets/images/a02/04_back.png)
 
@@ -155,28 +153,28 @@ docs/snippets/workspace.md
          1. Click on port `Ethernet14` on your assigned switch
          2. Choose the `Port Profile` of `Wireless-Access-Point`
          3. Click `Yes` radio button under `Enabled`
+         4. Click `Review`
 
          ![Campus Dashboard](./assets/images/a02/08_assign_port_1.png)
 
     === "Student 2"
 
-         4. Click on port `Ethernet14` on your assigned switch
-         5. Choose the `Port Profile` of `Wireless-Access-Point`
-         6. Click `Yes` radio button under `Enabled`
+         1. Click on port `Ethernet14` on your assigned switch
+         2. Choose the `Port Profile` of `Wireless-Access-Point`
+         3. Click `Yes` radio button under `Enabled`
+         4. Click `Review`
 
          ![Campus Dashboard](./assets/images/a02/08_assign_port_2.png)
 
-6. Click `Review`
-
-7. You can review the configuration before pushing, but all in the same workflow. Hit `Confirm` to push the access port config when ready!
+6. You can review the configuration before pushing, but all in the same workflow. Hit `Confirm` to push the access port config when ready!
 
     ![Campus Dashboard](./assets/images/a02/08_assign_port_3.png)
 
-8. Once the `Change Control` has been executed, click `Configure Additional Inputs` to configure another access port
+7. Once the `Change Control` has been executed, click `Configure Additional Inputs` to configure another access port
 
     ![Campus Dashboard](./assets/images/a02/09_add_inputs.png)
 
-9. Let's now configure our Raspberry Pi port, make sure you identify your assigned switch `pod<##>-leaf1(a|b)`
+8. Let's now configure our Raspberry Pi port, make sure you identify your assigned switch `pod<##>-leaf1(a|b)`
 
     !!! warning "Student Device"
 
@@ -200,14 +198,16 @@ docs/snippets/workspace.md
 
          ![Campus Dashboard](./assets/images/a02/08_assign_port_2.png)
 
-10. This time Click `Submit`
+9. This time Click `Submit`
 
-11. This has pushed the configuration without review! This streamlined the process for low risk changes like access port changes. Once `Change Control` has been executed, click `Finish`
+10. This has pushed the configuration without review! This streamlined the process for low risk changes like access port changes. Once `Change Control` has been executed, click `Finish`
 
     ![Campus Dashboard](./assets/images/a02/10_finish.png)
 
-12. Quick actions is using the same CloudVision Change Control workflow, the exception here is it's auto approved to allow low risk/impact changes easier. You can view this change control in the `Change Control` tab and see the generated task.
+11. Quick actions is using the same CloudVision Change Control workflow, the exception here is it's auto approved to allow low risk/impact changes easier. You can view this change control in the `Change Control` tab and see the generated task.
 
     ![Campus Dashboard](./assets/images/a02/11_review_cc.png)
+
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
 
 --8<-- "includes/abbreviations.md"
