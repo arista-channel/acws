@@ -11,7 +11,7 @@ If you're not already logged into AGNI, navigate to the [Arista Launchpad](https
     ![Launchpad Login](../assets/images/login/01_launchpad_login.png)
 
 === "Login Step 2"
-    
+
     You will see the various tools tied to your tenant, this includes CVP, AGNI (NAC), and CV-CUE for wireless. Click into `AGNI (Beta)` tile to begin this lab.
 
-    ![Launchpad](../assets/images/login/04_launchpad_agni.png)
+    ![Launchpad Login](../assets/images/login/login_agni.png)

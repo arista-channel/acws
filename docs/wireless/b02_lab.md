@@ -39,15 +39,15 @@ Let's configure a Guest Captive Portal using AGNI for wireless clients. To confi
 7. Add a new network with following settings
 
     ???+ example "Network Settings"
-        | Field                                   |      Student 1       |      Student 2       |
-        | --------------------------------------- | :------------------: | :------------------: |
-        | Name                                    |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
-        | Connection Type                         |       Wireless       |       Wireless       |
-        | SSID                                    |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
-        | Authentication Type                     |    Captive Portal    |    Captive Portal    |
-        | Captive Portal Type                     |       Internal       |       Internal       |
-        | Select Internal Portal                  |   `ATD-##A-GUEST`    |   `ATD-##B-GUEST`    |
-        | Internal Role for Portal Authentication | Type “Portal A Role” | Type “Portal B Role” |
+        | Field                                   |    Student 1    |    Student 2    |
+        | --------------------------------------- | :-------------: | :-------------: |
+        | Name                                    | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | Connection Type                         |    Wireless     |    Wireless     |
+        | SSID                                    | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | Authentication Type                     | Captive Portal  | Captive Portal  |
+        | Captive Portal Type                     |    Internal     |    Internal     |
+        | Select Internal Portal                  | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | Internal Role for Portal Authentication | `Portal A Role` | `Portal B Role` |
 
     ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
 
@@ -88,12 +88,6 @@ Let's configure a role profile and the SSID settings. Ensure that the SSID is en
 
 3. Click `Save` at the bottom of the page.
 
-<!--
-!!! note "Information"
-
-The Guest Role and Wireless-Guest-CP Segment are not required for Click Through Guest Access. If users are required to create a guest account or receive approval, then the Guest Role and Wireless-Guest-CP Segment are required.
--->
-
 ### Guest Role Profile
 
 Next, we’ll configure a Guest Role in CV-CUE to assign to Guest Users post authentication.
@@ -106,7 +100,12 @@ Next, we’ll configure a Guest Role in CV-CUE to assign to Guest Users post aut
 
     ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
 
-3. Add the `Role Name` as `Guest Role` and select the check box next to `VLAN` (if not already selected)
+3. Add the `Role Name` as follows
+
+    ???+ example "Network Settings"
+        | Field     |   Student 1    |   Student 2    |
+        | --------- | :------------: | :------------: |
+        | Role Name | `Guest A Role` | `Guest B Role` |
 
     ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
 
@@ -146,12 +145,12 @@ Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post 
     !!! note "Adding more than one condition means MATCH ALL"
 
     ???+ example "Network Settings"
-        | Field               |             Student 1             |            Student 2            |
-        | ------------------- | :-------------------------------: | :-----------------------------: |
-        | Name                |          `ATD-##A-GUEST`          |         `ATD-##B-GUEST`         |
-        | Condition           |  `Network:Name is ATD-##A-GUEST`  | `Network:Name is ATD-##B-GUEST` |
-        | Action              | `Arista-Wifi:Assign Role Profile` |             Always              |
-        | Action Role Profile |          `Guest A Role`           |         `Guest B Role`          |
+        | Field               |             Student 1             |             Student 2             |
+        | ------------------- | :-------------------------------: | :-------------------------------: |
+        | Name                |          `ATD-##A-GUEST`          |          `ATD-##B-GUEST`          |
+        | Condition           |  `Network:Name is ATD-##A-GUEST`  |  `Network:Name is ATD-##B-GUEST`  |
+        | Action              | `Arista-Wifi:Assign Role Profile` | `Arista-Wifi:Assign Role Profile` |
+        | Action Role Profile |          `Guest A Role`           |          `Guest B Role`           |
 
 3. Click `Add Segment` at the bottom of the page.
 4. Your conditions should now look like this.

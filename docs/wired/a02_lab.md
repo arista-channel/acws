@@ -210,4 +210,6 @@ docs/snippets/workspace.md
 
 !!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
 
+    [:material-login: LET'S GO TO THE NEXT LAB!](./a03_lab.md){ .md-button .md-button--primary }
+
 --8<-- "includes/abbreviations.md"
