@@ -32,6 +32,7 @@ Contributing to the guides is welcome, you can follow the steps below to contrib
 
     ```bash
     git branch -c your-branch
+    git switch your-branch
     ```
 
 3. Install pre-commit

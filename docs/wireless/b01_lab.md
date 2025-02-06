@@ -123,7 +123,11 @@ Access points that successfully receive an IP address, DNS, and default gateway 
 
 ## Managing the Configuration Hierarchy
 
-Within CV-CUE, much of the configuration is hierarchical, so everything you configure will be inherited from that level and it's children. Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. Now select the three dots :material-dots-horizontal: to the left of `Locations` and click on `Manage Navigator`.
+Within CV-CUE, much of the configuration is hierarchical, so everything you configure will be inherited from that level and it's children.
+
+### Moving AP to Location
+
+Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. Now select the three dots :material-dots-horizontal: to the left of `Locations` and click on `Manage Navigator`.
 
 ![Campus Studio](./assets/images/b01/config/01_config.png){ width=600" }
 
@@ -183,6 +187,151 @@ Within CV-CUE, much of the configuration is hierarchical, so everything you conf
 
     ![Campus Studio](./assets/images/b01/config/09_config.png)
 
+### Adjusting Power/Channels
+
+For this workshop event, we will be reducing WiFi Radio channel width and transmit power levels to avoid interference with the hosting facility.
+
+1. To customize these power settings:  Navigate to the Configure, Device, Access Points menu
+2. Once in that menu, ensure that `ACorp` or `BCorp` is selected from the tree structure on the left. If you do not see the tree structure, click the
+3. hamburger icon next to “Location” in the top left to expose the tree.
+Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify you have the “A/BCorp” level selected/highlighted in the tree:
+
+    You will select the `5GHz` tab (you can ignore 2.4GHz) and you will override both:
+
+    - Channel Selection: `Manual`
+    - Transmit Power: `Manual`
+
+    Find your pod number and assigned student number.
+
+    <div class="grid cards" markdown>
+
+    - ODD Pods
+
+        ---
+
+        ??? example "POD01: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  52   |     20MHz     |      4bBm      |
+            |    2    |  56   |     20MHz     |      4bBm      |
+
+        ??? example "POD03: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  100  |     20MHz     |      4bBm      |
+            |    2    |  105  |     20MHz     |      4bBm      |
+
+        ??? example "POD05: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  116  |     20MHz     |      4bBm      |
+            |    2    |  120  |     20MHz     |      4bBm      |
+
+        ??? example "POD07: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  132  |     20MHz     |      4bBm      |
+            |    2    |  136  |     20MHz     |      4bBm      |
+
+        ??? example "POD09: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  149  |     20MHz     |      4bBm      |
+            |    2    |  153  |     20MHz     |      4bBm      |
+
+        ??? example "POD11: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  165  |     20MHz     |      4bBm      |
+            |    2    |  52   |     20MHz     |      4bBm      |
+
+    - EVEN Pods
+
+        ---
+
+        ??? example "POD02: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  60   |     20MHz     |      4bBm      |
+            |    2    |  64   |     20MHz     |      4bBm      |
+
+        ??? example "POD04: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  108  |     20MHz     |      4bBm      |
+            |    2    |  112  |     20MHz     |      4bBm      |
+
+        ??? example "POD06: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  124  |     20MHz     |      4bBm      |
+            |    2    |  128  |     20MHz     |      4bBm      |
+
+        ??? example "POD08: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  140  |     20MHz     |      4bBm      |
+            |    2    |  144  |     20MHz     |      4bBm      |
+
+        ??? example "POD10: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  157  |     20MHz     |      4bBm      |
+            |    2    |  161  |     20MHz     |      4bBm      |
+
+        ??? example "POD12: Channel Settings"
+
+            | Student | 5.GHz | Channel Width | Transmit Power |
+            | :-----: | :---: | :-----------: | :------------: |
+            |    1    |  56   |     20MHz     |      4bBm      |
+            |    2    |  60   |     20MHz     |      4bBm      |
+
+    </div>
+
+    ??? quote "All Channel Settings"
+
+        |  Pod  | Student | 2.4 GHz  | 5.GHz | Channel Width | Transmit Power |
+        | :---: | :-----: | :------: | :---: | :-----------: | :------------: |
+        |  01   |    1    | Disabled |  52   |     20MHz     |      4bBm      |
+        |  01   |    2    | Disabled |  56   |     20MHz     |      4bBm      |
+        |  02   |    1    | Disabled |  60   |     20MHz     |      4bBm      |
+        |  02   |    2    | Disabled |  64   |     20MHz     |      4bBm      |
+        |  03   |    1    | Disabled |  100  |     20MHz     |      4bBm      |
+        |  03   |    2    | Disabled |  105  |     20MHz     |      4bBm      |
+        |  04   |    1    | Disabled |  108  |     20MHz     |      4bBm      |
+        |  04   |    2    | Disabled |  112  |     20MHz     |      4bBm      |
+        |  05   |    1    | Disabled |  116  |     20MHz     |      4bBm      |
+        |  05   |    2    | Disabled |  120  |     20MHz     |      4bBm      |
+        |  06   |    1    | Disabled |  124  |     20MHz     |      4bBm      |
+        |  06   |    2    | Disabled |  128  |     20MHz     |      4bBm      |
+        |  07   |    1    | Disabled |  132  |     20MHz     |      4bBm      |
+        |  07   |    2    | Disabled |  136  |     20MHz     |      4bBm      |
+        |  08   |    1    | Disabled |  140  |     20MHz     |      4bBm      |
+        |  08   |    2    | Disabled |  144  |     20MHz     |      4bBm      |
+        |  09   |    1    | Disabled |  149  |     20MHz     |      4bBm      |
+        |  09   |    2    | Disabled |  153  |     20MHz     |      4bBm      |
+        |  10   |    1    | Disabled |  157  |     20MHz     |      4bBm      |
+        |  10   |    2    | Disabled |  161  |     20MHz     |      4bBm      |
+        |  11   |    1    | Disabled |  165  |     20MHz     |      4bBm      |
+        |  11   |    2    | Disabled |  52   |     20MHz     |      4bBm      |
+        |  12   |    1    | Disabled |  56   |     20MHz     |      4bBm      |
+        |  12   |    2    | Disabled |  60   |     20MHz     |      4bBm      |
+
+4. Click `Save` at the bottom of the page then click `Continue` to confirm.
+5. Click `Continue` to commit changes
+6. Wait for the AP to reset radio
+
 ### Assign Floor Plan
 
 Let's assign a floor plan to our `1st Floor` for our respective corporation. Depending on the lab guide format, you can either save the image here or download from the email. We are going to use this image and import it into CV-CUE.
@@ -208,7 +357,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
         | Key    | Value |
         | ------ | :---: |
         | Unit   | Feet  |
-        | Length |  120  |1
+        | Length |  120  | 1 |
         | Width  |  50   |
 
     ![Campus Studio](./assets/images/b01/config/15_config.png)
