@@ -8,9 +8,10 @@ nav:
         - Lab Access: lab/access.md
     - Lab Guides:
         - A-Wired Lab Guides:
-            - Day 1 Operations: wired/a01_lab.md
-            - Day 2 Operations: wired/a02_lab.md
-            - Operations and Monitoring: wired/a03_lab.md
+            - Explore EOS: wired/a01_lab.md
+            - Day 1 Operations: wired/a02_lab.md
+            - Day 2 Operations: wired/a03_lab.md
+            - Operations and Monitoring: wired/a04_lab.md
         - B-Wireless Lab Guides:
             - Wireless Setup: wireless/b01_lab.md
             - Guest Wifi with WIPS: wireless/b02_lab.md

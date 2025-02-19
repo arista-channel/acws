@@ -22,29 +22,37 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **A01-Lab: Day 1 Wired Deployment**
+- :cloudvision: **A01-Lab: Exploring EOS**
+
+    ---
+
+    Get familiar with Arista's Extensible Operating System using the CLI
+
+    [:material-login: Hop into A-01](./wired/a01_lab.md){ .md-button .md-button--primary }
+
+- :cloudvision: **A02-Lab: Day 1 Wired Deployment**
 
     ---
 
     Get started with onboarding new Arista EOS switches using ZTP, CloudVision, and our Campus Studios.
 
-    [:material-login: Hop into A-01](./wired/a01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-02](./wired/a02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A02-Lab: Day 2 Wired Deployment**
+- :cloudvision: **A03-Lab: Day 2 Wired Deployment**
 
     ---
 
     Continue with day 2 operations, using CloudVision to manage campus port profiles, access port configuration, and streamlined task execution.
 
-    [:material-login: Hop into A-02](./wired/a02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-03](./wired/a03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A03-Lab: Day 2 Operations and Troubleshooting**
+- :cloudvision: **A04-Lab: Operations and Troubleshooting**
 
     ---
 
     The campus is deployed, explore the CloudVision observability, altering, troubleshooting, and more!
 
-    [:material-login: Hop into A-03](./wired/a03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-04](./wired/a04_lab.md){ .md-button .md-button--primary }
 
 </div>
 
@@ -64,7 +72,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     ---
 
-    Configure Wifi and WIPS
+    Configure a guest Wifi SSID with a captive guest portal and enable WIPS
 
     [:material-login: Hop into B-02](./wireless/b02_lab.md){ .md-button .md-button--primary }
 
@@ -82,27 +90,27 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **C01-Lab: Day 1 Wifi Deployment**
+- :cloudvision: **C01-Lab: EAP-TLS Wireless Policy**
 
     ---
 
-    Deploy and explore the deployment of new APs in the environment using CV-CUE
+    Using Arista AGNI to enforce wireless access via EAP-TLS policy on a given SSID
 
     [:material-login: Hop into C-01](./security/c01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **C02-Lab: Wifi and WIPS**
+- :cloudvision: **C02-Lab: UPSK Wireless Policy**
 
     ---
 
-    Configure Wifi and WIPS
+    Configure
 
     [:material-login: Hop into C-02](./security/c02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **C03-Lab: Smart System Upgrade (SSU)**
+- :cloudvision: **C03-Lab: EAP-TLS Wired Policy**
 
     ---
 
-    Using Arista EOS Smart System Upgrade (SSU) we can avoid downtime when upgrading our wired network!
+    Using Arista AGNI to enforce wired access via EAP-TLS policy
 
     [:material-login: Hop into C-03](./security/c03_lab.md){ .md-button .md-button--primary }
 

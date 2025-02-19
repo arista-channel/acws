@@ -1,212 +1,229 @@
-# A-02 | Access Interface Configuration
+# A-02 | Provisioning a Campus Fabric
 
 ## Overview
 
-This lab will guide you through creating port profiles and applying them to interfaces in your network.
+In this lab you will be onboarding your switch using CloudVision Studios, adding your new campus leaf switch to an existing Campus Fabric.
+
+Your environment has been pre-configured with a sample Campus to assist with these new concepts. Studios is equipped with flexible constructs that give you the ability to describe your campus footprint. These will be common throughout this workshop:
+
+- **Campus Fabrics**: Your campus `Workshop` has been created, this would be equivalent to a site or region.
+- **Campus Pod**: Your pod `Home Office` could be a building or MDF
+- **Access Pod**: Your access pod `IDF1` could be a floor or IDF
+
+??? example "Show me an example!"
+
+    CloudVision Network Hierarchy gives a better visual representation of how this might look in a real environment.
+
+    ![Network Hierarchy](./assets/images/a01/00_hierarchy.png)
+
+A customer would typically create these constructs ahead of time, waiting for switches to be shipped, racked, and powered on.
+
+The switch in front of you is in Zero-Touch Provisioning (ZTP) mode as they would come from the factory. We will take this new switch from out of the box to provisioned without the use of CLI or the trusty console cable.
+
+??? tip "Out with the console cable"
+
+    Zero-Touch Provisioning in this lab is performed using a bootstrap script delivered over DHCP option 67. This tells your device where to begin streaming for onboarding, you can read more on the [CloudVision Help Center](https://www.cv-staging.corp.arista.io/help/articles/ZGV2aWNlcy5kZXZpY2VSZWdpc3RyYXRpb24ub25ib2FyZA==#onboard-devices)
 
 --8<--
 docs/snippets/topology.md
-<!-- docs/snippets/login_cv.md -->
+docs/snippets/login_cv.md
 docs/snippets/workspace.md
 --8<--
 
-## Creating Port Profiles
+## Onboarding Device
 
-!!! danger "Single Workspace"
+1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Sreaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to chose which switch is `leaf1a` and `leaf1b`
 
-    You and your fellow student will work together to create port profiles for your campus fabric in a **single workspace**.
+    !!! danger "Single Workspace"
 
-1. From the `Studios` home page, disable the `Active Studios` toggle to display all available CloudVision Studios (which when enabled will only show used/active Studios).
+        You and your fellow student will work together to onboard your switch pair in a **single workspace**.
 
-    !!! note "The toggle may already be in the disabled position"
+        Your CloudVision is tied to **your pod**, anywhere it says `pod-##` you will replace with your assigned pod number.
 
-      ![Campus Studios](./assets/images/a02/01_access_config.png)
+    !!! tip "What's that hostname?"
 
-2. Let's create two port profiles using the `Access Interface Configuration` studio that will be used to provision connected hosts.
+        The ZTP process used here will use the DHCP ip address as a suffix and produce a `sw-X.X.X.X` hostname. This is a good indication a switch is in ZTP.
 
-    1. Launch the `Access Interface Configuration`
-    2. Click Add Port Profile, name it `Wireless-Access-Point`, and click the arrow on the right
+    ![Campus Fabric Studio](./assets/images/a01/01_device_inventory.png)
 
-       ![Campus Studios](./assets/images/a02/02_port_profile.png)
+2. Navigate to the Network Fabric Studio `Campus Fabric (L2/L3/EVPN)`
 
-    3. Enter the following values on this configuration page, you can leave all other configuration items left as default. See the settings are configured in the screenshot below
+    ![Campus Fabric Studio](./assets/images/a01/03_studio_campus_fabric.png)
 
-        ???+ example "Wireless-Access-Point"
+3. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides a location to place the switch.
 
-            | Key                  | Value                                        |
-            | -------------------- | -------------------------------------------- |
-            | Description          | `Wireless-Access-Point`                      |
-            | Enable               | Yes                                          |
-            | Mode                 | Access                                       |
-            | VLANS                | `1##` where `##` is your 2 digit pod number* |
-            | Portfast             | Edge                                         |
-            | POE Reboot Action    | Maintain                                     |
-            | POE Link Down Action | Maintain                                     |
-            | POE Shutdown Action  | Power-Off                                    |
+    ![Campus Fabrics](./assets/images/a01/04_campus_fabric_main.png)
 
-            **VLAN pod numbers between 01-12 that was assigned to your lab/Pod. Example: `Pod01` is `VLAN101`, `Pod13` is `VLAN113`*
+4. Click on the `Add Campus Devices` to launch the workflow
 
-       ![Campus Studios](./assets/images/a02/03_wireless_ap.png)
+    ![Campus Add Devices](./assets/images/a01/05_add_campus_devices.png)
 
-    4. Once you are done with configuration, navigate back to `Access interface Configuration` near the top of the page, under the `Quick Actions`
+5. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
 
-       ![Add Access Interface](./assets/images/a02/04_back.png)
+    === "Step 1"
 
-3. Let's add another port profile for our Raspberry Pi, click `Add Port Profile`, name it `Wired-RasPi`, and click the arrow on the right
+        Select the `Workshop > Home Office > IDF1` and add your assigned device from the `Available Devices`
 
-    ???+ example "Wired-RasPi"
+        ![Campus Add Devices](./assets/images/a01/06_add_device_qa_step1.png)
 
-        | Key                      | Value                                        |
-        | ------------------------ | -------------------------------------------- |
-        | Description              | `Wired-RasPi`                                |
-        | Enable                   | Yes                                          |
-        | Mode                     | Access                                       |
-        | VLANS                    | `1##` where `##` is your 2 digit pod number* |
-        | Portfast                 | Edge                                         |
-        | 802.1X                   | Enabled                                      |
-        | MAC Based Authentication | Yes                                          |
-        | POE Reboot Action        | Maintain                                     |
-        | POE Link Down Action     | Maintain                                     |
-        | POE Shutdown Action      | Power-Off                                    |
+    === "Step 2"
 
-        **VLAN pod numbers between 01-12 that was assigned to your lab/Pod. Example: `Pod01` is `VLAN101`, `Pod13` is `VLAN113`*
+        In the `Role Assignment` click on the `Hostname` field and name your switch `pod##-leaf1X`. Where ## is your pod number and `X` is either student A or B. Also select the role as `Leaf` and `Continue`
 
-4. Our port profiles have been staged, click `Review Workspace`
+        ![Campus Set Device Hostname and ROle](./assets/images/a01/06_add_device_qa_step2.png)
 
-5. We can see the only studio changed is the `Access Interface Configuration`, no configuration on the devices has changed.
+    === "Step 3"
 
-    ![Review Workspace](./assets/images/a02/05_review.png)
+        Validate your `Inband Management Subnet` and `Inband Management VLAN` match your assigned pod number, this will already be configured for you.
 
-6. Go ahead and `Submit the Workspace` when you ready
+        - **Subnet**: `10.1.#.0/24` where `#` is the pod number
+        - **VLAN**: `1##` where `#` is the pod number
 
-    !!! warning "Note that device configuration has NOT changed after submitting this workspace. If you see something different, create a new workspace and try again or reach out to the event staff."
+        ![Campus Add Management Network](./assets/images/a01/06_add_device_qa_step3.png)
 
-## Assigning Port Profiles
+    === "Step 4"
 
-!!! danger "No Workspace"
+        This is a review of what you have configured to onboard your device, click on `Build Workspace` when you are ready.
 
-    Now that you have port profiles, you can each individually configure ports on your assigned switch! No workspace required here 😄
+        ![Campus Review Changes](./assets/images/a01/06_add_device_qa_step4.png)
 
-1. We are going to assign our new port profiles to our switch, specifically assign ports for
+    === "Step 5"
 
-      1. `Ethernet2`: our access port for the Raspberry Pi
-      2. `Ethernet14`: our access port for the Access Point
+        During this step, the Quick Action is adding your devices to the Studios inventory anf generating configuration for your new MLAG pair. If we had selected an EOS image, a task would have been created to upgrade the device during our onboarding.
 
-2. CloudVision offers a number of places to configure access interfaces, it doesn't matter which one you choose! These workflows exist in multiple places depending on the type of work you are performing (broad updates, troubleshooting, etc)
+        ![Campus Review Changes](./assets/images/a01/06_add_device_qa_step5.png)
 
-    <div class="grid cards" markdown>
+6. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
 
-    - :material-alert-rhombus-outline:{ .lg .middle } **Studios**
+    ![Campus Review Workspace](./assets/images/a01/07_review_workspace.png)
 
-        ---
+7. We should see the detailed view of what's changing
 
-        If you are already in the `Access Interface Configuration` studio, you can click the quick action to launch the quick action
+    ![Campus Add Devices](./assets/images/a01/08_review_detail.png)
 
-    - :material-alert-rhombus-outline:{ .lg .middle } **Dashboards**
+8. In the workspace note the top leaf `Summary` box, there are several studios modified:
+    1. `Inventory and Topology`: Devices selected are simply added to the Campus inventory
+    2. `Campus Fabric (L2/L3/EVPN)`: Devices we're added to their respective Campus Access Pod `IDF1` and will inherit configuration from that part of the campus.
 
-        ---
+9. Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration.
 
-        You can launch the quick action directly from the Campus Health Dashboard
+    !!! tip "You may need to click twice"
 
-    - :material-alert-rhombus-outline:{ .lg .middle } **Network Hierarchy**
+        Studios will take you back to where you left off, you may need to click `Studios` on the side bar twice, or select `Studios` near the top left of your screen.
 
-        ---
+    ![Return to Studios](./assets/images/a01/09_return_studios.png)
 
-        Within this view, you can dig into a specific Campus, Pod, and Access Pod. Clicking on the `Front Panel` view, you can then configure port profiles on the right.
+## Applying Configuration
 
-    </div>
+1. Click on `Static Configuration`
 
-    === "Studios"
+    ![Campus Static Configuration Studio](./assets/images/a01/10_static_studio.png)
 
-        ![Campus Dashboard](./assets/images/a02/06_access_config_3.png)
+2. Let's add our new devices to this studio using the steps below
 
-    === "Campus Dashboard"
+    === "Add Devices Step 1"
 
-        ![Campus Dashboard](./assets/images/a02/06_access_config_1.png)
+        Click on the `Add +` and select `Devices`
 
-    === "Network Hierarchy"
+        ![Campus Add Device](./assets/images/a01/11_add_devices_1.png)
 
-        ![Campus Dashboard](./assets/images/a02/06_access_config_2.png)
+    === "Add Devices Step 2"
 
-3. We're going to use the `Campus Dashboard` option, so click on `Dashboards` on the left side navigation. Locate the `Quick Actions` panel on the lower left of the screen and Click `Access Interface Configuration`
+        Select your devices you recently added through the workflow
 
-    ![Campus Dashboard](./assets/images/a02/06_access_config_1.png)
+        ![Campus Add Device](./assets/images/a01/11_add_devices_2.png)
 
-4. Select the necessary locations to drill down to your `IDF1`:
+3. Now let's add our base configuration to these devices, this will include items like logging, banners, etc. for the lab. Use the steps below
 
-      1. Campus: `Workshop`
-      2. Campus Pod: `Home Office`
-      3. Access Pod: `IDF1`
+    !!! tip "Device Configuration"
 
-    ![Campus Dashboard](./assets/images/a02/07_access_ports.png)
+        Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop. This was done using [Arista Validated Designs (AVD)](https://avd.arista.com/5.1/index.html)
 
-5. Let's configure our Access Point port, make sure you identify your assigned switch `pod<##>-leaf1(a|b)`
+    === "Add Config Step 1"
 
-    !!! warning "Student Device"
+        Select a device and on the left and click the `+ Configlet` to the right and select `Configlet Library`
 
-        Make sure to select your device, see the tabs below!
+        ![Campus Add Config](./assets/images/a01/12_add_config_1.png)
 
-        **NOTE**: You will see a slightly different front panel layout, this is the difference between the 710P-12P and the 710P-16P you have in front of you.
+    === "Add Config Step 2 (Leaf1A)"
 
-    === "Student 1"
+        Select the correct configuration for the device selected.
 
-         1. Click on port `Ethernet14` on your assigned switch
-         2. Choose the `Port Profile` of `Wireless-Access-Point`
-         3. Click `Yes` radio button under `Enabled`
-         4. Click `Review`
+        ![Campus Add Config](./assets/images/a01/12_add_config_2.png)
 
-         ![Campus Dashboard](./assets/images/a02/08_assign_port_1.png)
+    === "Add Config Step 3"
 
-    === "Student 2"
+        Ensure the configuration has applied!
 
-         1. Click on port `Ethernet14` on your assigned switch
-         2. Choose the `Port Profile` of `Wireless-Access-Point`
-         3. Click `Yes` radio button under `Enabled`
-         4. Click `Review`
+        ![Campus Add Config](./assets/images/a01/12_add_config_3.png)
 
-         ![Campus Dashboard](./assets/images/a02/08_assign_port_2.png)
+    === "Add Config Step 4 (Leaf1B)"
 
-6. You can review the configuration before pushing, but all in the same workflow. Hit `Confirm` to push the access port config when ready!
+        Do the same for the other leaf, selecting the correct configuration file.
 
-    ![Campus Dashboard](./assets/images/a02/08_assign_port_3.png)
+        ![Campus Add Config](./assets/images/a01/12_add_config_4.png)
 
-7. Once the `Change Control` has been executed, click `Configure Additional Inputs` to configure another access port
+4. Let's now review our workspace and the changes we've made by clicking on `Review Workspace`
 
-    ![Campus Dashboard](./assets/images/a02/09_add_inputs.png)
+    ![Campus Config Review](./assets/images/a01/15_review.png)
 
-8. Let's now configure our Raspberry Pi port, make sure you identify your assigned switch `pod<##>-leaf1(a|b)`
+5. You can review the configuration changes to the devices
 
-    !!! warning "Student Device"
+    ??? info "What happens to the ZTP Configuration?!"
 
-        Make sure to select your device, see the tabs below!
+        We are replacing the Zero Touch configuration with a combination of base configuration (generated using AVD) and some dynamic configuration using Campus Studios
 
-        **NOTE**: You will see a slightly different front panel layout, this is the difference between the 710P-12P and the 710P-16P you have in front of you.
+    ![Campus Final Review](./assets/images/a01/16_workspace_review.png)
 
-    === "Student 1"
+6. Click `Submit Workspace` to generate the Change Control
 
-         1. Click on port `Ethernet2` on your assigned switch
-         2. Choose the `Port Profile` of `Wired-RasPI`
-         3. Click `Yes` radio button under `Enabled`
+    ![Campus Final Review](./assets/images/a01/17_view_cc.png)
 
-         ![Campus Dashboard](./assets/images/a02/08_assign_port_1.png)
+7. Click on `View Change Control` and let's explore executing a change control in the next section.
 
-    === "Student 2"
+## Executing a Change Control
 
-         4. Click on port `Ethernet2` on your assigned switch
-         5. Choose the `Port Profile` of `Wired-RasPI`
-         6. Click `Yes` radio button under `Enabled`
+1. Within the Change Control, you can review the configurations as we just did in the workspace. This is geared towards encouraging or enforcing review of changes prior to execution.
 
-         ![Campus Dashboard](./assets/images/a02/08_assign_port_2.png)
+    ![Campus Final Review](./assets/images/a01/18_change_control.png)
 
-9. This time Click `Submit`
+2. When you are ready, you can review `Review and Approve` at the top right, select the `Execute Immediately` toggle, and `Approve and Execute`.
 
-10. This has pushed the configuration without review! This streamlined the process for low risk changes like access port changes. Once `Change Control` has been executed, click `Finish`
+    ??? tip "I approved my own change?!"
 
-    ![Campus Dashboard](./assets/images/a02/10_finish.png)
+        Yes, for this workshop we have enabled the ability to approve your change. You can change this in setting and disable the ability for someone to approve their own change. This ensures another set of eyes reviews your change before that eventual change window!
 
-11. Quick actions is using the same CloudVision Change Control workflow, the exception here is it's auto approved to allow low risk/impact changes easier. You can view this change control in the `Change Control` tab and see the generated task.
+    ![Campus Final Review](./assets/images/a01/19_review_approve.png)
 
-    ![Campus Dashboard](./assets/images/a02/11_review_cc.png)
+3. Let's explore what is going on during the execution of the change control, while this is happening, feel free to click `Logs` near the top right to watch what's happening.
+
+    === "CC Start"
+
+        So what is the device doing?! There are a number of things that device goes through through a ZTP onboard
+
+        1. The device configuration will be applied to the device
+        2. The switch will reboot to bring the device out of ZTP mode (this will take about 10 mins)
+        3. We did not upgrade the device, but if we had, software upgrade would then take place and reboot once more.
+
+        ![Campus Final Review](./assets/images/a01/20_task_1.png)
+
+    === "CC Finish"
+
+        Now that change control has finished, you will see a summary of any tasks that failed.
+
+        ![Campus Final Review](./assets/images/a01/20_task_2.png)
+
+    === "CC Device Logs"
+
+        There are a number of logs you can review, the list is long, but great detail about what's going on behind the scenes.
+
+        ![Campus Final Review](./assets/images/a01/20_task_3.png)
+
+4. You can now return the `Devices` tab on the left and see our devices should be streaming with it's new hostname!
+
+    ![Campus Final Review](./assets/images/a01/21_device_review.png)
+
+5. That's it! Your new campus switch went from out of the box ZTP mode to a configured member of the Campus fabric. We're going to explore further changes to this switch in the next lab!
 
 !!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
 
