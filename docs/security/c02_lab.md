@@ -1,88 +1,238 @@
 # C-02 | AGNI UPSK Wireless Policy
+
 ## Overview
 
 In this lab...
 
 --8<--
-docs/snippets/topology.md
+docs/snippets/login_cvcue.md
+--8<--
+
+## Create Identity UPSK SSID
+
+Let's create our new UPSK SSID by copying/modifying the PSK SSID we created in the CV-CUE lab.
+
+1. While on your `CorpA/B` folder, Click on `Configure` and then `WiFi`
+
+    ![Wireless EAP-TLS](./assets/images/c02/01_cue_ssid.png)
+
+2. Next, click on the :material-dots-horizontal: and select `Create a Copy` on your specific SSID
+
+    ???+ example "Your SSID"
+
+        | Student   |     Name      |
+        | --------- | :-----------: |
+        | Student 1 | `ATD-##A-PSK` |
+        | Student 2 | `ATD-##B-PSK` |
+
+    *where ## is a 2 digit character between 01-20 that was assigned to your lab/Pod*
+
+    ![Wireless EAP-TLS](./assets/images/c02/02_cue_ssid.png)
+
+3. Select `Currently Selected Folders` and then `Continue`.
+
+    ![Wireless EAP-TLS](./assets/images/c02/03_cue_ssid.png)
+
+4. Click on the new SSID and select `Edit` :octicons-pencil-24:
+
+    ![Wireless EAP-TLS](./assets/images/c02/04_cue_ssid.png)
+
+5. On the `Basic` Tab rename the SSID to the following
+
+    ???+ example "Settings"
+
+        | Student      |   Student 1    |   Student 2    |
+        | ------------ | :------------: | :------------: |
+        | Name         | `ATD-##A-UPSK` | `ATD-##B-UPSK` |
+        | Profile Name | `ATD-##A-UPSK` | `ATD-##B-UPSK` |
+
+    ![Wireless EAP-TLS](./assets/images/c02/05_cue_ssid.png)
+
+6. Next, click on the `Security` tab and configure the following
+
+    !!! tip "UPSK Information"
+
+        For more information on UPSK visit the article on [Unique PSK](https://arista.my.site.com/AristaCommunity/s/article/Unique-PSKs)
+
+    ???+ example "Settings"
+
+        | Field                |    Value    |
+        | -------------------- | :---------: |
+        | Security Method      | WPA2 / UPSK |
+        | UPSK Identity Lookup |   Enabled   |
+
+    ![Wireless EAP-TLS](./assets/images/c02/06_cue_ssid.png)
+
+7. Next, click on the `Access Control` tab and configure the following
+
+    ???+ example "Settings"
+
+        | Field                   |             Value             |
+        | ----------------------- | :---------------------------: |
+        | Radius Settings         |        Select `RadSec`        |
+        | Authentication Server   |           `AGNI-##`           |
+        | Accounting Server       |           `AGNI-##`           |
+        | Username and Password   | MAC Address without Delimiter |
+        | Call Station ID         |            `%m-%s`            |
+        | Change of Authorization |            Enabled            |
+
+    ![Wireless EAP-TLS](./assets/images/c02/07_cue_ssid.png)
+
+8. Finally, `Save and turn on the SSID` and `Save SSID`
+
+    ![Wireless EAP-TLS](./assets/images/c02/08_cue_ssid.png)
+
+9. Only select the `5 GHz` option on the next screen (deselect the 2.4 GHz box if it’s checked), then click `Turn SSID On`.
+
+    ![Wireless EAP-TLS](./assets/images/c02/09_cue_ssid.png)
+
+--8<--
 docs/snippets/login_agni.md
 --8<--
 
-## Create Identity UPSK SSID:
-
-1. Return to the LaunchPad tab and Log into CV-CUE https://launchpad.wifi.arista.com/, or access the CV-CUE tab in your browser.
-2. Next, we will modify the PSK SSID we created in the CV-CUE lab.
-3. While on the Corp folder, Click on Configure and then WiFi
-4. Next, click on the 3 Dots and select Create a Copy on the SSID ATD-##-PSK where ## is a 2 digit character between 01-20 that was assigned to your lab/Pod
-5. Select - Currently Selected Folders and then Continue.
-6. Click on the new SSID and select Edit.
-7. On the Basic Tab rename the SSID to ATD-##-UPSK, and copy the SSID Name and paste it in the Profile Name field.
-8. Next, click on the Security Tab and change the WPA2 Security from PSK to UPSK
-9. Next, select UPSK Identity Lookup
-10. For more information on UPSK click here: https://arista.my.site.com/AristaCommunity/s/article/Unique-PSKs
-11. Next, Click on the Access Control tab.  Under RADIUS Settings, select RadSec and then AGNI for the Authentication and Accounting Servers.
-12. Confirm the Username and Password, Called Station, COA information.
-13. Finally, Save and turn on the SSID.
-
 ## Create UPSK Network and Segment
 
-1. Return to the LaunchPad tab, and select the AGNI tile, or go to your AGNI tab in your browser.
-2. Click on Networks and then + Add Network.
-3. Add the following:
-4. Name: Wireless-UPSK
-5. Connection Type: Wireless
-6. SSID: ATD-##-UPSK
-7. Authentication Type: Unique PSK (UPSK)
-8. Add Network
-9. You should now see this listed in your networks.
-10. Next, we will add the Segment.
-11. Under Access Control, click on Segments and then + Add Segment
-12. Name: Wireless-UPSK
-13. Description: Wireless-UPSK
-14. Click on + Add Condition
-15. Conditions: Network:Authentication Type is UPSK
-16. *Note: Conditions are always Matches ALL.
-17. Click on + Add Action
-18. Actions: Allow Access
-19. Finally, click on Add Segment.
-20. You should now see Wireless-UPSK in the list of segments.
+In this section we are going to configure AGNI for our new SSID network and apply segmentation policy to enforce UPSK.
 
-## Create an AGNI Local User and Enroll Personal Device
+1. Click on `Networks` and then `+ Add Network`.
 
-1. In this section you will create a local user and enroll the MAC of your device.
-2. In AGNI, under Identity, click on User and then + Add User.
-3. Fill out the sections.  Use Arista01! for the password.
-4. Disable - User must change password at next login:
-5. Click Add User
-6. You will notice that Password has now changed to UPSK Passphrase
-7. Copy and write down or save to text file the new UPSK Passphrase.
-8. Next, connect your client to ATD-##-UPSK using your UPSK Passphrase.
-9. Click on Sessions and validate your device connection.
-10. Next, validate your device by clicking on User and then Users.  Select your user.
-11. Click on Show Clients
+    ![Wireless EAP-TLS](./assets/images/c02/agni/01_agni.png)
+
+2. Add the following:
+
+    ???+ example "Settings"
+
+        | Field               |     Student 1     |     Student 2     |
+        | ------------------- | :---------------: | :---------------: |
+        | Name                |  `ATD-##A-UPSK`   |  `ATD-##B-UPSK`   |
+        | Connection Type     |     Wireless      |     Wireless      |
+        | SSID                |  `ATD-##A-UPSK`   |  `ATD-##B-UPSK`   |
+        | Authentication Type | Unique PSK (UPSK) | Unique PSK (UPSK) |
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/02_agni.png)
+
+3. Finally, click `Add Network`
+4. You should now see this listed in your `Networks`.
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/03_agni.png)
+
+5. Next, we will add the Segment.
+6. Under Access Control, click on `Segments` and then `+ Add Segment`
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/04_agni.png)
+
+7. Configure the following:
+
+    !!! note "Segment Conditions"
+
+        If there are multiple conditions, they must MATCH ALL.
+
+    ???+ example "Settings"
+
+        | Field        |               Student 1               |               Student 2               |
+        | ------------ | :-----------------------------------: | :-----------------------------------: |
+        | Name         |            `ATD-##A-UPSK`             |            `ATD-##B-UPSK`             |
+        | Description  |            `ATD-##A-UPSK`             |            `ATD-##B-UPSK`             |
+        | Condition #1 | `Network:Authentication Type is UPSK` | `Network:Authentication Type is UPSK` |
+        | Action #1    |            `Allow Access`             |            `Allow Access`             |
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/05_agni.png)
+
+8. Finally, click on `Add Segment`.
+9. You should now see your new segment in the list of segments.
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/06_agni.png)
+
+## Enroll Personal Device with Local User
+
+In this section you will create a local user and enroll the MAC of your device.
+
+1. In AGNI, under `Identity`, click on `User` and then `+ Add User`.
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/07_agni.png)
+
+2. Fill out the fields for a new user
+
+    ???+ example "Settings"
+
+        | Field                                   |      Student 1      |      Student 2      |
+        | --------------------------------------- | :-----------------: | :-----------------: |
+        | Name                                    | <whatever_you_want> | <whatever_you_want> |
+        | UserId                                  | <whatever_you_want> | <whatever_you_want> |
+        | Password                                |    `Arista!123`     |    `Arista!123`     |
+        | User must change password at next login |      Disabled       |      Disabled       |
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/08_agni.png)
+
+3. Click `Add User`
+4. You will notice that `Password` has now changed to `UPSK Passphrase`
+
+    ![Wireless EAP-TLS](./assets/images/c02/agni/09_agni.png)
+
+5. Copy and write down or save to text file the new UPSK Passphrase.
+6. Next, connect your client to `ATD-##A/B-UPSK` using your UPSK Passphrase.
+7. Click on `Sessions` and validate your device connection.
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+
+8. Next, validate your device by clicking on `User` and then `Users`. Select your user.
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+
+9. Click on `Show Clients`
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
 
 ## Create an AGNI Client Group
 
-1. In this section, you will simulate your device as an IoT device.
-2. Disable and forget previously saved lab networks so your wireless connection on your test device does not auto connect.  Under your user client list, delete your device.
+In this section, you will simulate your device as an IoT device.
+
+1. Disable and forget previously saved lab networks so your wireless connection on your test device does not auto connect.
+2. In AGNI under your `User Clients` list, `Delete` your device.
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+
 3. Next, you will add your client device as an IoT device in a Client Group.
 4. First, we will need to create the Client Group.
-5. In AGNI, under Identity, click on Client Groups and then + Add Client Group.
-6. Name: Corp Approved Devices
-7. Description: Corp Approved Devices
-8. User Association: Not user associated
-9. Enable the Group UPSK.  Copy the UPSK Passphrase
-10. Then click on Add Group
-11. Next, connect your client to ATD-##-UPSK using the Client Group UPSK Passphrase.
-12. Click on Sessions and validate your device connection.
-13. Next Click on your Client.
-14. Notice your Client Group.  Here you have the option to change the Client Group your device belongs to.
-15. Next, delete your device from the Client Group - Corp Approved Devices.
-16. Next, under Identity, click on Clients and then + Add Client.
-17. Select the Client Group: Corp Approved Devices
-18. Add in the MAC Address of your test device like your phone that is not randomized.
-19. Then select Add Client
-20. You will then see the Client added to the Group.
-21. Validate and Verify your connection using the Client Group UPSK Passphrase.
+5. In AGNI, under `Identity`, click on `Client Groups` and then `+ Add Client Group`.
+6. Configure the following
+
+    ???+ example "Settings"
+
+        | Field                                   |      Student 1      |      Student 2      |
+        | --------------------------------------- | :-----------------: | :-----------------: |
+        | Name                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
+        | Description                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
+        | User Association                                  |Not user associated|Not user associated |
+        | Group UPSK                                |    Enabled    |    Enabled    |
+        | User must change password at next login |      Disabled       |      Disabled       |
+
+7. `Copy` the UPSK Passphrase and click on `Add Group`
+8. Next, connect your client to ATD-##-UPSK using the Client Group UPSK Passphrase.
+9. Click on Sessions and validate your device connection.
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+
+10. Next Click on your `Client`.
+
+    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+
+11. Notice your Client Group. Here you have the option to change the Client Group your device belongs to.
+12. Next, delete your device from the Client Group
+13. Next, under `Identity`, click on `Client > Clients` and then `+ Add Client or Import Clients`.
+14. Configure the following
+
+    ???+ example "Settings"
+
+        | Field                                   |      Student 1      |      Student 2      |
+        | --------------------------------------- | :-----------------: | :-----------------: |
+        | Client Group                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
+        | Choose Action                                    | Add | Add |
+        | MAC Address                                    | <your_mac_address> | <your_mac_address> |
+
+15. Add in the MAC Address of your test device like your phone that is not randomized.
+16. Then select `Add Client`
+17. You will then see the Client added to the Group.
+18. Validate and Verify your connection using the Client Group UPSK Passphrase.
 
 --8<-- "includes/abbreviations.md"

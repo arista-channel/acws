@@ -5,7 +5,6 @@
 In this lab we will be working within the `WiFi` configuration section of CV-CUE. Create an SSID (WPA2 802.1X) with your `ATD-##-EAP` as the name (where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod).
 
 --8<--
-docs/snippets/topology.md
 docs/snippets/login_cvcue.md
 --8<--
 
@@ -53,12 +52,14 @@ The `Configure` section of CV-CUE is composed of multiple parts, including WiFi,
 
 4. In the `Basic` sub-category option, name the SSID using the settings below. The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
 
+    ???+ example "Settings"
+
         | Student   |     Name      |
         | --------- | :-----------: |
         | Student 1 | `ATD-##A-EAP` |
         | Student 2 | `ATD-##B-EAP` |
 
-        ** where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod
+        *where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod*
 
     ![Wireless EAP-TLS](./assets/images/c01/02_eap_wireless.png)
 
