@@ -13,7 +13,7 @@ This is the home of the Campus ATD Workshop lab guides and AVD repository.
 2. Launch the Mkdocs server
 
     ```bash
-    mkdocs serve -a 127.0.0.1:8001
+    mkdocs serve -a 127.0.0.1:8000
     ```
 
 3. Navigate to [http://127.0.0.1:8000](http://127.0.0.1:8000)
