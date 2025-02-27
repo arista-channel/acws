@@ -87,6 +87,10 @@ In this lab you will be configuring RadSec on your lab switches by adding the Ra
 docs/snippets/login_agni.md
 --8<--
 
+## Device Groups
+
+Move device into the device groups.
+
 ## Create Wired EAP-TLS Network and Segment
 
 1. Click on `Access Devices > Devices` to confirm the RadSec connection is up.
@@ -132,10 +136,6 @@ docs/snippets/login_agni.md
         | Condition #1                   |                `Network:Name is ATD-##A-WIRED`                |                `Network:Name is ATD-##B-WIRED`                |
         | Condition #2                   | `Network:Authentication Type is Client Certificate (EAP-TLS)` | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
         | Action #1                      |                        `Allow Access`                         |                        `Allow Access`                         |
-        | Fallback to mac Authentication |                            Enabled                            |                            Enabled                            |
-        | MAC Authentication Type        |                 Allow Registered Clients Only                 |                 Allow Registered Clients Only                 |
-        | Onboarding                     |                            Enabled                            |                            Enabled                            |
-        | Authorized User Groups         |                           Employees                           |                           Employees                           |
 
     ![Campus Studio](./assets/images/c03/agni/06_agni.png)
 

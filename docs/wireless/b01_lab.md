@@ -219,7 +219,7 @@ Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify y
             | Student | 5.GHz | Channel Width |
             | :-----: | :---: | :-----------: |
             |    1    |  100  |     20MHz     |
-            |    2    |  105  |     20MHz     |
+            |    2    |  104  |     20MHz     |
 
         ??? example "POD05: Channel Settings"
 
@@ -306,7 +306,7 @@ Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify y
         |  02   |    1    | Disabled |  60   |     20MHz     |      4bBm      |
         |  02   |    2    | Disabled |  64   |     20MHz     |      4bBm      |
         |  03   |    1    | Disabled |  100  |     20MHz     |      4bBm      |
-        |  03   |    2    | Disabled |  105  |     20MHz     |      4bBm      |
+        |  03   |    2    | Disabled |  104  |     20MHz     |      4bBm      |
         |  04   |    1    | Disabled |  108  |     20MHz     |      4bBm      |
         |  04   |    2    | Disabled |  112  |     20MHz     |      4bBm      |
         |  05   |    1    | Disabled |  116  |     20MHz     |      4bBm      |
