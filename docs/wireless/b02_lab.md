@@ -1,4 +1,4 @@
-# B-02 | Guest Wireless & WIPS
+# B-02 | Guest Wireless with AGNI
 
 ## Overview
 
@@ -153,7 +153,7 @@ Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post 
 1. Go back to AGNI and navigate to the Access Control > Segments.
 2. Add a new Segment by clicking on `+ Add Segment`
 
-    !!! note "Adding more than one condition means MATCH ALL"
+    !!! note "Conditions for segments must MATCH ALL conditions line by line."
 
     ???+ example "Network Settings"
         | Field               |             Student 1             |             Student 2             |
@@ -183,47 +183,44 @@ Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign th
 
     ![Campus Studio](./assets/images/b02/portal/11_portal.png)
 
-4. Configure the SSID using the settings below, use the tabs to navigate the sections
+4. Configure the SSID `Basic` settings using the settings below
 
-    === "Basic"
+    ???+ example "SSID Basic Settings"
 
-        ???+ example "SSID Basic Settings"
+        | Setting   |    Student 1    |    Student 2    |
+        | --------- | :-------------: | :-------------: |
+        | SSID Name | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
+        | SSID Type |     Private     |     Private     |
 
-            | Setting   |    Student 1    |    Student 2    |
-            | --------- | :-------------: | :-------------: |
-            | SSID Name | `ATD-##A-GUEST` | `ATD-##B-GUEST` |
-            | SSID Type |     Private     |     Private     |
+    ![Campus Studio](./assets/images/b02/portal/12_portal.png)
 
-        ![Campus Studio](./assets/images/b02/portal/12_portal.png)
+5. Click the 3 dots and select `Access Control` tab and configure using the settings below
 
-    === "Access Control"
+    ???+ example "SSID Access Control Settings"
 
-        Click the 3 dots and select `Access Control` tab and configure using the settings below
+        | Setting                               |           Value           | Notes                                     |
+        | ------------------------------------- | :-----------------------: | ----------------------------------------- |
+        | **Client Authentication**             |  :octicons-checkbox-16:   |                                           |
+        | Authentication Type                   | Radius MAC Authentication |                                           |
+        | **RadSec**                            |  :octicons-checkbox-16:   |                                           |
+        | Authentication Server                 |         `AGNI-01`         | AGNI Radsec Server was configured already |
+        | Accounting     Server                 |         `AGNI-01`         |                                           |
+        | **Role Based Control**                |  :octicons-checkbox-16:   |                                           |
+        | Rule Type                             |    802.1X Default VSA     |                                           |
+        | Operand                               |           Match           |                                           |
+        | Assign Role                           |        Select All         | Created in previous section               |
+        | Send DHCP Options and HTTP User Agent |  :octicons-checkbox-16:   |                                           |
 
-        ???+ example "SSID Access Control Settings"
+    ![Campus Studio](./assets/images/b02/portal/13_portal.png)
 
-            | Setting                   |           Value           | Notes                                     |
-            | ------------------------- | :-----------------------: | ----------------------------------------- |
-            | **Client Authentication** |  :octicons-checkbox-16:   |                                           |
-            | Authentication Type       | Radius MAC Authentication |                                           |
-            | **RadSec**                |  :octicons-checkbox-16:   |                                           |
-            | Authentication Server     |         `AGNI-01`         | AGNI Radsec Server was configured already |
-            | Accounting     Server     |         `AGNI-01`         |                                           |
-            | **Role Based Control**    |  :octicons-checkbox-16:   |                                           |
-            | Rule Type                 |    802.1X Default VSA     |                                           |
-            | Operand                   |           Match           |                                           |
-            | Assign Role               |        Select All         | Created in previous section               |
+    ![Campus Studio](./assets/images/b02/portal/14_portal.png)
 
-        ![Campus Studio](./assets/images/b02/portal/13_portal.png)
-
-        ![Campus Studio](./assets/images/b02/portal/14_portal.png)
-
-5. Once all settings have been set, Click the `Save & Turn SSID On` button at the bottom of the page.
-6. You will be prompted to customize before enabling, select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click `Turn SSID On`.
+6. Once all settings have been set, Click the `Save & Turn SSID On` button at the bottom of the page.
+7. You will be prompted to customize before enabling, select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click `Turn SSID On`.
 
     ![Campus Studio](./assets/images/b02/portal/15_portal.png)
 
-7. Join the new wifi and verify connectivity in CUE and AGNI
+8. Join the new wifi and verify connectivity in CUE and AGNI
 
     !!! tip "Join the guest Wifi!"
 
@@ -241,7 +238,7 @@ Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign th
 
         ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
 
-8. Lab section complete.
+9. Lab section complete.
 
 ## WIPS Wireless Intrusion Prevention System
 

@@ -43,7 +43,6 @@ When you open the launcher, you are presented with multiple applications. Each i
       3. **Profiles** - Defines Access levels to CV-CUE, LaunchPad, and Guest Manager
       4. **Logs** - Download User Action Logs
       5. **Settings** - Lockout Policy, Password Policy, and 2-Factor settings
-4. Account Settings - Change your Timezone and Change your password.
 
 !!! tip "Authentication"
 
@@ -198,8 +197,8 @@ Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify y
 
     You will select the `5GHz` tab (you can ignore 2.4GHz) and you will override both:
 
-    - Channel Selection: `Manual`
-    - Transmit Power: `Manual`
+    - Channel Selection: `Manual` and see the "Channel Settings" below.
+    - Transmit Power: `Manual` to `4bBm`
 
     Find your pod number and assigned student number.
 
@@ -211,45 +210,44 @@ Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify y
 
         ??? example "POD01: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  52   |     20MHz     |      4bBm      |
-            |    2    |  56   |     20MHz     |      4bBm      |
-
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  52   |     20MHz     |
+            |    2    |  56   |     20MHz     |
         ??? example "POD03: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  100  |     20MHz     |      4bBm      |
-            |    2    |  105  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  100  |     20MHz     |
+            |    2    |  105  |     20MHz     |
 
         ??? example "POD05: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  116  |     20MHz     |      4bBm      |
-            |    2    |  120  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  116  |     20MHz     |
+            |    2    |  120  |     20MHz     |
 
         ??? example "POD07: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  132  |     20MHz     |      4bBm      |
-            |    2    |  136  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  132  |     20MHz     |
+            |    2    |  136  |     20MHz     |
 
         ??? example "POD09: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  149  |     20MHz     |      4bBm      |
-            |    2    |  153  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  149  |     20MHz     |
+            |    2    |  153  |     20MHz     |
 
         ??? example "POD11: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  165  |     20MHz     |      4bBm      |
-            |    2    |  52   |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  165  |     20MHz     |
+            |    2    |  52   |     20MHz     |
 
     - EVEN Pods
 
@@ -257,45 +255,45 @@ Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify y
 
         ??? example "POD02: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  60   |     20MHz     |      4bBm      |
-            |    2    |  64   |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  60   |     20MHz     |
+            |    2    |  64   |     20MHz     |
 
         ??? example "POD04: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  108  |     20MHz     |      4bBm      |
-            |    2    |  112  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  108  |     20MHz     |
+            |    2    |  112  |     20MHz     |
 
         ??? example "POD06: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  124  |     20MHz     |      4bBm      |
-            |    2    |  128  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  124  |     20MHz     |
+            |    2    |  128  |     20MHz     |
 
         ??? example "POD08: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  140  |     20MHz     |      4bBm      |
-            |    2    |  144  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  140  |     20MHz     |
+            |    2    |  144  |     20MHz     |
 
         ??? example "POD10: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  157  |     20MHz     |      4bBm      |
-            |    2    |  161  |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  157  |     20MHz     |
+            |    2    |  161  |     20MHz     |
 
         ??? example "POD12: Channel Settings"
 
-            | Student | 5.GHz | Channel Width | Transmit Power |
-            | :-----: | :---: | :-----------: | :------------: |
-            |    1    |  56   |     20MHz     |      4bBm      |
-            |    2    |  60   |     20MHz     |      4bBm      |
+            | Student | 5.GHz | Channel Width |
+            | :-----: | :---: | :-----------: |
+            |    1    |  56   |     20MHz     |
+            |    2    |  60   |     20MHz     |
 
     </div>
 
@@ -418,7 +416,7 @@ The `Configure` section of CV-CUE is broken into several parts, including `WiFi`
 
 </div>
 
-In this section of the lab, we will be working in the `WiFi` configuration area. We will create an SSID (WPA2 PSK) with your `ATD-##-PSK` as the name and `Wireless!123` as the passkey.
+In this section of the lab, we will be working in the `WiFi` configuration area. We will create an SSID (WPA2 PSK) with your `ATD-##(A|B)-PSK` as the name and `Wireless!123` as the passkey.
 
 1. Hover your cursor over the `Configure` menu option on the left side of the screen, then click `WiFi`.
 
@@ -514,6 +512,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/tshoot/02_tshoot.png)
 
+    UPDATE SCREENSHOT
     ![Campus Studio](./assets/images/b01/tshoot/03_tshoot.png)
 
 4. Click `Save` at the bottom of the window.

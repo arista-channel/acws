@@ -5,9 +5,9 @@
 The Arista Wireless AP management plane (CV-CUE) is hosted within Arista’s public cloud presence, worldwide. In order to complete this lab section, a default gateway is pre-configured by event staff to facilitate internet connectivity.
 
 !!! note "Arista Wireless Ports & Protocols"
-    
+
     For more information on the TCP/UDP ports and protocols involved for management functions, see the links below:
-    
+
     - [AP Wireless Manager Communication](https://wifihelp.arista.com/post/access-point-wireless-manager-communication)
     - [TCP/UDP Ports Used by Arista Wireless](https://wifihelp.arista.com/post/tcp-and-udp-ports-used-by-arista-wi-fi-products)
 
@@ -17,7 +17,6 @@ docs/snippets/login_cvcue.md
 
 Go to the Arista CloudVision CUE portal via: https://launchpad.wifi.arista.com/
 
-
 ## 01 | Launchpad
 
 Launchpad is the portal to access your Arista cloud services including WiFi Management (CV-CUE) and AGNI (Network Access Control). When you open the launcher, you are presented with management applications on the Dashboard menu and access controls with the Admin menu.
@@ -25,11 +24,11 @@ Launchpad is the portal to access your Arista cloud services including WiFi Mana
 Dashboard Applications Summary:
 
 - **CV-CUE (CloudVision WiFI):** Wireless management and monitoring
-- **Canvas:** Access portal splash pages, and marketing Campaign management. 
-- **Guest Manager:** Analyze and report on user activity within your environment. 
-- **Nano:** Manage your environment from your smartphone 
+- **Canvas:** Access portal splash pages, and marketing Campaign management.
+- **Guest Manager:** Analyze and report on user activity within your environment.
+- **Nano:** Manage your environment from your smartphone
 - **Packets:** An online packet capture (.pcap) debug tool allowing you to examine the association and packet information.
-- **WiFi Resources:** Includes documentation and eLearning has 6 ½ hours of training, also included.
+- **WiFi Resources:** Includes documentation and over 6 ½ hours of training, also included.
 - **WiFi Device Registration:** Process for importing APs onto your account
 - **AGNI (Beta):** Arista Guardian for Network Identity (Network Access Control)
 
@@ -37,15 +36,14 @@ Dashboard Applications Summary:
 
 **In light of time, we have done this for you**. However, we will review how Arista Access Points are onboarded through Launchpad.
 
-!!! tip "These steps have alreaedy been done for you!"
+!!! tip "These steps have already been done for you!"
 
     Arista AP serial numbers are automatically assigned to the user’s CV-CUE staging area when purchased. In addition, specific devices can be registered for management using the WiFi Device Registration  function, accessible from Launchpad Dashboard.
-
 
 Device registration requires both the:
 
 - [x] Serial Number
-- [x] Registration Key 
+- [x] Registration Key
 
 This information found on the back of the APs. Additionally, a CSV containing this information can be uploaded for bulk registration operations.
 
@@ -53,9 +51,9 @@ Within the Import Function you can provide individual AP serials and keys or upl
 
 ## 02 | CV-CUE Access
 
-CloudVision CUE - Cognitive Unified Edge, provides the management plane and monitoring functions for the Arista WiFi solution. 
+CloudVision CUE - Cognitive Unified Edge, provides the management plane and monitoring functions for the Arista WiFi solution.
 
-1. You should have clicked on the `CV-CUE (CloudVision WiFi)` Tile in the LaunchPad from the Dashboard menu.  
+1. You should have clicked on the `CV-CUE (CloudVision WiFi)` Tile in the LaunchPad from the Dashboard menu.
 
 2. When the CV-CUE interface launches, you are presented with an initial dashboard to monitor your wireless environment at a glance, we will revisit these metrics later in the lab. Since this is a new setup the initial dashboard screen will be mostly empty.
 
@@ -72,7 +70,7 @@ CloudVision CUE - Cognitive Unified Edge, provides the management plane and moni
       - **Engage**: User insights, Presence, Usage, 3rd party integrations
       - **Floor Plans**: Floor layouts and AP location map view
       - **Reports**: Detailed information for Infrastructure APs/Radios, Client Connectivity and Experience, WIPS detections
-      - **System**: Locations Hierarchy, AP Groups, 3rd party server settings, keys and certificates 
+      - **System**: Locations Hierarchy, AP Groups, 3rd party server settings, keys and certificates
 
 In addition to the menu bar navigation and Locations Hierarchy, the UI provides a common Search bar, Metric summary, and Help button throughout workflows.
 

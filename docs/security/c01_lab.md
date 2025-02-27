@@ -148,7 +148,7 @@ docs/snippets/login_agni.md
 
     !!! note "Conditions"
 
-        Adding more than one condition means the policy must MATCH ALL
+        Conditions for segments must MATCH ALL conditions line by line.
 
     1. Select, `Network`, `Name`, `is`, `ATD-##X-SSID-EAP-TLS` from the drop down lists. Chose your `A` or `B` policy accordingly.
     2. Select, `Network`, `Authentication Type`, `is`, `Client Certificate (EAP-TLS)` from the drop down lists.

@@ -112,7 +112,7 @@ docs/snippets/login_agni.md
         | Fallback to mac Authentication |            Enabled            |            Enabled            |
         | MAC Authentication Type        | Allow Registered Clients Only | Allow Registered Clients Only |
         | Onboarding                     |            Enabled            |            Enabled            |
-        | Authorized User Groups         |           Employees           |           Employees           |
+        | Authorized User Groups         |            Arista             |            Arista             |
 
     ![Campus Studio](./assets/images/c03/agni/03_agni.png)
 

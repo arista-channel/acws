@@ -32,7 +32,7 @@ docs/snippets/workspace.md
 
 ## Onboarding Device
 
-1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Sreaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to chose which switch is `leaf1a` and `leaf1b`
+1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Streaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to choose which switch is `leaf1a` and `leaf1b`
 
     !!! danger "Single Workspace"
 
@@ -48,17 +48,17 @@ docs/snippets/workspace.md
 
 2. Navigate to the Network Fabric Studio `Campus Fabric (L2/L3/EVPN)`
 
+    !!! tip "Active Studios"
+
+        If you do not see the studios option below, there is a toggle on the right hand side you can toggle "off" the `Active Studios` to show all.
+
     ![Campus Fabric Studio](./assets/images/a01/03_studio_campus_fabric.png)
 
-3. Note on this first screen that there is a `Campus Fabrics` configured as `Workshop`. This is a physical representation of the campus and provides a location to place the switch.
-
-    ![Campus Fabrics](./assets/images/a01/04_campus_fabric_main.png)
-
-4. Click on the `Add Campus Devices` to launch the workflow
+3. Click on the `Add Campus Devices` to launch the workflow
 
     ![Campus Add Devices](./assets/images/a01/05_add_campus_devices.png)
 
-5. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
+4. This workflow will take you through onboarding the device, follow the tabs below to complete the onboarding process.
 
     === "Step 1"
 
@@ -93,19 +93,19 @@ docs/snippets/workspace.md
 
         ![Campus Review Changes](./assets/images/a01/06_add_device_qa_step5.png)
 
-6. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
+5. The workflow is completing several steps to onboard the device, click `Review Workspace` to explore
 
     ![Campus Review Workspace](./assets/images/a01/07_review_workspace.png)
 
-7. We should see the detailed view of what's changing
+6. We should see the detailed view of what's changing
 
     ![Campus Add Devices](./assets/images/a01/08_review_detail.png)
 
-8. In the workspace note the top leaf `Summary` box, there are several studios modified:
+7. In the workspace note the top leaf `Summary` box, there are several studios modified:
     1. `Inventory and Topology`: Devices selected are simply added to the Campus inventory
     2. `Campus Fabric (L2/L3/EVPN)`: Devices we're added to their respective Campus Access Pod `IDF1` and will inherit configuration from that part of the campus.
 
-9. Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration.
+8. Let's leave this for now and navigate back to `Studios` home page and next we add some base configuration.
 
     !!! tip "You may need to click twice"
 

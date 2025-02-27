@@ -51,7 +51,7 @@ Adding a VLAN is a common provisioning task. Let’s use the existing Campus Fab
 
 3. Review and Submit Workspace
 
-    1. Notice that the Studio is adding the VLAN to all three devices within the Pod.
+    1. Notice that the Studio is adding the VLAN to the two devices within the Pod.
 
         !!! tip "Pruning VLANS"
 
@@ -487,6 +487,8 @@ In this lab, you will configure CloudVision to send an email alert to an email a
 15. After a minute or two, you should receive the email alert at the email address you configured in the Receiver
 
     ![Campus Studio](./assets/images/a03/notify/14_notify.png)
+
+16. You can remove
 
 !!! tip "🎉 CONGRATS! You have completed the Wired labs! 🎉"
 
