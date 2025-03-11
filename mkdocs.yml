@@ -14,8 +14,9 @@ nav:
             - Operations and Monitoring: wired/a04_lab.md
         - B-Wireless Lab Guides:
             - Wireless Setup: wireless/b01_lab.md
-            - Guest Wifi with AGNI: wireless/b02_lab.md
-            - Smart System Upgrade: wireless/b03_lab.md
+            - Troubleshooting Wifi: wireless/b02_lab.md
+            - Guest Wifi with AGNI: wireless/b03_lab.md
+            - Smart System Upgrade: wireless/b04_lab.md
         - C-Security Lab Guides:
             - EAP-TLS Wireless Policy: security/c01_lab.md
             - UPSK Wireless Policy: security/c02_lab.md

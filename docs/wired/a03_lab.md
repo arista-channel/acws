@@ -95,8 +95,8 @@ Go over EOS CLI
 
 1. We are going to assign our new port profiles to our switch, specifically assign ports for
 
-      1. `Ethernet2`: our access port for the Raspberry Pi
-      2. `Ethernet14`: our access port for the Access Point
+      1. `Ethernet1`: our access port for the Raspberry Pi
+      2. `Ethernet13`: our access port for the Access Point
 
 2. CloudVision offers a number of places to configure access interfaces, it doesn't matter which one you choose! These workflows exist in multiple places depending on the type of work you are performing (broad updates, troubleshooting, etc)
 
@@ -156,7 +156,7 @@ Go over EOS CLI
 
     === "Student 1"
 
-         1. Click on port `Ethernet14` on your assigned switch
+         1. Click on port `Ethernet13` on your assigned switch
          2. Choose the `Port Profile` of `Wireless-Access-Point`
          3. Click `Yes` radio button under `Enabled`
          4. Click `Review`
@@ -165,7 +165,7 @@ Go over EOS CLI
 
     === "Student 2"
 
-         1. Click on port `Ethernet14` on your assigned switch
+         1. Click on port `Ethernet13` on your assigned switch
          2. Choose the `Port Profile` of `Wireless-Access-Point`
          3. Click `Yes` radio button under `Enabled`
          4. Click `Review`
@@ -190,7 +190,7 @@ Go over EOS CLI
 
     === "Student 1"
 
-         1. Click on port `Ethernet2` on your assigned switch
+         1. Click on port `Ethernet1` on your assigned switch
          2. Choose the `Port Profile` of `Wired-RasPI`
          3. Click `Yes` radio button under `Enabled`
 
@@ -198,7 +198,7 @@ Go over EOS CLI
 
     === "Student 2"
 
-         4. Click on port `Ethernet2` on your assigned switch
+         4. Click on port `Ethernet1` on your assigned switch
          5. Choose the `Port Profile` of `Wired-RasPI`
          6. Click `Yes` radio button under `Enabled`
 
