@@ -28,7 +28,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Get familiar with Arista's Extensible Operating System using the CLI
 
-    [:material-login: Hop into A-01](./wired/a01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-01](./a_wired/a01_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **A02-Lab: Day 1 Wired Deployment**
 
@@ -36,7 +36,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Get started with onboarding new Arista EOS switches using ZTP, CloudVision, and our Campus Studios.
 
-    [:material-login: Hop into A-02](./wired/a02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-02](./a_wired/a02_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **A03-Lab: Day 2 Wired Deployment**
 
@@ -44,7 +44,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Continue with day 2 operations, using CloudVision to manage campus port profiles, access port configuration, and streamlined task execution.
 
-    [:material-login: Hop into A-03](./wired/a03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-03](./a_wired/a03_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **A04-Lab: Operations and Troubleshooting**
 
@@ -52,7 +52,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     The campus is deployed, explore the CloudVision observability, altering, troubleshooting, and more!
 
-    [:material-login: Hop into A-04](./wired/a04_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-04](./a_wired/a04_lab.md){ .md-button .md-button--primary }
 
 </div>
 
@@ -66,7 +66,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Deploy and explore the deployment of new APs in the environment using CV-CUE
 
-    [:material-login: Hop into B-01](./wireless/b01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **B02-Lab: Wifi and WIPS**
 
@@ -74,7 +74,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Configure a guest Wifi SSID with a captive guest portal and enable WIPS
 
-    [:material-login: Hop into B-02](./wireless/b02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **B03-Lab: Smart System Upgrade (SSU)**
 
@@ -82,7 +82,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Using Arista EOS Smart System Upgrade (SSU) we can avoid downtime when upgrading our wired network!
 
-    [:material-login: Hop into B-03](./wireless/b03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 
 </div>
 
@@ -96,7 +96,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Using Arista AGNI to enforce wireless access via EAP-TLS policy on a given SSID
 
-    [:material-login: Hop into C-01](./security/c01_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-01](./c_security/c01_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **C02-Lab: UPSK Wireless Policy**
 
@@ -104,7 +104,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Configure
 
-    [:material-login: Hop into C-02](./security/c02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-02](./c_security/c02_lab.md){ .md-button .md-button--primary }
 
 - :cloudvision: **C03-Lab: EAP-TLS Wired Policy**
 
@@ -112,7 +112,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     Using Arista AGNI to enforce wired access via EAP-TLS policy
 
-    [:material-login: Hop into C-03](./security/c03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
 
 </div>
 

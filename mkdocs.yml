@@ -8,19 +8,19 @@ nav:
         - Lab Access: lab/access.md
     - Lab Guides:
         - A-Wired Lab Guides:
-            - Explore EOS: wired/a01_lab.md
-            - Day 1 Operations: wired/a02_lab.md
-            - Day 2 Operations: wired/a03_lab.md
-            - Operations and Monitoring: wired/a04_lab.md
+            - Explore EOS: a_wired/a01_lab.md
+            - Day 1 Operations: a_wired/a02_lab.md
+            - Day 2 Operations: a_wired/a03_lab.md
+            - Operations and Monitoring: a_wired/a04_lab.md
         - B-Wireless Lab Guides:
-            - Wireless Setup: wireless/b01_lab.md
-            - Troubleshooting Wifi: wireless/b02_lab.md
-            - Guest Wifi with AGNI: wireless/b03_lab.md
-            - Smart System Upgrade: wireless/b04_lab.md
+            - Wireless Setup: b_wireless/b01_lab.md
+            - Troubleshooting Wifi: b_wireless/b02_lab.md
+            - Guest Wifi with AGNI: b_wireless/b03_lab.md
+            - Smart System Upgrade: b_wireless/b04_lab.md
         - C-Security Lab Guides:
-            - EAP-TLS Wireless Policy: security/c01_lab.md
-            - UPSK Wireless Policy: security/c02_lab.md
-            - EAP-TLS Wired Policy: security/c03_lab.md
+            - EAP-TLS Wireless Policy: c_security/c01_lab.md
+            - UPSK Wireless Policy: c_security/c02_lab.md
+            - EAP-TLS Wired Policy: c_security/c03_lab.md
     - References:
         - Onboarding Wifi Devices: references/wireless_onboard.md
         - Configuring RadSec: references/radsec.md

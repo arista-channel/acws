@@ -4,12 +4,19 @@ Welcome to the Arista Campus ATD Workshop!
 
 ## Labs
 
-As part of this workshop, you will be configuring and interacting with Arista's campus ecosystem. Each pod is con
+As part of this workshop, you will be configuring and interacting with Arista's campus ecosystem. Each pod contains:
 
 - [x] 12 x Arista Campus Pods
 - [x] 2 x Students assigned per pod
 
-Each Arista Campus Pod is equipped with the hardware in front of you and the software
+## Topology
+
+![ATD Student Pod](../assets/images/topology/atd_student-light.png#only-light)
+![ATD Student Pod](../assets/images/topology/atd_student-dark.png#only-dark)
+
+## Equipment
+
+Each Arista Campus Pod is equipped with the hardware and software you would
 
 <div class="grid cards" markdown>
 
@@ -17,7 +24,7 @@ Each Arista Campus Pod is equipped with the hardware in front of you and the sof
 
     ---
 
-    Each pod will be provided their own instance of each of the following:
+    Each pod will be provided their own instance of:
 
       - [x] Arista CloudVision as a Service (CVaaS)
       - [x] Arista Guardian Network Identity (AGNI)
@@ -49,19 +56,15 @@ Each Arista Campus Pod is equipped with the hardware in front of you and the sof
 
     ---
 
-    You will work in collaboration with your fellow student on configuring your Campus pod
+    You will work in collaboration with your fellow student, keep this information handy
 
-      - [x] Remember your login
-      - [x] Remember your pod number
-      - [x] Remember your switch name/serial number
+      - [x] Your STUDENT number
+      - [x] Your POD number
+      - [x] Your USER
+      - [x] Your PASSWORD
 
 </div>
 
 --8<--
 docs/snippets/login_cv.md
 --8<--
-
-## Topology
-
-![ATD Student Pod](../assets/images/topology/atd_student-light.png#only-light)
-![ATD Student Pod](../assets/images/topology/atd_student-dark.png#only-dark)

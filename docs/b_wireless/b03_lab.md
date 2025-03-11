@@ -230,13 +230,13 @@ Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign th
 
         Navigate to `Monitor > Clients` in CV-CUE
 
-        ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+        ![Campus Studio](../assets/images/tbd.png){ width="500" }
 
     === "AGNI"
 
         Navigate to `Sessions` in AGNI
 
-        ![Campus Studio](./assets/images/need_screenshot.png){ width="500" }
+        ![Campus Studio](../assets/images/tbd.png){ width="500" }
 
 9. Lab section complete.
 
