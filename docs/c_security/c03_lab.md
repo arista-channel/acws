@@ -87,10 +87,6 @@ In this lab you will be configuring RadSec on your lab switches by adding the Ra
 docs/snippets/login_agni.md
 --8<--
 
-## Device Groups
-
-Move device into the device groups.
-
 ## Create Wired EAP-TLS Network and Segment
 
 1. Click on `Access Devices > Devices` to confirm the RadSec connection is up.
@@ -102,7 +98,16 @@ Move device into the device groups.
 
     ![Campus Studio](./assets/images/c03/agni/02_agni.png)
 
-4. Fill in and select the Following fields on the `Add Network` page.
+4. Before configuring the network, see `Access Device Group`, click on the `+` to create a new device group.
+
+    ???+ example "Network Settings"
+        | Field                       |  Student 1   |  Student 2   |
+        | --------------------------- | :----------: | :----------: |
+        | Name                        |   WIRED-A    |   WIRED-B    |
+        | Description                 |   WIRED-A    |   WIRED-B    |
+        | Available Devices (`+ Add`) | POD##-LEAF1A | POD##-LEAF1B |
+
+5. Fill in and select the Following fields on the `Add Network` page.
 
     ???+ example "Network Settings"
 
@@ -120,32 +125,32 @@ Move device into the device groups.
 
     ![Campus Studio](./assets/images/c03/agni/03_agni.png)
 
-5. When done, click on `Add Network` at the bottom of the screen.
-6. Next, click on `Segments` and then `+ Add Segment`
+6. When done, click on `Add Network` at the bottom of the screen.
+7. Next, click on `Segments` and then `+ Add Segment`
 
     ![Campus Studio](./assets/images/c03/agni/04_agni.png)
 
-7. Configure the network segment with the following settings:
+8. Configure the network segment with the following settings:
 
     ???+ example "Segment Settings"
 
-        | Field                          |                           Student 1                           |                           Student 2                           |
-        | ------------------------------ | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
-        | Name                           |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
-        | Description                    |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
-        | Condition #1                   |                `Network:Name is ATD-##A-WIRED`                |                `Network:Name is ATD-##B-WIRED`                |
-        | Condition #2                   | `Network:Authentication Type is Client Certificate (EAP-TLS)` | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
-        | Action #1                      |                        `Allow Access`                         |                        `Allow Access`                         |
+        | Field        |                           Student 1                           |                           Student 2                           |
+        | ------------ | :-----------------------------------------------------------: | :-----------------------------------------------------------: |
+        | Name         |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
+        | Description  |                         ATD-##A-WIRED                         |                         ATD-##B-WIRED                         |
+        | Condition #1 |                `Network:Name is ATD-##A-WIRED`                |                `Network:Name is ATD-##B-WIRED`                |
+        | Condition #2 | `Network:Authentication Type is Client Certificate (EAP-TLS)` | `Network:Authentication Type is Client Certificate (EAP-TLS)` |
+        | Action #1    |                        `Allow Access`                         |                        `Allow Access`                         |
 
     ![Campus Studio](./assets/images/c03/agni/06_agni.png)
 
-8. Finally, select `Add Segment` at the bottom of the page.
+9. Finally, select `Add Segment` at the bottom of the page.
 
-9. You should now be able to expand and review your segment.
+10. You should now be able to expand and review your segment.
 
     ![Campus Studio](./assets/images/c03/agni/07_agni.png)
 
-10. Next, unplug your raspberry Pi from `Ethernet1` and into `Ethernet2` on the switch and click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
+11. Next, unplug your raspberry Pi from `Ethernet1` and into `Ethernet2` on the switch and click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
 
     TODO: Get screenshot
 

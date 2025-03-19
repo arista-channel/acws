@@ -2,7 +2,7 @@
 
 Welcome to our Arista hands-on campus workshop! 🚀
 
-We appreciate your desire to explore our campus ecosystem! Over the next two days, you'll have the opportunity to work with real hardware and software, just as it's deployed in the field. Each lab is designed to simulate real-world scenarios, giving you practical experience. Whether you're troubleshooting devices, configuring switches, or working with our software, you'll gain a better understanding of the campus lifecycle. Get ready to dive in, experiment, and learn by doing!
+We appreciate your desire to get your hands dirty and diving into the Arista campus solutions. Over the next two days, you'll have the opportunity to work with real hardware and software, just as it's deployed in the field. Each lab is designed to simulate real-world scenarios, giving you practical experience. Whether you're deploying and configuring switches, operating the network, or troubleshooting client connectivity issues, you'll gain a better understanding of the campus lifecycle. Get ready to dive in, experiment, and learn by doing!
 
 ![Campus Workshop Table](./assets/images/banner.png)
 
@@ -12,7 +12,7 @@ We appreciate your desire to explore our campus ecosystem! Over the next two day
 
     ---
 
-    How to get logged into the lab
+    Your instructor will guide you with more details, but feel free to jump right in and understand what you have in front of you!
 
     [:material-login: Let's get started!](./lab/access.md){ .md-button .md-button--primary }
 

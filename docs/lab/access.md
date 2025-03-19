@@ -1,13 +1,11 @@
-# Lab Access
+# Campus Lab Overview
 
-Welcome to the Arista Campus ATD Workshop!
+You've made it, now what? Well, you and a room full of other engineers are sitting in front of a series of access pods. These Arista switches, while small, run the same Arista EOS images as our 1700lb 16 slot chassis.
 
-## Labs
+Get familiar with your fellow student, you will be working together to configure the pod in front of you. In total there are:
 
-As part of this workshop, you will be configuring and interacting with Arista's campus ecosystem. Each pod contains:
-
-- [x] 12 x Arista Campus Pods
 - [x] 2 x Students assigned per pod
+- [x] 12 x Arista Campus Pods
 
 ## Topology
 
@@ -16,7 +14,7 @@ As part of this workshop, you will be configuring and interacting with Arista's 
 
 ## Equipment
 
-Each Arista Campus Pod is equipped with the hardware and software you would
+The hardware you see sitting in front of you can
 
 <div class="grid cards" markdown>
 
@@ -26,15 +24,15 @@ Each Arista Campus Pod is equipped with the hardware and software you would
 
     Each pod will be provided their own instance of:
 
-      - [x] Arista CloudVision as a Service (CVaaS)
-      - [x] Arista Guardian Network Identity (AGNI)
-      - [x] Arista CloudVision Cognitive Unified Edge (CV-CUE)
+      - [x] **Arista CloudVision as a Service (CVaaS)** - Our management, orchestration, and visibility
+      - [x] **Arista CloudVision Cognitive Unified Edge (CV-CUE)** - Our wireless management, orchestration, and visibility
+      - [x] **Arista Guardian Network Identity (AGNI)** - Our Network Access Control
 
 - :fontawesome-solid-flask: **Lab Hardware**
 
     ---
 
-    Each pod will be provided the following hardware:
+    The hardware you see sitting in front of you:
 
       - [x] 2 x C-360
       - [x] 2 x 710P-16P
