@@ -17,7 +17,7 @@ Login into AGNI to begin this lab, you will create the Arista Cloud Gateway.
 
         | Setting             |  Student 1   |
         | ------------------- | :----------: |
-        | Name                | `ACG-POD01`  |
+        | Name                | `ATD-POD01`  |
         | Location            | `Locations`  |
         | TACACS+ Termination |   Enabled    |
         | Shared Secret Name  |   `Access`   |
@@ -32,7 +32,26 @@ Login into AGNI to begin this lab, you will create the Arista Cloud Gateway.
 4. Verify the settings and click `Add Cloud Gateway` when complete
 5. That's it, there is now a ACG instance configured for all devices
 
+### ACG Connection (CVP)
+
+Configuring your switches for Tacacs is easy as applying a configlet to all or select devices. We're going to use studios to demonstrate
+
+1. Login to CloudVision
+2. Navigate to `Provisioning > Studios`
+3. Click on `Create Workspace` and name it whatever you'd like
+4. Next, select `Static Configuration`
+5. Select only your device and click `+ Configlet > Configlet Library`, select the `tacacs` configuration
+
+    !!! tip "Apply to all devices"
+
+        You could apply the configuration at the container `Workshop`. This container has the device tag `Device: All Devices`, this means all devices would inherit this configuration without the need to go to each device. You could also create your own container and leverage any tag query to target specific subset of devices.
+6. Once the configlet is applied, click on `Review Workspace`
+7. Validate the configuration is correct and `Submit Workspace`
+8. Click on `Change Control` and `Approve and Execute` the change
+
 ### ACG Connection (EOS)
+
+Whil we used cloudvision to configure the device, you can also log directly into the switch
 
 1. Login to the switch
 2. Cloud Gateway should have been downloaded and installed on the switch. You can verify on EOS by running the following command
