@@ -2,7 +2,7 @@
 
 ## Overview
 
-This lab is intended to use the Campus Workshop to showcase how to configure Tacacs with AGNI. There are many online resources available, this will only include the basics of what's required.
+This lab is intended to use the Campus Workshop to showcase how to configure TACACS+ with AGNI. There are many online resources available, this will only include the basics of what's required.
 
 ## AGNI Configuration
 
@@ -23,7 +23,7 @@ Login into AGNI to begin this lab, you will create the Arista Cloud Gateway.
         | Shared Secret Name  |   `Access`   |
         | Value               | `Arista!123` |
 
-3. Be sure to copy the generated `Token` value
+3. Be sure to copy the generated `Token` value, this will used in our EOS configuration
 
     !!! warning "Token Generation"
 
