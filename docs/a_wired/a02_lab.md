@@ -16,8 +16,6 @@ Your environment has been pre-configured with a sample Campus to assist with the
 
     ![Network Hierarchy](./assets/images/a01/00_hierarchy.png)
 
-A customer would typically create these constructs ahead of time, waiting for switches to be shipped, racked, and powered on.
-
 The switch in front of you is in Zero-Touch Provisioning (ZTP) mode as they would come from the factory. We will take this new switch from out of the box to provisioned without the use of CLI or the trusty console cable.
 
 ??? tip "Out with the console cable"
@@ -191,7 +189,7 @@ docs/snippets/workspace.md
 
     ??? tip "I approved my own change?!"
 
-        Yes, for this workshop we have enabled the ability to approve your change. You can change this in setting and disable the ability for someone to approve their own change. This ensures another set of eyes reviews your change before that eventual change window!
+        Yes, for this workshop you can approve your own change. In `Settings > General Settings` the toggle for `Non-Author Change Control Review` can be enabled enforce a change control review from a "non-author".
 
     ![Campus Final Review](./assets/images/a01/19_review_approve.png)
 

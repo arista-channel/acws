@@ -342,7 +342,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
     If you are viewing this as a PDF, check the email you received as part of this Arista Test Drive session. You will find an image attached to the email to use as a floor plan. Save that image to your computer
 
-![Campus Studio](./assets/images/b01/config/13_config.png)
+![Campus Studio](./assets/images/b01/config/office.png)
 
 1. In the left hand menu, click on `Maps`.  Make sure to set the location level to be `1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
 
