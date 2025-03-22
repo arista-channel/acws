@@ -247,7 +247,7 @@ Let's log into the workshop spine switches.
         ```
 
         ```yaml title="Example Output: virtual-router"
-        IP virtual router is configured with MAC address: feed.dead.beef
+        IP virtual router is configured with MAC address: 00:1c:73:00:00:01
         IP virtual router address subnet routes not enabled
         IP router is not configured with Mlag peer MAC address
         MAC address advertisement interval: 30 seconds
@@ -353,7 +353,7 @@ Let's log into the workshop spine switches.
         - Tech Support Bundles/Checkpoints
         - So much more
 
-## MLAG
+## MLAG & VARP
 
 Arista's Multi-Chassis Link Aggregation (MLAG) is a technology that allows two physical switches to act as a single logical switch. By syncing the control plane without the need for proprietary cabling or protocols, it provides an active-active, non-blocking redundancy between multiple pairs of switches.
 
@@ -577,7 +577,7 @@ Let's explore the configuration and how to troubleshoot
             mlag 101
         !
 
-10. Lastly, if we do detect issues or want to verify the MLAG interfaces upstream/downstream are `up/up` we can validate
+10. If we do detect issues or want to verify the MLAG interfaces upstream/downstream are `up/up` we can validate
 
     ```yaml
     show mlag interfaces
@@ -605,7 +605,32 @@ Let's explore the configuration and how to troubleshoot
         113       POD13       inactive       Po113        Po113       down/down
         ```
 
-11. That's it for this lab, you should have a bit better understanding of how MLAG is configured
+11. Lastly, how do we maintain active/active forwarding with MLAG, this where VARP comes in. A virtual router address and common MAC is all it takes.
+
+    ```yaml
+    show run sec virtual-router
+    ```
+
+    ???+ quote "Example Output"
+
+        ```yaml
+        !
+        interface Vlan101
+            ip virtual-router address 10.1.1.1 #(1)!
+        interface Vlan102
+            ip virtual-router address 10.1.2.1
+        interface Vlan103
+            ip virtual-router address 10.1.3.1
+        ...
+        !
+        ip virtual-router mac-address 00:1c:73:00:00:01 #(2)!
+        !
+        ```
+
+        1. This is the virtual IP address configured on both MLAG pairs.
+        2. This vMAC will be used as the gateway vMAC associated with the Gateway VIP configured with either ip address virtual or ip virtual-router address (vARP). This vMAC will be consistent across all SVIs configured with a VIP.
+
+12. That's it for this lab, you should have a bit better understanding of how MLAG is configured
 
 ## Closing Out
 
