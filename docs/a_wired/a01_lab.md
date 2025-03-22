@@ -234,17 +234,18 @@ Let's login into the spine switch
     Port          Neighbor Device ID       Neighbor Port ID    TTL
     ---------- ------------------------ ---------------------- ---
     Et1           sw-10.1.1.51             Ethernet15          120
-    Et2           sw-10.1.2.42             Ethernet15          120
-    Et3           sw-10.1.3.40             Ethernet15          120
-    Et4           sw-10.1.4.41             Ethernet15          120
-    Et5           sw-10.1.5.40             Ethernet15          120
-    Et6           sw-10.1.6.41             Ethernet15          120
-    Et7           localhost                Ethernet15          120
-    Et9           sw-10.1.9.41             Ethernet15          120
-    Et10          sw-10.1.10.41            Ethernet15          120
-    Et11          sw-10.1.11.40            Ethernet15          120
-    Et12          sw-10.1.12.40            Ethernet15          120
-    Et13          sw-10.1.13.40            Ethernet15          120
+    Et3           sw-10.1.2.42             Ethernet15          120
+    Et5           sw-10.1.3.40             Ethernet15          120
+    Et7           sw-10.1.4.41             Ethernet15          120
+    Et9           sw-10.1.5.40             Ethernet15          120
+    Et11          sw-10.1.6.41             Ethernet15          120
+    Et13          sw-10.1.7.41             Ethernet15          120
+    Et15          sw-10.1.8.40             Ethernet15          120
+    Et17          sw-10.1.9.41             Ethernet15          120
+    Et19          sw-10.1.10.41            Ethernet15          120
+    Et21          sw-10.1.11.40            Ethernet15          120
+    Et23          sw-10.1.12.40            Ethernet15          120
+    Et25          sw-10.1.13.40            Ethernet15          120
     Et33          Arista_18:66:BF          3086.2d18.66bf      120
     Et47          SPINE02                  Ethernet47          120
     Et48          SPINE02                  Ethernet48          120
