@@ -10,12 +10,6 @@ docs/snippets/topology.md
 docs/snippets/workspace.md
 --8<--
 
-## Arista EOS
-
-Go over EOS CLI
-
-### MLAG (CLI/CV)
-
 ## Creating Port Profiles
 
 !!! danger "Single Workspace"

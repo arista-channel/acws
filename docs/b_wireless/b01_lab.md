@@ -19,7 +19,7 @@ When you open the launcher, you are presented with multiple applications. Each i
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **CV-CUE CloudVision-WiFi**: Wireless Manager.
+- :cvp: **CV-CUE CloudVision-WiFi**: Wireless Manager.
 - :fontawesome-solid-user-gear: **Guest Manager**: looks at the users and how they are interacting with your environment.
 - :material-cellphone-cog: **Nano**: manage your environment from your smartphone
 - :material-shark-fin: **Packets**: an online .pcap debug allowing you to examine the packet information.

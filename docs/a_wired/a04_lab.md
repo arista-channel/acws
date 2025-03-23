@@ -326,7 +326,7 @@ Let's get started:
         | Data Source           | Interfaces                      |
         | View Type             | Multiple Metrics for One Source |
         | Interface (device)    | `pod##-leaf1a`                  |
-        | Interface (interface) | `Ethernet2`                     |
+        | Interface (interface) | `Ethernet1`                     |
         | Metrics #1            | Bitrate In                      |
         | Metrics #2            | Bitrate Out                     |
         | Metrics #3            | Operational Status              |
@@ -488,7 +488,7 @@ In this lab, you will configure CloudVision to send an email alert to an email a
 
     ![Campus Studio](./assets/images/a03/notify/14_notify.png)
 
-16. You can remove
+16. You can remove your event receiver to avoid additional emails before continuing!
 
 !!! tip "🎉 CONGRATS! You have completed the Wired labs! 🎉"
 
