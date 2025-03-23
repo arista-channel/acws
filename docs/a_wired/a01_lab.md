@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this lab, you'll learn how to log into an Arista switch. All Arista switches, whether they’re used in data center, campus, WAN, or other environments, run on Arista's Extensible Operating System (EOS). We’ll also cover MLAG, how to configure it, and how to troubleshoot issues!
+In this lab, you'll learn how to log into an Arista switch and explore configuration. All Arista switches, whether they’re used in data center, campus, WAN, or other environments, run on Arista's Extensible Operating System (EOS). We’ll also cover MLAG, how to configure it, and how to troubleshoot issues!
 
 Let’s take a closer look at the EOS interface—while it might feel familiar, it’s also distinctly unique!
 
