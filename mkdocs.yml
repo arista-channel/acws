@@ -26,7 +26,7 @@ nav:
         - Configuring RadSec: references/radsec.md
         - Configuring Radius: references/radius.md
         - Interface Diagnostics: references/interface_diag.md
-        - Wireless Captive Portal: references/captive_portal.md
+        #- Wireless Captive Portal: references/captive_portal.md
         - AGNI Tacacs: references/agni_tacacs.md
         - Guest AP Tunnel: references/l2tunnel.md
 

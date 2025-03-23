@@ -1,5 +1,11 @@
 
-## B-02 | Troubleshooting
+# B-02 | Troubleshooting
+
+## Overview
+
+Explore the wireless troubleshooting features.
+
+## Client Troubleshooting
 
 1. Make sure you are at your correct folder (`ACorp`  or `BCorp`) in the hierarchy
 2. Hover over `Troubleshoot` in the left hand menu, then click `Packet Trace`.
