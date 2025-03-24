@@ -21,6 +21,7 @@ nav:
         - EAP-TLS Wireless Policy: c_security/c01_lab.md
         - UPSK Wireless Policy: c_security/c02_lab.md
         - EAP-TLS Wired Policy: c_security/c03_lab.md
+        - Top-Ranked WIPS: c_security/c04_lab.md
     - References:
         - Onboarding Wifi Devices: references/wireless_onboard.md
         - Configuring RadSec: references/radsec.md
