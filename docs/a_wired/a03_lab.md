@@ -25,7 +25,7 @@ docs/snippets/workspace.md
 2. Let's create two port profiles using the `Access Interface Configuration` studio that will be used to provision connected hosts.
 
     1. Launch the `Access Interface Configuration`
-    2. Click Add Port Profile, name it `Wireless-Access-Point`, and click the arrow on the right
+    2. Click `+ Add Port Profile`, name it `Wireless-Access-Point`, and click the arrow on the right
 
        ![Campus Studios](./assets/images/a02/02_port_profile.png)
 
