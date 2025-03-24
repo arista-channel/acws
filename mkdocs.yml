@@ -30,6 +30,7 @@ nav:
         #- Wireless Captive Portal: references/captive_portal.md
         - AGNI Tacacs: references/agni_tacacs.md
         - Guest AP Tunnel: references/l2tunnel.md
+        - WIPS: references/wips.md
 
 copyright: Copyright &copy; 2025 Arista Networks
 
