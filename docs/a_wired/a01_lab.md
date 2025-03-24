@@ -10,7 +10,7 @@ Let’s take a closer look at the EOS interface—while it might feel familiar, 
 
 Let's log into the workshop spine switches.
 
-??? tip "I have a console cable"
+???+ tip "I have a console cable"
 
     If you have a console cable, feel free to console into your switch. The switch is in ZTP, you can explore the same commands! The spine switch is running configuration your switch will not contain, but login using `admin` and `enable` to start exploring
 
@@ -30,7 +30,7 @@ Let's log into the workshop spine switches.
     show version
     ```
 
-    ??? quote "Example Output"
+    ???+ quote "Example Output"
 
         ```yaml title="Example Output" hl_lines="1 3 7-8 14"
         Arista CCS-722XPM-48ZY8-F #(1)!
@@ -576,6 +576,7 @@ Let's explore the configuration and how to troubleshoot
             port-channel lacp fallback timeout 20
             mlag 101
         !
+        ```
 
 10. If we do detect issues or want to verify the MLAG interfaces upstream/downstream are `up/up` we can validate
 
@@ -609,6 +610,7 @@ Let's explore the configuration and how to troubleshoot
 
     ```yaml
     show run sec virtual-router
+    show ip virtual-router
     ```
 
     ???+ quote "Example Output"
@@ -625,6 +627,34 @@ Let's explore the configuration and how to troubleshoot
         !
         ip virtual-router mac-address 00:1c:73:00:00:01 #(2)!
         !
+        ```
+
+        ```yaml
+        IP virtual router is configured with MAC address: feed.dead.beef
+        IP virtual router address subnet routes not enabled
+        IP router is not configured with Mlag peer MAC address
+        MAC address advertisement interval: 30 seconds
+
+        Protocol: U - Up, D - Down, T - Testing, UN - Unknown
+                NP - Not Present, LLD - Lower Layer Down
+
+        Interface       Vrf           Virtual IP Address       Protocol       State
+        --------------- ------------- ------------------------ -------------- ------
+        Vl1             default       192.168.3.1              U              active
+        Vl100           default       10.1.100.1               U              active
+        Vl101           default       10.1.1.1                 U              active
+        Vl102           default       10.1.2.1                 U              active
+        Vl103           default       10.1.3.1                 U              active
+        Vl104           default       10.1.4.1                 U              active
+        Vl105           default       10.1.5.1                 U              active
+        Vl106           default       10.1.6.1                 U              active
+        Vl107           default       10.1.7.1                 U              active
+        Vl108           default       10.1.8.1                 U              active
+        Vl109           default       10.1.9.1                 U              active
+        Vl110           default       10.1.10.1                U              active
+        Vl111           default       10.1.11.1                U              active
+        Vl112           default       10.1.12.1                U              active
+        Vl113           default       10.1.13.1                U              active
         ```
 
         1. This is the virtual IP address configured on both MLAG pairs.
