@@ -18,7 +18,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 </div>
 
-## Wired Guides
+## :material-router-network: Wired Guides
 
 <div class="grid cards" markdown>
 
@@ -56,7 +56,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 </div>
 
-## Wireless Guides
+## :material-wifi: Wireless Guides
 
 <div class="grid cards" markdown>
 
@@ -68,25 +68,33 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B02-Lab: Wifi and WIPS**
+- :cloudvision: **B02-Lab: Wifi Troubleshooting**
+
+    ---
+
+    Explore the wireless client troubleshooting tools like packet capture and client testing
+
+    [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
+
+- :cloudvision: **B03-Lab: Wifi and WIPS**
 
     ---
 
     Configure a guest Wifi SSID with a captive guest portal and enable WIPS
 
-    [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B03-Lab: Smart System Upgrade (SSU)**
+- :cloudvision: **B04-Lab: Smart System Upgrade (SSU)**
 
     ---
 
     Using Arista EOS Smart System Upgrade (SSU) we can avoid downtime when upgrading our wired network!
 
-    [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into B-04](./b_wireless/b04_lab.md){ .md-button .md-button--primary }
 
 </div>
 
-## Security Guides
+## :material-security: Security Guides
 
 <div class="grid cards" markdown>
 
