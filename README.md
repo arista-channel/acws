@@ -58,6 +58,39 @@ Contributing to the guides is welcome, you can follow the steps below to contrib
 
 6. Finally, open a PR on GitHub and notify the maintainers
 
+## Rebasing
+
+If changes have been made upstream in the amin branch, you may need to rebase. use the following to rebase.
+
+1. Commit all changes on your current branch
+
+    ```bash
+    git commit -am "Save all changes"
+    ```
+
+2. Switch to the `main` branch and pull down the latest changes
+
+    ```bash
+    git switch main
+    git pull
+    ```
+
+3. Switch back to your branch and rebase
+
+    ```bash
+    git switch your-branch
+    git rebase main
+    ```
+
+4. You may end up with conflicts, you must resolve those and commit changes and continue
+
+    ```bash
+    git commit -am "Save all changes"
+    git rebase --continue
+    ```
+
+5. You can now push to your branch
+
 ## Running Server
 
 To run mkdocs behind an nginx server
@@ -66,9 +99,7 @@ To run mkdocs behind an nginx server
 2. Build the mkdocs site
 3. Navigate to the server IP
 
-   !!! tip "Mac OS"
-
-        If you are unable to navigate to the local IP address, you may to open `System Prefrences
+   If you are unable to navigate to the local IP address, you may to open `System Prefrences
 
 ### References
 

@@ -108,13 +108,13 @@ Access points that successfully receive an IP address, DNS, and default gateway 
 
     ![Campus Studio](./assets/images/b01/ap/01_ap.png){ width=600" }
 
-2. Select the Access Points section and observe the discovered AP and default name `Arista_` and the last 3 bytes of the MAC address.
+2. Select the `Access Points` section and observe the discovered AP and default name `Arista_` and the last 3 bytes of the MAC address.
 
 3. Customize the AP’s name by clicking the 3-dots menu and Rename
 
     ![Campus Studio](./assets/images/b01/ap/02_ap.png){ width=600" }
 
-4. Give the AP a name such as: `POD-##-AP1` or `POD-##-AP2` where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod.
+4. Give the AP a name such as: `POD##-AP1` or `POD##-AP2` where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod.
 
     ![Campus Studio](./assets/images/b01/ap/03_ap.png)
 
@@ -190,17 +190,19 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
 For this workshop event, we will be reducing WiFi Radio channel width and transmit power levels to avoid interference with the hosting facility.
 
-1. To customize these power settings:  Navigate to the Configure, Device, Access Points menu
-2. Once in that menu, ensure that `ACorp` or `BCorp` is selected from the tree structure on the left. If you do not see the tree structure, click the
-3. hamburger icon next to “Location” in the top left to expose the tree.
-Set the following parameters under the WiFi Radios tab, 5GHz frequency, verify you have the “A/BCorp” level selected/highlighted in the tree:
+1. To customize these power settings:  Navigate to the `Configure > Device > Access Points` menu
+2. Once in that menu, ensure that `ACorp` or `BCorp` is selected from the tree structure on the left. If you do not see the tree structure, click the hamburger icon next to `Locations` in the top left to expose the tree.
 
-    You will select the `5GHz` tab (you can ignore 2.4GHz) and you will override both:
+3. Set the following parameters under the `WiFi Radios` tab and `5GHz` (you can ignore 2.4GHz) and you will override the following:
 
-    - Channel Selection: `Manual` and see the "Channel Settings" below.
+    - Channel Selection: Select `Manual` and see the "Channel Settings" below.
     - Transmit Power: `Manual` to `4bBm`
 
-    Find your pod number and assigned student number.
+    !!! warning "My settings are greyed out"
+
+        At the bottom of your screen you may need to select to override the inheritance policy. It should state: `Click here to enable editing and customize the policy`.
+
+    Find your pod number and assigned student number, set the `Candidate Channel` and `Channel Width`
 
     <div class="grid cards" markdown>
 
@@ -440,17 +442,6 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
 5. Walk through the steps (tabs) below to configure the SSID
 
-    ???+ example "SSID Name"
-
-        | Student                       |   Student 1    |   Student 2    |
-        | ----------------------------- | :------------: | :------------: |
-        | SSID Name                     | `ATD-##A-PSK`  | `ATD-##B-PSK`  |
-        | Profile Name                  |   Auto Fill    |   Auto Fill    |
-        | SSID Type                     |    Private     |    Private     |
-        | Association Type (drop down)  |      WPA2      |      WPA2      |
-        | Authentication (radio button) |      PSK       |      PSK       |
-        | Passphrase                    | `Wireless!123` | `Wireless!123` |
-
     === "Step 1: SSIDBasic"
 
         In the `Basic` sub-category option, name the SSID `ATD-##A/B-PSK` (where ## is the pod number you were assigned).  The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
@@ -478,6 +469,17 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
         2. `L2 Tunnel` / `L3 Tunnel`: as you would see for a Guest Anchor or tunneled corporate traffic
 
         ![Campus Studio](./assets/images/b01/wifi/04_wifi-3.png)
+
+    ???+ example "SSID Name"
+
+        | Student                       |   Student 1    |   Student 2    |
+        | ----------------------------- | :------------: | :------------: |
+        | SSID Name                     | `ATD-##A-PSK`  | `ATD-##B-PSK`  |
+        | Profile Name                  |   Auto Fill    |   Auto Fill    |
+        | SSID Type                     |    Private     |    Private     |
+        | Association Type (drop down)  |      WPA2      |      WPA2      |
+        | Authentication (radio button) |      PSK       |      PSK       |
+        | Passphrase                    | `Wireless!123` | `Wireless!123` |
 
 6. The rest of the settings can be left at the default values.
 7. Click the `Save & Turn SSID On` button at the bottom of the page.
