@@ -296,4 +296,6 @@ Screenshot shows VLAN200 mapped to VNI10200 and VXLAN clients with VLAN200 IPs
 
    ![Dashboard](./assets/images/b03/05_tunnel.png)
 
-Lab section complete.
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./b04_lab.md){ .md-button .md-button--primary }

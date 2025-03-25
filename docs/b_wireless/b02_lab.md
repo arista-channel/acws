@@ -86,3 +86,7 @@ Explore the wireless troubleshooting features.
 22. Explore the `Analyze` feature by clicking on the various menu options and reviewing the data.
 
     ![Campus Studio](./assets/images/b01/tshoot/13_tshoot.png)
+
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./b03_lab.md){ .md-button .md-button--primary }
