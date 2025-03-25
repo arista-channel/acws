@@ -155,18 +155,18 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
         ??? info ":material-apple: MAC OS"
 
-            Open Terminal and run the following, please replace ## with your pod number:
+            Open Terminal and run the following, please replace ## with your pod number (1-12)
 
             ```bash
-            ping -t 10.0.1##.1
+            ping -t 10.1.##.1
             ```
 
         ??? info ":material-microsoft-windows: Windows"
 
-            Open Command Prompt and run the following, please replace ## with your pod number
+            Open Command Prompt and run the following, please replace ## with your pod number (1-12)
 
             ```bash
-            ping 10.0.1##.1
+            ping 10.1.##.1
             ```
 
     3. Now leave this window open for the following steps. We will see ping packets being sent and received every second. You are now pinging the gateway IP address for your pod from your wireless device connected to your pods access point. The ping traffic must traverse the `leaf1a` or `leaf1b` switch to reach the gateway.  We should be able to observe how traffic is affected while the switch is upgrading during SSU.
@@ -253,7 +253,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
         4. Reloading the management and control plane to the new software image
         5. Mounting the software on to the hardware, `Strata` in this case is the family of ASICs
 
-12. You can now login with the username/password of `arista/arista`, and type `enable` to get back to privileged commands mode. Check the new current running version of the switch with the command `show version`. You should see the switch has upgraded to `EOS-4.31.6M`
+12. You can now login with the username/password and type `enable` to get back to privileged commands mode. Check the new current running version of the switch with the command `show version`. You should see the switch has upgraded to `EOS-4.31.6M`
 
     ???+ quote "Example Output"
 

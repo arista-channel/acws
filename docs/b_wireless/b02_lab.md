@@ -16,7 +16,6 @@ Explore the wireless troubleshooting features.
 
     ![Campus Studio](./assets/images/b01/tshoot/02_tshoot.png)
 
-    UPDATE SCREENSHOT
     ![Campus Studio](./assets/images/b01/tshoot/03_tshoot.png)
 
 4. Click `Save` at the bottom of the window.

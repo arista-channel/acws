@@ -63,7 +63,7 @@ The `Configure` section of CV-CUE is composed of multiple parts, including WiFi,
 
     ![Wireless EAP-TLS](./assets/images/c01/02_eap_wireless.png)
 
-5. Since this is our corporate SSID, leave the `Select SSID Type` set to `Private`, but note this is where you would change it to `Guest` if needed.
+5. Since this is our corporate SSID, leave the `Select SSID Type` set to `Private`
 6. Select `Next` at the bottom.
 7. In the `Security` sub-category, set the following select `WPA2` and change the association type to “802.1X”.
 
@@ -83,7 +83,7 @@ The `Configure` section of CV-CUE is composed of multiple parts, including WiFi,
 
     !!! note "Alternative Settings"
 
-        INstead of `Bridged` You could use `NAT` (often done for Guest) or `L2 Tunnel` / `L3 Tunnel` (as you would see for a Guest Anchor or tunneled corporate traffic).
+        Instead of `Bridged` You could use `NAT` (often done for Guest) or `L2 Tunnel` / `L3 Tunnel`, as we completed in the wireless lab.
 
     ![Wireless EAP-TLS](./assets/images/c01/04_eap_wireless.png)
 
@@ -139,8 +139,6 @@ docs/snippets/login_agni.md
         | ----------- | :--------------------: | :--------------------: |
         | Name        | `ATD-##A-SSID-EAP-TLS` | `ATD-##B-SSID-EAP-TLS` |
         | Description | `ATD-##A-SSID-EAP-TLS` | `ATD-##B-SSID-EAP-TLS` |
-        | Condition #1 | `Network: Name is ATD-##A-SSID-EAP-TLS` | `Network: Name is ATD-##B-SSID-EAP-TLS` |
-        | Condition #2 | `Network: Name is ATD-##A-SSID-EAP-TLS` | `Network: Name is ATD-##B-SSID-EAP-TLS` |
 
     ![Wireless EAP-TLS](./assets/images/c01/04_agni.png)
 
@@ -152,28 +150,36 @@ docs/snippets/login_agni.md
 
     1. Select, `Network`, `Name`, `is`, `ATD-##X-SSID-EAP-TLS` from the drop down lists. Chose your `A` or `B` policy accordingly.
     2. Select, `Network`, `Authentication Type`, `is`, `Client Certificate (EAP-TLS)` from the drop down lists.
+    3. Your Conditions should now look like this.
 
     ![Wireless EAP-TLS](./assets/images/c01/05_agni.png)
 
-7. Your Conditions should now look like this.
-8. Under Actions select `Add Action` and select `Allow Access`
+7. Under Actions select `Add Action` and select `Allow Access`
 
     ![Wireless EAP-TLS](./assets/images/c01/06_agni.png)
 
-9. Finally, select `Add Segment` at the bottom of the page.
+8. Finally, select `Add Segment` at the bottom of the page.
 
-10. You should now be able to expand and review your segment.
+9. You should now be able to expand and review your segment.
 
     ![Wireless EAP-TLS](./assets/images/c01/07_agni.png)
 
-11. Next, click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wireless connection.
+10. Next, click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wireless connection.
 
     !!! note "Client Connectivity"
 
         The Client Certificate has already been applied to the Raspberry Pi and is configured to connect to the SSID ATD-##A-EAP.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    ![Wireless EAP-TLS](./assets/images/c01/08_agni.png)
+
+11. Click on the session and explore the information we learn about the client, we're going to come back to this in more detail later.
+
+    ![Wireless EAP-TLS](./assets/images/c01/09_agni.png)
 
 12. If you don’t see any new sessions within 2 minutes AGNI, power cycle the Raspberry Pi.
+
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./a03_lab.md){ .md-button .md-button--primary }
 
 --8<-- "includes/abbreviations.md"

@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this lab...
+In this lab we're going to explore the power of Unique Pre-Shared Keys (UPSK),
 
 --8<--
 docs/snippets/login_cvcue.md
@@ -25,7 +25,7 @@ Let's create our new UPSK SSID by copying/modifying the PSK SSID we created in t
         | Student 1 | `ATD-##A-PSK` |
         | Student 2 | `ATD-##B-PSK` |
 
-    *where ## is a 2 digit character between 01-20 that was assigned to your lab/Pod*
+    *where ## is a 2 digit character between 01-12 that was assigned to your lab/Pod*
 
     ![Wireless EAP-TLS](./assets/images/c02/02_cue_ssid.png)
 
@@ -133,7 +133,8 @@ In this section we are going to configure AGNI for our new SSID network and appl
         | ------------ | :-----------------------------------: | :-----------------------------------: |
         | Name         |            `ATD-##A-UPSK`             |            `ATD-##B-UPSK`             |
         | Description  |            `ATD-##A-UPSK`             |            `ATD-##B-UPSK`             |
-        | Condition #1 | `Network:Authentication Type is UPSK` | `Network:Authentication Type is UPSK` |
+        | Condition #1 |    `Network:Name is ATD-##A-UPSK`     |    `Network:Name is ATD-##A-UPSK`     |
+        | Condition #2 | `Network:Authentication Type is UPSK` | `Network:Authentication Type is UPSK` |
         | Action #1    |            `Allow Access`             |            `Allow Access`             |
 
     ![Wireless EAP-TLS](./assets/images/c02/agni/05_agni.png)
@@ -155,12 +156,12 @@ In this section you will create a local user and enroll the MAC of your device.
 
     ???+ example "Settings"
 
-        | Field                                   |      Student 1      |      Student 2      |
-        | --------------------------------------- | :-----------------: | :-----------------: |
-        | Name                                    | <whatever_you_want> | <whatever_you_want> |
-        | UserId                                  | <whatever_you_want> | <whatever_you_want> |
-        | Password                                |    `Arista!123`     |    `Arista!123`     |
-        | User must change password at next login |      Disabled       |      Disabled       |
+        | Field                                   |     Student 1     |     Student 2     |
+        | --------------------------------------- | :---------------: | :---------------: |
+        | Name                                    | whatever_you_want | whatever_you_want |
+        | UserId                                  | whatever_you_want | whatever_you_want |
+        | Password                                |   `Arista!123`    |   `Arista!123`    |
+        | User must change password at next login |     Disabled      |     Disabled      |
 
     ![Wireless EAP-TLS](./assets/images/c02/agni/08_agni.png)
 
@@ -173,39 +174,38 @@ In this section you will create a local user and enroll the MAC of your device.
 6. Next, connect your client to `ATD-##A/B-UPSK` using your UPSK Passphrase.
 7. Click on `Sessions` and validate your device connection.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    ![Wireless EAP-TLS](./assets/images/c02/agni/10_agni.png)
 
 8. Next, validate your device by clicking on `User` and then `Users`. Select your user.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    ![Wireless EAP-TLS](./assets/images/c02/agni/11_agni.png)
 
 9. Click on `Show Clients`
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    ![Wireless EAP-TLS](./assets/images/c02/agni/12_agni.png)
 
 ## Create an AGNI Client Group
 
 In this section, you will simulate your device as an IoT device.
 
 1. Disable and forget previously saved lab networks so your wireless connection on your test device does not auto connect.
-2. In AGNI under your `User Clients` list, `Delete` your device.
+2. In AGNI under your `User Clients` list, `Delete` your `Device`.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    ![Wireless EAP-TLS](./assets/images/c02/agni/13_agni.png)
 
 3. Next, you will add your client device as an IoT device in a Client Group.
 4. First, we will need to create the Client Group.
-5. In AGNI, under `Identity`, click on `Client Groups` and then `+ Add Client Group`.
+5. In AGNI, under `Identity`, click on `Clients > Client Groups` and then `+ Add Client Group`.
 6. Configure the following
 
     ???+ example "Settings"
 
-        | Field                                   |      Student 1      |      Student 2      |
-        | --------------------------------------- | :-----------------: | :-----------------: |
+        | Field                                   |        Student 1         |        Student 2         |
+        | --------------------------------------- | :----------------------: | :----------------------: |
         | Name                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
-        | Description                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
-        | User Association                                  |Not user associated|Not user associated |
-        | Group UPSK                                |    Enabled    |    Enabled    |
-        | User must change password at next login |      Disabled       |      Disabled       |
+        | Description                             | `CorpA Approved Devices` | `CorpB Approved Devices` |
+        | User Association                        |   Not user associated    |   Not user associated    |
+        | Group UPSK                              |         Enabled          |         Enabled          |
 
 7. `Copy` the UPSK Passphrase and click on `Add Group`
 8. Next, connect your client to ATD-##-UPSK using the Client Group UPSK Passphrase.
@@ -218,21 +218,5 @@ In this section, you will simulate your device as an IoT device.
     ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
 
 11. Notice your Client Group. Here you have the option to change the Client Group your device belongs to.
-12. Next, delete your device from the Client Group
-13. Next, under `Identity`, click on `Client > Clients` and then `+ Add Client or Import Clients`.
-14. Configure the following
-
-    ???+ example "Settings"
-
-        | Field                                   |      Student 1      |      Student 2      |
-        | --------------------------------------- | :-----------------: | :-----------------: |
-        | Client Group                                    | `CorpA Approved Devices` | `CorpB Approved Devices` |
-        | Choose Action                                    | Add | Add |
-        | MAC Address                                    | <your_mac_address> | <your_mac_address> |
-
-15. Add in the MAC Address of your test device like your phone that is not randomized.
-16. Then select `Add Client`
-17. You will then see the Client added to the Group.
-18. Validate and Verify your connection using the Client Group UPSK Passphrase.
 
 --8<-- "includes/abbreviations.md"

@@ -1,4 +1,8 @@
-# WIPS Wireless Intrusion Prevention System
+# C-04 | Best in Class WIPS
+
+## Overview
+
+## WIPS Wireless Intrusion Prevention System
 
 Arista Wireless Intrusion Prevention System (WIPS) leverages RF broadcast and protocol properties including packet formats like probe requests and beacons common to all 802.11 standards(including 802.11ac and 802.11ax) to detect and prevent unauthorized access.
 
@@ -19,7 +23,7 @@ Wi-Fi threats include an ever changing landscape of vulnerabilities, such as:
 - :octicons-x-circle-fill-12: DoS attack
 - :octicons-x-circle-fill-12: Bridging client
 
-## Configure WIPS
+### Configure WIPS
 
 Let's go ahead and configure WIPS on our Access Point
 
@@ -92,3 +96,5 @@ Next, let’s use the WIPS system to identify and prevent an example problematic
 
     !!! danger "STOP Client Protection"
         🛑 When you are finished, **STOP** the client prevention so that you can use this test device in upcoming labs, optionally. 🛑
+
+--8<-- "includes/abbreviations.md"
