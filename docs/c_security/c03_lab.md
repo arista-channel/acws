@@ -213,4 +213,6 @@ Tunnel-Private-GroupId:
 Arista-PeriodicIdentity:
 ```
 
+!!! tip "🎉 CONGRATS! You have completed the Security labs! 🎉"
+
 --8<-- "includes/abbreviations.md"

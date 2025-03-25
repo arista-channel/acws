@@ -503,4 +503,8 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/wifi/09_wifi.png)
 
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./b02_lab.md){ .md-button .md-button--primary }
+
 --8<-- "includes/abbreviations.md"

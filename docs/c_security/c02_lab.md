@@ -219,4 +219,8 @@ In this section, you will simulate your device as an IoT device.
 
 11. Notice your Client Group. Here you have the option to change the Client Group your device belongs to.
 
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./c03_lab.md){ .md-button .md-button--primary }
+
 --8<-- "includes/abbreviations.md"
