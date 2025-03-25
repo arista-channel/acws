@@ -158,7 +158,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
             Open Terminal and run the following, please replace ## with your pod number (1-12)
 
             ```bash
-            ping -t 10.1.##.1
+            ping 10.1.##.1
             ```
 
         ??? info ":material-microsoft-windows: Windows"
@@ -166,7 +166,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
             Open Command Prompt and run the following, please replace ## with your pod number (1-12)
 
             ```bash
-            ping 10.1.##.1
+            ping -t 10.1.##.1
             ```
 
     3. Now leave this window open for the following steps. We will see ping packets being sent and received every second. You are now pinging the gateway IP address for your pod from your wireless device connected to your pods access point. The ping traffic must traverse the `leaf1a` or `leaf1b` switch to reach the gateway.  We should be able to observe how traffic is affected while the switch is upgrading during SSU.
