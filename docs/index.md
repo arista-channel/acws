@@ -64,7 +64,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     ---
 
-    Deploy and explore the deployment of new APs in the environment using CV-CUE
+    Deploy and explore the features of CloudVision Cognitive Unified Edge (CV-CUE)
 
     [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
@@ -76,11 +76,11 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B03-Lab: Wifi and WIPS**
+- :cloudvision: **B03-Lab: Guest Wireless**
 
     ---
 
-    Configure a guest Wifi SSID with a captive guest portal and enable WIPS
+    Configure a guest Wifi SSID with a captive guest portal and tunnel wireless traffic
 
     [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 
@@ -102,7 +102,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     ---
 
-    Using Arista AGNI to enforce wireless access via EAP-TLS policy on a given SSID
+    Use Arista AGNI to enforce wireless access via dot1x EAP-TLS policy on a given SSID
 
     [:material-login: Hop into C-01](./c_security/c01_lab.md){ .md-button .md-button--primary }
 
@@ -110,7 +110,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     ---
 
-    Configure
+    Configure unique pre-shared keys for an SSID and get familiar with device groupings
 
     [:material-login: Hop into C-02](./c_security/c02_lab.md){ .md-button .md-button--primary }
 
@@ -118,7 +118,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     ---
 
-    Using Arista AGNI to enforce wired access via EAP-TLS policy
+    Using Arista AGNI to enforce wired access via dot1x EAP-TLS policy
 
     [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
 
