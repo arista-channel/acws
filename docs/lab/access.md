@@ -34,9 +34,9 @@ The hardware you see sitting in front of you can
 
     The hardware you see sitting in front of you:
 
-      - [x] 2 x C-360
-      - [x] 2 x 710P-16P
-      - [x] 2 x Raspberry Pi
+      - [x] 2 x C-360 controllerless AP
+      - [x] 2 x 710P-16P running EOS
+      - [x] 2 x Raspberry Pi loaded with raspberries
 
 - :fontawesome-solid-user: **Student Equipment**
 

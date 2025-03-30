@@ -150,7 +150,7 @@ docs/snippets/login_agni.md
 
     ![Campus Studio](./assets/images/c03/agni/07_agni.png)
 
-11. Next, unplug your raspberry Pi from `Ethernet1` and into `Ethernet2` on the switch and click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
+11. Next, click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
 
     TODO: Get screenshot
 
