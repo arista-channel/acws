@@ -149,7 +149,7 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
     ![Campus Studio](./assets/images/b01/config/03_config.png){ width=600" }
 
-4. Next, create 2 more folders called `1st Floor` and `2nd Floor`.  Right click on the word `Corp` to expose the menu.
+4. Next, create a `Floor` called `1st Floor`.  Click on the word `A/BCorp` to expose the 3 dots menu.
 
     ![Campus Studio](./assets/images/b01/config/04_config.png){ width=600" }
 
@@ -162,19 +162,19 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
         *Use the `*` key to create floors instead of folders*
 
-5. Next, move your AP into the `1st Floor` folder you created. To move your AP from the staging area, right click on the `Staging Area` folder, and select `Show Available Devices`.
+5. Next, move your AP into the `1st Floor` you created. To move your AP from the staging area, Alternate click on the `Staging Area` folder, and select `Show Available Devices`.
 
-    ![Campus Studio](./assets/images/b01/config/05_config.png)
+    ![Campus Studio](./assets/images/b01/config/05_configb.png)
 
 6. Next, right click on the AP name, select `Move` and then select the `1st Floor` folder you created earlier, and then click the `Move` button at the bottom of the screen.
 
     === "Step 1: AP Move"
 
-        ![Campus Studio](./assets/images/b01/config/06_config-1.png)
+        ![Campus Studio](./assets/images/b01/config/06a_config-1.png)
 
     === "Step 2: AP Move"
 
-        ![Campus Studio](./assets/images/b01/config/06_config-2.png)
+        ![Campus Studio](./assets/images/b01/config/06a_config-2.png)
 
     === "Step 3: AP Move"
 
@@ -195,142 +195,47 @@ For this workshop event, we will be reducing WiFi Radio channel width and transm
 
 3. Set the following parameters under the `WiFi Radios` tab and `5GHz` (you can ignore 2.4GHz) and you will override the following:
 
-    - Channel Selection: Select `Manual` and see the "Channel Settings" below.
+    - Channel Selection: Select `Manual` and see the "Channel Settings" table below.
+    - Channel Width: `20MHz`
     - Transmit Power: `Manual` to `4bBm`
 
     !!! warning "My settings are greyed out"
 
         At the bottom of your screen you may need to select to override the inheritance policy. It should state: `Click here to enable editing and customize the policy`.
 
-    Find your pod number and assigned student number, set the `Candidate Channel` and `Channel Width`
+    Find your pod number and assigned student number, set the `Candidate Channel`
 
-    <div class="grid cards" markdown>
-
-    - ODD Pods
-
-        ---
-
-        ??? example "POD01: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  52   |     20MHz     |
-            |    2    |  56   |     20MHz     |
-        ??? example "POD03: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  100  |     20MHz     |
-            |    2    |  104  |     20MHz     |
-
-        ??? example "POD05: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  116  |     20MHz     |
-            |    2    |  120  |     20MHz     |
-
-        ??? example "POD07: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  132  |     20MHz     |
-            |    2    |  136  |     20MHz     |
-
-        ??? example "POD09: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  149  |     20MHz     |
-            |    2    |  153  |     20MHz     |
-
-        ??? example "POD11: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  165  |     20MHz     |
-            |    2    |  52   |     20MHz     |
-
-    - EVEN Pods
-
-        ---
-
-        ??? example "POD02: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  60   |     20MHz     |
-            |    2    |  64   |     20MHz     |
-
-        ??? example "POD04: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  108  |     20MHz     |
-            |    2    |  112  |     20MHz     |
-
-        ??? example "POD06: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  124  |     20MHz     |
-            |    2    |  128  |     20MHz     |
-
-        ??? example "POD08: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  140  |     20MHz     |
-            |    2    |  144  |     20MHz     |
-
-        ??? example "POD10: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  157  |     20MHz     |
-            |    2    |  161  |     20MHz     |
-
-        ??? example "POD12: Channel Settings"
-
-            | Student | 5.GHz | Channel Width |
-            | :-----: | :---: | :-----------: |
-            |    1    |  56   |     20MHz     |
-            |    2    |  60   |     20MHz     |
-
-    </div>
-
-    ??? quote "All Channel Settings"
+    ???+ quote "All Channel Settings"
 
         |  Pod  | Student | 2.4 GHz  | 5.GHz | Channel Width | Transmit Power |
         | :---: | :-----: | :------: | :---: | :-----------: | :------------: |
-        |  01   |    1    | Disabled |  52   |     20MHz     |      4bBm      |
-        |  01   |    2    | Disabled |  56   |     20MHz     |      4bBm      |
-        |  02   |    1    | Disabled |  60   |     20MHz     |      4bBm      |
-        |  02   |    2    | Disabled |  64   |     20MHz     |      4bBm      |
-        |  03   |    1    | Disabled |  100  |     20MHz     |      4bBm      |
-        |  03   |    2    | Disabled |  104  |     20MHz     |      4bBm      |
-        |  04   |    1    | Disabled |  108  |     20MHz     |      4bBm      |
-        |  04   |    2    | Disabled |  112  |     20MHz     |      4bBm      |
-        |  05   |    1    | Disabled |  116  |     20MHz     |      4bBm      |
-        |  05   |    2    | Disabled |  120  |     20MHz     |      4bBm      |
-        |  06   |    1    | Disabled |  124  |     20MHz     |      4bBm      |
-        |  06   |    2    | Disabled |  128  |     20MHz     |      4bBm      |
-        |  07   |    1    | Disabled |  132  |     20MHz     |      4bBm      |
-        |  07   |    2    | Disabled |  136  |     20MHz     |      4bBm      |
-        |  08   |    1    | Disabled |  140  |     20MHz     |      4bBm      |
-        |  08   |    2    | Disabled |  144  |     20MHz     |      4bBm      |
-        |  09   |    1    | Disabled |  149  |     20MHz     |      4bBm      |
-        |  09   |    2    | Disabled |  153  |     20MHz     |      4bBm      |
-        |  10   |    1    | Disabled |  157  |     20MHz     |      4bBm      |
-        |  10   |    2    | Disabled |  161  |     20MHz     |      4bBm      |
-        |  11   |    1    | Disabled |  165  |     20MHz     |      4bBm      |
-        |  11   |    2    | Disabled |  52   |     20MHz     |      4bBm      |
-        |  12   |    1    | Disabled |  56   |     20MHz     |      4bBm      |
-        |  12   |    2    | Disabled |  60   |     20MHz     |      4bBm      |
+        |  01   |    1    | Disabled |  36   |     20MHz     |      4bBm      |
+        |  01   |    2    | Disabled |  40   |     20MHz     |      4bBm      |
+        |  02   |    1    | Disabled |  44   |     20MHz     |      4bBm      |
+        |  02   |    2    | Disabled |  48   |     20MHz     |      4bBm      |
+        |  03   |    1    | Disabled |  52   |     20MHz     |      4bBm      |
+        |  03   |    2    | Disabled |  56   |     20MHz     |      4bBm      |
+        |  04   |    1    | Disabled |  60   |     20MHz     |      4bBm      |
+        |  04   |    2    | Disabled |  64   |     20MHz     |      4bBm      |
+        |  05   |    1    | Disabled |  100  |     20MHz     |      4bBm      |
+        |  05   |    2    | Disabled |  104  |     20MHz     |      4bBm      |
+        |  06   |    1    | Disabled |  108  |     20MHz     |      4bBm      |
+        |  06   |    2    | Disabled |  112  |     20MHz     |      4bBm      |
+        |  07   |    1    | Disabled |  120  |     20MHz     |      4bBm      |
+        |  07   |    2    | Disabled |  124  |     20MHz     |      4bBm      |
+        |  08   |    1    | Disabled |  128  |     20MHz     |      4bBm      |
+        |  08   |    2    | Disabled |  132  |     20MHz     |      4bBm      |
+        |  09   |    1    | Disabled |  136  |     20MHz     |      4bBm      |
+        |  09   |    2    | Disabled |  140  |     20MHz     |      4bBm      |
+        |  10   |    1    | Disabled |  144  |     20MHz     |      4bBm      |
+        |  10   |    2    | Disabled |  149  |     20MHz     |      4bBm      |
+        |  11   |    1    | Disabled |  153  |     20MHz     |      4bBm      |
+        |  11   |    2    | Disabled |  157  |     20MHz     |      4bBm      |
+        |  12   |    1    | Disabled |  161  |     20MHz     |      4bBm      |
+        |  12   |    2    | Disabled |  165  |     20MHz     |      4bBm      |
 
 4. Click `Save` at the bottom of the page then click `Continue` to confirm.
 5. Click `Continue` to commit changes
-6. Wait for the AP to reset radio
 
 ### Assign Floor Plan
 
@@ -346,9 +251,9 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
 ![Campus Studio](./assets/images/b01/config/office.png)
 
-1. In the left hand menu, click on `Maps`.  Make sure to set the location level to be `1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
+1. In the left hand menu, click on `Floor Maps`.  Make sure to set the location level to be `CorpA/B - 1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
 
-    ![Campus Studio](./assets/images/b01/config/14_config.png)
+    ![Campus Studio](./assets/images/b01/config/14a_config.png)
 
 2. Enter floor name as `1st Floor`, click the `Upload Image` button to import the floor plan image, and use the following dimensions:  Floor Plan Dimensions: Unit: Feet, Length: 120, Width: 50
 
@@ -358,7 +263,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
         | ------ | :---: |
         | Unit   | Feet  |
         | Length |  120  | 1 |
-        | Width  |  50   |
+        | Width  |  60   |
 
     ![Campus Studio](./assets/images/b01/config/15_config.png)
 
@@ -381,50 +286,28 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
     <div class="grid cards" markdown>
 
-    - ![Campus Studio](./assets/images/b01/config/18_config.png)
-    - ![Campus Studio](./assets/images/b01/config/19_config.png)
+    - ![Campus Studio](./assets/images/b01/config/18a_config.png)
+    - ![Campus Studio](./assets/images/b01/config/19a_config.png)
 
     </div>
 
-6. Next, explore the other menu options like `RF Heatmaps` (in the menu on the right hand side of the screen).
+6. Next, explore the other menu options like `Start LED Blinking` (in the menu on the right hand side of the screen).
 
-    ![Campus Studio](./assets/images/b01/config/20_config.png)
+    ![Campus Studio](./assets/images/b01/config/20a_config.png)
 
-    ![Campus Studio](./assets/images/b01/config/21_config.png)
+7. Try exploring the `Event Logs` under the `Troubleshoot` menu
 
 ## Creating a PSK SSID
 
-The `Configure` section of CV-CUE is broken into several parts, including `WiFi`, `Alerts`, and `WIPS`.
+The `Configure` section of CV-CUE is broken into several parts, including `WiFi`, `Device`,`Network Profiles`, `WIPS`, and `Alerts`.
 
-<div class="grid cards" markdown>
-
-- :material-alert-rhombus-outline:{ .lg .middle } **Alerts**
-
-    ---
-
-    Is where syslog and other alert related settings are configured
-
-- :material-wifi-lock:{ .lg .middle } **WIPS**
-
-    ---
-
-    Is where the policies are configured for the WIPS sensor.
-
-- :material-wifi:{ .lg .middle } **Wifi**
-
-    ---
-
-    Is what we'll be working on in this lab to create an SSID
-
-</div>
-
-In this section of the lab, we will be working in the `WiFi` configuration area. We will create an SSID (WPA2 PSK) with your `ATD-##(A|B)-PSK` as the name and `Wireless!123` as the passkey.
+In this section of the lab, we will be working in the `WiFi` configuration area. We will create an SSID with a WPA2 PSK for you CorpA/B site.
 
 1. Hover your cursor over the `Configure` menu option on the left side of the screen, then click `WiFi`.
 
     ![Campus Studio](./assets/images/b01/wifi/01_wifi.png)
 
-2. At the top of the screen, you will see where you are in the location hierarchy. If you aren’t on `Corp`, click on the three lines :material-menu: next to `Locations` to expand the hierarchy and choose/highlight the `Corp` folder. Now click the `Add SSID` button on the right hand side of the screen.
+2. At the top of the screen, you will see where you are in the location hierarchy. Click on the three lines :material-menu: next to `Locations` to expand the hierarchy and choose/highlight the `CorpA` or `CorpB` folder. Now click the `Add SSID` button on the right hand side of the screen.
 
     === "Hierarchy Collapsed"
 
@@ -436,7 +319,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
 3. Once on the `SSID` page, configuration sub-category menu options will appear across the top of the page related to WiFi (the defaults are `Basic`, `Security`, and `Network`). You can click on these sub-category names to change configuration items related to that area of the configuration.
 
-4. To make additional categories visible, click on the 3 dots :material-dots-horizontal: next to `Network` and you can see the other categories that are available to configure (`Analytics`, `Captive Portal`, etc.).
+4. To make additional categories visible, click on the 3 dots :material-dots-horizontal: next to `Network` and you can see the other categories that are available to configure (`Wifi7`,`Access Controls`, `Captive Portal`, etc.).
 
     ![Campus Studio](./assets/images/b01/wifi/03_wifi.png)
 
@@ -476,7 +359,6 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
         | ----------------------------- | :------------: | :------------: |
         | SSID Name                     | `ATD-##A-PSK`  | `ATD-##B-PSK`  |
         | Profile Name                  |   Auto Fill    |   Auto Fill    |
-        | SSID Type                     |    Private     |    Private     |
         | Association Type (drop down)  |      WPA2      |      WPA2      |
         | Authentication (radio button) |      PSK       |      PSK       |
         | Passphrase                    | `Wireless!123` | `Wireless!123` |
@@ -487,7 +369,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/wifi/05_wifi.png)
 
-9. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box if it’s checked), then click `Turn SSID On`.
+9. Only select the `5 GHz` option on the next screen (un-check the `2.4 GHz` box), then click `Turn SSID On`.
 
     ![Campus Studio](./assets/images/b01/wifi/06_wifi.png)
 
@@ -495,13 +377,17 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/wifi/07_wifi.png)
 
-11. Now, in the menu options at the top of the page, look at the `Radios` menu option. Is the 5 GHz radio :fontawesome-regular-thumbs-up: (Up) and 2.4 GHz radio :fontawesome-regular-thumbs-down: (down)? It may take a minute or two for the radio to become active.
+11. Now, in the menu options at the top of the page, look at the `Radios` menu option. Is the 5 GHz radio :fontawesome-regular-thumbs-up: (Up) and 2.4 GHz radio :fontawesome-regular-thumbs-down: (down)?
+
+    ???+ warning "It may take a minute or two for the radio to become active."
 
     ![Campus Studio](./assets/images/b01/wifi/08_wifi.png)
 
 12. Next, go ahead and connect your phone to the SSID (PSK is `Wireless!123`).  Navigate to the `Clients` menu at the top of the screen and you should see your device.
 
     ![Campus Studio](./assets/images/b01/wifi/09_wifi.png)
+
+13. Also take a look
 
 !!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
 
