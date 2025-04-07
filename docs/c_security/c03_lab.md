@@ -2,7 +2,13 @@
 
 ## Overview
 
-In this lab...
+In this lab we enhance the port security to our Raspberry Pi! We will do the following:
+
+- [x] Update our port profile
+- [x] Configure our switch to communicate over RadSec to AGNI
+- [x] Configure the AGNI EAP-TLS wired policy
+- [x] Verify it all works!
+
 --8<--
 docs/snippets/topology.md
 --8<--
@@ -13,6 +19,43 @@ docs/snippets/topology.md
     docs/snippets/login_cv.md
     docs/snippets/workspace.md
     --8<--
+
+## Update Port Profile
+
+Here we will update our existing raspberry pi port profile to enable 802.1X
+
+!!! danger "Single Workspace"
+
+    You and your fellow student will work together to create the port profile for your campus fabric in a **single workspace**.
+
+1. From the `Studios` home page, disable the `Active Studios` toggle to display all available CloudVision Studios (which when enabled will only show used/active Studios).
+
+    !!! note "The toggle may already be in the disabled position"
+
+      ![Campus Studios](../a_wired/assets/images/a02/01_access_config.png)
+
+2. Let's update the `Wired-RasPi` port profile for our Raspberry Pi and enable 802.1x, click the arrow on the right and enable the following:
+
+    ???+ example "Wired-RasPi"
+
+        | Key                      | Value                                        |
+        | ------------------------ | -------------------------------------------- |
+        | 802.1X                   | Enabled                                      |
+        | MAC Based Authentication | Yes                                          |
+
+3. Our port profiles have been staged, click `Review Workspace`
+
+4. We can see the only studio changed is the `Access Interface Configuration`, we will see the ports assigned are updated.
+
+5. Go ahead and `Submit the Workspace` when you ready
+
+6. Click View `Change Control`
+
+7. Review the Change Control and select `Review and Approve`
+
+8. Toggle the `Execute Immediately` button and select `Approve and Execute`
+
+9. The port is now enabled for 802.1X, let's now get your switch talking back to AGNI.
 
 ## Enable RadSec
 
