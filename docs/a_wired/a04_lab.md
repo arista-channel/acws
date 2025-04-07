@@ -267,7 +267,7 @@ In this section, we will explore the Events stream and the tools and filters to 
 
 8. Events and filtering lab section complete!
 
-## Customize Notifications
+### Customize Notifications
 
 In this lab, you will configure CloudVision to send an email alert to an email address using the built-in “SendGrid” email service. There are other notification systems natively supported in CloudVision, but we'll focus on email for this lab (Example: email, chat, SNMP, Syslog, etc).
 

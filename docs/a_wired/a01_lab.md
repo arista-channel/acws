@@ -664,6 +664,61 @@ Let's explore the configuration and how to troubleshoot
 
 ## Closing Out
 
+### Streaming Telemetry
+
+Let's take a look at the steaming telemetry agent that communicates back to CloudVision. You may not be able to do this on you switch (current in zero-touch). Feel free to come back to this section to explore, your instructor will showcase this.
+
+1. Let's view the telemetry agent daemon
+
+    ```bash
+    show running-config section TerminAttr
+    ```
+
+    ???+ quote "Example Output"
+
+        ```bash
+        daemon TerminAttr
+            exec /usr/bin/TerminAttr
+                -disableaaa
+                -cvaddr=apiserver.cv-staging.corp.arista.io:443
+                -cvauth=token-secure,/tmp/student_pod
+                -cvvrf=MGMT
+                -taillogs
+                -cvproxy=
+                -cvauth=certs,/persist/secure/ssl/terminattr/primary/certs/client.crt,/persist/secure/ssl/terminattr/primary/keys/client.key
+                -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata
+            no shutdown
+        ```
+
+2. Now let's see this in action, login to CloudVision and navigate to the `Devices > Inventory`
+3. Make a change to the hostname using a configuration session
+
+    ```yaml
+    !
+    configure session namechange #(1)!
+    hostname SOMEONEWASHERE
+    !
+    show session-config diffs #(2)!
+    !
+    commit timer 00:05:00 #(3)!
+    ```
+
+    1. Create a configuration session, similar to branching in git, this will stage changes and wait for a commit to apply as a replace in configuration
+    2. Show the differences of designed vs what's configured
+    3. Commit the configuration to roll back in 5 minutes (`hh:mm:ss`), if you do not commit after the fact, this will roll back.
+
+    ```yaml title="Session Configuration Diff"
+    SPINE01[16:13:56](config-s-namechange)#show session-config diffs
+    --- system:/running-config
+    +++ session:/namechange-session-config
+    -hostname SPINE01
+    +hostname SOMEONEWASHERE
+    ```
+
+4. You should see the hostname change immediately inside CloudVision! This is not a poll... this is a continuous stream of state from device to CloudVision.
+
+### Additional Fun Commands
+
 There are few other commands you can explore in your lab after deployment. As we move away from the CLI, remember all interactions with Arista EOS both via terminal or automation are leveraging the same commands.
 
 <div class="grid cards" markdown>
