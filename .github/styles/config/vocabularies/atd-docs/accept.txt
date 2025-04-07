@@ -169,6 +169,7 @@ pvst
 qos
 querier
 queryable
+radsec
 radware
 rd
 reachability

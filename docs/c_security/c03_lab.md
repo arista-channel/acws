@@ -2,7 +2,13 @@
 
 ## Overview
 
-In this lab...
+In this lab we enhance the port security to our Raspberry Pi! We will do the following:
+
+- [x] Update our port profile
+- [x] Configure our switch to communicate over RadSec to AGNI
+- [x] Configure the AGNI EAP-TLS wired policy
+- [x] Verify it all works!
+
 --8<--
 docs/snippets/topology.md
 --8<--
@@ -14,11 +20,13 @@ docs/snippets/topology.md
     docs/snippets/workspace.md
     --8<--
 
+## Update Port Profile
+
+Here we will update our existing raspberry pi port profile to enable 802.1X
+
 !!! danger "Single Workspace"
 
     You and your fellow student will work together to create the port profile for your campus fabric in a **single workspace**.
-
-## Update Port Profile
 
 1. From the `Studios` home page, disable the `Active Studios` toggle to display all available CloudVision Studios (which when enabled will only show used/active Studios).
 
@@ -26,16 +34,7 @@ docs/snippets/topology.md
 
       ![Campus Studios](../a_wired/assets/images/a02/01_access_config.png)
 
-2. Let's create two port profiles using the `Access Interface Configuration` studio that will be used to provision connected hosts.
-
-    1. Launch the `Access Interface Configuration`
-    2. Click `+ Add Port Profile`, name it `Wireless-Access-Point`, and click the arrow on the right
-
-       ![Campus Studios](../a_wired/assets/images/a02/02_port_profile.png)
-
-    3. Enter the following values on this configuration page, you can leave all other configuration items left as default. See the settings are configured in the screenshot below
-
-3. Let's update the `Wired-RasPi` port profile for our Raspberry Pi and enabled 802.1x, click the arrow on the right
+2. Let's update the `Wired-RasPi` port profile for our Raspberry Pi and enable 802.1x, click the arrow on the right and enable the following:
 
     ???+ example "Wired-RasPi"
 
@@ -44,19 +43,19 @@ docs/snippets/topology.md
         | 802.1X                   | Enabled                                      |
         | MAC Based Authentication | Yes                                          |
 
-4. Our port profiles have been staged, click `Review Workspace`
+3. Our port profiles have been staged, click `Review Workspace`
 
-5. We can see the only studio changed is the `Access Interface Configuration`, we will see the ports assigned are updated.
+4. We can see the only studio changed is the `Access Interface Configuration`, we will see the ports assigned are updated.
 
-6. Go ahead and `Submit the Workspace` when you ready
+5. Go ahead and `Submit the Workspace` when you ready
 
-7. Click View `Change Control`
+6. Click View `Change Control`
 
-8. Review the Change Control and select `Review and Approve`
+7. Review the Change Control and select `Review and Approve`
 
-9. Toggle the `Execute Immediately` button and select `Approve and Execute`
+8. Toggle the `Execute Immediately` button and select `Approve and Execute`
 
-10. The port is now enabled for 802.1X, let's now get your switch talking back to AGNI.
+9. The port is now enabled for 802.1X, let's now get your switch talking back to AGNI.
 
 ## Enable RadSec
 
