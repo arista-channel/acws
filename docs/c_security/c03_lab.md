@@ -14,6 +14,50 @@ docs/snippets/topology.md
     docs/snippets/workspace.md
     --8<--
 
+!!! danger "Single Workspace"
+
+    You and your fellow student will work together to create the port profile for your campus fabric in a **single workspace**.
+
+## Update Port Profile
+
+1. From the `Studios` home page, disable the `Active Studios` toggle to display all available CloudVision Studios (which when enabled will only show used/active Studios).
+
+    !!! note "The toggle may already be in the disabled position"
+
+      ![Campus Studios](../a_wired/assets/images/a02/01_access_config.png)
+
+2. Let's create two port profiles using the `Access Interface Configuration` studio that will be used to provision connected hosts.
+
+    1. Launch the `Access Interface Configuration`
+    2. Click `+ Add Port Profile`, name it `Wireless-Access-Point`, and click the arrow on the right
+
+       ![Campus Studios](../a_wired/assets/images/a02/02_port_profile.png)
+
+    3. Enter the following values on this configuration page, you can leave all other configuration items left as default. See the settings are configured in the screenshot below
+
+3. Let's update the `Wired-RasPi` port profile for our Raspberry Pi and enabled 802.1x, click the arrow on the right
+
+    ???+ example "Wired-RasPi"
+
+        | Key                      | Value                                        |
+        | ------------------------ | -------------------------------------------- |
+        | 802.1X                   | Enabled                                      |
+        | MAC Based Authentication | Yes                                          |
+
+4. Our port profiles have been staged, click `Review Workspace`
+
+5. We can see the only studio changed is the `Access Interface Configuration`, we will see the ports assigned are updated.
+
+6. Go ahead and `Submit the Workspace` when you ready
+
+7. Click View `Change Control`
+
+8. Review the Change Control and select `Review and Approve`
+
+9. Toggle the `Execute Immediately` button and select `Approve and Execute`
+
+10. The port is now enabled for 802.1X, let's now get your switch talking back to AGNI.
+
 ## Enable RadSec
 
 In this lab you will be configuring RadSec on your lab switches by adding the RadSec configuration to the switches via the Static Configuration Studio.
