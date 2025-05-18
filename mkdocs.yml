@@ -32,6 +32,7 @@ nav:
             - Guest AP Tunnel: references/l2tunnel.md
             - WIPS: references/wips.md
         #- Wireless Captive Portal: references/captive_portal.md
+        - Arista Configuration Tools: references/config_tools.md
 
 copyright: Copyright &copy; 2025 Arista Networks
 
@@ -103,7 +104,7 @@ markdown_extensions:
     - pymdownx.details
     - pymdownx.emoji:
         emoji_index: !!python/name:material.extensions.emoji.twemoji
-        emoji_generator: !!python/name:mkdocs_pymdownx_material_extras.emoji.to_svg
+        emoji_generator: !!python/name:material.extensions.emoji.to_svg
         options:
           custom_icons:
             - overrides/.icons/
