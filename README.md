@@ -1,4 +1,4 @@
-# TOLA Campus Workshop
+# Arsita Channel Campus Workshop
 
 This is the home of the Campus ATD Workshop lab guides and AVD repository.
 

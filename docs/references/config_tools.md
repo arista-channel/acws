@@ -4,37 +4,55 @@
 
 This lab is intended to use the Campus Workshop to showcase how to configure Arista campus . Authorized Arista partners are able to download and access the tool at intangi.com/support website. Partners are required to login with their corporate email address. Contact iris-help-ext@arista.com for assistance. There are many online resources available which includes videos, documentation, and more at [intangi.com/support](https://intangi.com/support).
 
-## Iris Dashboard Upon Login
+## Iris Dashboard
+Upon successfully logging in, you will be presented with the Iris dashboard. Click on the Arista catalog to begin
 
-### Arista Cloud Gateway (AGNI)
+![Dashboard](../references/assets/images/iris/01_iris_dashboard.png)
 
-Login into AGNI to begin this lab, you will create the Arista Cloud Gateway.
+### Arista Catalog at a glance
+Expand the catalog to view the various devices and features available
 
-1. Under the `Configuration` section, click on `Access Devices > Cloud Gateways`
-2. Add the gateway with the settings below
+![Catalogs](../references/assets/images/iris/02_iris_catalogs.png)
 
-    ???+ "ACG Settings"
+You are now ready to create a new network design.
 
-        | Setting             |  Student 1   |
-        | ------------------- | :----------: |
-        | Name                | `ATD-POD01`  |
-        | Location            | `Locations`  |
-        | TACACS+ Termination |   Enabled    |
-        | Shared Secret Name  |   `Access`   |
-        | Value               | `Arista!123` |
+1. Under the `Start` section, click on `New System`
+Provide a name for your system, accept all defaults and click `OK.
 
-3. Be sure to copy the generated `Token` value, this will used in our EOS configuration
+![New System](../references/assets/images/iris/03_iris_new_system.png)
 
-    !!! warning "Token Generation"
+2. Select the Arista price list.
+Navigate to Tools on the horizontal menu bar, select `Subscriptions` then select `Manage Subscriptions`. Select the `Arista` price list and click `Enable`. Optionally click on `Price Lists` to view the price list details. USD and EUR price lists are available. Click `OK` to continue.
 
-        The token can only be viewed this one time, if you forget to copy you must regenerate the token.
+![Price List](../references/assets/images/iris/04_iris_price_lists.png)
 
-4. Verify the settings and click `Add Cloud Gateway` when complete
-5. That's it, there is now a ACG instance configured for all devices
+3. Create a new site.
+Navigate to `Sites` and click on `New Site`. Provide a name for your site, select the desired `Power`. `Contact`, `Description` are optional and click `OK` continue. Double-click on your workshop name on the map. A clean worshop space will be provided.
 
-### ACG Connection (CVP)
+![New Site](../references/assets/images/iris/05_iris_new_site.png)
 
-Configuring your switches for Tacacs is easy as applying a configlet to all or select devices. We're going to use studios to demonstrate
+
+4. Choose a desired spine switch from the catalog. Double-click on the `7050X Switch Series`, select one of the pre-configured `7050SX3-24YC2-F` bundles. `-F` is with front-to-back fan trays, `-R` is rear-to-front. Cut-and-paste the device on the site workspace to build a two-switch spine network layer.
+
+![Spine Switch](../references/assets/images/iris/06_iris_spine_switch.png)
+
+5. Using the same method of choosing the right Arista products for your design, select `720XP-48ZC2` POE switches for the leaf layer. Add two switches for each leaf layer.
+
+![Leaf Switch](../references/assets/images/iris/07_iris_leaf_switch.png)
+
+6. Connect the spine and leaf layer together using the `Connect` tool. Select the spine switch and then the leaf switch. Repeat for the second leaf switch.
+
+![Connect](../references/assets/images/iris/08_iris_connect.png)
+7. Add an wireless access point to the leaf layer. Double-click on the `Wireless Access Points` and select the `C-406` WiFi7 model. Cut-and-paste the device on the site workspace to build a two-switch active-active wireless layer.
+
+![Wireless AP](../references/assets/images/iris/09_iris_wireless_ap.png)
+
+8. Connect the wireless access point to the leaf layer using the `Connect` tool. Select the leaf switch and then the wireless access point.
+
+
+### Create a Bill Of Material (BOM)
+
+Iris can generate a Bill Of Material (BOM) for your design. This can be used to order the hardware and software for your design.
 
 1. Login to CloudVision
 2. Navigate to `Provisioning > Studios`
@@ -200,3 +218,6 @@ Typically this would be populated via an identity management platform, here we w
 2.
 
 show users detail
+
+
+[def]: ../assets/images/config_tools/01_dashboard.png
