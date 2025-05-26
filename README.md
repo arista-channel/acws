@@ -106,7 +106,10 @@ To run mkdocs behind an nginx server
 - https://www.pulleycloud.com/mkdocs-nginx-aws-ec2/part-2/
 -
 
-## Maintainers
+## Original Maintainers
 
 - Kyle Bush ([kbush@arista.com](mailto:kbush@arista.com))
 - Larry Gomez ([larry@arista.com](mailto:larry@arista.com))
+
+## Edited For Channel Partners by
+- Miguel Balagot ([miguel@arista.com](mailto:miguel@arista.com))
