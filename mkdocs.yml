@@ -133,10 +133,11 @@ plugins:
     - glightbox
     - search:
         lang: en
-    # - mike:
-    #     alias_type: redirect
-    # - print-site:
-    #     path_to_pdf: "print_page"
+        indexing: full
+    - mike:
+        alias_type: redirect
+    - print-site:
+        path_to_pdf: "print_page"
 
 extra_css:
     - stylesheets/extra.css
