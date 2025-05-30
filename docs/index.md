@@ -60,7 +60,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **B01-Lab: Day 1 Wifi Deployment**
+- :cloudvision: **B01-Lab: Day 1 WiFi Deployment**
 
     ---
 
@@ -68,7 +68,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B02-Lab: Wifi Troubleshooting**
+- :cloudvision: **B02-Lab: WiFi Troubleshooting**
 
     ---
 
@@ -93,7 +93,6 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
     [:material-login: Hop into B-04](./b_wireless/b04_lab.md){ .md-button .md-button--primary }
 
 </div>
-
 ## :material-security: Security Guides
 
 <div class="grid cards" markdown>
@@ -123,5 +122,36 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
     [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
 
 </div>
+
+## :material-tools: Tools For The Job
+
+<div class="grid cards" markdown>
+
+- :cloudvision: **D01-Lab: Iris Design, Configuration and Pricing**
+
+    ---
+
+    Use Intangi Iris to design, configurre and price Arista campus products and solutions
+
+    [:material-login: Hop into D-01](./references/config_tools.md){ .md-button .md-button--primary }
+
+- :cloudvision: **D02-Lab: AROC**
+
+    ---
+
+    Use Arista Order and Configuration (AROC) to create bill of materials 
+
+    [:material-login: Hop into D-02](./references/under_constructions.md){ .md-button .md-button--primary }
+
+- :cloudvision: **D03-Lab: CPQ**
+
+    ---
+
+    Use Configure Price Quote (CPQ) to quote Arista approved BOMs
+
+    [:material-login: Hop into D-03](./references/under_constructions.md){ .md-button .md-button--primary }
+
+</div>
+
 
 --8<-- "includes/abbreviations.md"
