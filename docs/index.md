@@ -121,6 +121,42 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
 
+## :material-security: Security Guides
+
+<div class="grid cards" markdown>
+
+- :cloudvision: **C01-Lab: EAP-TLS Wireless Policy**
+
+    ---
+
+    Use Arista AGNI to enforce wireless access via dot1x EAP-TLS policy on a given SSID
+
+    [:material-login: Hop into C-01](./c_security/c01_lab.md){ .md-button .md-button--primary }
+
+- :cloudvision: **C02-Lab: UPSK Wireless Policy**
+
+    ---
+
+    Configure unique pre-shared keys for an SSID and get familiar with device groupings
+
+    [:material-login: Hop into C-02](./c_security/c02_lab.md){ .md-button .md-button--primary }
+
+- :cloudvision: **C03-Lab: EAP-TLS Wired Policy**
+
+    ---
+
+    Using Arista AGNI to enforce wired access via dot1x EAP-TLS policy
+
+    [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
+
+- :cloudvision: **C04-Lab: Multi-Domain Segmentation Services**
+
+    ---
+
+    Using Arista Multi-Domain Segmentation Services (MSS) for standards-based, non-proprietary, intelligent and dynamic network segmentation
+
+    [:material-login: Hop into C-03](./references/under_constructions.md){ .md-button .md-button--primary }
+
 </div>
 
 ## :material-tools: Tools For The Job
@@ -135,7 +171,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into D-01](./references/config_tools.md){ .md-button .md-button--primary }
 
-- :cloudvision: **D02-Lab: AROC**
+<!-- - :cloudvision: **D02-Lab: AROC**
 
     ---
 
@@ -149,7 +185,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     Use Configure Price Quote (CPQ) to quote Arista approved BOMs
 
-    [:material-login: Hop into D-03](./references/under_constructions.md){ .md-button .md-button--primary }
+    [:material-login: Hop into D-03](./references/under_constructions.md){ .md-button .md-button--primary } -->
 
 </div>
 
