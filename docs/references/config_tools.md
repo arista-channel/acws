@@ -9,7 +9,7 @@ This lab is intended forthe Campus Workshop and to showcase the partner tool to 
 
 ![Dashboard](assets/images/iris/01_iris_dashboard.png)
 
-### Arista Catalog at a glance
+## Arista Catalog at a glance
 2. Expand the catalog to view the various devices and features available
 
 ![Catalogs](assets/images/iris/02_iris_catalogs.png)
@@ -46,19 +46,17 @@ Edit the quantity multipler of 100G DAC to `2`
 8. Using the same method of choosing the right Arista products for your design, select `720XP-48ZC2` POE switches for the leaf layer. Add two switches for each leaf layer.
 
 ![Leaf Switch](assets/images/iris/09_iris_leaf_switch.png)
-
 9. Connect the spine and leaf layer together using the `Connect` tool. Select the spine switch and then the leaf switch. Repeat for the second leaf switch.
 
 ![Connect](assets/images/iris/10_iris_connect.png)
-10. Add an wireless access point to the leaf layer. Double-click on the `Wireless Access Points` and select the `C-406` WiFi7 model. Cut-and-paste the device on the site workspace to build a two-switch active-active wireless layer.
+10. Add an wireless access point to the leaf layer. Double-click on the `Wireless Access Points` and select the `C-460` WiFi7 model. Cut-and-paste the device on the site workspace to build a two-switch active-active wireless layer.
 
 ![Wireless AP](../references/assets/images/iris/11_iris_wireless_ap.png)
-
 11. Connect the wireless access point to the leaf layer using the `Connect` tool. Select the leaf switch and then the wireless access point.
-
 ![Wireless To Leaf](assets/images/iris/12_iris_wireless_to_leaf.png)
 
-### Create a Bill Of Material (BOM)
+
+## Create a Bill Of Material (BOM)
 
 Iris can generate a Bill Of Material (BOM) for your design. This can be used to order the hardware and software for your design.
 
