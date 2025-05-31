@@ -24,6 +24,8 @@ nav:
     - References:
         - General:
             - Agenda: references/agenda.md
+            - WiFi Passwords: references/wifi_password.md
+            - Streaming Telemetry: references/streaming.md
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
         - Wired:
