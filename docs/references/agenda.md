@@ -2,7 +2,7 @@
 
 | Time | Activity |
 | --- | --- |
- |Day 1, 8:30am - 4:30pm Day 2 - 8:30am - 3:30pm
+ |Day 1 8:30am - 4:30pm Day 2 - 8:30am - 3:30pm
 `Day 1 Wired and Wireless`
 8:30 - 8:55 Intros
 9:00-9:25 Overview of Arista Campus Architecture
@@ -42,4 +42,4 @@ Iris Lab D-00: Design a campus network and create a BOM
 `1:30 - 3:30 Competition:`
 Iris Arista campus network design and BOM creation
 Demo CloudVision, CV-CUE and AGNI
-Awards
+Awards. Must be present to win.

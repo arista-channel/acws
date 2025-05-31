@@ -22,17 +22,20 @@ nav:
         - UPSK Wireless Policy: c_security/c02_lab.md
         - EAP-TLS Wired Policy: c_security/c03_lab.md
     - References:
+        - General:
+            - Agenda: references/agenda.md
+        - Arista Configuration Tools: references/config_tools.md
         - Wired:
             - Interface Diagnostics: references/interface_diag.md
             - AGNI Tacacs: references/agni_tacacs.md
         - Wireless:
-            - Onboarding Wifi Devices: references/wireless_onboard.md
+            - Onboarding WiFi Devices: references/wireless_onboard.md
             - Configuring Radius: references/radius.md
             - Configuring RadSec: references/radsec.md
             - Guest AP Tunnel: references/l2tunnel.md
             - WIPS: references/wips.md
         #- Wireless Captive Portal: references/captive_portal.md
-        - Arista Configuration Tools: references/config_tools.md
+        
 
 copyright: Copyright &copy; 2025 Arista Networks
 

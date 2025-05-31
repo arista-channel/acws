@@ -93,6 +93,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
     [:material-login: Hop into B-04](./b_wireless/b04_lab.md){ .md-button .md-button--primary }
 
 </div>
+
 ## :material-security: Security Guides
 
 <div class="grid cards" markdown>

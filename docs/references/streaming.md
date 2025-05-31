@@ -4,7 +4,8 @@
 
 ```yaml
 daemon TerminAttr
-    exec /usr/bin/TerminAttr -disableaaa
+    exec /usr/bin/TerminAttr 
+    -disableaaa
 
     -cvaddr=apiserver.cv-staging.corp.arista.io:443
     -cvauth=token-secure,/tmp/cv-onboarding-token
