@@ -24,7 +24,8 @@ nav:
     - References:
         - General:
             - Agenda: references/agenda.md
-        - Arista Configuration Tools: references/config_tools.md
+        - Arista Configuration Tools: 
+            - Intangi Iris: references/config_tools.md
         - Wired:
             - Interface Diagnostics: references/interface_diag.md
             - AGNI Tacacs: references/agni_tacacs.md
