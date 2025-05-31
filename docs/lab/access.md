@@ -10,7 +10,6 @@ Get familiar with your fellow student, you will be working together to configure
 ## Topology
 
 ![ATD Student Pod](../assets/images/topology/atd_student-light.png#only-light)
-![ATD Student Pod](../assets/images/topology/atd_student-dark.png#only-dark)
 
 ## Equipment
 

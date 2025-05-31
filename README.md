@@ -1,6 +1,6 @@
 # Arsita Channel Campus Workshop
 
-This is the home of the Campus ATD Workshop lab guides and AVD repository.
+This is the home of the Channel Campus Workshop lab guides and AVD repository.
 
 ## Getting Started
 
@@ -99,7 +99,7 @@ To run mkdocs behind an nginx server
 2. Build the mkdocs site
 3. Navigate to the server IP
 
-   If you are unable to navigate to the local IP address, you may to open `System Prefrences
+   If you are unable to navigate to the local IP address, you may have to open `System Prefrences
 
 ### References
 
