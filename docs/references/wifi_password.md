@@ -1,10 +1,14 @@
-# WiFi Passwords and Login Information
+# Lab Guide, WiFi Password and Login Information
 
-## Wireless SSID: Arista-Workshop
-### Password: AristaRox! (case sensitive)
+## Online Lab Guides
+### [Arista Campus Workshop Lab Guides](http://3.148.13.216/)
 
-### Login: https://launchpad.wifi.arista.com/ (case sensitive)
-### User: partner_email@parnterdomain.com (case sensitive)
+## Wireless SSID: `Arista-Workshop`
+### Password: `AristaRox!` (case sensitive)
+
+### CV-CUE Login: `https://launchpad.wifi.arista.com/` (case sensitive)
+### User: `partner_email@parnterdomain.com` (case sensitive)
 ### Launchpad SSO
-##  CVaas organization name: campus-workshops-us
+## CVaas organization name: `campus-workshops-us`
 ###            Google SSO
+--8<-- "includes/abbreviations.md"

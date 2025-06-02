@@ -2,7 +2,7 @@
 
 ## Overview
 
-This lab is intended forthe Campus Workshop and to showcase the partner tool to design, configure and price out Arista campus . Authorized Arista partners are able to download and access the tool at `intangi.com/support` website. Partners are required to login with their corporate email address. Contact iris-help-ext@arista.com for assistance. There are many online resources available which includes videos, documentation, and more at [intangi.com/support](https://intangi.com/support).
+This lab is intended for the Campus Workshop and to showcase the partner tool to design, configure and price out Arista campus products and solutions. Authorized Arista partners are able to download and access the tool at `intangi.com/support` website. They are required to login with their corporate email address. Contact `iris-help-ext@arista.com` for assistance. There are many online resources available which includes videos, documentation, and more at [intangi.com/support](https://intangi.com/support).
 
 ## Iris Dashboard
 1. Upon successful login, you will be presented with the Iris dashboard. Click on the Arista catalog to start.
@@ -14,9 +14,11 @@ This lab is intended forthe Campus Workshop and to showcase the partner tool to 
 
 ![Catalogs](assets/images/iris/02_iris_catalogs.png)
 
+## Design, Configure and Price Out Your Network
+
 You are now ready to create a new network design.
 
-3. Under the `Start` section, click on `New System`
+3.  Under the `Start` section, click on `New System`
 Provide a name for your system, accept all defaults and click `OK.
 
 ![New System](assets/images/iris/03_iris_new_system.png)

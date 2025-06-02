@@ -138,7 +138,7 @@ plugins:
     - glightbox
     - search:
         lang: en
-        indexing: full
+        # indexing: full
     - mike:
         alias_type: redirect
     - print-site:
