@@ -130,6 +130,28 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-04](./references/under_constructions.md){ .md-button .md-button--primary }
 
+- :cloudvision: **C05-Lab: Network Detect and Response (NDR)**
+
+    ---
+
+    Using Arista NDR to detect and respond to network anomolous behavior and unauthorized acces
+
+    [:material-login: Hop into C-05](./references/under_constructions.md){ .md-button .md-button--primary }
+
+</div>
+
+## :material-eye-outline: Network Observability
+
+<div class="grid cards" markdown>
+
+- :cloudvision: **O01-Lab: Universal Network Observability with CloudVision**
+
+    ---
+
+    Use CloudVision to monitor and troubleshoot your network
+
+    [:material-login: Hop into O-01](./references/under_constructions.md){ .md-button .md-button--primary }
+
 </div>
 
 ## :material-tools: Tools For The Job
