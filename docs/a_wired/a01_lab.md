@@ -14,14 +14,14 @@ Let's log into the workshop spine switches.
 
     If you have a console cable, feel free to console into your switch. The switch is in ZTP, you can explore the same commands! The spine switch is running configuration your switch will not contain, but login using `admin` and `enable` to start exploring
 
-1. Login to the spine using the address below and the username `arista`, password `Arista!123`.
+1. Login to the spine using the address below and the username `student#`, password `Arista123`.
 
     ```yaml
     # Student 1
-    ssh arista@10.1.100.2
+    ssh student1@10.1.100.2
 
     # Student 2
-    ssh arista@10.1.100.3
+    ssh student2@10.1.100.3
     ```
 
 2. First thing, let's validate you are on the spine switch and explore the hardware.
@@ -197,7 +197,7 @@ Let's log into the workshop spine switches.
     show interfaces status | ?
     show interfaces status | inc POD01
     show interfaces | inc MTU|Eth
-    show interfaces | sec Ethernet(47|48)
+    show interfaces | sec Ethernet(25|26)
     ```
 
     ```yaml title="Example Output" hl_lines="3-5 10"
@@ -277,7 +277,7 @@ Let's log into the workshop spine switches.
 
     ```yaml
     show lldp neighbors detail
-    atdpods
+    acwspods
     show aliases
     ```
 
@@ -322,10 +322,10 @@ Let's log into the workshop spine switches.
         ```
 
         ```yaml title="Example Output: aliases"
-        atdpods         sh lldp neighbors detail | inc (detected 1|System Descr)
+        acwspods        sh lldp neighbors detail | inc (detected 1|System Descr)
         c               bash clear
-        show-acg        trace monitor acg
-        show-streaming  show agent TerminAttr logs | tail
+        sh-acg          trace monitor acg
+        sh-streaming    show agent TerminAttr logs | tail
         ```
 
 8. Let's look at traffic on our interfaces, let's also leverage the `watch` command with the `nz` (non-zero) command to monitor rates.
@@ -462,40 +462,37 @@ Let's explore the configuration and how to troubleshoot
 4. Let's take a closer look at the peer link itself
 
     ```yaml
-    run show run interface Eth47-48; show run int Port-Channel1000; show port-channel 1000 detailed
+    run show run interface Eth25-26; show run int Port-Channel1000; show port-channel 1000 detailed
     ```
 
     ???+ quote "Example Output"
 
         ```yaml title="Example Output" hl_lines="4 14-15"
         !
-        interface Ethernet47
+        interface Ethernet25
             description MLAG
-            channel-group 1000 mode active
+            channel-group 25mode active
         !
-        interface Ethernet48
+        interface Ethernet26
             description MLAG
-            channel-group 1000 mode active
+            channel-group 25 mode active
         !
-        interface Port-Channel1000
-            description MLAG_PEER_pod01-leaf1a_Po11
+        interface Port-Channel25
+            description MLAG_spine2_Ethernet25
             switchport mode trunk
             switchport trunk group MLAG
         !
-        Port Channel Port-Channel11 (Fallback State: Unconfigured):
+        Port Channel Port-Channel25 (Fallback State: Unconfigured):
         Minimum links: unconfigured
         Minimum speed: unconfigured
         Current weight/Max weight: 2/8
         Active Ports:
             Port             Time Became Active       Protocol       Mode         Weight    State
             ---------------- ------------------------ -------------- ------------ ------------ -----
-            Ethernet47       11:51:27                 LACP           Active         1       Rx,Tx
-            Ethernet48       9:24:02                  LACP           Active         1       Rx,Tx
+            Ethernet25       11:51:27                 LACP           Active         1       Rx,Tx
+            Ethernet26       9:24:02                  LACP           Active         1       Rx,Tx
 
-        Configured, but inactive ports:
-            Port             Time Became Inactive    Reason
-            ---------------- -------------------------- -------------------------
-            Ethernet51       Always                  wrong speed for aggregate
+        
         ```
 
 5. The port-channel is using a `trunk group`, lets look at that trunk group
@@ -545,7 +542,7 @@ Let's explore the configuration and how to troubleshoot
     No per interface configuration inconsistencies found.
     ```
 
-9. Looking at the interfaces down to the POD, let's valiadte the interface configuration
+9. Looking at the interfaces down to the POD, let's validate the interface configuration
 
     ```yaml
     show run interface Ethernet 1-2
@@ -781,4 +778,5 @@ There are few other commands you can explore in your lab after deployment. As we
 
     [:material-login: LET'S GO TO THE NEXT LAB!](./a02_lab.md){ .md-button .md-button--primary }
 
---8<-- "includes/abbreviations.md"
+--8<-- "./includes/abbreviations.md"
+--8<--

@@ -184,5 +184,4 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 </div>
 
-
---8<-- "includes/abbreviations.md"
+--8<-- "includes/abbreviations.md" --8<--

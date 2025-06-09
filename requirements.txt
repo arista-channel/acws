@@ -29,6 +29,7 @@ mkdocs-material==9.5.17
 mkdocs-material-extensions
 mkdocs-print-site-plugin
 mkdocs-pymdownx-material-extras
+mkdocs-table-reader-plugin
 msgpack>=1.0.3
 natsort
 netaddr

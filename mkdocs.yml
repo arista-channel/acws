@@ -25,6 +25,7 @@ nav:
         - General:
             - Agenda: references/agenda.md
             - WiFi Passwords: references/wifi_password.md
+            - Lab Assignment: references/orl_lab_assignment.md
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
         - Wired:
@@ -119,7 +120,8 @@ markdown_extensions:
     - pymdownx.keys
     - pymdownx.mark
     - pymdownx.smartsymbols
-    - pymdownx.snippets
+    - pymdownx.snippets:
+        base_path: 'includes'
     - pymdownx.superfences
     - pymdownx.tabbed:
         alternate_style: true
@@ -143,6 +145,7 @@ plugins:
         alias_type: redirect
     - print-site:
         path_to_pdf: "print_page"
+    - table-reader
 
 extra_css:
     - stylesheets/extra.css

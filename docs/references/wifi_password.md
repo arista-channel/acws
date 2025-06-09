@@ -24,12 +24,5 @@
 ### SSID: `Arista-Workshop`
 ### Password: `AristaRox!` (case sensitive)
 
-## CV-CUE 
-### Login: `https://launchpad.wifi.arista.com/` (case sensitive)
-### User: `partner_email@parnterdomain.com` (case sensitive)
-### Via Launchpad SSO
-## CloudVision as-a-Service
-### Login: `https://arista.io/` (case sensitive)
-###   CVaas organization name: `campus-workshops-us`
-###  Via Google SSO
 --8<--
+docs/snippets/login_cv.md
