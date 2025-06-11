@@ -677,9 +677,7 @@ Let's take a look at the steaming telemetry agent that communicates back to Clou
         daemon TerminAttr
             exec /usr/bin/TerminAttr
                 -disableaaa
-                -cvaddr=apiserver.cv-staging.corp.arista.io:443
-                -cvauth=token-secure,/tmp/student_pod
-                -cvvrf=MGMT
+                -cvaddr=apiserver.cv-prod-us-central1-b.arista.io:443
                 -taillogs
                 -cvproxy=
                 -cvauth=certs,/persist/secure/ssl/terminattr/primary/certs/client.crt,/persist/secure/ssl/terminattr/primary/keys/client.key
@@ -778,5 +776,5 @@ There are few other commands you can explore in your lab after deployment. As we
 
     [:material-login: LET'S GO TO THE NEXT LAB!](./a02_lab.md){ .md-button .md-button--primary }
 
---8<-- "./includes/abbreviations.md"
+--8<-- "includes/abbreviations.md"
 --8<--

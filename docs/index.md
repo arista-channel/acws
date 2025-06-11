@@ -183,5 +183,3 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
     [:material-login: Hop into D-03](./references/under_constructions.md){ .md-button .md-button--primary } -->
 
 </div>
-
---8<-- "includes/abbreviations.md" --8<--
