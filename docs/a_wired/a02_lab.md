@@ -30,6 +30,10 @@ docs/snippets/workspace.md
 
 ## Onboarding Device
 
+## Workshop Lab Access Point and Switch Serial Numbers
+
+{{ read_csv('data/orlando_lab_assignment.csv',colalign=("left","center","center","center"), usecols=['Email','AP#1','AP#2','Switch']) }}
+
 1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Streaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to choose which switch is `leaf1a` and `leaf1b`
 
     !!! danger "Single Workspace"

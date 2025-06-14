@@ -54,11 +54,17 @@ The hardware you see sitting in front of you can
 
     You will work in collaboration with your fellow student, keep this information handy
 
-      - [x] Your STUDENT number
-      - [x] Your POD number
-      - [x] Your USER
-      - [x] Your PASSWORD
+      - [x] Your STUDENT number. See Lab Assignment
+      - [x] Your POD number. See Lab Assignment
+      - [x] Your LOGIN ID. Your corporate email address.
+      - [x] Your PASSWORD. Emailed to you upon Arista Launchpad account creation
 
+</div>
+
+## Lab Assignment
+
+<div class="grid cards" markdown>
+{{ read_csv('data/orlando_lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
 </div>
 
 --8<--

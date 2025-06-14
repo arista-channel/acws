@@ -777,4 +777,4 @@ There are few other commands you can explore in your lab after deployment. As we
     [:material-login: LET'S GO TO THE NEXT LAB!](./a02_lab.md){ .md-button .md-button--primary }
 
 --8<-- "includes/abbreviations.md"
---8<--
+--8<-->
