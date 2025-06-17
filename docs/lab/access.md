@@ -5,7 +5,7 @@ You've made it, now what? Well, you and a room full of other engineers are sitti
 Get familiar with your fellow student, you will be working together to configure the pod in front of you. In total there are:
 
 - [x] 2 x Students assigned per pod
-- [x] 12 x Arista Campus Pods
+- [x] Up to 10 x Arista Campus Pods
 
 ## Topology
 

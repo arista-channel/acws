@@ -4,6 +4,10 @@ If you're not already logged into CloudVision (CVaaS), navigate to the [Arista L
 
 [:material-rocket-launch-outline: Open Launchpad](https://launchpad.wifi.arista.com/){ .md-button .md-button--primary target=_blank}
 
+=== "WiFi Login"
+    Workshop SSID: `Arista-Workshop`
+    Workshop Password: `AristaRox!` (case sensitive)
+
 === "Login Step 1"
 
     Click the `Log in with Launchpad` button and provide your assigned lab/pod email address and password:
