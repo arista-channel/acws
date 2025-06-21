@@ -165,7 +165,7 @@ Let's log into the workshop spine switches.
         Et25       POD13      connected    trunk     auto   auto   2.5GBASE-T
         Et26       POD13      notconnect   trunk     auto   auto   2.5GBASE-T
         ...
-        Et33       ATD_WIFI   disabled     100       auto   auto   2.5GBASE-T
+        Et33       ATD_WiFi   disabled     100       auto   auto   2.5GBASE-T
         Et34       ATD_PI     disabled     100       auto   auto   2.5GBASE-T
         ...
         Et47       MLAG       connected    in Po1000 auto   auto   5GBASE-T

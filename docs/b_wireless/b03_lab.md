@@ -160,7 +160,7 @@ Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post 
         | ------------------- | :-------------------------------: | :-------------------------------: |
         | Name                |          `ATD-##A-GUEST`          |          `ATD-##B-GUEST`          |
         | Condition           |  `Network:Name is ATD-##A-GUEST`  |  `Network:Name is ATD-##B-GUEST`  |
-        | Action              | `Arista-Wifi:Assign Role Profile` | `Arista-Wifi:Assign Role Profile` |
+        | Action              | `Arista-WiFi:Assign Role Profile` | `Arista-WiFi:Assign Role Profile` |
         | Action Role Profile |          `Guest A Role`           |          `Guest B Role`           |
 
     ![Campus Studio](./assets/images/b02/portal/10_portal.png)
@@ -220,11 +220,11 @@ Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign th
 
     ![Campus Studio](./assets/images/b02/portal/15_portal.png)
 
-8. Join the new wifi and verify connectivity in CUE and AGNI
+8. Join the new WiFi and verify connectivity in CUE and AGNI
 
-    !!! tip "Join the guest Wifi!"
+    !!! tip "Join the guest WiFi!"
 
-        Give it a moment for the new SSID to come up, but once it's up try and join the wifi! You should be prompted with a captive portal, click on the a
+        Give it a moment for the new SSID to come up, but once it's up try and join the WiFi! You should be prompted with a captive portal, click on the a
 
     === "CV-CUE"
 
@@ -264,7 +264,7 @@ To highlight Arista's Controller-less Architecture we will use the labs Core 720
 
 ### Assign SSID to Tunnel Profile
 
-1. Under the `Configure` section, click on `Wifi`
+1. Under the `Configure` section, click on `WiFi`
 2. Select the correct location in your hierarchy
 3. Select the pencil to edit Guest SSID
 4. Select `Network`
@@ -276,7 +276,7 @@ To highlight Arista's Controller-less Architecture we will use the labs Core 720
 
 ## Monitor Tunnels
 
-1. Under the `Monitor` section, click on `Wifi`
+1. Under the `Monitor` section, click on `WiFi`
 2. Verify your location in the hierarchy
 3. Click on `Tunnels` or the tunnel icon on the top row
 

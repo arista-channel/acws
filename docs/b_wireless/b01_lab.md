@@ -209,30 +209,30 @@ For this workshop event, we will be reducing WiFi Radio channel width and transm
 
         |  Pod  | Student | 2.4 GHz  | 5.GHz | Channel Width | Transmit Power |
         | :---: | :-----: | :------: | :---: | :-----------: | :------------: |
-        |  01   |    1    | Disabled |  36   |     20MHz     |      4bBm      |
-        |  01   |    2    | Disabled |  40   |     20MHz     |      4bBm      |
-        |  02   |    1    | Disabled |  44   |     20MHz     |      4bBm      |
-        |  02   |    2    | Disabled |  48   |     20MHz     |      4bBm      |
-        |  03   |    1    | Disabled |  52   |     20MHz     |      4bBm      |
-        |  03   |    2    | Disabled |  56   |     20MHz     |      4bBm      |
-        |  04   |    1    | Disabled |  60   |     20MHz     |      4bBm      |
-        |  04   |    2    | Disabled |  64   |     20MHz     |      4bBm      |
-        |  05   |    1    | Disabled |  100  |     20MHz     |      4bBm      |
-        |  05   |    2    | Disabled |  104  |     20MHz     |      4bBm      |
-        |  06   |    1    | Disabled |  108  |     20MHz     |      4bBm      |
-        |  06   |    2    | Disabled |  112  |     20MHz     |      4bBm      |
-        |  07   |    1    | Disabled |  120  |     20MHz     |      4bBm      |
-        |  07   |    2    | Disabled |  124  |     20MHz     |      4bBm      |
-        |  08   |    1    | Disabled |  128  |     20MHz     |      4bBm      |
-        |  08   |    2    | Disabled |  132  |     20MHz     |      4bBm      |
-        |  09   |    1    | Disabled |  136  |     20MHz     |      4bBm      |
-        |  09   |    2    | Disabled |  140  |     20MHz     |      4bBm      |
-        |  10   |    1    | Disabled |  144  |     20MHz     |      4bBm      |
-        |  10   |    2    | Disabled |  149  |     20MHz     |      4bBm      |
-        |  11   |    1    | Disabled |  153  |     20MHz     |      4bBm      |
-        |  11   |    2    | Disabled |  157  |     20MHz     |      4bBm      |
-        |  12   |    1    | Disabled |  161  |     20MHz     |      4bBm      |
-        |  12   |    2    | Disabled |  165  |     20MHz     |      4bBm      |
+        |  01   |    a    | Disabled |  36   |     20MHz     |      4bBm      |
+        |  01   |    b    | Disabled |  40   |     20MHz     |      4bBm      |
+        |  02   |    a    | Disabled |  44   |     20MHz     |      4bBm      |
+        |  02   |    b    | Disabled |  48   |     20MHz     |      4bBm      |
+        |  03   |    a    | Disabled |  52   |     20MHz     |      4bBm      |
+        |  03   |    b    | Disabled |  56   |     20MHz     |      4bBm      |
+        |  04   |    a    | Disabled |  60   |     20MHz     |      4bBm      |
+        |  04   |    b    | Disabled |  64   |     20MHz     |      4bBm      |
+        |  05   |    a    | Disabled |  100  |     20MHz     |      4bBm      |
+        |  05   |    b    | Disabled |  104  |     20MHz     |      4bBm      |
+        |  06   |    a    | Disabled |  108  |     20MHz     |      4bBm      |
+        |  06   |    b    | Disabled |  112  |     20MHz     |      4bBm      |
+        |  07   |    a    | Disabled |  120  |     20MHz     |      4bBm      |
+        |  07   |    b    | Disabled |  124  |     20MHz     |      4bBm      |
+        |  08   |    a    | Disabled |  128  |     20MHz     |      4bBm      |
+        |  08   |    b    | Disabled |  132  |     20MHz     |      4bBm      |
+        |  09   |    a    | Disabled |  136  |     20MHz     |      4bBm      |
+        |  09   |    b    | Disabled |  140  |     20MHz     |      4bBm      |
+        |  10   |    a    | Disabled |  144  |     20MHz     |      4bBm      |
+        |  10   |    b    | Disabled |  149  |     20MHz     |      4bBm      |
+        |  11   |    a    | Disabled |  153  |     20MHz     |      4bBm      |
+        |  11   |    b    | Disabled |  157  |     20MHz     |      4bBm      |
+        |  12   |    a    | Disabled |  161  |     20MHz     |      4bBm      |
+        |  12   |    b    | Disabled |  165  |     20MHz     |      4bBm      |
 
 4. Click `Save` at the bottom of the page then click `Continue` to confirm.
 5. Click `Continue` to commit changes
