@@ -64,7 +64,7 @@ The hardware you see sitting in front of you can
 ## Lab Assignment
 
 <div class="grid cards" markdown>
-{{ read_csv('data/orlando_lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
+{{ read_csv('data/orlando_lab_assignment.csv',colalign=("left","center","center","center"), usecols=['Email','Lab Assignment','Login','Student Pod #']) }}
 </div>
 
 --8<--

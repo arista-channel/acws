@@ -80,7 +80,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     ---
 
-    Configure a guest Wifi SSID with a captive guest portal and tunnel wireless traffic
+    Configure a guest WiFi SSID with a captive guest portal and tunnel wireless traffic
 
     [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 

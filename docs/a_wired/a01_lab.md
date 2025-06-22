@@ -10,9 +10,9 @@ Let’s take a closer look at the EOS interface—while it might feel familiar, 
 
 Let's log into the workshop spine switches.
 
-???+ tip "I have a console cable"
+???+ tip "I have a console cable or WiFi"
 
-    If you have a console cable, feel free to console into your switch. The switch is in ZTP, you can explore the same commands! The spine switch is running configuration your switch will not contain, but login using `admin` and `enable` to start exploring
+    If you have a console cable, feel free to console into your switch. The switch is in ZTP, you can explore the same commands! You may also use the `WiFi` to connect to the spine switches. The spine switch is running configuration your switch will not contain, but login using `admin`, hit Enter and type in `enable` to start exploring
 
 1. Login to the spine using the address below and the username `student#`, password `Arista123`.
 

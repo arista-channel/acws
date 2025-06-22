@@ -144,8 +144,8 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
         | Student   | Folder Name |
         | --------- | :---------: |
-        | Student 1 |   `ACorp`   |
-        | Student 2 |   `BCorp`   |
+        | Student-a |   `ACorp`   |
+        | Student-b |   `BCorp`   |
 
     ![Campus Studio](./assets/images/b01/config/03_config.png){ width=600" }
 

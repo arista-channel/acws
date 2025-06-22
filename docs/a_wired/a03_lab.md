@@ -90,7 +90,8 @@ docs/snippets/workspace.md
 1. We are going to assign our new port profiles to our switch, specifically assign ports for
 
       1. `Ethernet1`: our access port for the Raspberry Pi
-      2. `Ethernet13`: our access port for the Access Point
+      2. `Ethernet7`: our access port for the Access Point
+      3. `Ethernet9`: our access port for the Access Point
 
 2. CloudVision offers a number of places to configure access interfaces, it doesn't matter which one you choose! These workflows exist in multiple places depending on the type of work you are performing (broad updates, troubleshooting, etc)
 
@@ -150,19 +151,21 @@ docs/snippets/workspace.md
 
     === "Student 1"
 
-         1. Click on port `Ethernet13` on your assigned switch
+         1. Click on port `Ethernet7` on your assigned switch
          2. Choose the `Port Profile` of `Wireless-Access-Point`
          3. Click `Yes` radio button under `Enabled`
-         4. Click `Review`
+         4. Repeat steps 1-3 for port `Ethernet9`
+         5. Click `Review`
 
          ![Campus Dashboard](./assets/images/a02/08_assign_port_1.png)
 
     === "Student 2"
 
-         1. Click on port `Ethernet13` on your assigned switch
+         1. Click on port `Ethernet7` on your assigned switch
          2. Choose the `Port Profile` of `Wireless-Access-Point`
          3. Click `Yes` radio button under `Enabled`
-         4. Click `Review`
+         4. Repeat steps 1-3 for port `Ethernet9`
+         5. Click `Review`
 
          ![Campus Dashboard](./assets/images/a02/08_assign_port_2.png)
 

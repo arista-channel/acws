@@ -1,16 +1,16 @@
-First Name,Last Name,Email,Partner,Lab Assignment,Student Pod #,CV-CUE ATN,AP#1,AP#2,Switch
-Jason,Stiltner,Jason.stiltner@alturna-tech.com,Alturna Tech,Student-a,Pod 01,ATN570236,30862D42C7BF,30862D42D0BF,WTW22060197
-Jason,Dalessio,jason@alturna-tech.com,Alturna Tech,Student-b,Pod 01,ATN570306,30862D42C7EF,30862D42D0EF,WTW22060208
-Jonathan,Rullan,jonathan@alturna-tech.com,Alturna Tech,Student-a,Pod 02,ATN570307,30862D42C81F,30862D42DD4F,WTW22060228
-Joseph,Suhayda,joseph.suhayda@ahead.com,Ahead,Student-b,Pod 02,ATN570309,30862D42C8DF,30862D42DDAF,WTW22110001
-Bob,Clinton,bclinton@driven.tech,Driven Tech,Student-a,Pod 03,ATN570308,30862D42C84F,30862D42DD7F,WTW22060292
-John,Hathcock,jhathcock@driven.tech,Driven Tech,Student-b,Pod 03,ATN570310,30862D42C90F,30862D42DDDF,WTW22110005
-Eric,Huntley,EHuntley@driven.tech,Driven Tech,Student-a,Pod 04,ATN570311,30862D42C93F,30862D42DE0F,WTW22110279
-Rob,Schaefer,rschaefer@driven.tech,Driven Tech,Student-b,Pod 04,ATN570312,30862D42C96F,30862D42DE3F,WTW22120072
-Darren,Kennedy,dkennedy@driven.tech,Driven Tech,Student-a,Pod 05,ATN570313,30862D42C99F,30862D42E0DF,WTW22120191
-Open,-,-,-,Student-b,Pod 05,,30862D42CFFF,30862D42E16F,WTW22130296
-Shawn,Sloan,Shawn.Sloan@computacenter.com,Computacenter,Student-a,Pod 06,ATN570314,30862D42C9CF,30862D42E10F,WTW22120242
-Trevor,Reid,Trevor.Reid2@computacenter.com,Computacenter,Student-a,Pod 06,ATN570315,30862D42CFCF,30862D42E13F,WTW22130251
-Jeff,Rhoades,jeff.rhoades@wwt.com,WWT,Student-a,Pod 07,ATN570316,30862D42D05F,30862D42E1CF,WTW22130314
-Open,-,-,-,Student-b,Pod 07,,30862D42D02F,30862D42E19F,WTW22130313
-Paul,Mancuso,pmancuso+cws@arista.com,Arista,Student-a,Pod 08,ATN570237,-,-,-
+First Name,Last Name,Email,Partner,Login,Lab Assignment,Student Pod #,CV-CUE ATN,AP#1,AP#2,Switch
+Jason,Stiltner,Jason.stiltner@alturna-tech.com,Alturna Tech,student1,Student-a,Pod 01,ATN570236,30862D42C7BF,30862D42D0BF,WTW22060197
+Jason,Dalessio,jason@alturna-tech.com,Alturna Tech,student2,Student-b,Pod 01,ATN570306,30862D42C7EF,30862D42D0EF,WTW22060208
+Jonathan,Rullan,jonathan@alturna-tech.com,Alturna Tech,student3,Student-a,Pod 02,ATN570307,30862D42C81F,30862D42DD4F,WTW22060228
+Joseph,Suhayda,joseph.suhayda@ahead.com,Ahead,student4,Student-b,Pod 02,ATN570309,30862D42C8DF,30862D42DDAF,WTW22110001
+Bob,Clinton,bclinton@driven.tech,Driven Tech,student5,Student-a,Pod 03,ATN570308,30862D42C84F,30862D42DD7F,WTW22060292
+John,Hathcock,jhathcock@driven.tech,Driven Tech,student6,Student-b,Pod 03,ATN570310,30862D42C90F,30862D42DDDF,WTW22110005
+Eric,Huntley,EHuntley@driven.tech,Driven Tech,student7,Student-a,Pod 04,ATN570311,30862D42C93F,30862D42DE0F,WTW22110279
+Rob,Schaefer,rschaefer@driven.tech,Driven Tech,student8,Student-b,Pod 04,ATN570312,30862D42C96F,30862D42DE3F,WTW22120072
+Darren,Kennedy,dkennedy@driven.tech,Driven Tech,student9,Student-a,Pod 05,ATN570313,30862D42C99F,30862D42E0DF,WTW22120191
+Open,-,-,-,student10,Student-b,Pod 05,,30862D42CFFF,30862D42E16F,WTW22130296
+Shawn,Sloan,Shawn.Sloan@computacenter.com,Computacenter,student11,Student-a,Pod 06,ATN570314,30862D42C9CF,30862D42E10F,WTW22120242
+Trevor,Reid,Trevor.Reid2@computacenter.com,Computacenter,student12,Student-a,Pod 06,ATN570315,30862D42CFCF,30862D42E13F,WTW22130251
+Jeff,Rhoades,jeff.rhoades@wwt.com,WWT,student13,Student-a,Pod 07,ATN570316,30862D42D05F,30862D42E1CF,WTW22130314
+Open,-,-,-,student14,Student-b,Pod 07,,30862D42D02F,30862D42E19F,WTW22130313
+Paul,Mancuso,pmancuso+cws@arista.com,Arista,arista,Student-a,Pod 08,ATN570237,-,-,-
