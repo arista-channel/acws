@@ -69,7 +69,7 @@ When you open the launcher, you are presented with multiple applications. Each i
 
     ![Campus Studio](./assets/images/b01/launchpad/04_launchpad.png)
 
-## CV-CUE CloudVision Wifi Access
+## CV-CUE CloudVision WiFi Access
 
 CloudVision CUE - Cognitive Unified Edge, provides the management plane and monitoring functions for the Arista WiFi solution.
 

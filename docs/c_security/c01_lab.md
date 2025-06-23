@@ -1,4 +1,4 @@
-# C-01 | AGNI and Wifi EAP-TLS 802.1X
+# C-01 | AGNI and WiFi EAP-TLS 802.1X
 
 ## Overview
 
@@ -10,7 +10,7 @@ docs/snippets/login_cvcue.md
 
 ## Create an EAP-TLS SSID
 
-The `Configure` section of CV-CUE is composed of multiple parts, including WiFi, Alerts, WIPS, etc. In this lab we are focused on the `Wifi` section.
+The `Configure` section of CV-CUE is composed of multiple parts, including WiFi, Alerts, WIPS, etc. In this lab we are focused on the `WiFi` section.
 
 !!! tip "Other configuration sections"
     - **Alerts:** Where syslog and other alert related settings are configured

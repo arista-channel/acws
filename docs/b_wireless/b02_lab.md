@@ -1,5 +1,5 @@
 
-# B-02 | Wifi Troubleshooting
+# B-02 | WiFi Troubleshooting
 
 ## Overview
 

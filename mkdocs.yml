@@ -8,19 +8,20 @@ nav:
         - Lab Access: lab/access.md
     #- Lab Guides:
     - Wired Lab Guides:
-        - Explore EOS: a_wired/a01_lab.md
-        - Day 1 Operations: a_wired/a02_lab.md
-        - Day 2 Operations: a_wired/a03_lab.md
-        - Operations and Monitoring: a_wired/a04_lab.md
+        - A01 - Explore EOS: a_wired/a01_lab.md
+        - A02 - Day 1 Operations: a_wired/a02_lab.md
+        - A03 - Day 2 Operations: a_wired/a03_lab.md
+        - A04 - Operations and Monitoring: a_wired/a04_lab.md
     - Wireless Lab Guides:
-        - Wireless Setup: b_wireless/b01_lab.md
-        - Troubleshooting Wifi: b_wireless/b02_lab.md
-        - Guest Wifi with AGNI: b_wireless/b03_lab.md
-        - Smart System Upgrade: b_wireless/b04_lab.md
+        - B00 - Wireless Management: b_wireless/b00_lab.md
+        - B01 - Wireless Setup: b_wireless/b01_lab.md
+        - B02 - Troubleshooting WiFi: b_wireless/b02_lab.md
+        - B03 - Guest WiFi with AGNI: b_wireless/b03_lab.md
+        - B04 - Smart System Upgrade: b_wireless/b04_lab.md
     - Security Lab Guides:
-        - EAP-TLS Wireless Policy: c_security/c01_lab.md
-        - UPSK Wireless Policy: c_security/c02_lab.md
-        - EAP-TLS Wired Policy: c_security/c03_lab.md
+        - C01 - EAP-TLS Wireless Policy: c_security/c01_lab.md
+        - C02 - UPSK Wireless Policy: c_security/c02_lab.md
+        - C03 - EAP-TLS Wired Policy: c_security/c03_lab.md
     - References:
         - General:
             - Agenda: references/agenda.md
@@ -32,10 +33,9 @@ nav:
             - Interface Diagnostics: references/interface_diag.md
             - AGNI Tacacs: references/agni_tacacs.md
         - Wireless:
-            - Onboarding WiFi Devices: references/wireless_onboard.md
             - Configuring Radius: references/radius.md
-            - Configuring RadSec: references/radsec.md
             - Guest AP Tunnel: references/l2tunnel.md
+            - RadSec: references/radsec.md
             - WIPS: references/wips.md
         #- Wireless Captive Portal: references/captive_portal.md
         

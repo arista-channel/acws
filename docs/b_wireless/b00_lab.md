@@ -74,4 +74,8 @@ CloudVision CUE - Cognitive Unified Edge, provides the management plane and moni
 
 In addition to the menu bar navigation and Locations Hierarchy, the UI provides a common Search bar, Metric summary, and Help button throughout workflows.
 
+!!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
+
+    [:material-login: LET'S GO TO THE NEXT LAB!](./b01_lab.md){ .md-button .md-button--primary }
+
 --8<-- "includes/abbreviations.md"
