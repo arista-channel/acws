@@ -22,7 +22,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **A01-Lab: Exploring EOS**
+- :cloudvision: **A01-Lab: Explore EOS**
 
     ---
 
@@ -30,7 +30,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-01](./a_wired/a01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A02-Lab: Day 1 Wired Deployment**
+- :cloudvision: **A02-Lab: Day 1 Operations**
 
     ---
 
@@ -38,7 +38,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-02](./a_wired/a02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A03-Lab: Day 2 Wired Deployment**
+- :cloudvision: **A03-Lab: Day 2 Operations**
 
     ---
 
@@ -46,7 +46,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-03](./a_wired/a03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A04-Lab: Operations and Troubleshooting**
+- :cloudvision: **A04-Lab: Operations and Monitoring**
 
     ---
 
@@ -59,15 +59,9 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 ## :material-wifi: Wireless Guides
 
 <div class="grid cards" markdown>
-- :cloudvision: **B00-Lab: Arista Wireless Management Plane**
 
-    ---
 
-    Get familiar with the Arista Wireless management plane and onboarding process
-
-    [:material-login: Hop into B-00](./b_wireless/b00_lab.md){ .md-button .md-button--primary }
-
-- :cloudvision: **B01-Lab: Day 1 WiFi Deployment**
+- :cloudvision: **B01-Lab: Wireless Setup**
 
     ---
 
@@ -75,7 +69,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B02-Lab: WiFi Troubleshooting**
+- :cloudvision: **B02-Lab: Troubleshooting WiFi**
 
     ---
 
@@ -83,7 +77,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B03-Lab: Guest Wireless**
+- :cloudvision: **B03-Lab: Guest WiFi with AGNI**
 
     ---
 
@@ -91,7 +85,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B04-Lab: Smart System Upgrade (SSU)**
+- :cloudvision: **B04-Lab: Smart System Upgrade**
 
     ---
 

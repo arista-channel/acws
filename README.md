@@ -112,4 +112,4 @@ To run mkdocs behind an nginx server
 - Larry Gomez ([larry@arista.com](mailto:larry@arista.com))
 
 ## Edited For Channel Partners by
-- Miguel Balagot ([miguel@arista.com](mailto:miguel@arista.com))
+- Miguel Balagot ([mbalagot@arista.com](mailto:mbalagot@arista.com))

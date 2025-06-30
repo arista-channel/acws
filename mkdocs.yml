@@ -9,19 +9,18 @@ nav:
     #- Lab Guides:
     - Wired Lab Guides:
         - A01 - Explore EOS: a_wired/a01_lab.md
-        - A02 - Day 1 Operations: a_wired/a02_lab.md
-        - A03 - Day 2 Operations: a_wired/a03_lab.md
-        - A04 - Operations and Monitoring: a_wired/a04_lab.md
+        - A02 - Provisioning a Campus Fabric: a_wired/a02_lab.md
+        - A03 - Access Interface Configuration: a_wired/a03_lab.md
+        - A04 - Operations, Dashboards, and Events: a_wired/a04_lab.md
     - Wireless Lab Guides:
-        - B00 - Wireless Management: b_wireless/b00_lab.md
         - B01 - Wireless Setup: b_wireless/b01_lab.md
-        - B02 - Troubleshooting WiFi: b_wireless/b02_lab.md
-        - B03 - Guest WiFi with AGNI: b_wireless/b03_lab.md
+        - B02 - WiFi Troubleshooting: b_wireless/b02_lab.md
+        - B03 - Guest Wireless with AGNI: b_wireless/b03_lab.md
         - B04 - Smart System Upgrade: b_wireless/b04_lab.md
     - Security Lab Guides:
-        - C01 - EAP-TLS Wireless Policy: c_security/c01_lab.md
-        - C02 - UPSK Wireless Policy: c_security/c02_lab.md
-        - C03 - EAP-TLS Wired Policy: c_security/c03_lab.md
+        - C01 - AGNI and WiFi EAP-TLS 802.1X: c_security/c01_lab.md
+        - C02 - AGNI UPSK Wireless Policy: c_security/c02_lab.md
+        - C03 - AGNI and Wired EAP-TLS 802.1X: c_security/c03_lab.md
     - References:
         - General:
             - Agenda: references/agenda.md

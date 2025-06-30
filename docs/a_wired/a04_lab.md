@@ -98,7 +98,7 @@ Dashboards are an important way to visualize commonly requested information, we'
 
 ### Device Health
 
-1. Next, Select the Device Health dashboard
+1. Next, Select the Device Hardware dashboard
 
     ![Campus Studio](./assets/images/a03/dashboards/04_dashboards.png)
 
