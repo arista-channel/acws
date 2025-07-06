@@ -20,7 +20,7 @@ The switch in front of you is in Zero-Touch Provisioning (ZTP) mode as they woul
 
 ??? tip "Out with the console cable"
 
-    Zero-Touch Provisioning in this lab is performed using a bootstrap script delivered over DHCP option 67. This tells your device where to begin streaming for onboarding, you can read more on the [CloudVision Help Center](https://www.cv-prod-us-central1-b.arista.io/help/articles/ZGV2aWNlcy5kZXZpY2VSZWdpc3RyYXRpb24ub25ib2FyZA==#onboard-devices)
+    Zero-Touch Provisioning in this lab is performed using a bootstrap script delivered over DHCP option 67. This tells your device where to begin streaming for onboarding, you can read more on the [CloudVision Help Center](https://www.cv-prod-us-central1-b.arista.io/help/articles/ZGV2aWNlcy5kZXZpY2VSZWdpc3RyYXRpb24ub25ib2FyZA==#onboard-devices){target="_blank"}
 
 --8<--
 docs/snippets/topology.md
@@ -139,7 +139,7 @@ docs/snippets/workspace.md
 
     !!! tip "Device Configuration"
 
-        Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop. This was done using [Arista Validated Designs (AVD)](https://avd.arista.com/5.1/index.html)
+        Here the base device configuration was generated for these devices before hand and include additional configuration for the workshop. This was done using [Arista Validated Designs (AVD)](https://avd.arista.com/5.1/index.html){target="_blank"}
 
     === "Add Config Step 1"
 

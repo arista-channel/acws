@@ -10,6 +10,12 @@ docs/snippets/login_agni.md
 
 Let's configure a Guest Captive Portal using AGNI for wireless clients. To configure the guest portal, you must configure both AGNI and CV-CUE.
 
+??? tip "Important: Your access points need to be onboarded in AGNI with RadSec before proceeding. Follow the steps here"
+
+    --8<--
+    docs/references/radsec.md
+    --8<--
+
 1. Navigate to `Guest > Portals` under the section `Identity`.
 
     ![Campus Studio](./assets/images/b02/portal/01_portal.png)
@@ -110,7 +116,7 @@ Next, we’ll configure a Guest Role in CV-CUE to assign to Guest Users post aut
 
 3. Add the `Role Name` as follows, this role is simple, but see the [additional information](#additional-information) below to explore some of the options you have with roles.
 
-    ???+ example "Network Settings"
+    ???+ example "Network Profiles"
         | Field     |   Student 1    |   Student 2    |
         | --------- | :------------: | :------------: |
         | Role Name | `Guest A Role` | `Guest B Role` |
@@ -230,17 +236,17 @@ Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign th
 
         Navigate to `Monitor > Clients` in CV-CUE
 
-        ![Campus Studio](../assets/images/tbd.png){ width="500" }
+        ![Campus Studio](../references/assets/images/l2tunnel/05_tunnel.png){ width="500" }
 
     === "AGNI"
 
         Navigate to `Sessions` in AGNI
 
-        ![Campus Studio](../assets/images/tbd.png){ width="500" }
+        ![Campus Studio](../references/assets/images/agni/agni_sessions.png){ width="500" }
 
 ## Tunneling Guest Traffic
 
-To highlight Arista's Controller-less Architecture we will use the labs Core 720DP to simulate a DMZ switch configured with VXLAN configured and tunnel guest traffic.
+To highlight Arista's Controller-less Architecture we will use the labs spine MLAG switches to terminate the AP tunnel with VXLAN configured and tunnel guest traffic.
 
 ### Create Tunnel Profile (CV-CUE)
 
@@ -288,11 +294,9 @@ To highlight Arista's Controller-less Architecture we will use the labs Core 720
 
     ![Dashboard](./assets/images/b03/04_tunnel.png)
 
-### Review VXLAN on CORE01 (Instructor CVAAS)
+### Review VXLAN on spine1 or spine2 in CVaas
 
 Screenshot shows VLAN200 mapped to VNI10200 and VXLAN clients with VLAN200 IPs
-
-# Need new screenshow with correct IP
 
    ![Dashboard](./assets/images/b03/05_tunnel.png)
 

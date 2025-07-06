@@ -3,10 +3,27 @@
 This is the home of the Channel Campus Workshop lab guides and AVD repository.
 
 ## Getting Started
+=== "Linux/MacOS"
 
 1. Create a python virtual environment and install requirements
 
     ```bash
+    Classic virtual environement creation
+
+    python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
+
+    Using uv
+
+
+    ```
+=== "Windows"
+1. Create a python virtual environment and install requirements
+
+    ```PowerShell
+    Install uv
+    
+    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+
     python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
     ```
 

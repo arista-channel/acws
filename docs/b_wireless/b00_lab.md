@@ -8,14 +8,14 @@ The Arista Wireless AP management plane (CV-CUE) is hosted within Arista’s pub
 
     For more information on the TCP/UDP ports and protocols involved for management functions, see the links below:
 
-    - [AP Wireless Manager Communication](https://wifihelp.arista.com/post/access-point-wireless-manager-communication)
-    - [TCP/UDP Ports Used by Arista Wireless](https://wifihelp.arista.com/post/tcp-and-udp-ports-used-by-arista-wi-fi-products)
+    - [AP Wireless Manager Communication](https://wifihelp.arista.com/post/access-point-wireless-manager-communication){target="_blank"}
+    - [TCP/UDP Ports Used by Arista Wireless](https://wifihelp.arista.com/post/tcp-and-udp-ports-used-by-arista-wi-fi-products){target="_blank"}
 
 --8<--
 docs/snippets/login_cvcue.md
 --8<--
 
-Go to the Arista CloudVision CUE portal via: https://launchpad.wifi.arista.com/
+Go to the Arista CloudVision CUE portal via: https://launchpad.wifi.arista.com/{target="_blank"}
 
 ## 01 | Launchpad
 

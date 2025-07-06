@@ -47,7 +47,7 @@ When you open the launcher, you are presented with multiple applications. Each i
 !!! tip "Authentication"
 
     CloudVision CUE authenticates users via SAML directory integration or via the Launchpad identity providers. These can be customized with local users in Launchpad or directory single-sign-on users.
-    More information on Arista Communities, [Integrating Third-Party SAML Authentication Providers](https://arista.my.site.com/AristaCommunity/s/article/Integrating-Third-Party-SAML-Solution-Providers-with-Arista-CV-CUE)
+    More information on Arista Communities, [Integrating Third-Party SAML Authentication Providers](https://arista.my.site.com/AristaCommunity/s/article/Integrating-Third-Party-SAML-Solution-Providers-with-Arista-CV-CUE){target="_blank"}
 
 ### AP Registration
 

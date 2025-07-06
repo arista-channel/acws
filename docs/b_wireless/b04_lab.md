@@ -6,7 +6,7 @@ Arista's Smart System Upgrade (SSU) is a feature to minimize traffic loss when u
 
 !!! info "Arista Smart System Upgrade"
 
-    Additional information about this feature can be found in the [Arista TOI for Smart System Upgrade](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu)
+    Additional information about this feature can be found in the [Arista TOI for Smart System Upgrade](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu){target="_blank"}
 
 In our workshop lab topology you will see that each leaf in your pod is directly connected to the access point and RaspberryPi client. Traditionally, a firmware upgrade on the lead in the pod would cause the access point, wireless clients connected to the access point, and the raspberry pi client to lose network connectivity. In this lab, we will use Arista SSU on the leaf switch in your pod to perform a firmware upgrade minimizing any network disruptions for both wired and wireless clients.
 
@@ -25,7 +25,7 @@ As you can imagine, disconnecting the Control and Management plane off the data 
 
 - [x] SSU only supports upgrades. Hitless image downgrades are not supported.
 - [x] If a new EOS version includes an FPGA upgrade, the FPGA upgrade will be suppressed. FPGA upgrades require a full reboot of a switch to apply.
-- [x] Some switch features, when in use, will prevent SSU from starting. See the [Arista TOI](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations) for more details
+- [x] Some switch features, when in use, will prevent SSU from starting. See the [Arista TOI](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations){target="_blank"} for more details
 
 ## Perform Arista SSU
 
@@ -50,7 +50,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
     !!! note "EOS Version"
 
-        That the switch is currently running EOS-4.31.5M, this is a supported starting version for Arista SSU on the CCS-710P-16P model switch we are using in this lab.
+        Smart System Upgrade (SSU) is supported on EOS versions 4.31.5M and later on CCS-710P-12/16P switches. In this example, the switch is currently running EOS-4.34.0F. This is a supported EOS version for Arista SSU.
 
     ```yaml
     show version
@@ -59,25 +59,25 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
     ???+ quote "Example Output"
 
         ```yaml
-        Arista CCS-710P-12
-        Hardware version: 11.03
-        Serial number: WTW22261433
-        Hardware MAC address: 2cdd.e9fe.dc0e
-        System MAC address: 2cdd.e9fe.dc0e
+                Arista CCS-710P-16P
+                Hardware version: 11.02
+                Serial number: WTW22220037
+                Hardware MAC address: 2cdd.e9fd.af50
+                System MAC address: 2cdd.e9fd.af50
 
-        Software image version: 4.31.5M
-        Architecture: i686
-        Internal build version: 4.31.5M-38783123.4315M
-        Internal build ID: a514fb70-598b-4084-975c-4f5978421b10
-        Image format version: 3.0
-        Image optimization: Strata-4GB
+                Software image version: 4.34.0F
+                Architecture: i686
+                Internal build version: 4.34.0F-41661064.4340F
+                Internal build ID: 8346ed5e-061a-4a70-9c36-b6eee6fc0848
+                Image format version: 3.0
+                Image optimization: Strata-4GB
 
-        Uptime: 59 minutes
-        Total memory: 3952504 kB
-        Free memory: 2408036 kB
+                Uptime: 2 hours and 5 minutes
+                Total memory: 3952472 kB
+                Free memory: 2193016 kB
         ```
 
-3. Type `dir` to show the list of files in the `flash:` filesystem. You should note that there are some EOS image versions already on the flash storage of the leaf1a switch. `EOS-4.31.5M`, which we are currently using, and `EOS-4.31.6M`, which is our target update version for this lab.
+3. Type `dir` to show the list of files in the `flash:` filesystem. You should note that there are some EOS image versions already on the flash storage of the leaf1a switch. Choose the latest EOS image version which is our target update version for this lab.
 
     ```yaml
     dir
@@ -85,47 +85,55 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
     ???+ quote "Example Output"
 
-        ```yaml hl_lines="5 6"
-        Directory of flash:/
+        ```yaml hl_lines="9 10"
+            Directory of flash:/
 
-            -rw-    32184348           Jan 19 10:06  AristaCloudGateway-1.0.2-1.swix
-            -rw-        7161           Jan 23 09:58  AsuFastPktTransmit.log
-            -rwx   834075912           Jan 22 19:51  EOS-4.31.5M.swi
-            -rwx   834335804           Jan 22 21:21  EOS-4.31.6M.swi
-            drwx        4096            Feb 4  2023  Fossil
-            -rw-        4402           Jan 23 09:58  SsuRestore.log
-            -rw-        4402           Jan 23 09:58  SsuRestoreLegacy.log
-            -rw-     6829174            May 6  2024  TerminAttr-1.31.2-1.swix
+            -rw-    25449761           Jul 21  2024  AristaCloudGateway-1.0.0-1.swix
+            -rw-    32184348           Apr 14 21:54  AristaCloudGateway-1.0.2-1.swix
+            -rw-    32566624            Jun 6 13:20  AristaCloudGateway-1.0.3-1.swix
+            -rw-       18480            Jul 2 05:51  AsuFastPktTransmit.log
+            -rw-   783781597            Dec 6  2021  EOS-4.29.1FX-710P-DHCP.swi
+            -rwx   834335804            Jul 1 03:33  EOS-4.31.6M.swi
+            -rwx   894262536            May 5 14:16  EOS-4.34.0F.swi
+            -rw-  1531686247            Jul 2 03:42  EOS-4.34.1F.swi
+            drwx        4096           Jun 15 00:24  Fossil
+            -rw-       11360            Jul 2 05:51  SsuRestore.log
+            -rw-       11360            Jul 2 05:51  SsuRestoreLegacy.log
             drwx        4096            Dec 6  2021  aboot
-            -rw-        8355           Jan 18 14:21  backup-config
-            -rw-         143           Jan 23 09:54  boot-config
-            -rw-           1           Jan 22 19:52  boot-extensions
-            drwx        4096           Jan 23 10:53  debug
+            -rw-          27            Jul 2 05:47  boot-config
+            -rw-          32            Jul 2 05:47  boot-extensions
+            drwx        4096            Jul 2 08:01  debug
             drwx        4096            Feb 4  2023  fastpkttx.backup
-            -rw-          98            Jun 5  2024  id_ed25519.pub
-            -rw-          24           May 13  2024  intf-ap-access.pcap
             drwx       16384            Dec 6  2021  lost+found
-            drwx        4096           Jan 23 10:57  persist
+            drwx        4096            Jul 2 08:00  persist
             drwx        4096            Feb 4  2023  schedule
-            -rw-        4816           Jan 23 10:23  startup-config
-            drwx        4096           Apr 30  2024  tpm-data
-            -rw-           0           Jan 22 20:48  zerotouch-config
-            drwx        4096           Jan 20 08:26  ztp-debug
+            -rw-        5224            Jul 2 05:47  startup-config
+            drwx        4096           Jul 21  2024  tpm-data
+            -rw-           0           Jun 29 20:50  zerotouch-config
+            drwx        4096           Jun 23 20:34  ztp-debug
 
-        7526043648 bytes total (4948328448 bytes free) on flash:
+            7527178240 bytes total (2043318272 bytes free) on flash:
         ```
 
-4. Type `show reload fast-boot`.  This command will show you an output of warnings or incompatibilities with the current configuration of the switch. As mentioned in the prerequisites section above, if any configuration is set in a way that prevents SSU from starting, the reasons will be listed here. In our output, we see that there are no configuration incompatibilities.
+4. Type `show reload fast-boot`.  This command will show you an output of warnings or incompatibilities with the current configuration of the switch. As mentioned in the prerequisites section above, if any configuration is set in a way that prevents SSU from starting, the reasons will be listed here.
 
-    ```yaml
-    show reload fast-boot
-    ```
+        ```yaml
+            show reload fast-boot
+        ```
+    
+    ???+ quote "Example Output when SSU will proceed with caution. In this case, MLAG is compatible"
+        ```yaml hl_lines="2 3 4 5"
+            pod00-leaf1a#show reload fast-boot
+            Warnings in the current configuration detected:
+            If you are performing an upgrade, and the Release Notes for the new version of EOS indicate that MLAG is not backwards-compatible with the currently installed version (4.34.1F), the upgrade will result in packet loss.
+            Mlag is configured
+        ```
 
-    ???+ quote "Example Output"
+    ???+ quote "Example Output when SSU will proceed without caution"
 
         ```yaml hl_lines="2"
-        pod00-leaf1a#show reload fast-boot
-        No warnings or unsupported configuration found.
+            pod00-leaf1a#show reload fast-boot
+            No warnings or unsupported configuration found.
         ```
 
 5. Now that we have confirmed our configuration is ready to allow SSU, let's prepare the switch for the upgrade process by setting the new boot image in the configuration of the switch. Issue the following commands:
@@ -134,7 +142,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
     ```bash
     configure
-    boot system flash:EOS-4.31.6M.swi
+    boot system flash:EOS-4.34.1F.swi
     exit
     write
     ```
@@ -142,11 +150,11 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
     ???+ quote "Example Output"
 
         ```yaml
-        pod00-leaf1a#configure
-        pod00-leaf1a(config)#boot system flash:EOS-4.31.6M.swi
-        pod00-leaf1a(config)#exit
-        pod00-leaf1a#write
-        Copy completed successfully.
+            pod00-leaf1a#configure
+            pod00-leaf1a(config)#boot system flash:EOS-4.34.1F.swi
+            pod00-leaf1a(config)#exit
+            pod00-leaf1a#write
+            Copy completed successfully.
         ```
 
 6. Before we apply the new firmware, let's start a ping test which will run during the switch upgrade process. We will see that the ping traffic will continue to flow through the switch even while its software is being upgraded.
@@ -177,9 +185,9 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
         During this test, **do not plug in or unplug devices from the switch**. Recall, the control plane will effectively be down, so changes or updates to the switch at a hardware level (like populating MAC add/removals) are unavailable.
 
-    ```yaml
-    reload fast-boot now
-    ```
+        ```yaml
+            reload fast-boot now
+        ```
 
 8. As the SSU process proceeds, you can watch the output on the serial console showing the switch preparing itself for reboot. The switch will reboot shortly, and you should see the normal output of a switch reboot.
 
@@ -188,63 +196,62 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
         During the SSU reboot process, you may see messages referring to Arista Smart Upgrade, or ASU. ASU is a previous version of SSU, and some references to ASU still exist in code for the SSU process.
 
 9. When you see the following message in your serial console of the switch, the switch is now rebooting.
+        ```yaml
+        reloading /mnt/flash/EOS-4.34.1F.swi
+        ```
 
-    ```yaml
-    reloading /mnt/flash/EOS-4.31.6M.swi
-    ```
-
-10. SSH to the switch is not possible since the management plane of the switch is rebooting. However, the dataplane is still functional. Open the ping terminal window we started in `step 8` and note that ping packets are still being sent and received even though the switch is in the middle of its reboot process.
+10. SSH to the switch is not possible since the management plane of the switch is rebooting. However, the dataplane is still functional. Open the ping terminal window we started in `step 6` and note that ping packets are still being sent and received even though the switch is in the middle of its reboot process.
 
 11. Below is the output of the full process, with highlights on terminal messages indicating the progress of the upgrade.
 
     ???+ quote "Example Output"
 
         ```yaml hl_lines="2 5 8 13 25"
-        pod00-leaf1a#reload fast-boot now
-        Running AsuPatchDb:doPatch( version=4.31.5M-38783123.4315M, model=Strata ) #(1)!
-        Optimizing image for current system - this may take a minute...
-        No warnings or unsupported configuration found.
-        2024-07-31 17:51:14.459848 Kernel Files /mnt/flash/EOS-4.31.6M.swi extracted from SWI #(2)!
-        2024-07-31 17:51:16.439052 ProcOutput passed to Kernel ['crashkernel=512-4G:45M,4G-8G:59M,8G-32G:89M,32G-:121M', 'nmi_watchdog=panic', 'tsc=reliable', 'pcie_ports=native', 'reboot=p', 'usb-storage.delay_use=0', 'pti=off', 'crash_kexec_post_notifiers', 'watchdog.stop_on_reboot=0', 'mds=off', 'nohz=off', 'printk.console_no_auto_verbose=1', 'CONSOLESPEED=9600', 'console=ttyS0', 'gpt', 'Aboot=Aboot-norcal6-6.2.1-2-25288791', 'net_ma1=pci0000:00/0000:00:12.0/usb1/.*$', 'platform=raspberryisland', 'scd.lpc_irq=3', 'scd.lpc_res_addr=0xf00000', 'scd.lpc_res_size=0x100000', 'block_flash=pci0000:00/0000:00:14.7/mmc_host/.*$', 'block_usb1=pci0000:00/0000:00:12.0/usb1/1-1/1-1.1/.*$', 'block_usb2=pci0000:00/0000:00:12.0/usb1/1-1/1-1.4/.*$', 'block_drive=pci0000:00/0000:00:11.0/.*host./target.:0:0/.*$', 'sid=RaspberryIsland16', 'log_buf_len=2M', 'systemd.show_status=0', 'sdhci.append_quirks2=0x40', 'amd_iommu=off', 'nvme_core.default_ps_max_latency_us=0', 'SWI=/mnt/flash/EOS-4.31.6M.swi', 'arista.asu_hitless']
-        Proceeding with reload
-        No qualified FPGAs to upgrade #(3)!
-        waiting for platform processing ..........................................................ok
-        Shutting down packet drivers
-        2024-07-31 17:52:54.117479 bringing fab down
-        2024-07-31 17:52:54.437128 bringing fifo down
-        reloading /mnt/flash/EOS-4.31.6M.swi #(4)!
-        Shutting down management interface(s)
-        1 block
-        umount: /mnt/flash: target is busy.
-        [71576.090602][T15227] kexec_core: Starting new kernel
-        [    2.363505][  T296] Running e2fsck on: /mnt/flash
-        [    2.803117][  T303] e2fsck on /mnt/flash took 1s
-        [    3.116739][  T370] Running e2fsck on: /mnt/crash
-        [    3.181814][  T375] e2fsck on /mnt/crash took 0s
-        Mounting SWIM Filesystem
-        Optimization Strata-4GB root squash found
-        Optimization Strata-4GB all squashes found
-        Mounting optimization Strata-4GB #(5)!
-        Switching rootfs
-        Welcome to Arista Networks EOS 4.31.6M
-        Architecture: i386
-        [   43.938521] sh[2099]: Starting EOS initialization stage 1
-        Starting NorCal initialization: [  OK  ]
-        [   48.023047] sh[2181]: Starting EOS initialization stage 2
-        Completing EOS initialization (press ESC to skip): [  OK  ]
-        Model: CCS-710P-16P
-        Serial Number: WTW22200366
-        System RAM: 3952504 kB
-        Flash Memory size:  7.1G
+            pod00-leaf1a#reload fast-boot now
+            Running AsuPatchDb:doPatch( version=4.34.0F-38783123.4315M, model=Strata ) #(1)!
+            Optimizing image for current system - this may take a minute...
+            No warnings or unsupported configuration found.
+            2024-07-31 17:51:14.459848 Kernel Files /mnt/flash/EOS-4.34.1F.swi extracted from SWI #(2)!
+            2024-07-31 17:51:16.439052 ProcOutput passed to Kernel ['crashkernel=512-4G:45M,4G-8G:59M,8G-32G:89M,32G-:121M', 'nmi_watchdog=panic', 'tsc=reliable', 'pcie_ports=native', 'reboot=p', 'usb-storage.delay_use=0', 'pti=off', 'crash_kexec_post_notifiers', 'watchdog.stop_on_reboot=0', 'mds=off', 'nohz=off', 'printk.console_no_auto_verbose=1', 'CONSOLESPEED=9600', 'console=ttyS0', 'gpt', 'Aboot=Aboot-norcal6-6.2.1-2-25288791', 'net_ma1=pci0000:00/0000:00:12.0/usb1/.*$', 'platform=raspberryisland', 'scd.lpc_irq=3', 'scd.lpc_res_addr=0xf00000', 'scd.lpc_res_size=0x100000', 'block_flash=pci0000:00/0000:00:14.7/mmc_host/.*$', 'block_usb1=pci0000:00/0000:00:12.0/usb1/1-1/1-1.1/.*$', 'block_usb2=pci0000:00/0000:00:12.0/usb1/1-1/1-1.4/.*$', 'block_drive=pci0000:00/0000:00:11.0/.*host./target.:0:0/.*$', 'sid=RaspberryIsland16', 'log_buf_len=2M', 'systemd.show_status=0', 'sdhci.append_quirks2=0x40', 'amd_iommu=off', 'nvme_core.default_ps_max_latency_us=0', 'SWI=/mnt/flash/EOS-4.34.1F.swi', 'arista.asu_hitless']
+            Proceeding with reload
+            No qualified FPGAs to upgrade #(3)!
+            waiting for platform processing ..........................................................ok
+            Shutting down packet drivers
+            2024-07-31 17:52:54.117479 bringing fab down
+            2024-07-31 17:52:54.437128 bringing fifo down
+            reloading /mnt/flash/EOS-4.34.1F.swi #(4)!
+            Shutting down management interface(s)
+            1 block
+            umount: /mnt/flash: target is busy.
+            [71576.090602][T15227] kexec_core: Starting new kernel
+            [    2.363505][  T296] Running e2fsck on: /mnt/flash
+            [    2.803117][  T303] e2fsck on /mnt/flash took 1s
+            [    3.116739][  T370] Running e2fsck on: /mnt/crash
+            [    3.181814][  T375] e2fsck on /mnt/crash took 0s
+            Mounting SWIM Filesystem
+            Optimization Strata-4GB root squash found
+            Optimization Strata-4GB all squashes found
+            Mounting optimization Strata-4GB #(5)!
+            Switching rootfs
+            Welcome to Arista Networks EOS 4.34.1F
+            Architecture: i386
+            [   43.938521] sh[2099]: Starting EOS initialization stage 1
+            Starting NorCal initialization: [  OK  ]
+            [   48.023047] sh[2181]: Starting EOS initialization stage 2
+            Completing EOS initialization (press ESC to skip): [  OK  ]
+            Model: CCS-710P-16P
+            Serial Number: WTW22200366
+            System RAM: 3952504 kB
+            Flash Memory size:  7.1G
 
-        pod00-leaf1a login:
-
-
-
-        Wait for the SSU process to complete. This can take up to 10 minute.  When you see the following console message, the switch management plane has finished its reboot.
+            pod00-leaf1a login:
 
 
-        pod00-leaf1a login:
+
+            Wait for the SSU process to complete. This can take up to 10 minute.  When you see the following console message, the switch management plane has finished its reboot.
+
+
+            pod00-leaf1a login:
         ```
 
         1. Remember the mention, there may still be some mention of ASU in the code. This is the SSU process kicking off.
@@ -253,7 +260,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
         4. Reloading the management and control plane to the new software image
         5. Mounting the software on to the hardware, `Strata` in this case is the family of ASICs
 
-12. You can now login with the username/password and type `enable` to get back to privileged commands mode. Check the new current running version of the switch with the command `show version`. You should see the switch has upgraded to `EOS-4.31.6M`
+12. You can now login with the username/password and type `enable` to get back to privileged commands mode. Check the new current running version of the switch with the command `show version`. You should see the switch has upgraded to `EOS-4.34.1F`
 
     ???+ quote "Example Output"
 
@@ -264,9 +271,9 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
         Hardware MAC address: 2cdd.e9f6.e9f2
         System MAC address: 2cdd.e9f6.e9f2
 
-        Software image version: 4.31.6M
+        Software image version: 4.34.1F
         Architecture: i686
-        Internal build version: 4.31.6M-37710335.4314M
+        Internal build version: 4.34.1F-37710335.4314M
         Internal build ID: d26721db-c526-41ec-bf9d-0a14b4edfcf5
         Image format version: 3.0
         Image optimization: Strata-4GB

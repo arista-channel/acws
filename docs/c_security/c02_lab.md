@@ -52,7 +52,7 @@ Let's create our new UPSK SSID by copying/modifying the PSK SSID we created in t
 
     !!! tip "UPSK Information"
 
-        For more information on UPSK visit the article on [Unique PSK](https://arista.my.site.com/AristaCommunity/s/article/Unique-PSKs)
+        For more information on UPSK visit the article on [Unique PSK](https://arista.my.site.com/AristaCommunity/s/article/Unique-PSKs){target="_blank"}
 
     ???+ example "Settings"
 
@@ -209,13 +209,13 @@ In this section, you will simulate your device as an IoT device.
 
 7. `Copy` the UPSK Passphrase and click on `Add Group`
 8. Next, connect your client to ATD-##-UPSK using the Client Group UPSK Passphrase.
-9. Click on Sessions and validate your device connection.
+9. Click on `Sessions` and validate your device connection.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    <!-- ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" } -->
 
 10. Next Click on your `Client`.
 
-    ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" }
+    <!-- ![Wireless EAP-TLS](../assets/images/tbd.png){ width="300px" } -->
 
 11. Notice your Client Group. Here you have the option to change the Client Group your device belongs to.
 

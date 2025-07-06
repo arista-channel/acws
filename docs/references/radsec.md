@@ -12,8 +12,8 @@ Arista Switches can form a RadSec tunnel using SSL encryption with AGNI:
 - The highly secure and encrypted tunnel offers complete protection to the communications that happen in a distributed network environment. This mechanism offers much greater security to AAA workflows when compared with traditional unencrypted RADIUS workflows.
 
 !!! info "More information on RadSec"
-    - [Configuring a RadSec profile in EOS](https://arista.my.site.com/AristaCommunity/s/article/Configuring-RadSec-profile-in-EOS)
-    - [RADIUS Dynamic Authorization over TLS](https://www.arista.com/en/support/toi/eos-4-27-0f/14891-radius-dynamic-authorization-over-tls)
+    - [Configuring a RadSec profile in EOS](https://arista.my.site.com/AristaCommunity/s/article/Configuring-RadSec-profile-in-EOS){target="_blank"}
+    - [RADIUS Dynamic Authorization over TLS](https://www.arista.com/en/support/toi/eos-4-27-0f/14891-radius-dynamic-authorization-over-tls){target="_blank"}
 
 !!! note "Open AGNI and CV-CUE"
 
@@ -26,8 +26,8 @@ Arista Switches can form a RadSec tunnel using SSL encryption with AGNI:
 It's important to identify if the wired or wireless device you are configuring is manufactured with a Trusted Platform Module (TPM) chip. This chip contains the required certificate used for RadSec. However, if the TPM chip does not exist, CV-CUE supports Custom Certificate Management for Access Points.
 
 !!! info "More information on TPM"
-    - [Wireless TPM vs Non-TPM](https://www.arista.com/en/support/toi/cv-cue-18-0-0/20886-wi-fi-access-point-server-communication-workflow)
-    - [TPM chip APs - RadSec Tunnel Configuration](https://www.youtube.com/watch?v=9kxJDjRnVnE)
+    - [Wireless TPM vs Non-TPM](https://www.arista.com/en/support/toi/cv-cue-18-0-0/20886-wi-fi-access-point-server-communication-workflow){target="_blank"}
+    - [TPM chip APs - RadSec Tunnel Configuration](https://www.youtube.com/watch?v=9kxJDjRnVnE){target="_blank"}
     - [Non-TPM chip APs - RadSec Tunnel with Custom Certificate](https://www.youtube.com/watch?v=kFJ24zRHYJ8&list=PL3NLCp8DnVftRcsTAa8xmKBrJ3WJLxvzn&index=4)
 
 ### Summary

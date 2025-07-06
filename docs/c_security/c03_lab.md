@@ -13,6 +13,12 @@ In this lab we enhance the port security to our Raspberry Pi! We will do the fol
 docs/snippets/topology.md
 --8<--
 
+??? tip "Important: Your switches need to be onboarded in AGNI with RadSec before proceeding. Follow the steps here"
+
+    --8<--
+    docs/references/radsec_on_eos.md
+    --8<--
+
 ??? tip "Reminder on logging in and creating a workspace"
 
     --8<--
@@ -71,7 +77,7 @@ In this lab you will be configuring RadSec on your lab switches by adding the Ra
 
    ![Campus Studio](./assets/images/c03/02_radsec.png)
 
-5. Select the configlet named for your switch, should be `pod##-leaf1X-radsec` and click `Assign` to add the configlet to the switch
+5. Select the configlet named for your switch, should be `radsec` and click `Assign` to add the configlet to the switch
 
    ![Campus Studio](./assets/images/c03/03_radsec.png)
 
@@ -118,13 +124,13 @@ In this lab you will be configuring RadSec on your lab switches by adding the Ra
 
 10. The change control will execute and apply all the RadSec configuration changes to the device. This will enable RadSec connectivity between the switch and AGNI.
 
-    !!! tip "Automating Certificates"
+    <!-- !!! tip "Automating Certificates"
 
-        The switch and AGNI certs were generated, signed, and installed using automation before hand. Specifically ansible and leveraging both the switch eAPI and AGNI API. You can read more on how this role works [EOS AGNI Radsec (GitHub)](https://github.com/carl-baillargeon/eos_agni_radsec/tree/main)
+        The switch and AGNI certs were generated, signed, and installed using automation before hand. Specifically ansible and leveraging both the switch eAPI and AGNI API. You can read more on how this role works [EOS AGNI Radsec (GitHub)](https://github.com/carl-baillargeon/eos_agni_radsec/tree/main){target="_blank"}
 
     ![Campus Studio](./assets/images/c03/09_radsec.png)
 
-11. See the [Configuring RadSec](../references/radsec.md) in EOS for additional information. You can
+11. See the [Configuring RadSec](../references/radsec.md) in EOS for additional information. -->
 
 --8<--
 docs/snippets/login_agni.md
@@ -194,8 +200,6 @@ docs/snippets/login_agni.md
     ![Campus Studio](./assets/images/c03/agni/07_agni.png)
 
 11. Next, click on `Sessions` to see if your ATD Raspberry Pi has a connection via the Wired connection.
-
-    TODO: Get screenshot
 
     ![Campus Studio](./assets/images/c03/agni/07_agni.png)
 

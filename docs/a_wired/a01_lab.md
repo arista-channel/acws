@@ -456,7 +456,7 @@ Let's explore the configuration and how to troubleshoot
         1. MLAG domain is locally significant to the MLAG pair of switches, this can be any descriptor. Whether it's simply `MLAG` like shown or the name of say a pod: `POD01`
         2. The local interface used to peer to the MLAG neighbor, this will always be an SVI
         3. The MLAG neighbors address that resides within the `local-interface` subnet
-        4. This is an optional configuration called [Dual Primary Detection](https://www.arista.com/en/support/toi/eos-4-23-1f/14406-mlag-dual-primary-detection-and-release-updates), you can read more on this topic.
+        4. This is an optional configuration called [Dual Primary Detection](https://www.arista.com/en/support/toi/eos-4-23-1f/14406-mlag-dual-primary-detection-and-release-updates){target="_blank"}, you can read more on this topic.
         5. The peer link is the layer 2 port-channel used to trunk our MLAG vlans, we'll explore below how that's configured.
 
 4. Let's take a closer look at the peer link itself
