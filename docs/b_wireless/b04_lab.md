@@ -27,6 +27,12 @@ As you can imagine, disconnecting the Control and Management plane off the data 
 - [x] If a new EOS version includes an FPGA upgrade, the FPGA upgrade will be suppressed. FPGA upgrades require a full reboot of a switch to apply.
 - [x] Some switch features, when in use, will prevent SSU from starting. See the [Arista TOI](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations){target="_blank"} for more details
 
+!!! tip "First, download the desired EOS image to the switch flash storage.  Login to your switch using the `arista` user credentials."
+
+```bash
+copy tftp:10.1.100.50/EOS-4.34.1F.swi flash:
+```
+
 ## Perform Arista SSU
 
 Let's begin the hands-on portion of this lab. SSU can be triggered on the command line or via CloudVision. For this lab we will be triggering an SSU upgrade using the command line, preferably using the serial port of the switch. As in
@@ -117,9 +123,9 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
 4. Type `show reload fast-boot`.  This command will show you an output of warnings or incompatibilities with the current configuration of the switch. As mentioned in the prerequisites section above, if any configuration is set in a way that prevents SSU from starting, the reasons will be listed here.
 
-        ```yaml
-            show reload fast-boot
-        ```
+     ```yaml
+        show reload fast-boot
+     ```
     
     ???+ quote "Example Output when SSU will proceed with caution. In this case, MLAG is compatible"
         ```yaml hl_lines="2 3 4 5"
@@ -305,7 +311,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
     ???+ quote "Example Output"
 
         ```yaml hl_lines="10-17"
-        kbush@MacBook-Pro ~ % ping -i 0.1 10.0.111.1
+        me@MacBook-Pro ~ % ping -i 0.1 10.0.111.1
         64 bytes from 9.9.9.9: icmp_seq=0 ttl=51 time=10.974 ms
         64 bytes from 9.9.9.9: icmp_seq=1 ttl=51 time=10.147 ms
         64 bytes from 9.9.9.9: icmp_seq=2 ttl=51 time=10.583 ms

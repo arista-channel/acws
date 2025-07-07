@@ -28,6 +28,8 @@ nav:
             - Lab Assignment: references/orl_lab_assignment.md
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
+        - Working with Certificates:
+            - Cut-and-Paste Method: references/cut_paste_certs.md
         - Wired:
             - Interface Diagnostics: references/interface_diag.md
             - AGNI Tacacs: references/agni_tacacs.md

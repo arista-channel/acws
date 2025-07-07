@@ -21,7 +21,7 @@ The hardware you see sitting in front of you can
 
     ---
 
-    Each pod will be provided their own instance of:
+    Except for CVaas, each pod will be provided their own instance of:
 
       - [x] **Arista CloudVision as a Service (CVaaS)** - Our management, orchestration, and visibility
       - [x] **Arista CloudVision Cognitive Unified Edge (CV-CUE)** - Our wireless management, orchestration, and visibility
