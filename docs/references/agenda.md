@@ -13,7 +13,7 @@ Wireless Lab | B-01: Wireless Setup
 Wireless Lab | B-02: Troubleshooting WiFi
 12:00pm - 12:50pm | Lunch-and-Learn
 Overview of Arista Zero Trust Networking Security | Remote Presentation
-1:00 - 1:25 | Recap of the morning sessions
+1:00 - 1:25 | Q&A and Recap of the morning sessions
 1:30 - 2:25 | Labs: Guest Wireless and Hitless Upgrade
 Wireless Lab | B-03: Guest WiFi with AGNI
 Wireless Lab | B-04: Smart System Upgrade (SSU)
@@ -21,22 +21,22 @@ Wireless Lab | B-04: Smart System Upgrade (SSU)
 Wired Lab | A-01 Explore EOS
 3:30 - 4:25 | Labs: CloudVision Telemetry
 Wired Lab | A-04: Operations, Dashboards and Events
-4:30 - 5:00 | Recap of the afternoon session
+4:30 - 5:00 | Q&A and Recap of the afternoon session
 5:00 - 6:00 | Happy Hour - Location TBD
 6:00 - 8:00 | Team Dinner
 Day 2 | Security, Design and Competition
-8:30 - 8:55 | Recap of Day 1 
+8:30 - 8:55 | Q&A and Recap of Day 1 
 9:00 - 9:25 | Overview of Arista Network Access Control (NAC) with AGNI
-9:30 - 10:55 | Labs: AGNI - Enforce Network Access Policies - Wireless
+9:30 - 10:25 | Labs: AGNI - Enforce Network Access Policies - Wireless
 AGNI Lab | C-01: AGNI and WiFi EAP-TLS 802.1X
 AGNI Lab | C-02: AGNI and Unique Pre-Shared Keys (UPSK)
-11:30 - 11:55 | Labs: AGNI - Enforce Network Access Policies - Wired
+10:30 - 10:55 | Labs: AGNI - Enforce Network Access Policies - Wired
 AGNI Lab | C-03: AGNI and Wired EAP-TLS
-12:00 - 12:50pm | Lunch-and-Learn
-Overview of Intangi Iris
-1:00 - 1:25 | Labs: Iris - Design, Configure and Price Out Your Network
-Lab D-00: Iris Design, Configuration and Pricing
-1:30 - 3:30 | Competition
-Campust Network Design | Iris Arista campus network design and BOM creation
-Demo |CloudVision, CV-CUE and AGNI
+11:00 - 11:25 | Overview of Intangi Iris
+11:30 - 11:55 | Labs: Iris - Design, Configure and Price Out Your Network
+Iris Lab | D-00: Iris Design, Configuration and Pricing
+12:00 - 12:50pm | Lunch and Q&A
+1:00 - 3:30 | Competition
+Campus Network Design | Iris Arista campus network design and BOM creation
+Demo | CloudVision, CV-CUE and AGNI
 Awards. Must be present to win.
