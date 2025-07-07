@@ -16,8 +16,8 @@
 
 ### Accesible from your browser
 
-1. On the web [Arista Campus Workshop Lab Guides](https://acws.duckdns.org/)
-2. Local server [Arista Campus Workshop Lab Guides](http://10.1.100.50/)
+1. On the web [Arista Campus Workshop Lab Guides](https://acws.duckdns.org/){target="_blank"}
+2. Local server [Arista Campus Workshop Lab Guides](http://10.1.100.50:8000/){target="_blank"}   
 
 ## Wireless 
 ### SSID: `Arista-Workshop`
