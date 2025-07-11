@@ -245,9 +245,10 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
     If you are viewing this guide as a MkDocs site, simply right click the image below and `Save Image As` to your Desktop.
 
-!!! info ":fontawesome-solid-file-pdf: PDF Emailed Floor Plan"
+!!! info ":fontawesome-solid-laptop-code: Use your favorite snip program"
 
-    If you are viewing this as a PDF, check the email you received as part of this Arista Test Drive session. You will find an image attached to the email to use as a floor plan. Save that image to your computer
+    On your Mac, `Command+Shitt+5` and snip the image here and save that image to your computer.
+    On Windows, use your favorite snip program to capture the image below and save it to your computer.
 
 ![Campus Studio](./assets/images/b01/config/office.png)
 
@@ -255,14 +256,14 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
     ![Campus Studio](./assets/images/b01/config/14a_config.png)
 
-2. Enter floor name as `1st Floor`, click the `Upload Image` button to import the floor plan image, and use the following dimensions:  Floor Plan Dimensions: Unit: Feet, Length: 120, Width: 50
+2. Enter floor name as `1st Floor`, click the `Upload Image` button to import the floor plan image, and use the following dimensions:  Floor Plan Dimensions: Unit: Feet, Length: 120, Width: 60
 
     ???+ example "Floor Plan Settings"
 
         | Key    | Value |
         | ------ | :---: |
         | Unit   | Feet  |
-        | Length |  120  | 1 |
+        | Length |  120  |
         | Width  |  60   |
 
     ![Campus Studio](./assets/images/b01/config/15_config.png)

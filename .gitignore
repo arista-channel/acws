@@ -152,3 +152,7 @@ documentation/
 act/tokens/*
 tmp/
 eos_images/*.swi
+# Sharpened images
+docs_sharpened/
+# sharpen_images.py
+sharpen_images.py
