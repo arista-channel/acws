@@ -1,112 +1,89 @@
-# Arsita Channel Campus Workshop
+# Arista Campus Workshop Docs
 
-This is the home of the Channel Campus Workshop lab guides and AVD repository.
+This project uses [MkDocs](https://www.mkdocs.org/) to build and serve documentation for the Arista Campus Workshop.
 
-## Getting Started
-=== "Linux/MacOS"
+## 🚀 Quick Start
 
-1. Create a python virtual environment and install requirements
+### 1. Clone the Repository
 
-    ```bash
-    Classic virtual environement creation
+```sh
+git clone https://github.com/mbalagot12/campus-workshop.git
+cd your-repo
+```
 
-    python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
+### 2. Install Python (if needed)
 
-    Using uv
+- **MacOS/Linux:**  
+  Python 3.8+ is usually pre-installed. Check with:
+  ```sh
+  python3 --version
+  ```
+- **Windows 11:**  
+  Download and install Python from [python.org](https://www.python.org/downloads/windows/).
 
+### 3. Create a Virtual Environment
 
-    ```
-=== "Windows"
-1. Create a python virtual environment and install requirements
+#### Option 1: Using `venv` (Standard Python)
 
-    ```PowerShell
-    Install uv
-    
-    powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```sh
+python3 -m venv venv
+source venv/bin/activate      # MacOS/Linux
+venv\Scripts\activate         # Windows
+```
 
-    python3 -m venv venv && source venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt
-    ```
+#### Option 2: Using [`uv`](https://github.com/astral-sh/uv) (Fast Python package manager)
 
-2. Launch the Mkdocs server
+1. Install `uv` (if not already installed):
 
-    ```bash
-    mkdocs serve -a 127.0.0.1:8000
-    ```
+    - **MacOS/Linux:**
+      ```sh
+      curl -Ls https://astral.sh/uv/install.sh | sh
+      ```
+    - **Windows (PowerShell):**
+      ```powershell
+      irm https://astral.sh/uv/install.ps1 | iex
+      ```
 
-3. Navigate to `http://127.0.0.1:8000`
+2. Create and activate a virtual environment with `uv`:
 
-## Contributing
-
-Contributing to the guides is welcome, you can follow the steps below to contribute
-
-1. Clone the repository, it's recommended to [setup GitHub SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-
-    ```bash
-    git clone git@github.com:kpbush30/campus-workshop.git
-    ```
-
-2. Create a branch, try naming the branch after the docs you are modifying.
-
-    ```bash
-    git branch -c your-branch
-    git switch your-branch
-    ```
-
-3. Install pre-commit
-
-    ```bash
-    pre-commit install
+    ```sh
+    uv venv .venv
+    source .venv/bin/activate      # MacOS/Linux
+    .venv\Scripts\activate         # Windows
     ```
 
-4. Make your changes and push to your branch
+### 4. Install MkDocs and Required Plugins
 
-    ```bash
-    git add --all
-    git commit -m "Commit message"
-    git push
-    ```
+```sh
+pip install mkdocs mkdocs-material
+```
 
-5. If pre-commit catches any errors, fix the errors to commit. Some formatting fixes are done for you and must be re-committed
+> Add any additional plugins your project uses (e.g., `pip install mkdocs-table-reader-plugin`).
 
-    ```bash
-    git commit -am "Commit message"
-    git push
-    ```
+### 5. Serve the Documentation Locally
 
-6. Finally, open a PR on GitHub and notify the maintainers
+```sh
+mkdocs serve
+```
 
-## Rebasing
+Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser to view the docs.
 
-If changes have been made upstream in the amin branch, you may need to rebase. use the following to rebase.
+### 6. Build the Static Site
 
-1. Commit all changes on your current branch
+```sh
+mkdocs build
+```
 
-    ```bash
-    git commit -am "Save all changes"
-    ```
+The static site will be generated in the `site/` directory.
 
-2. Switch to the `main` branch and pull down the latest changes
+---
 
-    ```bash
-    git switch main
-    git pull
-    ```
+## 🛠️ Troubleshooting
 
-3. Switch back to your branch and rebase
+- If you encounter permission errors, try running commands with `python3` instead of `python`.
+- For Windows, always use the Command Prompt or PowerShell, not WSL unless you have Python set up there.
 
-    ```bash
-    git switch your-branch
-    git rebase main
-    ```
-
-4. You may end up with conflicts, you must resolve those and commit changes and continue
-
-    ```bash
-    git commit -am "Save all changes"
-    git rebase --continue
-    ```
-
-5. You can now push to your branch
+---
 
 ## Running Server
 
@@ -116,7 +93,12 @@ To run mkdocs behind an nginx server
 2. Build the mkdocs site
 3. Navigate to the server IP
 
-   If you are unable to navigate to the local IP address, you may have to open `System Prefrences
+   If you are unable to navigate to the local IP address, you may have to open `System Preferences`.
+
+## 📚 Resources
+
+- [MkDocs Documentation](https://www.mkdocs.org/)
+- [MkDocs Material Theme](https://squidfunk.github.io/mkdocs-material/)
 
 ### References
 
