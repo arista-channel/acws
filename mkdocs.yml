@@ -28,6 +28,10 @@ nav:
             - Lab Assignment: references/orl_lab_assignment.md
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
+        - Arista Advance EOS:
+            - Arista EOS Tips & Tricks: references/arista_eos_guide.md
+        - Arista @Home:
+            - Configuring Arista switches and APs for Home Use: references/arista_home.md
         - Working with Certificates:
             - Cut-and-Paste Method: references/cut_paste_certs.md
         - Wired:
@@ -51,6 +55,8 @@ extra:
       link: https://www.arista.com
     version:
         provider: mike
+        default: latest
+        alias: true
 theme:
     name: material
     custom_dir: docs/overrides

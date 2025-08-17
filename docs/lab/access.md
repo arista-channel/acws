@@ -10,6 +10,7 @@ Get familiar with your fellow student, you will be working together to configure
 ## Topology
 
 ![Network Topology](../assets/images/topology/atd_student-light.png#only-light)
+![Network Topology](../assets/images/topology/atd_student-dark.png#only-dark)
 
 ## Equipment
 
