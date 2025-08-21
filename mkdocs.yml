@@ -21,6 +21,12 @@ nav:
         - C01 - AGNI and WiFi EAP-TLS 802.1X: c_security/c01_lab.md
         - C02 - AGNI UPSK Wireless Policy: c_security/c02_lab.md
         - C03 - AGNI and Wired EAP-TLS 802.1X: c_security/c03_lab.md
+    
+    # - SD-WAN Lab Guides:
+    #     - D01 - SD-WAN Overview: d_sdwan/d01_lab.md
+    #     - D02 - SD-WAN Configuration: d_sdwan/d02_lab.md
+    #     - D03 - SD-WAN Operations: d_sdwan/d03_lab.md
+
     - References:
         - General:
             - Agenda: references/agenda.md
@@ -32,6 +38,10 @@ nav:
             - Arista EOS Tips & Tricks: references/arista_eos_guide.md
         - Arista @Home:
             - Configuring Arista switches and APs for Home Use: references/arista_home.md
+        
+        # - Arista Velocloud:
+        #     - VeloCloud on EVE-NG: references/velocloud_eveng_guide.md
+
         - Working with Certificates:
             - Cut-and-Paste Method: references/cut_paste_certs.md
         - Wired:
