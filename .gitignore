@@ -156,3 +156,4 @@ eos_images/*.swi
 docs_sharpened/
 # sharpen_images.py
 sharpen_images.py
+*.sh
