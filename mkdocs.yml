@@ -31,7 +31,7 @@ nav:
         - General:
             - Agenda: references/agenda.md
             - WiFi Passwords: references/wifi_password.md
-            - Lab Assignment: references/orl_lab_assignment.md
+            - Lab Assignment: references/lab_assignment.md
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
         - Arista Advance EOS:
