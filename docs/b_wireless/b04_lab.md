@@ -30,7 +30,9 @@ As you can imagine, disconnecting the Control and Management plane off the data 
 !!! tip "First, download the desired EOS image to the switch flash storage.  Login to your switch using the `arista` user credentials."
 
 ```bash
-copy tftp:10.1.100.50/EOS-4.34.1F.swi flash:
+copy https://ztp-acws.duckdns.org/images/EOS-4.34.1F.swi flash:
+# or
+copy https://10.1.100.50/EOS-4.34.1F.swi flash:
 ```
 
 ## Perform Arista SSU

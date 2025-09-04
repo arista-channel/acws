@@ -1,7 +1,7 @@
-# Nashville Lab Assignment - October 28-29, 2025
+# Nashville Lab Assignment - Oct. 28-29, 2025
 
-## Access Points and Switches Serial Numbers
-{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","center"), usecols=['Email','AP#1','AP#2','Switch']) }}
+## Access Points Serial Numbers
+{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','AP#1','AP#2']) }}
 
-## Student and Pod Assignment
-{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
+<!-- ## Student and Pod Assignment
+{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","left"), usecols=['Email','Lab Assignment','Student Pod #','ATD Token']) }} -->
