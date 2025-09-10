@@ -149,7 +149,7 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
     ![Campus Studio](./assets/images/b01/config/03_config.png){ width=600" }
 
-4. Next, create a `Floor` called `1st Floor`.  Click on the word `A/BCorp` to expose the 3 dots menu.
+4. Next, create a `Floor` called `1st Floor`.  Click on the word `ACorp` to expose the 3 dots menu.
 
     ![Campus Studio](./assets/images/b01/config/04_config.png){ width=600" }
 
@@ -191,7 +191,7 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 For this workshop event, we will be reducing WiFi Radio channel width and transmit power levels to avoid interference with the hosting facility.
 
 1. To customize these power settings:  Navigate to the `Configure > Device > Access Points` menu
-2. Once in that menu, ensure that `ACorp` or `BCorp` is selected from the tree structure on the left. If you do not see the tree structure, click the hamburger icon next to `Locations` in the top left to expose the tree.
+2. Once in that menu, ensure that `ACorp` is selected from the tree structure on the left. If you do not see the tree structure, click the hamburger icon next to `Locations` in the top left to expose the tree.
 
 3. Set the following parameters under the `WiFi Radios` tab and `5GHz` (you can ignore 2.4GHz) and you will override the following:
 
@@ -209,18 +209,26 @@ For this workshop event, we will be reducing WiFi Radio channel width and transm
 
         |  Pod  | Student | 2.4 GHz  | 5.GHz | Channel Width | Transmit Power |
         | :---: | :-----: | :------: | :---: | :-----------: | :------------: |
-        |  01   |    1    | Disabled |  36   |     20MHz     |      4bBm      |
-        |  02   |    2    | Disabled |  44   |     20MHz     |      4bBm      |
-        |  03   |    3    | Disabled |  52   |     20MHz     |      4bBm      |
-        |  04   |    4    | Disabled |  60   |     20MHz     |      4bBm      |
-        |  05   |    5    | Disabled |  100  |     20MHz     |      4bBm      |
-        |  06   |    6    | Disabled |  108  |     20MHz     |      4bBm      |
-        |  07   |    7    | Disabled |  120  |     20MHz     |      4bBm      |
-        |  08   |    8    | Disabled |  128  |     20MHz     |      4bBm      |
-        |  09   |    9    | Disabled |  136  |     20MHz     |      4bBm      |
-        |  10   |    10   | Disabled |  144  |     20MHz     |      4bBm      |
-        |  11   |    11   | Disabled |  153  |     20MHz     |      4bBm      |
-        |  12   |    12   | Disabled |  161  |     20MHz     |      4bBm      |
+        |  01   |    1    | Disabled |  52   |     20MHz     |      4dBm      |
+        |  02   |    2    | Disabled |  56   |     20MHz     |      4dBm      |
+        |  03   |    3    | Disabled |  60   |     20MHz     |      4dBm      |
+        |  04   |    4    | Disabled |  64   |     20MHz     |      4dBm      |
+        |  05   |    5    | Disabled |  100  |     20MHz     |      4dBm      |
+        |  06   |    6    | Disabled |  105  |     20MHz     |      4dBm      |
+        |  07   |    7    | Disabled |  108  |     20MHz     |      4dBm      |
+        |  08   |    8    | Disabled |  112  |     20MHz     |      4dBm      |
+        |  09   |    9    | Disabled |  116  |     20MHz     |      4dBm      |
+        |  10   |    10   | Disabled |  120  |     20MHz     |      4dBm      |
+        |  11   |    11   | Disabled |  124  |     20MHz     |      4dBm      |
+        |  12   |    12   | Disabled |  128  |     20MHz     |      4dBm      |
+        |  13   |    13   | Disabled |  132  |     20MHz     |      4dBm      |
+        |  14   |    14   | Disabled |  136  |     20MHz     |      4dBm      |
+        |  15   |    15   | Disabled |  140  |     20MHz     |      4dBm      |
+        |  16   |    16   | Disabled |  144  |     20MHz     |      4dBm      |
+        |  17   |    17   | Disabled |  149  |     20MHz     |      4dBm      |
+        |  18   |    18   | Disabled |  153  |     20MHz     |      4dBm      |
+        |  19   |    19   | Disabled |  157  |     20MHz     |      4dBm      |
+        |  20   |    20   | Disabled |  161  |     20MHz     |      4dBm      |
 
 
 4. Click `Save` at the bottom of the page then click `Continue` to confirm.
@@ -241,7 +249,7 @@ Let's assign a floor plan to our `1st Floor` for our respective corporation. Dep
 
 ![Campus Studio](./assets/images/b01/config/office.png)
 
-1. In the left hand menu, click on `Floor Maps`.  Make sure to set the location level to be `CorpA/B - 1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
+1. In the left hand menu, click on `Floor Maps`.  Make sure to set the location level to be `CorpA - 1st Floor`.  Click the `Add Floor Plan` button in the upper right corner of the screen.
 
     ![Campus Studio](./assets/images/b01/config/14a_config.png)
 
@@ -297,7 +305,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     ![Campus Studio](./assets/images/b01/wifi/01_wifi.png)
 
-2. At the top of the screen, you will see where you are in the location hierarchy. Click on the three lines :material-menu: next to `Locations` to expand the hierarchy and choose/highlight the `CorpA` or `CorpB` folder. Now click the `Add SSID` button on the right hand side of the screen.
+2. At the top of the screen, you will see where you are in the location hierarchy. Click on the three lines :material-menu: next to `Locations` to expand the hierarchy and choose/highlight the `CorpA` folder. Now click the `Add SSID` button on the right hand side of the screen.
 
     === "Hierarchy Collapsed"
 
@@ -317,7 +325,7 @@ In this section of the lab, we will be working in the `WiFi` configuration area.
 
     === "Step 1: SSIDBasic"
 
-        In the `Basic` sub-category option, name the SSID `ATD-##A/B-PSK` (where ## is the pod number you were assigned).  The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
+        In the `Basic` sub-category option, name the SSID `ATD-##A-PSK` (where ## is the pod number you were assigned).  The `Profile Name` is used to describe the SSID and should have been auto-filled for you.
 
         Since this is our corporate SSID, leave the `Select SSID Type` set to `Private`
 

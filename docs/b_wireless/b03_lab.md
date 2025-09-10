@@ -58,7 +58,7 @@ Let's configure a Guest Captive Portal using AGNI for wireless clients. To confi
         | SSID                                    | `ATD-##-GUEST` | `ATD-##-GUEST` |
         | Authentication Type                     | Captive Portal  | Captive Portal  |
         | Captive Portal Type                     |    Internal     |    Internal     |
-        | Select Internal Portal                  | `ATD-##-GUEST` | `ATD-##B-GUEST` |
+        | Select Internal Portal                  | `ATD-##-GUEST` | `ATD-##-GUEST` |
         | Internal Role for Portal Authentication | `Portal ## Role` | `Portal ## Role` |
 
     ![Campus Studio](./assets/images/b02/portal/05_portal.png)
@@ -179,7 +179,7 @@ Next, we’ll configure a Segment in AGNI to assign the Guest Role Profile post 
 Lastly, we’ll configure and enable the Guest Captive Portal SSID and assign the pre and post authentication roles.
 
 1. Let's navigate back to CV-CUE
-2. Select Correct location `ACorp` (student 1) or `BCorp` (student 2)
+2. Select Correct location `ACorp`
 
     !!! warning "CV-CUE Locations"
 
