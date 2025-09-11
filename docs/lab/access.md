@@ -1,16 +1,22 @@
 # Campus Lab Overview
 
-You've made it, now what? Well, you and a room full of other engineers are sitting in front of a series of access pods. These Arista switches, while small, run the same Arista EOS images as our 1700lb 16 slot chassis.
+Welcome to the Arista Campus Workshop! You've made it to our hands-on lab environment where you'll get practical experience with real Arista hardware and software.
 
-Get familiar with your fellow student, you will be working together to configure the pod in front of you. In total there are:
+In front of you is a complete campus network pod featuring Arista switches running the same EOS operating system found in our enterprise-grade chassis switches, along with wireless access points and all the tools needed for a comprehensive campus networking experience.
 
-- [x] 2 x Students assigned per pod
-- [x] Up to 10 x Arista Campus Pods
+Throughout this workshop, you'll work collaboratively with your assigned lab partner to explore both wired and wireless campus solutions, from initial device provisioning through advanced security configurations. Each pod is equipped with dedicated instances of Arista's cloud management platforms, giving you the full production experience.
+
+Get ready to dive into real-world scenarios including Zero-Touch Provisioning, CloudVision management, wireless deployment with CV-CUE, and network security with AGNI!
+
+In total there are:
+
+- [x] 1 x Student assigned per pod
+- [x] Up to 20 x Arista Campus Pods
 
 ## Topology
 
 ![Network Topology](../assets/images/topology/atd_student-light.png#only-light)
-![Network Topology](../assets/images/topology/atd_student-dark.png#only-dark)
+![Network Topology](../assets/images/topology/atd_student-light.png#only-dark)
 
 ## Equipment
 
@@ -66,7 +72,7 @@ The hardware you see sitting in front of you can
 ## Lab Assignment
 
 <div class="grid cards" markdown>
- {{ read_csv('data/lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
+ {{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","left"), usecols=['Email','Lab Assignment','Student Pod #','ATD Token']) }}
 </div>
 
 --8<--
