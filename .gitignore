@@ -1,16 +1,32 @@
-tmp/
+# Arista Campus Workshop - Git Ignore File
 
-**.DS_Store
-site
+# MkDocs
+site/
+.mkdocs_cache/
 
-# Never share
-.env
-files
-nettowel
-tmp 
+# uv package manager
+.uv/
 
+# Mike versioning
+versions.json
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+
+# IDE and Editors
 .vscode/
-.DS_store
+.idea/
+*.swp
+*.swo
+
+# Never share - Sensitive files
+.env
+files/
+nettowel/
+tmp/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -143,19 +159,29 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Lab-specific files
+config/*.cfg.bak
+data/*.csv.bak
+*.pcap
+*.cap
+
+# Automation artifacts
+automation/logs/
+automation/output/
+automation/.cache/
+automation/venv/
+
+# Project-specific
 tmp/
 reports/
 intended/
 documentation/
 .vault*
-
 act/tokens/*
-tmp/
 eos_images/*.swi
-# Sharpened images
 docs_sharpened/
-# sharpen_images.py
 sharpen_images.py
-*.sh
-# backup
 .backup_*
+
+# Allow version control script
+!mkdocs-version-control.sh

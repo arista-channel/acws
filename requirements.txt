@@ -1,55 +1,36 @@
-ansible-core
-asgiref
-black==22.8.0
-certifi
-cffi
-chardet
-click
-colorama
-cryptography
-cryptography>=42.0.4,<43.0.0
-docker
-flake8
-grpcio>=1.53.0
-identify>=1.4.20
-idna
-importlib-resources
-isort==5.10.1
-Jinja2
-jsonschema
-MarkupSafe
-md-toc
-mdx_truly_sane_lists
-mike
-mkdocs
-mkdocs-git-revision-date-plugin
-mkdocs-glightbox
-mkdocs-include-dir-to-nav
+# Arista Campus Workshop Documentation Dependencies
+# This file is maintained for compatibility, but uv + pyproject.toml is preferred
+
+# Core MkDocs
+mkdocs>=1.5.0
 mkdocs-material==9.5.17
-mkdocs-material-extensions
-mkdocs-print-site-plugin
-mkdocs-pymdownx-material-extras
-mkdocs-table-reader-plugin
-msgpack>=1.0.3
-natsort
-netaddr
-packaging
-pre-commit>=2.9.2
-pre-commit-hooks>=3.3.0
-protobuf>=5.28.3,<6.0dev
-pycodestyle
-pycparser
-pylint>=2.4.4
-pyparsing
-pytz
-PyYAML
-requests
+
+# MkDocs Plugins
+mkdocs-git-revision-date-plugin>=0.3.2
+mkdocs-glightbox>=0.3.4
+mkdocs-table-reader-plugin>=2.0.3
+mkdocs-print-site-plugin>=2.3.4
+mkdocs-material-extensions>=1.3.1
+
+# Version Management
+mike>=2.0.0
+
+# Content Processing
+jinja2>=3.1.2
+markdown>=3.4.4
+pymdown-extensions>=10.2.1
+
+# Development Tools
+pre-commit>=3.3.0
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+yamllint>=1.32.0
+
+# Security
+cryptography>=42.0.4,<43.0.0
+
+# Utilities
+PyYAML>=6.0
 requests>=2.20.1
-six
-sqlparse
-treelib
-twine
 typing-extensions>=4.2.0
-urllib3
-yamllint
-zipp

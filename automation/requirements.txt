@@ -1,6 +1,0 @@
-# A01 Lab Automation Agent Requirements
-asyncssh>=2.13.0
-rich>=13.0.0
-asyncio-mqtt>=0.11.0
-pydantic>=2.0.0
-typer>=0.9.0

@@ -1,7 +1,139 @@
 [project]
 name = "campus-workshop"
-version = "0.1.0"
-description = "Add your description here"
+version = "2025.3.0"
+description = "Arista Campus Workshop Documentation with Interactive AI Lab Automation"
 readme = "README.md"
+license = { text = "Proprietary - Arista Networks" }
+authors = [
+    { name = "Miguel Balagot", email = "mbalagot@arista.com" },
+    { name = "Kyle Bush", email = "kbush@arista.com" },
+    { name = "Larry Gomez", email = "larry@arista.com" }
+]
+maintainers = [
+    { name = "Miguel Balagot", email = "mbalagot@arista.com" }
+]
 requires-python = ">=3.9"
-dependencies = []
+keywords = ["arista", "networking", "campus", "documentation", "mkdocs", "workshop"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Education",
+    "Topic :: Documentation",
+    "Topic :: System :: Networking",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    # Core MkDocs
+    "mkdocs>=1.5.0",
+    "mkdocs-material>=9.5.17",
+
+    # MkDocs Plugins
+    "mkdocs-git-revision-date-plugin>=0.3.2",
+    "mkdocs-glightbox>=0.3.4",
+    "mkdocs-table-reader-plugin>=2.0.3",
+    "mkdocs-print-site-plugin>=2.3.4",
+    "mkdocs-material-extensions>=1.3.1",
+
+    # Version Management
+    "mike>=2.0.0",
+
+    # Content Processing
+    "jinja2>=3.1.2",
+    "markdown>=3.4.4",
+    "pymdown-extensions>=10.2.1",
+
+    # Development Tools
+    "pre-commit>=3.3.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+    "flake8>=6.0.0",
+    "yamllint>=1.32.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "mypy>=1.5.0",
+    "ruff>=0.0.287",
+]
+
+automation = [
+    "asyncssh>=2.13.0",
+    "rich>=13.0.0",
+    "typer>=0.9.0",
+    "pydantic>=2.0.0",
+]
+
+[project.urls]
+Homepage = "https://mbalagot12.github.io/campus-workshop/"
+Repository = "https://github.com/mbalagot12/campus-workshop"
+Documentation = "https://mbalagot12.github.io/campus-workshop/"
+"Bug Tracker" = "https://github.com/mbalagot12/campus-workshop/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["docs"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | site
+)/
+'''
+
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 88
+known_first_party = ["campus_workshop"]
+
+[tool.flake8]
+max-line-length = 88
+extend-ignore = ["E203", "W503"]
+exclude = [".git", "__pycache__", "site", ".venv", "build", "dist"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "--cov=docs --cov-report=term-missing --cov-report=html"
+
+[tool.coverage.run]
+source = ["docs"]
+omit = ["*/tests/*", "*/test_*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
