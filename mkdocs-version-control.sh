@@ -61,9 +61,13 @@ deploy_version() {
     fi
 }
 
-# Deploy current version (Nashville 2025.2)
-print_status "Deploying current version: 2025.2.NAS"
-deploy_version "2025.2.NAS" "latest" true
+# Deploy latest version (Toronto 2025.3)
+print_status "Deploying latest version: 2025.3.TOR"
+deploy_version "2025.3.TOR" "latest" true
+
+# Deploy current versions
+print_status "Deploying current versions..."
+deploy_version "2025.2.NAS" "" false
 
 # Deploy historical versions
 print_status "Deploying historical versions..."
@@ -83,7 +87,8 @@ print_status "Documentation available at: https://mbalagot12.github.io/campus-wo
 
 echo ""
 echo "📚 Available versions:"
-echo "  - latest (2025.2.NAS) - Current Nashville workshop"
+echo "  - latest (2025.3.TOR) - Current Toronto workshop"
+echo "  - 2025.2.NAS - Nashville workshop"
 echo "  - 2025.1.ORL - Orlando workshop (historical)"
 echo ""
 echo "🔗 Version selector available in the documentation header"

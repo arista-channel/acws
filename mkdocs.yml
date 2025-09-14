@@ -1,5 +1,6 @@
 site_name: Arista Campus Workshop
-site_description: Arista Campus Workshop
+site_description: Arista Campus Workshop Documentation with Interactive Lab Automation
+site_url: https://mbalagot12.github.io/campus-workshop/
 watch: ["docs", "mkdocs.yml"]
 
 nav:
@@ -122,16 +123,14 @@ markdown_extensions:
     - def_list
     - footnotes
     - md_in_html
-    - pymdownx.arithmatex
+    - pymdownx.arithmatex:
+        generic: true
     - pymdownx.caret
     - pymdownx.critic
     - pymdownx.details
     - pymdownx.emoji:
         emoji_index: !!python/name:material.extensions.emoji.twemoji
         emoji_generator: !!python/name:material.extensions.emoji.to_svg
-        options: 
-            custom_icons:
-            - overrides/.icons
     - pymdownx.highlight:
         anchor_linenums: true
     - pymdownx.inlinehilite
@@ -144,8 +143,6 @@ markdown_extensions:
         alternate_style: true
     - pymdownx.tasklist:
         custom_checkbox: true
-    - pymdownx.arithmatex:
-        generic: true
     - pymdownx.tilde
     - tables
     - toc:
