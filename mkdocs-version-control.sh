@@ -61,17 +61,22 @@ deploy_version() {
     fi
 }
 
-# Deploy latest version (Toronto 2025.3)
-print_status "Deploying latest version: 2025.3.TOR"
-deploy_version "2025.3.TOR" "latest" true
+# Deploy latest version (Nashville 2025.2)
+print_status "Deploying latest version: 2025.2.NAS"
+deploy_version "2025.2.NAS" "latest" true
 
-# Deploy current versions
-print_status "Deploying current versions..."
-deploy_version "2025.2.NAS" "" false
+# Deploy placeholder versions
+print_status "Deploying placeholder versions..."
+deploy_version "2025.3.TOR" "" false
 
-# Deploy historical versions
-print_status "Deploying historical versions..."
-deploy_version "2025.1.ORL" "" false
+# Deploy historical versions (skip if already exists to preserve Orlando content)
+print_status "Checking historical versions..."
+if mike list | grep -q "2025.1.ORL"; then
+    print_warning "2025.1.ORL already exists - skipping to preserve Orlando historical content"
+else
+    print_status "Deploying historical version: 2025.1.ORL"
+    deploy_version "2025.1.ORL" "" false
+fi
 
 # Set default version
 print_status "Setting default version to 'latest'"
@@ -87,8 +92,8 @@ print_status "Documentation available at: https://mbalagot12.github.io/campus-wo
 
 echo ""
 echo "📚 Available versions:"
-echo "  - latest (2025.3.TOR) - Current Toronto workshop"
-echo "  - 2025.2.NAS - Nashville workshop"
+echo "  - latest (2025.2.NAS) - Current Nashville workshop"
+echo "  - 2025.3.TOR - Toronto workshop (placeholder)"
 echo "  - 2025.1.ORL - Orlando workshop (historical)"
 echo ""
 echo "🔗 Version selector available in the documentation header"
