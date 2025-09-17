@@ -56,9 +56,9 @@ fi
 
 # Test SSH connection
 echo ""
-print_info "Testing SSH connection to ec2-3-148-13-216.us-east-2.compute.amazonaws.com..."
+print_info "Testing SSH connection to acws.duckdns.org..."
 
-if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@ec2-3-148-13-216.us-east-2.compute.amazonaws.com "echo 'Connection test successful'" 2>/dev/null; then
+if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@acws.duckdns.org "echo 'Connection test successful'" 2>/dev/null; then
     print_status "SSH connection successful!"
 else
     print_warning "SSH connection failed (server may be down or network issue)"
@@ -134,10 +134,10 @@ echo ""
 echo "🖥️  Server Information"
 echo "====================="
 echo ""
-echo "Server: ec2-3-148-13-216.us-east-2.compute.amazonaws.com"
+echo "Server: acws.duckdns.org"
 echo "User: ubuntu"
 echo "Key: mb-partner-kp.pem"
-echo "Deployment Path: /var/www/campus-workshop"
+echo "Deployment Path: /var/www/mkdocs/site (operational Mike site)"
 echo ""
 
 print_status "SSH key setup instructions complete!"

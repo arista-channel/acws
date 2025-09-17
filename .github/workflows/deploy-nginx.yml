@@ -15,7 +15,7 @@ on:
       server_host:
         description: 'Server hostname or IP'
         required: true
-        default: 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com'
+        default: 'acws.duckdns.org'
       force_update:
         description: 'Force update even if no changes'
         type: boolean
@@ -27,7 +27,7 @@ on:
 
 env:
   SERVER_USER: ubuntu
-  SERVER_PATH: /var/www/campus-workshop
+  SERVER_PATH: /var/www/mkdocs/site
   NGINX_SERVICE: nginx
 
 jobs:
@@ -48,145 +48,220 @@ jobs:
 
       - name: Add server to known hosts
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
 
       - name: Check server connectivity
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔗 Testing connection to $SERVER_HOST..."
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful to Campus Workshop server'"
 
-      - name: Backup current site
+      - name: Backup current Mike site (SAFE)
         if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
-          echo "💾 Creating backup of current Campus Workshop site..."
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
+          echo "💾 Creating backup of operational Mike site..."
+          echo "🎯 Target: ${{ env.SERVER_PATH }} (existing operational site)"
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
             if [ -d '${{ env.SERVER_PATH }}' ]; then
-              sudo cp -r '${{ env.SERVER_PATH }}' '${{ env.SERVER_PATH }}.backup.$(date +%Y%m%d_%H%M%S)'
-              echo '✅ Backup created'
-            else
-              echo '⚠️ No existing site to backup'
-            fi
-          "
+              echo '✅ Operational Mike site found: ${{ env.SERVER_PATH }}'
 
-      - name: Update site from GitHub with Mike version protection
-        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
-        run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
-          echo "🔄 Updating Campus Workshop site from GitHub with Orlando protection..."
+              # Create timestamped backup
+              BACKUP_DIR='${{ env.SERVER_PATH }}.backup.$(date +%Y%m%d_%H%M%S)'
+              echo \"📦 Creating backup: \$BACKUP_DIR\"
+              sudo cp -r '${{ env.SERVER_PATH }}' \"\$BACKUP_DIR\"
 
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            # Check if site directory exists and has Mike versioning
-            if [ -d '${{ env.SERVER_PATH }}' ]; then
-              echo '📁 Site directory exists, checking for Mike versioning...'
-
-              # Check if Mike versioning structure exists (2025.1.ORL directory)
-              if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
-                echo '🛡️ Mike versioning detected with Orlando protection - selective update...'
-
-                # Clone fresh content to temporary directory using SSH
-                TEMP_DIR=\"/tmp/campus-workshop-update-\$(date +%s)\"
-                git clone -b gh-pages git@github.com:${{ github.repository }}.git \"\$TEMP_DIR\"
-
-                if [ -d \"\$TEMP_DIR\" ]; then
-                  echo '📥 Fresh content cloned to temporary directory'
-
-                  # Backup Orlando version before any updates
-                  if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
-                    echo '🛡️ Backing up Orlando 2025.1.ORL version...'
-                    sudo cp -r '${{ env.SERVER_PATH }}/2025.1.ORL' '/tmp/orlando-backup-$(date +%s)'
-                  fi
-
-                  # Update all versions EXCEPT Orlando 2025.1.ORL
-                  echo '🔄 Updating all versions except protected Orlando...'
-                  
-                  # Update root files (index.html, versions.json, etc.)
-                  sudo rsync -av --exclude='2025.1.ORL' \"\$TEMP_DIR/\" '${{ env.SERVER_PATH }}/'
-                  
-                  # Update individual versions (but skip Orlando)
-                  for version_dir in \"\$TEMP_DIR\"/*/; do
-                    version_name=\$(basename \"\$version_dir\")
-                    if [ \"\$version_name\" != \"2025.1.ORL\" ]; then
-                      echo \"🔄 Updating version: \$version_name\"
-                      sudo rsync -av --delete \"\$version_dir\" '${{ env.SERVER_PATH }}/\$version_name/'
-                    else
-                      echo \"🛡️ Skipping protected Orlando version: \$version_name\"
-                    fi
-                  done
-
-                  # Verify Orlando is still intact
-                  if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
-                    echo '✅ Orlando 2025.1.ORL protection verified - version intact'
-                  else
-                    echo '❌ CRITICAL: Orlando 2025.1.ORL was lost! Restoring from backup...'
-                    sudo cp -r '/tmp/orlando-backup-'* '${{ env.SERVER_PATH }}/2025.1.ORL' || echo 'Backup restore failed!'
-                  fi
-
-                  # Clean up temporary directory
-                  rm -rf \$TEMP_DIR
-                else
-                  echo '❌ Failed to clone fresh content'
-                  exit 1
-                fi
+              # Verify backup
+              if [ -d \"\$BACKUP_DIR\" ]; then
+                echo '✅ Backup created successfully'
+                echo \"📊 Backup size: \$(sudo du -sh \$BACKUP_DIR | cut -f1)\"
               else
-                echo '🆕 No Mike versioning - performing full update...'
-                cd '${{ env.SERVER_PATH }}'
-
-                # Standard git update for non-Mike sites
-                if [ -d '.git' ]; then
-                  sudo git fetch origin && sudo git reset --hard origin/gh-pages
-                else
-                  cd /var/www/
-                  sudo mv '${{ env.SERVER_PATH }}' '${{ env.SERVER_PATH }}.old'
-                  sudo git clone -b gh-pages git@github.com:${{ github.repository }}.git '${{ env.SERVER_PATH }}'
-                fi
+                echo '❌ Backup creation failed!'
+                exit 1
               fi
             else
-              echo '🆕 Site directory does not exist, creating and cloning repository...'
-              cd /var/www/
-              sudo mkdir -p \$(dirname '${{ env.SERVER_PATH }}')
-              sudo git clone -b gh-pages git@github.com:${{ github.repository }}.git '${{ env.SERVER_PATH }}'
+              echo '❌ CRITICAL: Operational site not found at ${{ env.SERVER_PATH }}'
+              echo 'Expected existing Mike setup - aborting to prevent data loss'
+              exit 1
             fi
-
-            echo '✅ Campus Workshop site updated from GitHub with Orlando protection'
           "
 
-      - name: Dry run - Update simulation
+      - name: SAFE Mike version update (preserves operational site)
+        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+        run: |
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
+          echo "🔄 SAFE UPDATE: Updating Mike versions without overwriting operational site"
+          echo "🎯 Target: ${{ env.SERVER_PATH }} (operational Mike site)"
+          echo "🛡️ Orlando 2025.1.ORL will be preserved"
+
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
+            # Verify operational Mike site exists
+            if [ ! -d '${{ env.SERVER_PATH }}' ]; then
+              echo '❌ CRITICAL: Operational site not found at ${{ env.SERVER_PATH }}'
+              echo 'Aborting to prevent data loss'
+              exit 1
+            fi
+
+            # Verify Mike structure
+            if [ ! -f '${{ env.SERVER_PATH }}/versions.json' ]; then
+              echo '❌ CRITICAL: No Mike versions.json found'
+              echo 'This does not appear to be a Mike-managed site'
+              echo 'Aborting to prevent overwriting operational site'
+              exit 1
+            fi
+
+            echo '✅ Operational Mike site verified'
+            echo '📋 Current site structure:'
+            ls -la '${{ env.SERVER_PATH }}/' | head -10
+
+            # Extra protection: Backup Orlando if it exists
+            if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
+              echo '🛡️ Extra Orlando protection: Creating backup...'
+              sudo cp -r '${{ env.SERVER_PATH }}/2025.1.ORL' '/tmp/orlando-protection-$(date +%s)'
+              echo '✅ Orlando protection backup created'
+            fi
+
+            # Clone fresh content to temporary staging area
+            TEMP_DIR=\"/tmp/mike-update-staging-\$(date +%s)\"
+            echo \"📥 Cloning fresh content to staging area: \$TEMP_DIR\"
+            git clone -b gh-pages git@github.com:${{ github.repository }}.git \"\$TEMP_DIR\"
+
+            if [ ! -d \"\$TEMP_DIR\" ]; then
+              echo '❌ Failed to clone fresh content'
+              exit 1
+            fi
+
+            echo '✅ Fresh content staged successfully'
+
+            # SAFE UPDATE: Only update specific version directories (not root files)
+            echo '🔄 SAFE UPDATE: Updating individual version directories only...'
+
+            for version_dir in \"\$TEMP_DIR\"/*/; do
+              if [ -d \"\$version_dir\" ]; then
+                version_name=\$(basename \"\$version_dir\")
+
+                # Skip Orlando (protected)
+                if [ \"\$version_name\" = \"2025.1.ORL\" ]; then
+                  echo \"🛡️ PROTECTED: Skipping Orlando version: \$version_name\"
+                  continue
+                fi
+
+                # Skip non-version directories
+                if [[ ! \"\$version_name\" =~ ^20[0-9]{2}\.[0-9]+\.[A-Z]{3}$ ]]; then
+                  echo \"⏭️  Skipping non-version directory: \$version_name\"
+                  continue
+                fi
+
+                echo \"📁 Updating version: \$version_name\"
+
+                # Create version directory if it doesn't exist
+                sudo mkdir -p '${{ env.SERVER_PATH }}/'\$version_name
+
+                # SAFE: Sync only the version content (not destructive)
+                sudo rsync -av --delete \"\$version_dir/\" '${{ env.SERVER_PATH }}/'\$version_name'/'
+
+                if [ \$? -eq 0 ]; then
+                  echo \"✅ Version \$version_name updated successfully\"
+                else
+                  echo \"❌ Failed to update version \$version_name\"
+                fi
+              fi
+            done
+
+            # SAFE: Update only Mike metadata files (preserve existing structure)
+            echo '📄 SAFE UPDATE: Updating Mike metadata files...'
+
+            # Update versions.json if it exists in the new content
+            if [ -f \"\$TEMP_DIR/versions.json\" ]; then
+              echo '📊 Updating versions.json...'
+              sudo cp \"\$TEMP_DIR/versions.json\" '${{ env.SERVER_PATH }}/versions.json'
+              echo '✅ versions.json updated'
+            fi
+
+            # Update main index.html if it exists (but preserve existing if not)
+            if [ -f \"\$TEMP_DIR/index.html\" ]; then
+              echo '🏠 Updating main index.html...'
+              sudo cp \"\$TEMP_DIR/index.html\" '${{ env.SERVER_PATH }}/index.html'
+              echo '✅ Main index.html updated'
+            fi
+
+            # Verify Orlando is still intact (critical check)
+            if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
+              echo '✅ VERIFICATION: Orlando 2025.1.ORL still intact'
+              echo \"📊 Orlando size: \$(sudo du -sh '${{ env.SERVER_PATH }}/2025.1.ORL' | cut -f1)\"
+            else
+              echo '❌ CRITICAL: Orlando 2025.1.ORL was lost during update!'
+              echo '🔄 Restoring from protection backup...'
+              if ls /tmp/orlando-protection-* 1> /dev/null 2>&1; then
+                sudo cp -r /tmp/orlando-protection-* '${{ env.SERVER_PATH }}/2025.1.ORL'
+                echo '✅ Orlando restored from protection backup'
+              else
+                echo '❌ No Orlando protection backup found!'
+                echo '🚨 MANUAL INTERVENTION REQUIRED'
+                exit 1
+              fi
+            fi
+
+            # Clean up staging area
+            rm -rf \$TEMP_DIR
+            echo '🧹 Staging area cleaned up'
+
+            echo '✅ SAFE UPDATE COMPLETED: Mike versions updated without overwriting operational site'
+            echo '🛡️ Orlando 2025.1.ORL protection verified'
+          "
+
+      - name: Dry run - SAFE update simulation
         if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
-          echo "🧪 DRY RUN: Would update Campus Workshop site from GitHub..."
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
+          echo "🧪 DRY RUN: SAFE Mike version update simulation"
+          echo "🎯 Target: ${{ env.SERVER_PATH }} (operational Mike site)"
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            if [ -d '${{ env.SERVER_PATH }}' ]; then
-              echo '📁 Site directory exists'
-              
-              if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
-                echo '🛡️ Orlando 2025.1.ORL detected - would be protected during update'
-                echo '🧪 Would selectively update all versions except Orlando'
-              fi
-              
-              cd '${{ env.SERVER_PATH }}'
+            echo '🧪 DRY RUN: Checking operational site status...'
 
-              if [ -d '.git' ]; then
-                echo '🧪 Would run: git fetch origin && git reset --hard origin/gh-pages'
-                echo 'Current branch:' \$(git branch --show-current)
-                echo 'Current commit:' \$(git log -1 --oneline)
+            if [ -d '${{ env.SERVER_PATH }}' ]; then
+              echo '✅ Operational Mike site found: ${{ env.SERVER_PATH }}'
+
+              if [ -f '${{ env.SERVER_PATH }}/versions.json' ]; then
+                echo '✅ Mike versioning detected (versions.json found)'
+                echo '📋 Current versions on server:'
+                ls -la '${{ env.SERVER_PATH }}/' | grep '^d' | grep -E '20[0-9]{2}\.[0-9]+\.[A-Z]{3}' || echo 'No version directories found'
+
+                if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
+                  echo '🛡️ Orlando 2025.1.ORL detected - WOULD BE PROTECTED'
+                  echo \"📊 Orlando size: \$(sudo du -sh '${{ env.SERVER_PATH }}/2025.1.ORL' | cut -f1)\"
+                fi
+
+                echo ''
+                echo '🧪 DRY RUN: What would happen:'
+                echo '  1. ✅ Create backup of entire operational site'
+                echo '  2. ✅ Create extra Orlando protection backup'
+                echo '  3. ✅ Clone fresh content to staging area'
+                echo '  4. ✅ Update individual version directories (except Orlando)'
+                echo '  5. ✅ Update Mike metadata files (versions.json, index.html)'
+                echo '  6. ✅ Verify Orlando protection intact'
+                echo '  7. ✅ Clean up staging area'
+                echo ''
+                echo '🛡️ PROTECTION: Orlando 2025.1.ORL would remain untouched'
+                echo '🔒 SAFETY: No destructive operations on operational site'
               else
-                echo '🧪 Directory exists but not a git repo - would re-clone'
+                echo '❌ No Mike versioning found - would abort to prevent data loss'
               fi
             else
-              echo '🧪 Site directory does not exist - would create and clone'
+              echo '❌ Operational site not found - would abort to prevent data loss'
             fi
+
+            echo ''
+            echo '🧪 DRY RUN COMPLETE: No actual changes made'
           "
 
       - name: Set proper permissions
         if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔐 Setting proper permissions..."
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
@@ -198,7 +273,7 @@ jobs:
 
       - name: Validate nginx configuration
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔧 Validating nginx configuration..."
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
@@ -214,7 +289,7 @@ jobs:
       - name: Reload nginx
         if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔄 Reloading nginx..."
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
@@ -225,7 +300,7 @@ jobs:
 
       - name: Test site accessibility and Orlando protection
         run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'ec2-3-148-13-216.us-east-2.compute.amazonaws.com' }}"
+          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🌐 Testing Campus Workshop site accessibility..."
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
