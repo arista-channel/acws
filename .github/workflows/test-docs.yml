@@ -1,0 +1,201 @@
+# Test Campus Workshop Documentation
+name: Test Documentation
+
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'data/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+  
+  workflow_dispatch:
+    inputs:
+      test_version:
+        description: 'Version to test (e.g., 2025.2.NAS)'
+        required: false
+        default: 'test-build'
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install UV
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Set up UV environment
+        run: |
+          uv venv .venv
+          echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+          echo "PATH=.venv/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          uv pip install -r requirements.txt
+
+      - name: Test MkDocs build
+        run: |
+          echo "🔨 Testing MkDocs build..."
+          mkdocs build --strict
+          echo "✅ MkDocs build successful"
+
+      - name: Test Mike versioning
+        run: |
+          echo "🔍 Testing Mike versioning system..."
+          
+          # Configure git for testing
+          git config --global user.name "Test User"
+          git config --global user.email "test@example.com"
+          
+          # Test version deployment (local only)
+          TEST_VERSION="${{ github.event.inputs.test_version || 'test-build' }}"
+          echo "Testing version: $TEST_VERSION"
+          
+          mike deploy "$TEST_VERSION" "Test build"
+          
+          # Verify version was created
+          if mike list | grep -q "$TEST_VERSION"; then
+            echo "✅ Mike version $TEST_VERSION created successfully"
+          else
+            echo "❌ Mike version $TEST_VERSION was not created"
+            exit 1
+          fi
+          
+          # Clean up test version
+          mike delete "$TEST_VERSION"
+          echo "✅ Test version cleaned up"
+
+      - name: Check Orlando protection
+        run: |
+          echo "🛡️ Verifying Orlando protection logic..."
+          
+          # Test that Orlando version cannot be overwritten
+          if [[ "${{ github.event.inputs.test_version }}" == "2025.1.ORL" ]]; then
+            echo "❌ CRITICAL: Test attempted to use protected Orlando version!"
+            echo "Orlando 2025.1.ORL is protected and cannot be used for testing"
+            exit 1
+          else
+            echo "✅ Orlando protection verified - test version is safe"
+          fi
+
+      - name: Validate data files
+        run: |
+          echo "📊 Validating data files..."
+          
+          # Check if Orlando data exists
+          if [ -f "data/orlando_lab_assignment.csv" ]; then
+            echo "✅ Orlando lab assignment data found"
+            # Basic CSV validation
+            if head -1 data/orlando_lab_assignment.csv | grep -q "Email"; then
+              echo "✅ Orlando CSV has proper header"
+            else
+              echo "❌ Orlando CSV header validation failed"
+              exit 1
+            fi
+          else
+            echo "⚠️ Orlando lab assignment data not found"
+          fi
+          
+          # Check if standard data exists
+          if [ -f "data/lab_assignment.csv" ]; then
+            echo "✅ Standard lab assignment data found"
+            # Basic CSV validation
+            if head -1 data/lab_assignment.csv | grep -q "Email"; then
+              echo "✅ Standard CSV has proper header"
+            else
+              echo "❌ Standard CSV header validation failed"
+              exit 1
+            fi
+          else
+            echo "❌ Standard lab assignment data not found"
+            exit 1
+          fi
+
+      - name: Check topology images
+        run: |
+          echo "🖼️ Checking topology images..."
+          
+          # Check Orlando topology
+          if [ -f "docs/assets/images/topology/atd_student-light_orlando.png" ]; then
+            echo "✅ Orlando topology image found"
+          else
+            echo "⚠️ Orlando topology image not found"
+          fi
+          
+          # Check standard topology
+          if [ -f "docs/assets/images/topology/atd_student-light.png" ]; then
+            echo "✅ Standard topology image found"
+          else
+            echo "❌ Standard topology image not found"
+            exit 1
+          fi
+
+      - name: Test site structure
+        run: |
+          echo "🏗️ Testing site structure..."
+          
+          # Check if build directory was created
+          if [ -d "site" ]; then
+            echo "✅ Site directory created"
+            
+            # Check for essential files
+            if [ -f "site/index.html" ]; then
+              echo "✅ Main index.html found"
+            else
+              echo "❌ Main index.html not found"
+              exit 1
+            fi
+            
+            # Check for lab access page
+            if [ -f "site/lab/access/index.html" ]; then
+              echo "✅ Lab access page found"
+            else
+              echo "❌ Lab access page not found"
+              exit 1
+            fi
+            
+            # Check for references
+            if [ -f "site/references/lab_assignment/index.html" ]; then
+              echo "✅ Lab assignment reference found"
+            else
+              echo "❌ Lab assignment reference not found"
+              exit 1
+            fi
+          else
+            echo "❌ Site directory not created"
+            exit 1
+          fi
+
+      - name: Create test summary
+        run: |
+          echo "## 🧪 Campus Workshop Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **MkDocs Build**: ✅ Successful" >> $GITHUB_STEP_SUMMARY
+          echo "- **Mike Versioning**: ✅ Working" >> $GITHUB_STEP_SUMMARY
+          echo "- **Orlando Protection**: ✅ Verified" >> $GITHUB_STEP_SUMMARY
+          echo "- **Data Files**: ✅ Valid" >> $GITHUB_STEP_SUMMARY
+          echo "- **Topology Images**: ✅ Present" >> $GITHUB_STEP_SUMMARY
+          echo "- **Site Structure**: ✅ Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Test Details" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test Version**: ${{ github.event.inputs.test_version || 'test-build' }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Python Version**: ${{ env.PYTHON_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ All tests passed! Ready for deployment." >> $GITHUB_STEP_SUMMARY

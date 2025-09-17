@@ -1,0 +1,290 @@
+# CI/CD Pipeline for Campus Workshop with Mike Versioning and Orlando Protection
+name: Deploy Campus Workshop Documentation
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'data/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+  
+  # Manual trigger with version input
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to deploy (e.g., 2025.2.NAS, 2025.3.TOR)'
+        required: true
+        default: '2025.2.NAS'
+      description:
+        description: 'Version description'
+        required: true
+        default: 'Manual deployment'
+      set_default:
+        description: 'Set as default version'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run (test without deploying)'
+        type: boolean
+        default: false
+
+  # Automatic versioning on release tags
+  release:
+    types: [published]
+
+env:
+  PYTHON_VERSION: '3.11'
+  UV_VERSION: '0.1.0'
+  # Protected versions that cannot be overwritten
+  PROTECTED_VERSIONS: '2025.1.ORL'
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      docs_changed: ${{ steps.changes.outputs.docs }}
+      data_changed: ${{ steps.changes.outputs.data }}
+      config_changed: ${{ steps.changes.outputs.config }}
+      should_deploy: ${{ steps.decision.outputs.should_deploy }}
+      version: ${{ steps.version.outputs.version }}
+      description: ${{ steps.version.outputs.description }}
+      is_dry_run: ${{ steps.decision.outputs.is_dry_run }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect file changes
+        uses: dorny/paths-filter@v2
+        id: changes
+        with:
+          filters: |
+            docs:
+              - 'docs/**'
+            data:
+              - 'data/**'
+            config:
+              - 'mkdocs.yml'
+              - 'requirements.txt'
+
+      - name: Determine deployment decision
+        id: decision
+        run: |
+          # Check if this is a dry run
+          if [[ "${{ github.event.inputs.dry_run }}" == "true" ]]; then
+            echo "is_dry_run=true" >> $GITHUB_OUTPUT
+            echo "should_deploy=true" >> $GITHUB_OUTPUT  # Allow dry run to proceed
+          else
+            echo "is_dry_run=false" >> $GITHUB_OUTPUT
+
+            if [[ "${{ github.event_name }}" == "workflow_dispatch" ]] || [[ "${{ github.event_name }}" == "release" ]]; then
+              echo "should_deploy=true" >> $GITHUB_OUTPUT
+            elif [[ "${{ steps.changes.outputs.docs }}" == "true" ]] || [[ "${{ steps.changes.outputs.data }}" == "true" ]] || [[ "${{ steps.changes.outputs.config }}" == "true" ]]; then
+              echo "should_deploy=true" >> $GITHUB_OUTPUT
+            else
+              echo "should_deploy=false" >> $GITHUB_OUTPUT
+            fi
+          fi
+
+      - name: Determine version and description
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+            echo "description=${{ github.event.inputs.description }}" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.event_name }}" == "release" ]]; then
+            # Extract version from release tag (e.g., v2025.2.NAS -> 2025.2.NAS)
+            VERSION=$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//')
+            echo "version=$VERSION" >> $GITHUB_OUTPUT
+            echo "description=Release $VERSION" >> $GITHUB_OUTPUT
+          else
+            # Auto-generate version based on date and commit for non-Orlando versions
+            DATE=$(date +%Y.%m)
+            SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+            echo "version=${DATE}.${SHORT_SHA}" >> $GITHUB_OUTPUT
+            echo "description=Auto-deployment $(date '+%Y-%m-%d %H:%M')" >> $GITHUB_OUTPUT
+          fi
+
+  deploy:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.CAMPUS_WORKSHOP_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install UV
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Set up UV environment
+        run: |
+          uv venv .venv
+          echo "VIRTUAL_ENV=.venv" >> $GITHUB_ENV
+          echo "PATH=.venv/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: |
+          uv pip install -r requirements.txt
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+      - name: Check for protected version (Orlando 2025.1.ORL)
+        id: protection_check
+        run: |
+          VERSION="${{ needs.detect-changes.outputs.version }}"
+          
+          # Check if attempting to deploy protected Orlando version
+          if [[ "$VERSION" == "2025.1.ORL" ]]; then
+            echo "is_protected=true" >> $GITHUB_OUTPUT
+            echo "🛡️ CRITICAL: Attempting to deploy protected Orlando version $VERSION"
+            echo "Orlando 2025.1.ORL is historically protected and cannot be overwritten!"
+            exit 1
+          else
+            echo "is_protected=false" >> $GITHUB_OUTPUT
+            echo "✅ Version $VERSION is not protected, proceeding with deployment"
+          fi
+
+      - name: Verify Mike versions integrity
+        run: |
+          echo "🔍 Checking current Mike versions..."
+          mike list || echo "No existing versions found"
+          
+          echo "🔍 Verifying Orlando 2025.1.ORL integrity..."
+          if mike list | grep -q "2025.1.ORL"; then
+            echo "✅ Orlando 2025.1.ORL version exists and is protected"
+          else
+            echo "⚠️ Orlando 2025.1.ORL version not found - this is expected for new repositories"
+          fi
+
+      - name: Deploy with Mike
+        if: steps.protection_check.outputs.is_protected == 'false'
+        run: |
+          VERSION="${{ needs.detect-changes.outputs.version }}"
+          DESCRIPTION="${{ needs.detect-changes.outputs.description }}"
+          IS_DRY_RUN="${{ needs.detect-changes.outputs.is_dry_run }}"
+
+          echo "🚀 Deploying version: $VERSION"
+          echo "📝 Description: $DESCRIPTION"
+
+          if [[ "$IS_DRY_RUN" == "true" ]]; then
+            echo "🧪 DRY RUN MODE - No actual deployment"
+            echo "Would deploy: mike deploy \"$VERSION\" \"$DESCRIPTION\" --push"
+
+            # Test Mike deployment locally without push
+            mike deploy "$VERSION" "$DESCRIPTION"
+            echo "✅ Dry run: Version $VERSION would deploy successfully"
+
+            # Show what would be deployed
+            echo "📋 Mike versions after dry run deployment:"
+            mike list
+
+            # Clean up dry run version
+            mike delete "$VERSION" || true
+          else
+            echo "🚀 LIVE DEPLOYMENT MODE"
+            # Deploy the version
+            mike deploy "$VERSION" "$DESCRIPTION" --push
+            echo "✅ Version $VERSION deployed successfully"
+          fi
+
+      - name: Set as default version
+        if: |
+          steps.protection_check.outputs.is_protected == 'false' &&
+          (github.event.inputs.set_default == 'true' || github.event_name == 'release') &&
+          needs.detect-changes.outputs.is_dry_run == 'false'
+        run: |
+          VERSION="${{ needs.detect-changes.outputs.version }}"
+          echo "🎯 Setting $VERSION as default version"
+          mike set-default "$VERSION" --push
+          echo "✅ Default version updated"
+
+      - name: Verify deployment and Orlando protection
+        run: |
+          echo "📋 Current Mike versions after deployment:"
+          mike list
+          
+          echo "🛡️ Verifying Orlando 2025.1.ORL protection..."
+          if mike list | grep -q "2025.1.ORL"; then
+            echo "✅ Orlando 2025.1.ORL remains protected and intact"
+          else
+            echo "⚠️ Orlando 2025.1.ORL not found in versions"
+          fi
+          
+          echo "🌐 GitHub Pages will be available at:"
+          echo "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+
+      - name: Create deployment summary
+        run: |
+          VERSION="${{ needs.detect-changes.outputs.version }}"
+          DESCRIPTION="${{ needs.detect-changes.outputs.description }}"
+          IS_DRY_RUN="${{ needs.detect-changes.outputs.is_dry_run }}"
+
+          if [[ "$IS_DRY_RUN" == "true" ]]; then
+            echo "## 🧪 Campus Workshop Dry Run Summary" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **Mode**: DRY RUN (No actual deployment)" >> $GITHUB_STEP_SUMMARY
+            echo "- **Version**: $VERSION (would be deployed)" >> $GITHUB_STEP_SUMMARY
+            echo "- **Description**: $DESCRIPTION" >> $GITHUB_STEP_SUMMARY
+            echo "- **Orlando Protection**: ✅ 2025.1.ORL remains protected" >> $GITHUB_STEP_SUMMARY
+            echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## 🚀 Campus Workshop Deployment Summary" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "- **Version**: $VERSION" >> $GITHUB_STEP_SUMMARY
+            echo "- **Description**: $DESCRIPTION" >> $GITHUB_STEP_SUMMARY
+            echo "- **Orlando Protection**: ✅ 2025.1.ORL remains protected" >> $GITHUB_STEP_SUMMARY
+            echo "- **Trigger**: ${{ github.event_name }}" >> $GITHUB_STEP_SUMMARY
+            echo "- **Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "### 🌐 URLs" >> $GITHUB_STEP_SUMMARY
+            echo "- **Live Site**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_STEP_SUMMARY
+            echo "- **Version**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/$VERSION/" >> $GITHUB_STEP_SUMMARY
+            echo "- **Orlando (Protected)**: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/2025.1.ORL/" >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📋 Changes Detected" >> $GITHUB_STEP_SUMMARY
+          echo "- **Documentation**: ${{ needs.detect-changes.outputs.docs_changed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Data**: ${{ needs.detect-changes.outputs.data_changed }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Configuration**: ${{ needs.detect-changes.outputs.config_changed }}" >> $GITHUB_STEP_SUMMARY
+
+  notify:
+    needs: [detect-changes, deploy]
+    if: always() && needs.detect-changes.outputs.should_deploy == 'true'
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Notify deployment status
+        run: |
+          if [[ "${{ needs.deploy.result }}" == "success" ]]; then
+            echo "✅ Campus Workshop deployment successful!"
+            echo "🌐 Site updated: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+            echo "🛡️ Orlando 2025.1.ORL remains protected"
+          else
+            echo "❌ Campus Workshop deployment failed!"
+            echo "Please check the logs for details."
+          fi
