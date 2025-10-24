@@ -2,12 +2,9 @@
 name: Deploy to Nginx Server
 
 on:
-  # Automatic deployment when GitHub Pages deployment completes
-  workflow_run:
-    workflows: ["Deploy Campus Workshop Documentation"]
-    types:
-      - completed
-    branches: [main]
+  # Automatic deployment when GitHub Pages is updated
+  push:
+    branches: [gh-pages]
 
   # Manual trigger for nginx deployment (with options)
   workflow_dispatch:
@@ -33,9 +30,8 @@ env:
 jobs:
   deploy-to-nginx:
     runs-on: ubuntu-latest
-    # Run for both automatic (workflow_run) and manual (workflow_dispatch) triggers
-    # Skip if the triggering workflow failed (for workflow_run events)
-    if: ${{ github.event_name == 'workflow_dispatch' || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') }}
+    # Run for both automatic (push to gh-pages) and manual (workflow_dispatch) triggers
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
     
     steps:
       - name: Checkout repository
@@ -58,7 +54,7 @@ jobs:
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful to Campus Workshop server'"
 
       - name: Backup current Mike site (SAFE)
-        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "💾 Creating backup of operational Mike site..."
@@ -89,7 +85,7 @@ jobs:
           "
 
       - name: SAFE Mike version update (preserves operational site)
-        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔄 SAFE UPDATE: Updating Mike versions without overwriting operational site"
@@ -259,7 +255,7 @@ jobs:
           "
 
       - name: Set proper permissions
-        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔐 Setting proper permissions..."
@@ -287,7 +283,7 @@ jobs:
           "
 
       - name: Reload nginx
-        if: ${{ github.event_name == 'workflow_run' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔄 Reloading nginx..."
