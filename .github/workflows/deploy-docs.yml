@@ -14,9 +14,9 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to deploy (e.g., 2025.2.NAS, 2025.3.TOR)'
+        description: 'Version to deploy (e.g., 2025.4.ATL, 2025.5.NYC)'
         required: true
-        default: '2025.2.NAS'
+        default: '2025.4.ATL'
       description:
         description: 'Version description'
         required: true
