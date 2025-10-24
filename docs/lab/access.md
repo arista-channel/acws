@@ -7,8 +7,7 @@ Welcome to the Arista Campus Workshop! This page provides you with the necessary
 Each participant will be assigned a dedicated lab environment with the following components:
 
 - **Student Pod**: Your assigned pod number
-- **Lab Assignment**: Your student designation (Student-a, Student-b, etc.)
-- **ATD Token**: Your Arista Test Drive token for lab access
+- **Lab Assignment**: Your student designation (student1, student2, etc.)
 
 ## Important Notes
 
@@ -20,7 +19,8 @@ Each participant will be assigned a dedicated lab environment with the following
 
 Your instructor will provide you with the necessary credentials to access:
 
-- **CloudVision-as-a-Service (CVaaS)**: Your ATD Token
+- **CloudVision-as-a-Service (CVaaS)**: For switch management and configuration
+- **CV-CUE (CloudVision WiFi)**: For wireless management and monitoring
 - **AGNI Portal**: For wireless policy management
 - **Lab Switches**: Direct CLI access when needed
 
@@ -30,9 +30,7 @@ Your instructor will provide you with the necessary credentials to access:
 
 ## Lab Assignment
 
-<div class="grid cards" markdown>
- {{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","left"), usecols=['Email','Lab Assignment','Student Pod #','ATD Token']) }}
-</div>
+{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
 
 --8<--
 "snippets/workspace.md"

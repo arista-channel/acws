@@ -39,6 +39,8 @@ nav:
             - Arista EOS Tips & Tricks: references/arista_eos_guide.md
         - Arista @Home:
             - Configuring Arista switches and APs for Home Use: references/arista_home.md
+        - CloudVision Demos:
+            - Change Control Workspace: references/change_control_workspace.md
         
         # - Arista Velocloud:
         #     - VeloCloud on EVE-NG: references/velocloud_eveng_guide.md
@@ -163,3 +165,7 @@ plugins:
 
 extra_css:
     - stylesheets/extra.css
+    - stylesheets/enhanced-components.css
+
+extra_javascript:
+    - javascripts/enhanced-gifs.js

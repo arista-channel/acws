@@ -144,8 +144,7 @@ Expand the `Locations` pane by clicking on the hamburger icon :material-menu:. N
 
         | Student   | Folder Name |
         | --------- | :---------: |
-        | Student1  |   `ACorp`   |
-        | Student2  |   `ACorp`   |
+        | student##  |   `ACorp`   |
 
     ![Campus Studio](./assets/images/b01/config/03_config.png){ width=600" }
 
@@ -229,7 +228,6 @@ For this workshop event, we will be reducing WiFi Radio channel width and transm
         |  18   |    18   | Disabled |  153  |     20MHz     |      4dBm      |
         |  19   |    19   | Disabled |  157  |     20MHz     |      4dBm      |
         |  20   |    20   | Disabled |  161  |     20MHz     |      4dBm      |
-
 
 4. Click `Save` at the bottom of the page then click `Continue` to confirm.
 5. Click `Continue` to commit changes

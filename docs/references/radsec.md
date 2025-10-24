@@ -34,7 +34,7 @@ It's important to identify if the wired or wireless device you are configuring i
 
 1. **Launchpad** Add AP and assign the Service
 2. **CV-CUE** Create a Folder and move the AP
-3. **CV-CUE** Generate CSR TAG and then Download CSR `.zip`, unzip for the .CSR
+3. **CV-CUE** Generate CSR TAG and then Download CSR `.zip`.
 4. **AGNI** Add the device as a new AP under Access Devices
 5. **AGNI** Click on your AP and then select Get Client Certificate
 6. **AGNI** Upload the CSR and Generate Certificate
@@ -51,18 +51,55 @@ It's important to identify if the wired or wireless device you are configuring i
 1. `CV-CUE`
       1. First we Generate a CSR. Click on `Monitor > WiFi Access Points`
       2. On right hand side on top and click on `Certificate Actions`
-      3. Next, right click on the AP and select `Generate CSR` and select your `Certificate Tag`.
+      3. Next, right click on the AP and select `Generate CSR` and select your `Add New Certificate Tag`. Type in a name for your Certificate Tag. Click on `Generate`.
       4. Next, right click on the AP and select `Download CSR` and select your `Certificate Tag`.
-      5. Unzip the CSR File
+
 2. `AGNI`
-      1. Click on Access Devices and Select the AP.
+      1. Click on Access Devices and click on `+ Add or Import`. Specify the following in the table below. Click on `Add Device` when done.
+
+        | Field | Value | Notes |
+        | --- | --- | --- |
+        | Choose Action | `Add Device` | Select radio button |
+        | Name | `Your AP Name` | Enter descriptive name for the AP |
+        | MAC Address | `xx:xx:xx:xx:xx:xx` | Optional - Enter AP MAC address |
+        | Vendor | `Arista WiFi` | Select from dropdown |
+        | Serial Number | `Your AP Serial` | **Required for RadSec** - Enter AP serial number |
+        | IP Address | `Your AP IP` | Optional - Enter AP IP address |
+        | Access Device Group | `Select Group` | Optional - Choose appropriate group |
+        | Location | `Your Location` | Optional - Example: Global/America/California/Site-1 |
+
       2. Access Devices → Devices → Select AP → Get Client Certificate
-      3. Select Get Client Certificate.
-      4. Next, select `Generate Certificate: Use CSR (Single Device)`, and select `Action: Upload CSR File`, and browse to and select the CSR file that you unzipped earlier in the process.
-      5. Select `Generate Certificate` and the AP Client Certificate will be created and downloaded to your device.
+      3. Next, select `Generate Certificate: Use CSR (Single Device)`, and select `Action: Upload CSR File`, and browse to and select the CSR zip file.
+      4. Select `Generate Certificate` and the AP Client Certificate will be created and downloaded to your device.
+      5. Under `System -> RadSec Settings` copy the `Radsec Server Hostname` and `Download Certificate` at the bottom.
+
+!!! danger "🚨 CRITICAL STEP - DO NOT SKIP!"
+    <div style="background-color: #ffebee; border-left: 5px solid #f44336; padding: 15px; margin: 10px 0;">
+    <strong>⚠️ MANDATORY:</strong> You MUST download the RadSec certificate from AGNI before proceeding to CV-CUE configuration.
+    <br><br>
+    <strong>📥 Download Certificate</strong> - This certificate is required for the RadSec tunnel to work properly.
+    <br><br>
+    <strong>🔗 Copy Hostname</strong> - The RadSec Server Hostname is needed for CV-CUE RADIUS server configuration.
+    </div>
+
 3. `CV-CUE`
       1. Upload the Device Certificate
       2. Go to `Monitor → WiFi → Access Points → Select AP → Certificate → Upload Device Certificate`, and upload the Client/Device Certificate that was downloaded to your device. Use the same Certificate Tag as when you Downloaded the CSR above.
+      3. Configuring AGNI RadSec Server.
+      4. Go to `Configure → Network Profiles → RADIUS` and create a new RADIUS Server.
+      5. Select `Add RADIUS Server`. Specify the following in the table below.
+
+        | Field | Value |
+        | --- | --- |
+        | Server Name | `AGNI-01` |
+        | Server Address | `radsec.beta.agni.arista.io` |
+        | Radsec | `ON` |
+        | Radsec Port | `2083` |
+        | Add CA Certificate | `Downloaded from AGNI` |
+        | Certificate Tag | `Select your tag created in Step 1` |
+
+      6. Select `Save` to commit the changes.
+
 4. `AGNI`
       1. Click on Access Devices and then Devices look at the RadSec Status.
-      2. If the AP does not connect, issue a reboot.
+      2. 🟢 **Green dot** means connected and an active SSID is using AGNI.

@@ -10,7 +10,12 @@ docs/snippets/login_agni.md
 
 Let's configure a Guest Captive Portal using AGNI for wireless clients. To configure the guest portal, you must configure both AGNI and CV-CUE.
 
-??? tip "Important: Your access points need to be onboarded in AGNI with RadSec before proceeding. Follow the steps here"
+!!! note "🔥 CRITICAL PREREQUISITE 🔥"
+    <div style="background-color: #ffebee; border-left: 5px solid #f44336; padding: 15px; margin: 10px 0;">
+    <strong>⚠️ MANDATORY:</strong> Your access points need to be onboarded in AGNI with RadSec before proceeding.
+    <br><br>
+    <strong>📖 Follow the steps here</strong> - This step cannot be skipped!
+    </div>
 
     --8<--
     docs/references/radsec.md

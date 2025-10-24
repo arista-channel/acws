@@ -2,7 +2,11 @@
 
 Welcome to our Arista hands-on campus workshop! 🚀
 
-We appreciate your desire to get your hands dirty and diving into the Arista campus solutions. Over the next two days, you'll have the opportunity to work with real hardware and software, just as it's deployed in the field. Each lab is designed to simulate real-world scenarios, giving you practical experience. Whether you're deploying and configuring switches, operating the network, or troubleshooting client connectivity issues, you'll gain a better understanding of the campus lifecycle. Get ready to dive in, experiment, and learn by doing!
+Welcome to an immersive exploration of Arista's comprehensive campus networking solutions. This intensive workshop provides hands-on experience with enterprise-grade hardware and software platforms deployed in production environments worldwide.
+
+Our carefully structured lab exercises mirror real-world implementation scenarios, enabling you to develop practical expertise across the complete campus network lifecycle. From initial device provisioning and configuration management to advanced network operations and client connectivity troubleshooting, each module builds upon foundational concepts while introducing industry best practices.
+
+Through direct interaction with Arista's CloudVision platform, EOS operating system, and integrated campus solutions, you'll gain the technical proficiency and operational confidence essential for successful enterprise network deployments.
 
 <div class="hero-banner">
     <div class="hero-container">
@@ -59,284 +63,6 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
     </div>
 </div>
 
-<style>
-.hero-banner {
-    width: 100%;
-    margin: 20px 0;
-}
-
-.hero-container {
-    width: 100%;
-    min-height: 500px;
-    background: linear-gradient(135deg, #0B1426 0%, #1E3A5F 50%, #2B5A87 100%);
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-radius: 12px;
-    padding: 40px 20px;
-}
-
-.hero-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 2px, transparent 2px),
-                      radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 1px, transparent 1px);
-    background-size: 60px 60px, 40px 40px;
-    animation: float 20s ease-in-out infinite;
-}
-
-.hero-decorations {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 5;
-}
-
-.switch-element {
-    position: absolute;
-    width: clamp(60px, 8vw, 80px);
-    height: clamp(15px, 2vw, 20px);
-    background: linear-gradient(45deg, #2196F3, #64B5F6);
-    border-radius: 4px;
-    box-shadow: 0 4px 15px rgba(33, 150, 243, 0.3);
-}
-
-.switch-1 {
-    top: 15%;
-    left: 10%;
-    animation: float-switch 15s ease-in-out infinite;
-}
-
-.switch-2 {
-    top: 25%;
-    right: 15%;
-    animation: float-switch 18s ease-in-out infinite reverse;
-}
-
-.switch-3 {
-    bottom: 20%;
-    left: 8%;
-    animation: float-switch 12s ease-in-out infinite;
-}
-
-.hero-lines {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.pulse-line {
-    position: absolute;
-    background: linear-gradient(90deg, transparent, rgba(79, 195, 247, 0.6), transparent);
-    height: 2px;
-    animation: pulse-line 3s ease-in-out infinite;
-}
-
-.line-1 {
-    top: 30%;
-    left: 20%;
-    width: clamp(150px, 20vw, 200px);
-    transform: rotate(25deg);
-}
-
-.line-2 {
-    top: 60%;
-    right: 25%;
-    width: clamp(120px, 15vw, 150px);
-    transform: rotate(-15deg);
-}
-
-.line-3 {
-    bottom: 35%;
-    left: 15%;
-    width: clamp(140px, 18vw, 180px);
-    transform: rotate(45deg);
-}
-
-.hero-badge {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(76, 175, 80, 0.9);
-    color: white;
-    padding: 8px 16px;
-    border-radius: 25px;
-    font-size: clamp(10px, 1.5vw, 14px);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
-    animation: pulse-badge 2s ease-in-out infinite;
-    z-index: 10;
-}
-
-.hero-content {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-    max-width: 1200px;
-    width: 100%;
-}
-
-.hero-brand {
-    color: #FFFFFF;
-    font-size: clamp(24px, 6vw, 48px);
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-.hero-title {
-    color: #FFFFFF !important;
-    font-size: clamp(28px, 7vw, 56px);
-    font-weight: 600;
-    margin: 0 0 15px 0;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-.hero-subtitle {
-    color: #B8D4F0;
-    font-size: clamp(14px, 3vw, 24px);
-    font-weight: 400;
-    margin-bottom: 30px;
-    line-height: 1.4;
-}
-
-.hero-break {
-    display: block;
-}
-
-.solutions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    margin-top: 30px;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.solution-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 20px 15px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.solution-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.solution-icon {
-    font-size: clamp(32px, 5vw, 48px);
-    margin-bottom: 12px;
-    color: #4FC3F7;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-}
-
-.solution-title {
-    color: #FFFFFF;
-    font-size: clamp(14px, 2vw, 16px);
-    font-weight: 600;
-    margin-bottom: 6px;
-}
-
-.solution-desc {
-    color: #B8D4F0;
-    font-size: clamp(10px, 1.5vw, 12px);
-    line-height: 1.3;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-@keyframes float-switch {
-    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
-    50% { transform: translateY(-20px) rotate(2deg); opacity: 0.8; }
-}
-
-@keyframes pulse-line {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-}
-
-@keyframes pulse-badge {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-}
-
-/* Mobile-specific adjustments */
-@media (max-width: 768px) {
-    .hero-container {
-        min-height: 400px;
-        padding: 30px 15px;
-    }
-
-    .hero-badge {
-        top: 15px;
-        right: 15px;
-        padding: 6px 12px;
-    }
-
-    .hero-break {
-        display: none;
-    }
-
-    .solutions-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-top: 25px;
-    }
-
-    .solution-card {
-        padding: 15px 10px;
-    }
-
-    .switch-element {
-        display: none;
-    }
-
-    .pulse-line {
-        display: none;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-container {
-        min-height: 350px;
-        padding: 25px 10px;
-    }
-
-    .solutions-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-    }
-
-    .solution-card {
-        padding: 12px 8px;
-    }
-}
-</style>
-
 <div class="grid cards" markdown>
 
 - :material-file-document-multiple:{ .lg .middle } **Lab Access**
@@ -353,7 +79,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **A01-Lab: Explore EOS**
+- :material-cloud: **A01-Lab: Explore EOS**
 
     ---
 
@@ -361,7 +87,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-01](./a_wired/a01_lab.md){ .md-button .md-button--primary }
 
-<!-- - :cloudvision: **A02-Lab: Day 1 Operations**
+<!-- - :material-cloud: **A02-Lab: Day 1 Operations**
 
     ---
 
@@ -369,7 +95,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-02](./a_wired/a02_lab.md){ .md-button .md-button--primary } -->
 
-- :cloudvision: **A02-ATD-Lab: Day 1 Operations - Virtual Lab**
+- :material-cloud: **A02-ATD-Lab: Day 1 Operations - Virtual Lab**
 
     ---
 
@@ -377,7 +103,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-02-ATD](./a_wired/a02_atd.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A03-Lab: Day 2 Operations**
+- :material-cloud: **A03-Lab: Day 2 Operations**
 
     ---
 
@@ -385,7 +111,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into A-03](./a_wired/a03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **A04-Lab: Operations and Monitoring**
+- :material-cloud: **A04-Lab: Operations and Monitoring**
 
     ---
 
@@ -399,8 +125,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-
-- :cloudvision: **B01-Lab: Wireless Setup**
+- :material-cloud: **B01-Lab: Wireless Setup**
 
     ---
 
@@ -408,7 +133,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-01](./b_wireless/b01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B02-Lab: Troubleshooting WiFi**
+- :material-cloud: **B02-Lab: Troubleshooting WiFi**
 
     ---
 
@@ -416,7 +141,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-02](./b_wireless/b02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B03-Lab: Guest WiFi with AGNI**
+- :material-cloud: **B03-Lab: Guest WiFi with AGNI**
 
     ---
 
@@ -424,7 +149,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into B-03](./b_wireless/b03_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **B04-Lab: Smart System Upgrade**
+- :material-cloud: **B04-Lab: Smart System Upgrade**
 
     ---
 
@@ -438,7 +163,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **C01-Lab: EAP-TLS Wireless Policy**
+- :material-cloud: **C01-Lab: EAP-TLS Wireless Policy**
 
     ---
 
@@ -446,7 +171,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-01](./c_security/c01_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **C02-Lab: UPSK Wireless Policy**
+- :material-cloud: **C02-Lab: UPSK Wireless Policy**
 
     ---
 
@@ -454,7 +179,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-02](./c_security/c02_lab.md){ .md-button .md-button--primary }
 
-- :cloudvision: **C03-Lab: EAP-TLS Wired Policy**
+- :material-cloud: **C03-Lab: EAP-TLS Wired Policy**
 
     ---
 
@@ -462,7 +187,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-03](./c_security/c03_lab.md){ .md-button .md-button--primary }
 
-<!-- - :cloudvision: **C04-Lab: Multi-Domain Segmentation Services**
+<!-- - :material-cloud: **C04-Lab: Multi-Domain Segmentation Services**
 
     ---
 
@@ -470,7 +195,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into C-04](./references/under_constructions.md){ .md-button .md-button--primary } -->
 
-<!-- - :cloudvision: **C05-Lab: Network Detect and Response (NDR)**
+<!-- - :material-cloud: **C05-Lab: Network Detect and Response (NDR)**
 
     ---
 
@@ -484,7 +209,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **O01-Lab: Universal Network Observability with CloudVision**
+- :material-cloud: **O01-Lab: Universal Network Observability with CloudVision**
 
     ---
 
@@ -498,7 +223,7 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
 <div class="grid cards" markdown>
 
-- :cloudvision: **D01-Lab: Iris Design, Configuration and Pricing**
+- :material-cloud: **D01-Lab: Iris Design, Configuration and Pricing**
 
     ---
 
@@ -506,15 +231,15 @@ We appreciate your desire to get your hands dirty and diving into the Arista cam
 
     [:material-login: Hop into D-01](./references/config_tools.md){ .md-button .md-button--primary }
 
-<!-- - :cloudvision: **D02-Lab: AROC**
+<!-- - :material-cloud: **D02-Lab: AROC**
 
     ---
 
-    Use Arista Order and Configuration (AROC) to create bill of materials 
+    Use Arista Order and Configuration (AROC) to create bill of materials
 
     [:material-login: Hop into D-02](./references/under_constructions.md){ .md-button .md-button--primary }
 
-- :cloudvision: **D03-Lab: CPQ**
+- :material-cloud: **D03-Lab: CPQ**
 
     ---
 

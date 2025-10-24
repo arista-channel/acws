@@ -27,13 +27,9 @@ As you can imagine, disconnecting the Control and Management plane off the data 
 - [x] If a new EOS version includes an FPGA upgrade, the FPGA upgrade will be suppressed. FPGA upgrades require a full reboot of a switch to apply.
 - [x] Some switch features, when in use, will prevent SSU from starting. See the [Arista TOI](https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations){target="_blank"} for more details
 
-!!! tip "First, download the desired EOS image to the switch flash storage.  Login to your switch using the `arista` user credentials."
+!!! tip "First, download the desired EOS image to the switch flash storage using CloudVision Change Control."
 
-```bash
-copy https://ztp-acws.duckdns.org/images/EOS-4.34.1F.swi flash:
-# or
-copy https://10.1.100.50/EOS-4.34.1F.swi flash:
-```
+    For detailed instructions on using the **Action Download File** feature in Change Control, see the [Change Control Action Download File Guide](../references/change_control_workspace.md).
 
 ## Perform Arista SSU
 
@@ -47,7 +43,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
     ???+ quote "Example Output"
 
-        ```yaml
+        ```
         pod00-leaf1 login: arista
         Last login: Tue Jul 30 22:16:56 on ttyS0
         pod00-leaf1>enable
@@ -60,9 +56,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
         Smart System Upgrade (SSU) is supported on EOS versions 4.31.5M and later on CCS-710P-12/16P switches. In this example, the switch is currently running EOS-4.34.0F. This is a supported EOS version for Arista SSU.
 
-    ```yaml
     show version
-    ```
 
     ???+ quote "Example Output"
 
@@ -87,9 +81,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
 3. Type `dir` to show the list of files in the `flash:` filesystem. You should note that there are some EOS image versions already on the flash storage of the leaf1a switch. Choose the latest EOS image version which is our target update version for this lab.
 
-    ```yaml
     dir
-    ```
 
     ???+ quote "Example Output"
 
@@ -125,10 +117,9 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
 4. Type `show reload fast-boot`.  This command will show you an output of warnings or incompatibilities with the current configuration of the switch. As mentioned in the prerequisites section above, if any configuration is set in a way that prevents SSU from starting, the reasons will be listed here.
 
-     ```yaml
-        show reload fast-boot
-     ```
-    
+    show reload fast-boot
+         ```
+
     ???+ quote "Example Output when SSU will proceed with caution. In this case, MLAG is compatible"
         ```yaml hl_lines="2 3 4 5"
             pod00-leaf1a#show reload fast-boot
@@ -148,12 +139,10 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
     !!! tip "⏲ Setting the boot flash will take a few seconds!"
 
-    ```bash
     configure
     boot system flash:EOS-4.34.1F.swi
     exit
     write
-    ```
 
     ???+ quote "Example Output"
 
@@ -204,7 +193,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
         During the SSU reboot process, you may see messages referring to Arista Smart Upgrade, or ASU. ASU is a previous version of SSU, and some references to ASU still exist in code for the SSU process.
 
 9. When you see the following message in your serial console of the switch, the switch is now rebooting.
-        ```yaml
+        # yaml
         reloading /mnt/flash/EOS-4.34.1F.swi
         ```
 
@@ -215,7 +204,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
     ???+ quote "Example Output"
 
         ```yaml hl_lines="2 5 8 13 25"
-            pod00-leaf1a#reload fast-boot now
+            pod00-leaf1#reload fast-boot now
             Running AsuPatchDb:doPatch( version=4.34.0F-38783123.4315M, model=Strata ) #(1)!
             Optimizing image for current system - this may take a minute...
             No warnings or unsupported configuration found.
@@ -252,14 +241,14 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
             System RAM: 3952504 kB
             Flash Memory size:  7.1G
 
-            pod00-leaf1a login:
+            pod00-leaf1 login:
 
 
 
             Wait for the SSU process to complete. This can take up to 10 minute.  When you see the following console message, the switch management plane has finished its reboot.
 
 
-            pod00-leaf1a login:
+            pod00-leaf1 login:
         ```
 
         1. Remember the mention, there may still be some mention of ASU in the code. This is the SSU process kicking off.
@@ -293,9 +282,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
 13. After the management plane boots up, there are still some processes running before SSU can be considered successful. Run the following command to watch for the log message indicating SSU is fully successful. You should see the message `reload hitless reconciliation complete` about 2 minutes after the switch completes its reload.
 
-    ```yaml
     show log follow | inc hitless
-    ```
 
     ???+ quote "Example Output"
 
@@ -342,9 +329,7 @@ Let's begin the hands-on portion of this lab. SSU can be triggered on the comman
 
 16. As a last item to leave you with, you can validate your reload reason to confirm why the switch last reloaded using the command below.
 
-    ```yaml
     show reload cause
-    ```
 
     ???+ quote "Example Output"
 

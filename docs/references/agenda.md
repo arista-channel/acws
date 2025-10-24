@@ -6,7 +6,6 @@ Day 1 | Wired and Wireless
 8:30 - 8:55 |Intros
 9:00-9:25 | Overview of Arista Campus Architecture
 9:30-10:30 | Labs: Arista CloudVision for Campus - Build the Campus Fabric
-Wired Lab | A-02-ATD: Provisioning a Campus Fabric - Virtual Lab
 Wired Lab | A-03: Access Interface Configuration
 10:35 - 11:55 | Labs: Arista Wireless with CV-CUE - Build the Wireless Fabric
 Wireless Lab | B-01: Wireless Setup
@@ -36,4 +35,4 @@ AGNI Lab | C-03: AGNI and Wired EAP-TLS
 11:30 - 11:55 | Labs: Iris - Design, Configure and Price Out Your Network
 Iris Lab | D-00: Iris Design, Configuration and Pricing
 12:00 - 12:50pm | Lunch and Q&A
-1:00 - 2:00 | Till the next time!
+1:00 - 2:00 | Till next time!

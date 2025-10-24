@@ -7,7 +7,7 @@ This lab combines two essential CloudVision workflows: onboarding switches using
 --8<--
 docs/snippets/topology.md
 docs/snippets/login_cv.md
-docs/snippets/workspace.md
+<!-- docs/snippets/workspace.md -->
 --8<--
 
 ## Part 1: Switch Onboarding with Inventory Studio
@@ -16,44 +16,14 @@ docs/snippets/workspace.md
 
 Before we begin the hands-on portion, watch this demonstration video that shows the complete switch onboarding process using Inventory Studio:
 
-<div class="video-container" id="main-video-container">
-  <video 
-    id="demo-video"
-    width="100%" 
-    controls 
-    controlslist="nodownload"
-    preload="metadata"
-    aria-label="CloudVision Inventory Studio Walkthrough"
-    onloadeddata="videoLoaded()"
-    onerror="videoError()"
-  >
-    <source src="../assets/demos/01_inventory_studio.mp4" type="video/mp4">
-    
-    <!-- Fallback content -->
-    <div class="video-fallback">
-      <p><strong>⚠️ Video cannot be loaded</strong></p>
-      <p>This might be due to:</p>
-      <ul style="text-align: left; display: inline-block;">
-        <li>Missing video file in the demos folder</li>
-        <li>Incorrect file path</li>
-        <li>Browser compatibility issues</li>
-      </ul>
-      <p>
-        <button onclick="retryVideo()" class="retry-btn">🔄 Retry Loading</button>
-      </p>
-    </div>
-  </video>
-  
-  <!-- Loading indicator -->
-  <div id="video-loading" class="video-loading" style="display: none;">
-    <p>📺 Loading video...</p>
-  </div>
-  
-<!-- Video info -->
-  <div class="video-controls-info">
-    <small>
-      💡 <strong>Tip:</strong> Use spacebar to play/pause, arrow keys to skip forward/back
-    </small>
+<div class="gif-container">
+  <img src="../assets/demos/01_inventory_studio.gif"
+       alt="Inventory Studio Demo"
+       class="enhanced-gif clickable-gif gif-blue-border"
+       onclick="openLightbox(this)"
+       title="Click to view full-screen" />
+  <div class="gif-overlay">
+    <span class="zoom-hint">🔍 Click to zoom</span>
   </div>
 </div>
 
@@ -81,44 +51,14 @@ Now that you've seen the process, let's onboard your assigned switch using the s
 
 #### Video Walkthrough - Applying base configuration
 
-<div class="video-container" id="base-config-video-container">
-  <video 
-    id="base-config-video"
-    width="100%" 
-    controls 
-    controlslist="nodownload"
-    preload="metadata"
-    aria-label="CloudVision Base Configuration Walkthrough"
-    onloadeddata="videoLoaded()"
-    onerror="videoError()"
-  >
-    <source src="../assets/demos/02_base_config.mp4" type="video/mp4">
-    
-    <!-- Fallback content -->
-    <div class="video-fallback">
-      <p><strong>⚠️ Video cannot be loaded</strong></p>
-      <p>This might be due to:</p>
-      <ul style="text-align: left; display: inline-block;">
-        <li>Missing video file in the demos folder</li>
-        <li>Incorrect file path</li>
-        <li>Browser compatibility issues</li>
-      </ul>
-      <p>
-        <button onclick="retryVideo()" class="retry-btn">🔄 Retry Loading</button>
-      </p>
-    </div>
-  </video>
-  
-  <!-- Loading indicator -->
-  <div id="video-loading" class="video-loading" style="display: none;">
-    <p>📺 Loading video...</p>
-  </div>
-  
-  <!-- Video info -->
-  <div class="video-controls-info">
-    <small>
-      💡 <strong>Tip:</strong> Use spacebar to play/pause, arrow keys to skip forward/back
-    </small>
+<div class="gif-container">
+  <img src="../assets/demos/02_base_config.gif"
+       alt="Base Configuration Demo"
+       class="enhanced-gif clickable-gif gif-green-border"
+       onclick="openLightbox(this)"
+       title="Click to view full-screen" />
+  <div class="gif-overlay">
+    <span class="zoom-hint">🔍 Click to zoom</span>
   </div>
 </div>
 
@@ -163,46 +103,32 @@ Now that your switches are onboarded, let's configure port profiles and apply th
 
 ### Video Walkthrough - Build the Campus Fabric
 
-<div class="video-container" id="access-config-video-container">
-  <video 
-    id="access-config-video"
-    width="100%" 
-    controls 
-    controlslist="nodownload"
-    preload="metadata"
-    aria-label="CloudVision Campus Fabric Configuration Walkthrough"
-    onloadeddata="videoLoaded()"
-    onerror="videoError()"
-  >
-    <source src="../assets/demos/03_campus_fabric.mp4" type="video/mp4">
-    
-    <!-- Fallback content -->
-    <div class="video-fallback">
-      <p><strong>⚠️ Video cannot be loaded</strong></p>
-      <p>This might be due to:</p>
-      <ul style="text-align: left; display: inline-block;">
-        <li>Missing video file in the demos folder</li>
-        <li>Incorrect file path</li>
-        <li>Browser compatibility issues</li>
-      </ul>
-      <p>
-        <button onclick="retryVideo()" class="retry-btn">🔄 Retry Loading</button>
-      </p>
-    </div>
-  </video>
-  
-  <!-- Loading indicator -->
-  <div id="video-loading" class="video-loading" style="display: none;">
-    <p>📺 Loading video...</p>
-  </div>
-  
-  <!-- Video info -->
-  <div class="video-controls-info">
-    <small>
-      💡 <strong>Tip:</strong> Use spacebar to play/pause, arrow keys to skip forward/back
-    </small>
+<div class="gif-container">
+  <img src="../assets/demos/03_campus_fabric.gif"
+       alt="Campus Fabric Demo"
+       class="enhanced-gif clickable-gif gif-orange-border"
+       onclick="openLightbox(this)"
+       title="Click to view full-screen" />
+  <div class="gif-overlay">
+    <span class="zoom-hint">🔍 Click to zoom</span>
   </div>
 </div>
+
+### Step 1: Build the Campus Fabric
+
+1. Navigate to `Studios` from the main CloudVision menu
+2. Locate and click on `Campus Fabric (L2/L3/EVPN)`
+3. Click on `+ Add Campus Fabric`. Type `Workshop` and click `+ Create "Workshop"`
+4. On Workspace Review, click `Submit Workspace` Review, click `X` to close the window. You will be taken back to the main Campus Fabric page.
+5. Click on `>` to expand the `Workshop` campus fabric
+6. Click on `+ Add Campus Pod`. Type `Home Office` and click `+ Create "Home Office"`
+7. Click on `>` to expand the `Home Office` campus pod
+8. Under the Campus Type, click on `Select` and select `L2` from the dropdown
+9. Scroll down to `+ Add Access Pod`. Type `IDF1` and click `+ Create "IDF1"`
+10. Click on `>` to expand the `IDF1` access pod
+11. At the bottom of the page, `Updating tag Campus Fabric`, click :mag: `Review`
+12. On Workspace Review, click `Submit Workspace`
+13. On `Workspace Submitted`, click `Clear Workspace`
 
 ### Creating Port Profiles
 
@@ -215,17 +141,17 @@ Now that your switches are onboarded, let's configure port profiles and apply th
 2. Let's create two port profiles using the `Access Interface Configuration` studio that will be used to provision connected hosts.
 
     1. Launch the `Access Interface Configuration`
-    2. Click `+ Add Port Profile`, name it `WAP`, and click the arrow on the right
+    2. Click `+ Add Port Profile`, name it `Wireless-Access Point`, and click the arrow on the right
 
     3. Enter the following values on this configuration page, you can leave all other configuration items left as default. See the settings are configured in the screenshot below
     
         **VLAN pod numbers between 01-20 that was assigned to your lab/Pod. Example: `Pod01` is `VLAN101`, `Pod13` is `VLAN113`*
 
-        ???+ example "WAP"
+        ???+ example "Wireless-Access Point"AP"
 
             | Key                  | Value                                        |
             | -------------------- | -------------------------------------------- |
-            | Description          | `WAP`                                        |
+            | Description          | `Wireless-Access Point`                                        |
             | Enable               | Yes                                          |
             | Mode                 | Access                                       |
             | VLANS                | `1##` where `##` is your 2 digit pod number* |
@@ -469,75 +395,3 @@ CloudVision Change Controls are built with this flexibility in mind, granular ch
     [:material-login: LET'S GO TO THE NEXT LAB!](./a04_lab.md){ .md-button .md-button--primary }
 
 --8<-- "includes/abbreviations.md"
-
-<!-- Custom CSS and JavaScript for enhanced video experience -->
-<style>
-.video-container {
-  position: relative;
-  margin: 1.5em 0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  background: #f8f9fa;
-}
-
-.video-container video {
-  border-radius: 8px;
-  background: #000;
-  display: block;
-}
-
-.video-loading, .video-error {
-  padding: 2em;
-  text-align: center;
-  background: #f8f9fa;
-  border-radius: 8px;
-}
-
-.video-error {
-  background: #fff3cd;
-  border: 1px solid #ffeaa7;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-  .video-container {
-    background: #2d3748;
-  }
-  
-  .video-controls-info {
-    background: #2d3748;
-    border-color: #4a5568;
-    color: #e2e8f0;
-  }
-  
-  .video-loading {
-    background: #2d3748;
-    color: #e2e8f0;
-  }
-  
-  .video-error, .video-fallback {
-    background: #744210;
-    border-color: #d69e2e;
-    color: #fef5e7;
-  }
-  
-  .troubleshooting {
-    background: #2d3748;
-    color: #e2e8f0;
-  }
-  
-  .troubleshooting code {
-    background: #4a5568;
-    color: #e2e8f0;
-  }
-}
-</style>
-
-<script>
-function videoLoaded() {
-  console.log('Video loaded successfully');
-  document.getElementById('video-loading').style.display = 'none';
-  document.getElementById('video-error').style.display = 'none';
-}
-</script>

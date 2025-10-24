@@ -34,11 +34,9 @@ docs/snippets/workspace.md
 
 {{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","center"), usecols=['Email','AP#1','AP#2','Switch']) }}
 
-1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Streaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`). We will use these to choose which switch is `leaf1a` and `leaf1b`
+1. Navigate to the `Devices` tab on the left and let's look at the `Inventory`. There should be two devices with their `Streaming` status as `Active`. Identify your serial number (`Device ID`) and associated hostname (`Device`).
 
-    !!! danger "Single Workspace"
-
-        You and your fellow student will work together to onboard your switch pair in a **single workspace**.
+    !!! tip "Working with Workspace"
 
         Your CloudVision is tied to **your pod**, anywhere it says `pod-##` you will replace with your assigned pod number.
 
@@ -70,7 +68,7 @@ docs/snippets/workspace.md
 
     === "Step 2"
 
-        In the `Role Assignment` click on the `Hostname` field and name your switch `pod##-leaf1X`. Where ## is your pod number and `X` is either student A or B. Also select the role as `Leaf` and `Continue`
+        In the `Role Assignment` click on the `Hostname` field and name your switch `pod##-leaf1`. Where ## is your pod number.
 
         ![Campus Set Device Hostname and ROle](./assets/images/a01/06_add_device_qa_step2.png)
 
@@ -147,7 +145,7 @@ docs/snippets/workspace.md
 
         ![Campus Add Config](./assets/images/a01/12_add_config_1.png)
 
-    === "Add Config Step 2 (Leaf1A)"
+    === "Add Config Step 2 (Leaf1)"
 
         Select the correct configuration for the device selected.
 
@@ -158,12 +156,6 @@ docs/snippets/workspace.md
         Ensure the configuration has applied!
 
         ![Campus Add Config](./assets/images/a01/12_add_config_3.png)
-
-    === "Add Config Step 4 (Leaf1B)"
-
-        Do the same for the other leaf, selecting the correct configuration file.
-
-        ![Campus Add Config](./assets/images/a01/12_add_config_4.png)
 
 4. Let's now review our workspace and the changes we've made by clicking on `Review Workspace`
 
