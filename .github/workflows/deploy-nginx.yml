@@ -79,7 +79,7 @@ jobs:
           echo "🔗 Testing connection to $SERVER_HOST..."
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful'"
 
-      - name: Deploy to nginx server
+      - name: Transfer site to server
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
@@ -102,15 +102,20 @@ jobs:
           echo "📤 Transferring to server..."
           scp site.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
 
-          # Simple deployment approach
-          echo "🔄 Executing simple deployment..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST '
+      - name: Deploy to nginx server
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
+          script: |
             set -e
-            echo "Starting deployment on server..."
+            echo "🔄 Starting deployment on server..."
 
             # Backup Orlando if exists
             if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
-              echo "Backing up Orlando..."
+              echo "🛡️ Backing up Orlando..."
               sudo cp -r "/var/www/mkdocs/site/2025.1.ORL" "/tmp/orlando-backup"
             fi
 
@@ -125,11 +130,12 @@ jobs:
             tar -xzf /tmp/site.tar.gz
 
             # Deploy excluding Orlando
+            echo "📦 Deploying new content..."
             sudo rsync -av --exclude="2025.1.ORL" . "/var/www/mkdocs/site/"
 
             # Restore Orlando
             if [ -d "/tmp/orlando-backup" ]; then
-              echo "Restoring Orlando..."
+              echo "🛡️ Restoring Orlando..."
               sudo cp -r "/tmp/orlando-backup" "/var/www/mkdocs/site/2025.1.ORL"
             fi
 
@@ -143,10 +149,7 @@ jobs:
             # Cleanup
             rm -rf /tmp/new-site /tmp/site.tar.gz /tmp/orlando-backup
 
-            echo "Deployment completed successfully"
-          '
-
-          echo "✅ Deployment completed successfully"
+            echo "✅ Deployment completed successfully"
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
