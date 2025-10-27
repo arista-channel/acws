@@ -2,6 +2,8 @@
 
 Welcome to our Arista hands-on campus workshop! 🚀
 
+<!-- CI/CD Test: Updated at $(date) -->
+
 Welcome to an immersive exploration of Arista's comprehensive campus networking solutions. This intensive workshop provides hands-on experience with enterprise-grade hardware and software platforms deployed in production environments worldwide.
 
 Our carefully structured lab exercises mirror real-world implementation scenarios, enabling you to develop practical expertise across the complete campus network lifecycle. From initial device provisioning and configuration management to advanced network operations and client connectivity troubleshooting, each module builds upon foundational concepts while introducing industry best practices.
