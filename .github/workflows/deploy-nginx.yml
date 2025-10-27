@@ -63,21 +63,49 @@ jobs:
           echo "Site built successfully"
           ls -la deploy_site/
 
-      - name: Deploy to nginx server (working approach)
+      - name: Deploy to nginx server (exit code 255 fix)
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
+          set -e
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "Deploying to nginx server: $SERVER_HOST"
 
-          # Setup SSH key (same as working diagnostic)
+          # Setup SSH key with better error handling
           mkdir -p ~/.ssh
           echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
 
-          # Test connection first (like diagnostic)
-          echo "Testing SSH connection..."
-          ssh -o ConnectTimeout=30 -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful'"
+          # Add SSH config for better connection handling
+          cat >> ~/.ssh/config << EOF
+          Host $SERVER_HOST
+            HostName $SERVER_HOST
+            User ${{ env.SERVER_USER }}
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+            ServerAliveInterval 60
+            ServerAliveCountMax 3
+            ConnectTimeout 30
+          EOF
+
+          # Add to known hosts
+          ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
+
+          # Test connection with retry logic
+          echo "Testing SSH connection with retry..."
+          for i in {1..3}; do
+            if ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection test $i successful'"; then
+              echo "SSH connection established on attempt $i"
+              break
+            else
+              echo "Connection attempt $i failed, retrying..."
+              sleep 5
+            fi
+            if [ $i -eq 3 ]; then
+              echo "All connection attempts failed"
+              exit 1
+            fi
+          done
 
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -93,13 +121,26 @@ jobs:
           tar -czf site-deploy.tar.gz -C "$SITE_SOURCE" .
           echo "Archive created: $(ls -lh site-deploy.tar.gz)"
 
-          # Transfer archive
-          echo "Transferring archive..."
-          scp -o StrictHostKeyChecking=no site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
+          # Transfer archive with retry
+          echo "Transferring archive with retry..."
+          for i in {1..3}; do
+            if scp site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/; then
+              echo "File transfer successful on attempt $i"
+              break
+            else
+              echo "Transfer attempt $i failed, retrying..."
+              sleep 5
+            fi
+            if [ $i -eq 3 ]; then
+              echo "All transfer attempts failed"
+              exit 1
+            fi
+          done
 
-          # Execute deployment (simplified commands)
+          # Execute deployment with better error handling
           echo "Executing deployment..."
-          ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@$SERVER_HOST '
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST 'bash -s' << 'DEPLOY_SCRIPT'
+            set -e
             echo "Starting deployment on server..."
 
             # Backup Orlando
@@ -136,7 +177,7 @@ jobs:
             rm -rf /tmp/deploy-temp /tmp/site-deploy.tar.gz
 
             echo "Deployment completed successfully"
-          '
+          DEPLOY_SCRIPT
 
           echo "Deployment finished successfully"
 
