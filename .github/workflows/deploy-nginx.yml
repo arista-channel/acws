@@ -63,17 +63,21 @@ jobs:
           echo "Site built successfully"
           ls -la deploy_site/
 
-      - name: Deploy to nginx server (ultra-simple)
+      - name: Deploy to nginx server (working approach)
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "Deploying to nginx server: $SERVER_HOST"
 
-          # Setup SSH key
+          # Setup SSH key (same as working diagnostic)
           mkdir -p ~/.ssh
           echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
+
+          # Test connection first (like diagnostic)
+          echo "Testing SSH connection..."
+          ssh -o ConnectTimeout=30 -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful'"
 
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -87,23 +91,25 @@ jobs:
           # Create archive
           echo "Creating deployment archive..."
           tar -czf site-deploy.tar.gz -C "$SITE_SOURCE" .
-          ls -lh site-deploy.tar.gz
+          echo "Archive created: $(ls -lh site-deploy.tar.gz)"
 
-          # Simple deployment script
-          echo "Transferring and deploying..."
-          scp site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
+          # Transfer archive
+          echo "Transferring archive..."
+          scp -o StrictHostKeyChecking=no site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
 
-          # Execute deployment on server
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            echo 'Starting deployment on server...'
+          # Execute deployment (simplified commands)
+          echo "Executing deployment..."
+          ssh -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@$SERVER_HOST '
+            echo "Starting deployment on server..."
 
             # Backup Orlando
-            if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then
-              sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup'
-              echo 'Orlando backed up'
+            if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
+              sudo cp -r "/var/www/mkdocs/site/2025.1.ORL" "/tmp/orlando-backup"
+              echo "Orlando backed up"
             fi
 
             # Create temp directory and extract
+            rm -rf /tmp/deploy-temp
             mkdir -p /tmp/deploy-temp
             cd /tmp/deploy-temp
             tar -xzf /tmp/site-deploy.tar.gz
@@ -113,10 +119,10 @@ jobs:
             sudo cp -r . /var/www/mkdocs/site/
 
             # Restore Orlando
-            if [ -d '/tmp/orlando-backup' ]; then
-              sudo cp -r '/tmp/orlando-backup' '/var/www/mkdocs/site/2025.1.ORL'
+            if [ -d "/tmp/orlando-backup" ]; then
+              sudo cp -r "/tmp/orlando-backup" "/var/www/mkdocs/site/2025.1.ORL"
               rm -rf /tmp/orlando-backup
-              echo 'Orlando restored'
+              echo "Orlando restored"
             fi
 
             # Set permissions
@@ -129,10 +135,10 @@ jobs:
             # Cleanup
             rm -rf /tmp/deploy-temp /tmp/site-deploy.tar.gz
 
-            echo 'Deployment completed successfully'
-          "
+            echo "Deployment completed successfully"
+          '
 
-          echo "Deployment finished"
+          echo "Deployment finished successfully"
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
