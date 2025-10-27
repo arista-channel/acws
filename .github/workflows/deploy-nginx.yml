@@ -102,56 +102,51 @@ jobs:
           echo "📤 Transferring to server..."
           scp site.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
 
-          # Create deployment script with proper variable substitution
-          cat > deploy_script.sh << DEPLOY_EOF
-          #!/bin/bash
-          set -e
+          # Execute deployment commands directly via SSH
+          echo "🔄 Executing deployment on server..."
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST << 'EOF'
+            set -e
+            echo "🔄 Starting deployment on server..."
 
-          echo "🔄 Deploying on server..."
+            # Backup Orlando if it exists
+            if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
+              echo "🛡️ Backing up Orlando version..."
+              sudo cp -r "/var/www/mkdocs/site/2025.1.ORL" "/tmp/orlando-backup-$(date +%s)"
+            fi
 
-          # Backup Orlando if it exists
-          if [ -d "${{ env.SERVER_PATH }}/2025.1.ORL" ]; then
-            echo "🛡️ Backing up Orlando version..."
-            sudo cp -r "${{ env.SERVER_PATH }}/2025.1.ORL" "/tmp/orlando-backup-\$(date +%s)"
-          fi
+            # Create target directory
+            sudo mkdir -p "/var/www/mkdocs/site"
 
-          # Create target directory
-          sudo mkdir -p "${{ env.SERVER_PATH }}"
+            # Extract new site
+            cd /tmp
+            rm -rf new-site
+            mkdir -p new-site
+            cd new-site
+            tar -xzf /tmp/site.tar.gz
 
-          # Extract new site
-          cd /tmp
-          rm -rf new-site
-          mkdir -p new-site
-          cd new-site
-          tar -xzf /tmp/site.tar.gz
+            # Deploy new content (excluding Orlando)
+            echo "📦 Deploying new content..."
+            sudo rsync -av --exclude="2025.1.ORL" /tmp/new-site/ "/var/www/mkdocs/site/"
 
-          # Deploy new content (excluding Orlando)
-          echo "📦 Deploying new content..."
-          sudo rsync -av --exclude="2025.1.ORL" /tmp/new-site/ "${{ env.SERVER_PATH }}/"
+            # Restore Orlando if we backed it up
+            ORLANDO_BACKUP=$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
+            if [ -n "$ORLANDO_BACKUP" ] && [ -d "$ORLANDO_BACKUP" ]; then
+              echo "🛡️ Restoring Orlando version..."
+              sudo cp -r "$ORLANDO_BACKUP" "/var/www/mkdocs/site/2025.1.ORL"
+            fi
 
-          # Restore Orlando if we backed it up
-          ORLANDO_BACKUP=\$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
-          if [ -n "\$ORLANDO_BACKUP" ] && [ -d "\$ORLANDO_BACKUP" ]; then
-            echo "🛡️ Restoring Orlando version..."
-            sudo cp -r "\$ORLANDO_BACKUP" "${{ env.SERVER_PATH }}/2025.1.ORL"
-          fi
+            # Set permissions
+            sudo chown -R www-data:www-data "/var/www/mkdocs/site"
+            sudo chmod -R 755 "/var/www/mkdocs/site"
 
-          # Set permissions
-          sudo chown -R www-data:www-data "${{ env.SERVER_PATH }}"
-          sudo chmod -R 755 "${{ env.SERVER_PATH }}"
+            # Reload nginx
+            sudo systemctl reload nginx
 
-          # Reload nginx
-          sudo systemctl reload nginx
+            # Cleanup
+            rm -rf /tmp/new-site /tmp/site.tar.gz /tmp/orlando-backup-*
 
-          # Cleanup
-          rm -rf /tmp/new-site /tmp/site.tar.gz /tmp/orlando-backup-*
-
-          echo "✅ Deployment completed successfully"
-          DEPLOY_EOF
-
-          # Transfer and execute deployment script
-          scp deploy_script.sh ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "chmod +x /tmp/deploy_script.sh && /tmp/deploy_script.sh && rm /tmp/deploy_script.sh"
+            echo "✅ Deployment completed successfully"
+          EOF
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
