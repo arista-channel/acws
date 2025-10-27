@@ -1,7 +1,7 @@
-# Deploy Campus Workshop to Nginx Server (mb-acws1)
+# Deploy Campus Workshop to Nginx Server
 name: Deploy to Nginx Server
 
-on:
+"on":
   # Automatic deployment when GitHub Pages is updated
   push:
     branches: [gh-pages]
@@ -69,36 +69,10 @@ jobs:
           cp -r site/* deploy_site/2025.4.ATL/
 
           # Create versions.json for Mike compatibility
-          cat > deploy_site/versions.json << 'EOF'
-[
-  {
-    "version": "2025.4.ATL",
-    "title": "Atlanta 2025.4",
-    "aliases": ["latest"]
-  },
-  {
-    "version": "2025.1.ORL",
-    "title": "Orlando 2025.1",
-    "aliases": []
-  }
-]
-EOF
+          echo '[{"version":"2025.4.ATL","title":"Atlanta 2025.4","aliases":["latest"]},{"version":"2025.1.ORL","title":"Orlando 2025.1","aliases":[]}]' > deploy_site/versions.json
 
           # Create main index.html that redirects to latest version
-          cat > deploy_site/index.html << 'EOF'
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0; url=./2025.4.ATL/">
-    <link rel="canonical" href="./2025.4.ATL/">
-</head>
-<body>
-    <p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p>
-</body>
-</html>
-EOF
+          echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting...</title><meta http-equiv="refresh" content="0; url=./2025.4.ATL/"><link rel="canonical" href="./2025.4.ATL/"></head><body><p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p></body></html>' > deploy_site/index.html
 
           echo "✅ Site built successfully"
           echo "📁 Deploy structure:"
