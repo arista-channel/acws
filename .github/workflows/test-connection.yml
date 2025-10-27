@@ -1,0 +1,51 @@
+name: Test SSH Connection
+
+"on":
+  workflow_dispatch:
+    inputs:
+      server_host:
+        description: 'Server hostname or IP'
+        required: true
+        default: 'acws.duckdns.org'
+
+env:
+  SERVER_USER: ubuntu
+
+jobs:
+  test-connection:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Test SSH connection
+        run: |
+          echo "Testing SSH connection to ${{ github.event.inputs.server_host }}"
+          
+          # Setup SSH key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Add server to known hosts
+          ssh-keyscan -H ${{ github.event.inputs.server_host }} >> ~/.ssh/known_hosts
+          
+          # Test basic SSH connection
+          echo "Testing basic SSH connection..."
+          ssh -v ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "echo 'SSH connection successful'"
+          
+          # Test sudo access
+          echo "Testing sudo access..."
+          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "sudo whoami"
+          
+          # Check target directory
+          echo "Checking target directory..."
+          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "ls -la /var/www/ || echo 'Directory does not exist'"
+          
+          # Check if Orlando exists
+          echo "Checking for Orlando directory..."
+          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "ls -la /var/www/mkdocs/site/2025.1.ORL || echo 'Orlando does not exist'"
+          
+          # Test file creation
+          echo "Testing file creation..."
+          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "echo 'test' > /tmp/test-file && cat /tmp/test-file && rm /tmp/test-file"
+          
+          echo "All tests completed successfully"
