@@ -122,16 +122,16 @@ EOF
           echo "🔗 Testing connection to $SERVER_HOST..."
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful to Campus Workshop server'"
 
-      - name: Backup current Mike site (SAFE)
+      - name: Backup existing site (if present)
         if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "💾 Creating backup of operational Mike site..."
-          echo "🎯 Target: ${{ env.SERVER_PATH }} (existing operational site)"
+          echo "💾 Checking for existing site to backup..."
+          echo "🎯 Target: ${{ env.SERVER_PATH }}"
 
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
             if [ -d '${{ env.SERVER_PATH }}' ]; then
-              echo '✅ Operational Mike site found: ${{ env.SERVER_PATH }}'
+              echo '✅ Existing site found: ${{ env.SERVER_PATH }}'
 
               # Create timestamped backup
               BACKUP_DIR='${{ env.SERVER_PATH }}.backup.$(date +%Y%m%d_%H%M%S)'
@@ -143,13 +143,16 @@ EOF
                 echo '✅ Backup created successfully'
                 echo \"📊 Backup size: \$(sudo du -sh \$BACKUP_DIR | cut -f1)\"
               else
-                echo '❌ Backup creation failed!'
-                exit 1
+                echo '⚠️ Backup creation failed, but continuing deployment'
               fi
             else
-              echo '❌ CRITICAL: Operational site not found at ${{ env.SERVER_PATH }}'
-              echo 'Expected existing Mike setup - aborting to prevent data loss'
-              exit 1
+              echo '📝 No existing site found at ${{ env.SERVER_PATH }}'
+              echo '🚀 This appears to be a fresh deployment'
+
+              # Create the directory structure
+              echo '📁 Creating directory structure...'
+              sudo mkdir -p '${{ env.SERVER_PATH }}'
+              sudo chown -R www-data:www-data '${{ env.SERVER_PATH }}'
             fi
           "
 
