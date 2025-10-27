@@ -86,34 +86,52 @@ jobs:
             echo "Using gh-pages content from: $SITE_SOURCE"
           fi
 
+          # Test SSH connection first
+          echo "Testing SSH connection..."
+          ssh -o ConnectTimeout=10 ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'SSH connection successful'"
+
           # Backup Orlando if exists
           echo "Backing up Orlando..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup'; echo 'Orlando backed up'; else echo 'No Orlando to backup'; fi"
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup-\$(date +%s)'; echo 'Orlando backed up'; else echo 'No Orlando to backup'; fi"
 
-          # Create target directory
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "sudo mkdir -p /var/www/mkdocs/site"
+          # Create target directories
+          echo "Creating target directories..."
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "sudo mkdir -p /var/www/mkdocs/site && sudo mkdir -p /tmp/new-site && sudo chown ${{ env.SERVER_USER }}:${{ env.SERVER_USER }} /tmp/new-site"
 
           # Deploy via rsync excluding Orlando
           echo "Deploying via rsync..."
-          rsync -avz --delete --exclude="2025.1.ORL" "$SITE_SOURCE/" ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/new-site/
+          rsync -avz --progress --exclude="2025.1.ORL" "$SITE_SOURCE/" ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/new-site/
 
           # Move to final location and restore Orlando
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            sudo rsync -av --exclude='2025.1.ORL' /tmp/new-site/ /var/www/mkdocs/site/
+          echo "Finalizing deployment..."
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST '
+            set -e
+            echo "Moving files to final location..."
+            sudo rsync -av --exclude="2025.1.ORL" /tmp/new-site/ /var/www/mkdocs/site/
+
+            echo "Cleaning up temp directory..."
             rm -rf /tmp/new-site
-            
-            if [ -d '/tmp/orlando-backup' ]; then
-              echo 'Restoring Orlando...'
-              sudo cp -r '/tmp/orlando-backup' '/var/www/mkdocs/site/2025.1.ORL'
-              rm -rf /tmp/orlando-backup
+
+            echo "Restoring Orlando if backed up..."
+            ORLANDO_BACKUP=$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
+            if [ -n "$ORLANDO_BACKUP" ] && [ -d "$ORLANDO_BACKUP" ]; then
+              echo "Restoring Orlando from: $ORLANDO_BACKUP"
+              sudo cp -r "$ORLANDO_BACKUP" "/var/www/mkdocs/site/2025.1.ORL"
+              rm -rf "$ORLANDO_BACKUP"
+              echo "Orlando restored successfully"
+            else
+              echo "No Orlando backup found to restore"
             fi
-            
+
+            echo "Setting permissions..."
             sudo chown -R www-data:www-data /var/www/mkdocs/site
             sudo chmod -R 755 /var/www/mkdocs/site
+
+            echo "Reloading nginx..."
             sudo systemctl reload nginx
-            
-            echo 'Deployment completed successfully'
-          "
+
+            echo "Deployment completed successfully"
+          '
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
