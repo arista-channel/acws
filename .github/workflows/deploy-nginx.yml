@@ -50,122 +50,80 @@ jobs:
       - name: Build site for nginx deployment
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          echo "🔨 Building site for nginx deployment..."
+          echo "Building site for nginx deployment..."
           mkdocs build --clean
           
-          echo "📦 Creating versioned structure..."
+          echo "Creating versioned structure..."
           mkdir -p deploy_site/2025.4.ATL
           cp -r site/* deploy_site/2025.4.ATL/
           
           echo '[{"version":"2025.4.ATL","title":"Atlanta 2025.4","aliases":["latest"]},{"version":"2025.1.ORL","title":"Orlando 2025.1","aliases":[]}]' > deploy_site/versions.json
           echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting...</title><meta http-equiv="refresh" content="0; url=./2025.4.ATL/"></head><body><p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p></body></html>' > deploy_site/index.html
           
-          echo "✅ Site built successfully"
+          echo "Site built successfully"
           ls -la deploy_site/
 
+      - name: Setup SSH key
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ github.event.inputs.server_host || 'acws.duckdns.org' }} >> ~/.ssh/known_hosts
 
-
-      - name: Create deployment archive
+      - name: Deploy to nginx server
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "🚀 Preparing deployment for nginx server: $SERVER_HOST"
+          echo "Deploying to nginx server: $SERVER_HOST"
 
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             SITE_SOURCE="deploy_site"
-            echo "📦 Using built site from: $SITE_SOURCE"
+            echo "Using built site from: $SITE_SOURCE"
           else
             SITE_SOURCE="."
-            echo "📦 Using gh-pages content from: $SITE_SOURCE"
+            echo "Using gh-pages content from: $SITE_SOURCE"
           fi
 
-          # Create deployment archive
-          echo "📦 Creating deployment archive..."
-          tar -czf site.tar.gz -C "$SITE_SOURCE" .
-          echo "✅ Archive created: $(ls -lh site.tar.gz)"
+          # Backup Orlando if exists
+          echo "Backing up Orlando..."
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup'; echo 'Orlando backed up'; else echo 'No Orlando to backup'; fi"
 
-      - name: Transfer and deploy to nginx server
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
-          username: ${{ env.SERVER_USER }}
-          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
-          script: |
-            set -e
-            echo "� Starting deployment on server..."
+          # Create target directory
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "sudo mkdir -p /var/www/mkdocs/site"
 
-            # Backup Orlando if exists
-            if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
-              echo "🛡️ Backing up Orlando..."
-              sudo cp -r "/var/www/mkdocs/site/2025.1.ORL" "/tmp/orlando-backup"
+          # Deploy via rsync excluding Orlando
+          echo "Deploying via rsync..."
+          rsync -avz --delete --exclude="2025.1.ORL" "$SITE_SOURCE/" ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/new-site/
+
+          # Move to final location and restore Orlando
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
+            sudo rsync -av --exclude='2025.1.ORL' /tmp/new-site/ /var/www/mkdocs/site/
+            rm -rf /tmp/new-site
+            
+            if [ -d '/tmp/orlando-backup' ]; then
+              echo 'Restoring Orlando...'
+              sudo cp -r '/tmp/orlando-backup' '/var/www/mkdocs/site/2025.1.ORL'
+              rm -rf /tmp/orlando-backup
             fi
-
-            # Create directory
-            sudo mkdir -p "/var/www/mkdocs/site"
-
-            echo "✅ Ready for file transfer..."
-
-      - name: Transfer site archive
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
-          username: ${{ env.SERVER_USER }}
-          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
-          source: "site.tar.gz"
-          target: "/tmp/"
-
-      - name: Complete deployment on server
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
-          username: ${{ env.SERVER_USER }}
-          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
-          script: |
-            set -e
-            echo "🔄 Completing deployment on server..."
-
-            # Extract and deploy
-            cd /tmp
-            rm -rf new-site
-            mkdir new-site
-            cd new-site
-            tar -xzf /tmp/site.tar.gz
-
-            # Deploy excluding Orlando
-            echo "📦 Deploying new content..."
-            sudo rsync -av --exclude="2025.1.ORL" . "/var/www/mkdocs/site/"
-
-            # Restore Orlando
-            if [ -d "/tmp/orlando-backup" ]; then
-              echo "🛡️ Restoring Orlando..."
-              sudo cp -r "/tmp/orlando-backup" "/var/www/mkdocs/site/2025.1.ORL"
-            fi
-
-            # Fix permissions
-            sudo chown -R www-data:www-data "/var/www/mkdocs/site"
-            sudo chmod -R 755 "/var/www/mkdocs/site"
-
-            # Reload nginx
+            
+            sudo chown -R www-data:www-data /var/www/mkdocs/site
+            sudo chmod -R 755 /var/www/mkdocs/site
             sudo systemctl reload nginx
-
-            # Cleanup
-            rm -rf /tmp/new-site /tmp/site.tar.gz /tmp/orlando-backup
-
-            echo "✅ Deployment completed successfully"
+            
+            echo 'Deployment completed successfully'
+          "
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
         run: |
-          echo "🧪 DRY RUN: Would deploy to ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "🛡️ Orlando 2025.1.ORL would be preserved"
-          echo "✅ Dry run completed"
+          echo "DRY RUN: Would deploy to ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
+          echo "Orlando 2025.1.ORL would be preserved"
+          echo "Dry run completed"
 
       - name: Deployment summary
         run: |
-          echo "✅ Campus Workshop deployment completed!"
-          echo "🌐 Site: http://${{ github.event.inputs.server_host || 'acws.duckdns.org' }}/"
-          echo "🛡️ Orlando 2025.1.ORL protected"
+          echo "Campus Workshop deployment completed!"
+          echo "Site: http://${{ github.event.inputs.server_host || 'acws.duckdns.org' }}/"
+          echo "Orlando 2025.1.ORL protected"
