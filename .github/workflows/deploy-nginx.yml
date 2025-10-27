@@ -102,8 +102,8 @@ jobs:
           echo "📤 Transferring to server..."
           scp site.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
 
-          # Create deployment script
-          cat > deploy_script.sh << 'DEPLOY_EOF'
+          # Create deployment script with proper variable substitution
+          cat > deploy_script.sh << DEPLOY_EOF
           #!/bin/bash
           set -e
 
@@ -112,7 +112,7 @@ jobs:
           # Backup Orlando if it exists
           if [ -d "${{ env.SERVER_PATH }}/2025.1.ORL" ]; then
             echo "🛡️ Backing up Orlando version..."
-            sudo cp -r "${{ env.SERVER_PATH }}/2025.1.ORL" "/tmp/orlando-backup-$(date +%s)"
+            sudo cp -r "${{ env.SERVER_PATH }}/2025.1.ORL" "/tmp/orlando-backup-\$(date +%s)"
           fi
 
           # Create target directory
@@ -130,10 +130,10 @@ jobs:
           sudo rsync -av --exclude="2025.1.ORL" /tmp/new-site/ "${{ env.SERVER_PATH }}/"
 
           # Restore Orlando if we backed it up
-          ORLANDO_BACKUP=$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
-          if [ -n "$ORLANDO_BACKUP" ] && [ -d "$ORLANDO_BACKUP" ]; then
+          ORLANDO_BACKUP=\$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
+          if [ -n "\$ORLANDO_BACKUP" ] && [ -d "\$ORLANDO_BACKUP" ]; then
             echo "🛡️ Restoring Orlando version..."
-            sudo cp -r "$ORLANDO_BACKUP" "${{ env.SERVER_PATH }}/2025.1.ORL"
+            sudo cp -r "\$ORLANDO_BACKUP" "${{ env.SERVER_PATH }}/2025.1.ORL"
           fi
 
           # Set permissions
