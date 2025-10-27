@@ -55,20 +55,56 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Build site with Mike (for manual builds)
+      - name: Build site for nginx deployment
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          # Configure git for Mike
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          echo "🔨 Building site for nginx deployment..."
 
-          # Build site locally without pushing (for nginx deployment)
-          mike deploy --no-redirect 2025.4.ATL "Atlanta 2025.4"
-          mike set-default 2025.4.ATL
+          # Build the site with MkDocs
+          mkdocs build --clean
 
-          # The built site is now in the current directory
-          echo "✅ Site built successfully with Mike"
-          ls -la
+          # Create Mike-style directory structure
+          echo "📦 Creating Mike-style versioned structure..."
+          mkdir -p deploy_site/2025.4.ATL
+          cp -r site/* deploy_site/2025.4.ATL/
+
+          # Create versions.json for Mike compatibility
+          cat > deploy_site/versions.json << 'EOF'
+[
+  {
+    "version": "2025.4.ATL",
+    "title": "Atlanta 2025.4",
+    "aliases": ["latest"]
+  },
+  {
+    "version": "2025.1.ORL",
+    "title": "Orlando 2025.1",
+    "aliases": []
+  }
+]
+EOF
+
+          # Create main index.html that redirects to latest version
+          cat > deploy_site/index.html << 'EOF'
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0; url=./2025.4.ATL/">
+    <link rel="canonical" href="./2025.4.ATL/">
+</head>
+<body>
+    <p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p>
+</body>
+</html>
+EOF
+
+          echo "✅ Site built successfully"
+          echo "📁 Deploy structure:"
+          ls -la deploy_site/
+          echo "📁 Atlanta version:"
+          ls -la deploy_site/2025.4.ATL/ | head -5
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
@@ -125,18 +161,26 @@ jobs:
           echo "🎯 Target: ${{ env.SERVER_PATH }}"
           echo "🛡️ Orlando 2025.1.ORL will be preserved"
 
-          # For manual builds, we have the site built locally
-          # For gh-pages pushes, we need to use the current directory content
+          # For manual builds, we have the site built in the 'deploy_site' directory
+          # For gh-pages pushes, we use the current directory content
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "📦 Manual build: Using locally built site"
-            SITE_SOURCE="."
+            echo "📦 Manual build: Using deploy_site directory"
+            SITE_SOURCE="deploy_site"
+            if [ ! -d "$SITE_SOURCE" ]; then
+              echo "❌ Deploy site directory not found!"
+              echo "Available directories:"
+              ls -la
+              exit 1
+            fi
           else
             echo "📦 Automatic deployment: Using gh-pages content"
             SITE_SOURCE="."
           fi
 
           # Create a tarball of the site for transfer
-          echo "📦 Creating site archive..."
+          echo "📦 Creating site archive from: $SITE_SOURCE"
+          echo "📁 Contents of $SITE_SOURCE:"
+          ls -la "$SITE_SOURCE" | head -10
           tar -czf site.tar.gz -C "$SITE_SOURCE" .
 
           # Transfer and deploy
