@@ -63,19 +63,17 @@ jobs:
           echo "Site built successfully"
           ls -la deploy_site/
 
-      - name: Setup SSH key
-        if: ${{ github.event.inputs.dry_run != 'true' }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ github.event.inputs.server_host || 'acws.duckdns.org' }} >> ~/.ssh/known_hosts
-
-      - name: Deploy to nginx server
+      - name: Deploy to nginx server (ultra-simple)
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "Deploying to nginx server: $SERVER_HOST"
+
+          # Setup SSH key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
 
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -86,52 +84,55 @@ jobs:
             echo "Using gh-pages content from: $SITE_SOURCE"
           fi
 
-          # Test SSH connection first
-          echo "Testing SSH connection..."
-          ssh -o ConnectTimeout=10 ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'SSH connection successful'"
+          # Create archive
+          echo "Creating deployment archive..."
+          tar -czf site-deploy.tar.gz -C "$SITE_SOURCE" .
+          ls -lh site-deploy.tar.gz
 
-          # Backup Orlando if exists
-          echo "Backing up Orlando..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup-\$(date +%s)'; echo 'Orlando backed up'; else echo 'No Orlando to backup'; fi"
+          # Simple deployment script
+          echo "Transferring and deploying..."
+          scp site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
 
-          # Create target directories
-          echo "Creating target directories..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "sudo mkdir -p /var/www/mkdocs/site && sudo mkdir -p /tmp/new-site && sudo chown ${{ env.SERVER_USER }}:${{ env.SERVER_USER }} /tmp/new-site"
+          # Execute deployment on server
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
+            echo 'Starting deployment on server...'
 
-          # Deploy via rsync excluding Orlando
-          echo "Deploying via rsync..."
-          rsync -avz --progress --exclude="2025.1.ORL" "$SITE_SOURCE/" ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/new-site/
-
-          # Move to final location and restore Orlando
-          echo "Finalizing deployment..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST '
-            set -e
-            echo "Moving files to final location..."
-            sudo rsync -av --exclude="2025.1.ORL" /tmp/new-site/ /var/www/mkdocs/site/
-
-            echo "Cleaning up temp directory..."
-            rm -rf /tmp/new-site
-
-            echo "Restoring Orlando if backed up..."
-            ORLANDO_BACKUP=$(ls -t /tmp/orlando-backup-* 2>/dev/null | head -1 || echo "")
-            if [ -n "$ORLANDO_BACKUP" ] && [ -d "$ORLANDO_BACKUP" ]; then
-              echo "Restoring Orlando from: $ORLANDO_BACKUP"
-              sudo cp -r "$ORLANDO_BACKUP" "/var/www/mkdocs/site/2025.1.ORL"
-              rm -rf "$ORLANDO_BACKUP"
-              echo "Orlando restored successfully"
-            else
-              echo "No Orlando backup found to restore"
+            # Backup Orlando
+            if [ -d '/var/www/mkdocs/site/2025.1.ORL' ]; then
+              sudo cp -r '/var/www/mkdocs/site/2025.1.ORL' '/tmp/orlando-backup'
+              echo 'Orlando backed up'
             fi
 
-            echo "Setting permissions..."
+            # Create temp directory and extract
+            mkdir -p /tmp/deploy-temp
+            cd /tmp/deploy-temp
+            tar -xzf /tmp/site-deploy.tar.gz
+
+            # Deploy to final location
+            sudo mkdir -p /var/www/mkdocs/site
+            sudo cp -r . /var/www/mkdocs/site/
+
+            # Restore Orlando
+            if [ -d '/tmp/orlando-backup' ]; then
+              sudo cp -r '/tmp/orlando-backup' '/var/www/mkdocs/site/2025.1.ORL'
+              rm -rf /tmp/orlando-backup
+              echo 'Orlando restored'
+            fi
+
+            # Set permissions
             sudo chown -R www-data:www-data /var/www/mkdocs/site
             sudo chmod -R 755 /var/www/mkdocs/site
 
-            echo "Reloading nginx..."
+            # Reload nginx
             sudo systemctl reload nginx
 
-            echo "Deployment completed successfully"
-          '
+            # Cleanup
+            rm -rf /tmp/deploy-temp /tmp/site-deploy.tar.gz
+
+            echo 'Deployment completed successfully'
+          "
+
+          echo "Deployment finished"
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
