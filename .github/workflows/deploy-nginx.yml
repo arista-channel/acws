@@ -63,19 +63,22 @@ jobs:
           echo "Site built successfully"
           ls -la deploy_site/
 
-      - name: Deploy to nginx server (exit code 255 fix)
+      - name: Deploy to nginx server (detailed diagnostics)
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           set -e
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "Deploying to nginx server: $SERVER_HOST"
+          echo "🚀 Starting deployment to nginx server: $SERVER_HOST"
+          echo "⏰ Timestamp: $(date)"
 
           # Setup SSH key with better error handling
+          echo "🔑 Setting up SSH key..."
           mkdir -p ~/.ssh
           echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
 
           # Add SSH config for better connection handling
+          echo "⚙️ Creating SSH config..."
           cat >> ~/.ssh/config << EOF
           Host $SERVER_HOST
             HostName $SERVER_HOST
@@ -89,20 +92,22 @@ jobs:
           EOF
 
           # Add to known hosts
+          echo "🔐 Adding to known hosts..."
           ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts 2>/dev/null || true
 
           # Test connection with retry logic
-          echo "Testing SSH connection with retry..."
+          echo "🔍 Testing SSH connection with retry..."
           for i in {1..3}; do
+            echo "🔄 Connection attempt $i/3..."
             if ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection test $i successful'"; then
-              echo "SSH connection established on attempt $i"
+              echo "✅ SSH connection established on attempt $i"
               break
             else
-              echo "Connection attempt $i failed, retrying..."
+              echo "❌ Connection attempt $i failed, retrying..."
               sleep 5
             fi
             if [ $i -eq 3 ]; then
-              echo "All connection attempts failed"
+              echo "💥 All connection attempts failed"
               exit 1
             fi
           done
@@ -110,76 +115,141 @@ jobs:
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             SITE_SOURCE="deploy_site"
-            echo "Using built site from: $SITE_SOURCE"
+            echo "📁 Using built site from: $SITE_SOURCE"
           else
             SITE_SOURCE="."
-            echo "Using gh-pages content from: $SITE_SOURCE"
+            echo "📁 Using gh-pages content from: $SITE_SOURCE"
+          fi
+
+          # Check if source directory exists
+          echo "🔍 Checking source directory..."
+          if [ ! -d "$SITE_SOURCE" ]; then
+            echo "❌ Source directory $SITE_SOURCE does not exist!"
+            echo "📋 Available directories:"
+            ls -la
+            exit 1
           fi
 
           # Create archive
-          echo "Creating deployment archive..."
+          echo "📦 Creating deployment archive..."
           tar -czf site-deploy.tar.gz -C "$SITE_SOURCE" .
-          echo "Archive created: $(ls -lh site-deploy.tar.gz)"
+          if [ $? -eq 0 ]; then
+            echo "✅ Archive created: $(ls -lh site-deploy.tar.gz)"
+          else
+            echo "❌ Failed to create archive"
+            exit 1
+          fi
 
           # Transfer archive with retry
-          echo "Transferring archive with retry..."
+          echo "📤 Transferring archive with retry..."
           for i in {1..3}; do
+            echo "🔄 Transfer attempt $i/3..."
             if scp site-deploy.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/; then
-              echo "File transfer successful on attempt $i"
+              echo "✅ File transfer successful on attempt $i"
               break
             else
-              echo "Transfer attempt $i failed, retrying..."
+              echo "❌ Transfer attempt $i failed, retrying..."
               sleep 5
             fi
             if [ $i -eq 3 ]; then
-              echo "All transfer attempts failed"
+              echo "💥 All transfer attempts failed"
               exit 1
             fi
           done
 
-          # Execute deployment with better error handling
-          echo "Executing deployment..."
+          # Execute deployment with detailed logging
+          echo "🔄 Executing deployment with detailed logging..."
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST 'bash -s' << 'DEPLOY_SCRIPT'
             set -e
-            echo "Starting deployment on server..."
+            echo "🚀 Starting deployment on server..."
+            echo "⏰ Server timestamp: $(date)"
+            echo "👤 Running as user: $(whoami)"
+
+            # Check if archive exists
+            echo "🔍 Checking if archive exists..."
+            if [ ! -f "/tmp/site-deploy.tar.gz" ]; then
+              echo "❌ Archive not found at /tmp/site-deploy.tar.gz"
+              exit 1
+            else
+              echo "✅ Archive found: $(ls -lh /tmp/site-deploy.tar.gz)"
+            fi
 
             # Backup Orlando
+            echo "🛡️ Checking for Orlando backup..."
             if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
+              echo "📋 Orlando directory found, creating backup..."
               sudo cp -r "/var/www/mkdocs/site/2025.1.ORL" "/tmp/orlando-backup"
-              echo "Orlando backed up"
+              echo "✅ Orlando backed up to /tmp/orlando-backup"
+            else
+              echo "ℹ️ No Orlando directory found to backup"
             fi
 
             # Create temp directory and extract
+            echo "📁 Creating temp directory and extracting..."
             rm -rf /tmp/deploy-temp
             mkdir -p /tmp/deploy-temp
             cd /tmp/deploy-temp
+            echo "📦 Extracting archive..."
             tar -xzf /tmp/site-deploy.tar.gz
+            if [ $? -eq 0 ]; then
+              echo "✅ Archive extracted successfully"
+              echo "📋 Extracted contents:"
+              ls -la
+            else
+              echo "❌ Failed to extract archive"
+              exit 1
+            fi
 
             # Deploy to final location
+            echo "🚀 Deploying to final location..."
             sudo mkdir -p /var/www/mkdocs/site
+            echo "📁 Copying files to /var/www/mkdocs/site/..."
             sudo cp -r . /var/www/mkdocs/site/
+            if [ $? -eq 0 ]; then
+              echo "✅ Files copied successfully"
+            else
+              echo "❌ Failed to copy files"
+              exit 1
+            fi
 
             # Restore Orlando
+            echo "🛡️ Restoring Orlando if backup exists..."
             if [ -d "/tmp/orlando-backup" ]; then
+              echo "📋 Restoring Orlando from backup..."
               sudo cp -r "/tmp/orlando-backup" "/var/www/mkdocs/site/2025.1.ORL"
               rm -rf /tmp/orlando-backup
-              echo "Orlando restored"
+              echo "✅ Orlando restored successfully"
+            else
+              echo "ℹ️ No Orlando backup to restore"
             fi
 
             # Set permissions
+            echo "🔐 Setting permissions..."
             sudo chown -R www-data:www-data /var/www/mkdocs/site
             sudo chmod -R 755 /var/www/mkdocs/site
+            echo "✅ Permissions set successfully"
 
             # Reload nginx
+            echo "🔄 Reloading nginx..."
             sudo systemctl reload nginx
+            if [ $? -eq 0 ]; then
+              echo "✅ Nginx reloaded successfully"
+            else
+              echo "❌ Failed to reload nginx"
+              exit 1
+            fi
 
             # Cleanup
+            echo "🧹 Cleaning up..."
             rm -rf /tmp/deploy-temp /tmp/site-deploy.tar.gz
+            echo "✅ Cleanup completed"
 
-            echo "Deployment completed successfully"
+            echo "🎉 Deployment completed successfully!"
+            echo "⏰ Completion timestamp: $(date)"
           DEPLOY_SCRIPT
 
-          echo "Deployment finished successfully"
+          echo "🎉 Deployment finished successfully!"
+          echo "⏰ Local completion timestamp: $(date)"
 
       - name: Dry run simulation
         if: ${{ github.event.inputs.dry_run == 'true' }}
