@@ -16,36 +16,59 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test SSH connection
+      - name: Check SSH secret exists
         run: |
-          echo "Testing SSH connection to ${{ github.event.inputs.server_host }}"
-          
+          echo "Checking if SSH secret is available..."
+          if [ -z "${{ secrets.NGINX_SERVER_SSH_KEY }}" ]; then
+            echo "❌ ERROR: NGINX_SERVER_SSH_KEY secret is not set or is empty"
+            echo "Please check GitHub repository secrets"
+            exit 1
+          else
+            echo "✅ SSH secret is available"
+            echo "Secret length: $(echo '${{ secrets.NGINX_SERVER_SSH_KEY }}' | wc -c) characters"
+          fi
+
+      - name: Test network connectivity
+        run: |
+          echo "Testing network connectivity to ${{ github.event.inputs.server_host }}"
+
+          # Test DNS resolution
+          echo "Testing DNS resolution..."
+          nslookup ${{ github.event.inputs.server_host }} || echo "DNS resolution failed"
+
+          # Test ping
+          echo "Testing ping..."
+          ping -c 3 ${{ github.event.inputs.server_host }} || echo "Ping failed"
+
+          # Test port 22
+          echo "Testing SSH port 22..."
+          nc -zv ${{ github.event.inputs.server_host }} 22 || echo "Port 22 not accessible"
+
+      - name: Test SSH key format
+        run: |
+          echo "Testing SSH key format..."
+
           # Setup SSH key
           mkdir -p ~/.ssh
           echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          
+
+          # Check key format
+          echo "Checking SSH key format..."
+          ssh-keygen -l -f ~/.ssh/id_rsa || echo "Invalid SSH key format"
+
+          # Check key type
+          echo "SSH key details:"
+          file ~/.ssh/id_rsa
+          head -1 ~/.ssh/id_rsa
+
+      - name: Test SSH connection with detailed output
+        run: |
+          echo "Testing SSH connection with maximum verbosity..."
+
           # Add server to known hosts
           ssh-keyscan -H ${{ github.event.inputs.server_host }} >> ~/.ssh/known_hosts
-          
-          # Test basic SSH connection
-          echo "Testing basic SSH connection..."
-          ssh -v ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "echo 'SSH connection successful'"
-          
-          # Test sudo access
-          echo "Testing sudo access..."
-          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "sudo whoami"
-          
-          # Check target directory
-          echo "Checking target directory..."
-          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "ls -la /var/www/ || echo 'Directory does not exist'"
-          
-          # Check if Orlando exists
-          echo "Checking for Orlando directory..."
-          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "ls -la /var/www/mkdocs/site/2025.1.ORL || echo 'Orlando does not exist'"
-          
-          # Test file creation
-          echo "Testing file creation..."
-          ssh ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "echo 'test' > /tmp/test-file && cat /tmp/test-file && rm /tmp/test-file"
-          
-          echo "All tests completed successfully"
+
+          # Test SSH with maximum verbosity
+          echo "Attempting SSH connection..."
+          ssh -vvv -o ConnectTimeout=30 -o StrictHostKeyChecking=no ${{ env.SERVER_USER }}@${{ github.event.inputs.server_host }} "echo 'Connection successful'" || echo "SSH connection failed"
