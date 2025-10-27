@@ -1,12 +1,8 @@
-# Deploy Campus Workshop to Nginx Server
 name: Deploy to Nginx Server
 
-"on":
-  # Automatic deployment when GitHub Pages is updated
+'on':
   push:
     branches: [gh-pages]
-
-  # Manual trigger for nginx deployment (with options)
   workflow_dispatch:
     inputs:
       server_host:
@@ -30,19 +26,15 @@ env:
 jobs:
   deploy-to-nginx:
     runs-on: ubuntu-latest
-    # Run for both automatic (push to gh-pages) and manual (workflow_dispatch) triggers
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          # For manual dispatch from main, checkout main branch
-          # For automatic gh-pages push, checkout gh-pages branch
           ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || 'gh-pages' }}
           fetch-depth: 0
 
-      # Build site if triggered manually from main branch
       - name: Setup Python (for manual builds)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/setup-python@v4
@@ -59,26 +51,17 @@ jobs:
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           echo "🔨 Building site for nginx deployment..."
-
-          # Build the site with MkDocs
           mkdocs build --clean
-
-          # Create Mike-style directory structure
-          echo "📦 Creating Mike-style versioned structure..."
+          
+          echo "📦 Creating versioned structure..."
           mkdir -p deploy_site/2025.4.ATL
           cp -r site/* deploy_site/2025.4.ATL/
-
-          # Create versions.json for Mike compatibility
+          
           echo '[{"version":"2025.4.ATL","title":"Atlanta 2025.4","aliases":["latest"]},{"version":"2025.1.ORL","title":"Orlando 2025.1","aliases":[]}]' > deploy_site/versions.json
-
-          # Create main index.html that redirects to latest version
-          echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting...</title><meta http-equiv="refresh" content="0; url=./2025.4.ATL/"><link rel="canonical" href="./2025.4.ATL/"></head><body><p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p></body></html>' > deploy_site/index.html
-
+          echo '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Redirecting...</title><meta http-equiv="refresh" content="0; url=./2025.4.ATL/"></head><body><p>Redirecting to <a href="./2025.4.ATL/">latest version</a>...</p></body></html>' > deploy_site/index.html
+          
           echo "✅ Site built successfully"
-          echo "📁 Deploy structure:"
           ls -la deploy_site/
-          echo "📁 Atlanta version:"
-          ls -la deploy_site/2025.4.ATL/ | head -5
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
@@ -90,155 +73,86 @@ jobs:
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
 
-      - name: Check server connectivity
+      - name: Test server connection
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🔗 Testing connection to $SERVER_HOST..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful to Campus Workshop server'"
+          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful'"
 
-      - name: Backup existing site (if present)
-        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
+      - name: Deploy to nginx server
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "💾 Checking for existing site to backup..."
-          echo "🎯 Target: ${{ env.SERVER_PATH }}"
-
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            if [ -d '${{ env.SERVER_PATH }}' ]; then
-              echo '✅ Existing site found: ${{ env.SERVER_PATH }}'
-
-              # Create timestamped backup
-              BACKUP_DIR='${{ env.SERVER_PATH }}.backup.$(date +%Y%m%d_%H%M%S)'
-              echo \"📦 Creating backup: \$BACKUP_DIR\"
-              sudo cp -r '${{ env.SERVER_PATH }}' \"\$BACKUP_DIR\"
-
-              # Verify backup
-              if [ -d \"\$BACKUP_DIR\" ]; then
-                echo '✅ Backup created successfully'
-                echo \"📊 Backup size: \$(sudo du -sh \$BACKUP_DIR | cut -f1)\"
-              else
-                echo '⚠️ Backup creation failed, but continuing deployment'
-              fi
-            else
-              echo '📝 No existing site found at ${{ env.SERVER_PATH }}'
-              echo '🚀 This appears to be a fresh deployment'
-
-              # Create the directory structure
-              echo '📁 Creating directory structure...'
-              sudo mkdir -p '${{ env.SERVER_PATH }}'
-              sudo chown -R www-data:www-data '${{ env.SERVER_PATH }}'
-            fi
-          "
-
-      - name: Deploy built site to nginx server
-        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
-        run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "� Deploying site to nginx server: $SERVER_HOST"
-          echo "🎯 Target: ${{ env.SERVER_PATH }}"
-          echo "🛡️ Orlando 2025.1.ORL will be preserved"
-
-          # For manual builds, we have the site built in the 'deploy_site' directory
-          # For gh-pages pushes, we use the current directory content
+          echo "�� Deploying to nginx server: $SERVER_HOST"
+          
+          # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "📦 Manual build: Using deploy_site directory"
             SITE_SOURCE="deploy_site"
-            if [ ! -d "$SITE_SOURCE" ]; then
-              echo "❌ Deploy site directory not found!"
-              echo "Available directories:"
-              ls -la
-              exit 1
-            fi
+            echo "📦 Using built site from: $SITE_SOURCE"
           else
-            echo "📦 Automatic deployment: Using gh-pages content"
             SITE_SOURCE="."
+            echo "📦 Using gh-pages content from: $SITE_SOURCE"
           fi
-
-          # Create a tarball of the site for transfer
-          echo "📦 Creating site archive from: $SITE_SOURCE"
-          echo "📁 Contents of $SITE_SOURCE:"
-          ls -la "$SITE_SOURCE" | head -10
+          
+          # Create deployment archive
+          echo "📦 Creating deployment archive..."
           tar -czf site.tar.gz -C "$SITE_SOURCE" .
-
-          # Transfer and deploy
-          echo "📤 Transferring site to server..."
+          
+          # Transfer to server
+          echo "📤 Transferring to server..."
           scp site.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
-
+          
+          # Deploy on server
           ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            echo '🔄 Deploying site on server...'
-
-            # Backup Orlando version if it exists
+            echo '🔄 Deploying on server...'
+            
+            # Backup Orlando if it exists
             if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
               echo '🛡️ Backing up Orlando version...'
-              sudo cp -r '${{ env.SERVER_PATH }}/2025.1.ORL' '/tmp/orlando-backup-\$(date +%s)'
+              sudo cp -r '${{ env.SERVER_PATH }}/2025.1.ORL' '/tmp/orlando-backup'
             fi
-
-            # Create temporary directory for new site
-            TEMP_SITE='/tmp/new-site-\$(date +%s)'
-            mkdir -p \"\$TEMP_SITE\"
-
+            
+            # Create target directory
+            sudo mkdir -p '${{ env.SERVER_PATH }}'
+            
             # Extract new site
-            cd \"\$TEMP_SITE\"
+            cd /tmp
+            mkdir -p new-site
+            cd new-site
             tar -xzf /tmp/site.tar.gz
-
-            # Deploy new site (preserve Orlando)
-            echo '� Deploying new site content...'
-            sudo rsync -av --exclude='2025.1.ORL' \"\$TEMP_SITE/\" '${{ env.SERVER_PATH }}/'
-
+            
+            # Deploy new content (excluding Orlando)
+            echo '📦 Deploying new content...'
+            sudo rsync -av --exclude='2025.1.ORL' /tmp/new-site/ '${{ env.SERVER_PATH }}/'
+            
             # Restore Orlando if we backed it up
-            if [ -d '/tmp/orlando-backup-'* ]; then
+            if [ -d '/tmp/orlando-backup' ]; then
               echo '🛡️ Restoring Orlando version...'
-              ORLANDO_BACKUP=\$(ls -t /tmp/orlando-backup-* | head -1)
-              sudo cp -r \"\$ORLANDO_BACKUP\" '${{ env.SERVER_PATH }}/2025.1.ORL'
+              sudo cp -r '/tmp/orlando-backup' '${{ env.SERVER_PATH }}/2025.1.ORL'
             fi
-
-            # Set proper permissions
+            
+            # Set permissions
             sudo chown -R www-data:www-data '${{ env.SERVER_PATH }}'
             sudo chmod -R 755 '${{ env.SERVER_PATH }}'
-
+            
+            # Reload nginx
+            sudo systemctl reload nginx
+            
             # Cleanup
-            rm -rf \"\$TEMP_SITE\" /tmp/site.tar.gz
-
-            echo '✅ Site deployed successfully'
+            rm -rf /tmp/new-site /tmp/site.tar.gz /tmp/orlando-backup
+            
+            echo '✅ Deployment completed successfully'
           "
 
       - name: Dry run simulation
-        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run == 'true' }}
+        if: ${{ github.event.inputs.dry_run == 'true' }}
         run: |
-          echo "🧪 DRY RUN: Would deploy site to nginx server"
-          echo "🎯 Target: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
+          echo "🧪 DRY RUN: Would deploy to ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
           echo "🛡️ Orlando 2025.1.ORL would be preserved"
-          echo "✅ Dry run complete - no actual deployment performed"
-
-      - name: Reload nginx and verify deployment
-        if: ${{ github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.event.inputs.dry_run != 'true') }}
-        run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "� Reloading nginx and verifying deployment..."
-
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "
-            # Reload nginx
-            sudo systemctl reload ${{ env.NGINX_SERVICE }}
-            echo '✅ Nginx reloaded'
-
-            # Verify Orlando protection
-            if [ -d '${{ env.SERVER_PATH }}/2025.1.ORL' ]; then
-              echo '🛡️ ✅ Orlando 2025.1.ORL is protected and intact'
-            else
-              echo '🛡️ ⚠️ Orlando version not found'
-            fi
-
-            # Test site accessibility
-            HTTP_CODE=\$(curl -s -o /dev/null -w '%{http_code}' http://localhost/)
-            if [ \"\$HTTP_CODE\" = '200' ]; then
-              echo \"✅ Site is accessible (HTTP \$HTTP_CODE)\"
-            else
-              echo \"⚠️ Site returned HTTP \$HTTP_CODE\"
-            fi
-          "
+          echo "✅ Dry run completed"
 
       - name: Deployment summary
         run: |
-          echo "✅ Campus Workshop nginx deployment completed!"
-          echo "🌐 Site: http://acws.duckdns.org/"
+          echo "✅ Campus Workshop deployment completed!"
+          echo "🌐 Site: http://${{ github.event.inputs.server_host || 'acws.duckdns.org' }}/"
           echo "🛡️ Orlando 2025.1.ORL protected"
