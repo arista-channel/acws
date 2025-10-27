@@ -461,52 +461,230 @@
 /* Hero Banner Mobile Responsive */
 @media (max-width: 768px) {
     .hero-container {
-        min-height: 400px;
-        padding: 30px 15px;
+        min-height: 350px;
+        padding: 20px 15px;
     }
 
     .hero-badge {
-        top: 15px;
-        right: 15px;
-        padding: 6px 12px;
+        top: 10px;
+        right: 10px;
+        padding: 4px 8px;
+        font-size: 0.7rem;
+    }
+
+    .hero-brand {
+        font-size: 2rem;
+        margin-bottom: 6px;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.3;
+        margin-bottom: 20px;
+        padding: 0 10px;
     }
 
     .hero-break {
-        display: none;
+        display: block;
     }
 
     .solutions-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin-top: 25px;
+        gap: 12px;
+        margin-top: 15px;
     }
 
     .solution-card {
-        padding: 15px 10px;
+        padding: 12px;
+        min-height: auto;
     }
 
+    .solution-icon {
+        font-size: 1.5rem;
+        margin-bottom: 6px;
+    }
+
+    .solution-title {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+        line-height: 1.2;
+    }
+
+    .solution-desc {
+        font-size: 0.7rem;
+        line-height: 1.2;
+    }
+
+    /* Simplify decorative elements for mobile */
     .switch-element {
-        display: none;
+        width: 35px;
+        height: 25px;
     }
 
-    .pulse-line {
-        display: none;
+    .switch-element::before,
+    .switch-element::after {
+        width: 4px;
+        height: 4px;
     }
 }
 
 @media (max-width: 480px) {
     .hero-container {
-        min-height: 350px;
-        padding: 25px 10px;
+        min-height: 300px;
+        padding: 15px 10px;
+    }
+
+    .hero-brand {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+    }
+
+    .hero-title {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+        font-size: 0.8rem;
+        line-height: 1.2;
+        margin-bottom: 15px;
+        padding: 0 5px;
     }
 
     .solutions-grid {
         grid-template-columns: 1fr;
-        gap: 12px;
+        gap: 10px;
+        margin-top: 10px;
     }
 
     .solution-card {
-        padding: 12px 8px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .solution-icon {
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+    }
+
+    .solution-title {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+
+    .solution-desc {
+        font-size: 0.65rem;
+    }
+
+    /* Hide decorative elements on very small screens */
+    .switch-element,
+    .pulse-line {
+        display: none;
+    }
+}
+
+/* Mobile Responsive Grid Cards and Layout */
+/* ======================================== */
+
+@media (max-width: 768px) {
+    /* Grid cards responsive layout */
+    .md-typeset .grid.cards {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin: 1rem 0;
+    }
+
+    .md-typeset .grid.cards > * {
+        margin: 0;
+        padding: 1rem;
+    }
+
+    /* Button improvements for mobile */
+    .md-typeset .md-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        margin: 0.5rem 0;
+        display: inline-block;
+        width: auto;
+        text-align: center;
+    }
+
+    /* Section headings mobile spacing */
+    .md-typeset h2 {
+        font-size: 1.4rem;
+        margin: 1.5rem 0 1rem 0;
+        line-height: 1.3;
+    }
+
+    /* Improve text readability on mobile */
+    .md-typeset p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+
+    /* Card content mobile optimization */
+    .md-typeset .grid.cards .md-button {
+        width: 100%;
+        margin-top: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Extra small screens - single column everything */
+    .md-typeset .grid.cards {
+        gap: 0.8rem;
+        margin: 0.8rem 0;
+    }
+
+    .md-typeset .grid.cards > * {
+        padding: 0.8rem;
+    }
+
+    .md-typeset h2 {
+        font-size: 1.2rem;
+        margin: 1.2rem 0 0.8rem 0;
+    }
+
+    .md-typeset p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+        margin-bottom: 0.8rem;
+    }
+
+    .md-typeset .md-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Optimize icon sizes for mobile */
+    .md-typeset .twemoji {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+/* Tablet responsive adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .md-typeset .grid.cards {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .hero-container {
+        min-height: 450px;
+        padding: 40px 20px;
+    }
+
+    .solutions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
     }
 }
 
