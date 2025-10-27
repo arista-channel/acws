@@ -63,27 +63,13 @@ jobs:
           echo "✅ Site built successfully"
           ls -la deploy_site/
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.8.0
-        with:
-          ssh-private-key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
 
-      - name: Add server to known hosts
-        run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          ssh-keyscan -H $SERVER_HOST >> ~/.ssh/known_hosts
 
-      - name: Test server connection
-        run: |
-          SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "🔗 Testing connection to $SERVER_HOST..."
-          ssh ${{ env.SERVER_USER }}@$SERVER_HOST "echo 'Connection successful'"
-
-      - name: Transfer site to server
+      - name: Create deployment archive
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: |
           SERVER_HOST="${{ github.event.inputs.server_host || 'acws.duckdns.org' }}"
-          echo "🚀 Deploying to nginx server: $SERVER_HOST"
+          echo "🚀 Preparing deployment for nginx server: $SERVER_HOST"
 
           # Determine source directory
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -97,12 +83,9 @@ jobs:
           # Create deployment archive
           echo "📦 Creating deployment archive..."
           tar -czf site.tar.gz -C "$SITE_SOURCE" .
+          echo "✅ Archive created: $(ls -lh site.tar.gz)"
 
-          # Transfer to server
-          echo "📤 Transferring to server..."
-          scp site.tar.gz ${{ env.SERVER_USER }}@$SERVER_HOST:/tmp/
-
-      - name: Deploy to nginx server
+      - name: Transfer and deploy to nginx server
         if: ${{ github.event.inputs.dry_run != 'true' }}
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -111,7 +94,7 @@ jobs:
           key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
           script: |
             set -e
-            echo "🔄 Starting deployment on server..."
+            echo "� Starting deployment on server..."
 
             # Backup Orlando if exists
             if [ -d "/var/www/mkdocs/site/2025.1.ORL" ]; then
@@ -121,6 +104,29 @@ jobs:
 
             # Create directory
             sudo mkdir -p "/var/www/mkdocs/site"
+
+            echo "✅ Ready for file transfer..."
+
+      - name: Transfer site archive
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
+          source: "site.tar.gz"
+          target: "/tmp/"
+
+      - name: Complete deployment on server
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ github.event.inputs.server_host || 'acws.duckdns.org' }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ secrets.NGINX_SERVER_SSH_KEY }}
+          script: |
+            set -e
+            echo "🔄 Completing deployment on server..."
 
             # Extract and deploy
             cd /tmp
