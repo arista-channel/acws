@@ -32,10 +32,42 @@ jobs:
     runs-on: ubuntu-latest
     # Run for both automatic (push to gh-pages) and manual (workflow_dispatch) triggers
     if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'push' }}
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # For manual dispatch from main, checkout main branch
+          # For automatic gh-pages push, checkout gh-pages branch
+          ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || 'gh-pages' }}
+          fetch-depth: 0
+
+      # Build site if triggered manually from main branch
+      - name: Setup Python (for manual builds)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies (for manual builds)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build site with Mike (for manual builds)
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          # Configure git for Mike
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Build and deploy with Mike (Atlanta version)
+          mike deploy --push --update-aliases 2025.4.ATL "Atlanta 2025.4"
+          mike set-default --push 2025.4.ATL
+
+          # Switch to gh-pages branch for deployment
+          git checkout gh-pages
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
