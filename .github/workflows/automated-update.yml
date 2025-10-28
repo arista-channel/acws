@@ -146,65 +146,30 @@ jobs:
           # Configure git remote with token for Mike
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          # Aggressive gh-pages branch conflict resolution
-          echo "🔄 Handling gh-pages branch conflicts with aggressive reset..."
+          # Simple gh-pages branch reset
+          echo "🔄 Preparing gh-pages branch for deployment..."
 
           # Fetch all branches
           git fetch origin --prune
 
-          # Completely reset gh-pages branch to avoid any conflicts
+          # Delete remote gh-pages branch to start fresh
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-            echo "📋 Remote gh-pages branch exists, performing aggressive reset..."
-
-            # Delete local gh-pages branch completely
-            git branch -D gh-pages 2>/dev/null || true
-
-            # Create orphan gh-pages branch (disconnected from history)
-            git checkout --orphan gh-pages-temp
-            git rm -rf . 2>/dev/null || true
-            git clean -fd
-
-            # Switch back to main
-            git checkout main
-            git branch -D gh-pages-temp 2>/dev/null || true
-
-            echo "✅ Prepared clean slate for gh-pages deployment"
-          else
-            echo "📋 No remote gh-pages branch found, will create new one"
+            echo "📋 Deleting remote gh-pages branch to start fresh..."
+            git push origin --delete gh-pages || echo "Could not delete remote branch (may not exist)"
           fi
 
-          # Deploy with Mike using bulletproof approach
-          echo "🚀 Deploying with Mike (bulletproof mode)..."
+          # Delete local gh-pages branch
+          git branch -D gh-pages 2>/dev/null || true
 
-          # Use manual deployment approach for maximum reliability
-          echo "🔄 Step 1: Deploy locally without push..."
-          mike deploy --update-aliases 2025.4.ATL latest
+          echo "✅ Clean slate prepared for Mike deployment"
 
-          echo "🔄 Step 2: Create clean gh-pages branch..."
-          # Create a completely new gh-pages branch
-          git checkout --orphan gh-pages-new
+          # Deploy with Mike to fresh branch
+          echo "🚀 Deploying with Mike to fresh gh-pages branch..."
 
-          # Copy Mike-generated content
-          if [ -d "site" ]; then
-            cp -r site/* . 2>/dev/null || true
-            cp site/.* . 2>/dev/null || true
-          fi
+          # Since we deleted the remote branch, Mike should create a fresh one
+          mike deploy --push --update-aliases 2025.4.ATL latest
 
-          # Add all content
-          git add .
-
-          # Commit the new content
-          git commit -m "Deploy documentation with Mike versioning - $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
-
-          echo "🔄 Step 3: Replace remote gh-pages branch..."
-          # Force push the new branch to replace the old one
-          git push origin gh-pages-new:gh-pages --force
-
-          # Clean up
-          git checkout main
-          git branch -D gh-pages-new
-
-          echo "✅ Bulletproof Mike deployment completed"
+          echo "✅ Mike deployment to fresh branch completed"
 
           # Verify Mike structure (from main branch with remote gh-pages)
           echo "📋 Mike versions after deployment:"
