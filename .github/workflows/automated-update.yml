@@ -25,6 +25,7 @@ on:
 
 env:
   SERVER_HOST: acws.duckdns.org
+  SERVER_IP: 3.148.13.216
   SERVER_USER: ubuntu
   SERVER_PATH: /var/www/mkdocs/site
   PYTHON_VERSION: '3.11'
@@ -311,12 +312,91 @@ jobs:
             BatchMode yes
           EOF
           
-          # Test connection with timeout
+          # Test DNS resolution first
+          echo "🔍 Testing DNS resolution..."
+          if ! nslookup ${{ env.SERVER_HOST }} >/dev/null 2>&1; then
+            echo "⚠️ DNS resolution failed, trying alternative DNS servers..."
+
+            # Try with Google DNS
+            echo "🔄 Trying with Google DNS (8.8.8.8)..."
+            if nslookup ${{ env.SERVER_HOST }} 8.8.8.8 >/dev/null 2>&1; then
+              echo "✅ DNS resolution successful with Google DNS"
+            else
+              echo "🔄 Trying with Cloudflare DNS (1.1.1.1)..."
+              if nslookup ${{ env.SERVER_HOST }} 1.1.1.1 >/dev/null 2>&1; then
+                echo "✅ DNS resolution successful with Cloudflare DNS"
+              else
+                echo "❌ DNS resolution failed with all DNS servers"
+                echo "🔍 DNS troubleshooting info:"
+                echo "  - Hostname: ${{ env.SERVER_HOST }}"
+                echo "  - Current DNS servers:"
+                cat /etc/resolv.conf || echo "Cannot read /etc/resolv.conf"
+                echo "  - Network connectivity test:"
+                ping -c 1 8.8.8.8 >/dev/null 2>&1 && echo "  ✅ Internet connectivity OK" || echo "  ❌ No internet connectivity"
+                exit 1
+              fi
+            fi
+          else
+            echo "✅ DNS resolution successful"
+          fi
+
+          # Test connection with timeout and retry (hostname first, then IP fallback)
           echo "🔍 Testing server connection..."
-          timeout 30 ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Connection successful: $(date)'" || {
-            echo "❌ Server connection failed"
+          CONNECTION_SUCCESS=false
+
+          # Try with hostname first
+          for attempt in {1..2}; do
+            echo "🔄 Connection attempt $attempt/2 using hostname (${{ env.SERVER_HOST }})..."
+            if timeout 30 ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Connection successful: $(date)'" 2>/dev/null; then
+              echo "✅ Server connection successful using hostname on attempt $attempt"
+              CONNECTION_SUCCESS=true
+              break
+            else
+              echo "❌ Hostname connection attempt $attempt failed"
+              if [ $attempt -lt 2 ]; then
+                echo "⏳ Waiting 5 seconds before retry..."
+                sleep 5
+              fi
+            fi
+          done
+
+          # If hostname failed, try IP address
+          if [ "$CONNECTION_SUCCESS" = false ]; then
+            echo "🔄 Trying connection with IP address (${{ env.SERVER_IP }})..."
+            for attempt in {1..2}; do
+              echo "🔄 IP connection attempt $attempt/2..."
+              if timeout 30 ssh ${{ env.SERVER_USER }}@${{ env.SERVER_IP }} "echo 'Connection successful via IP: $(date)'" 2>/dev/null; then
+                echo "✅ Server connection successful using IP address on attempt $attempt"
+                echo "ℹ️ Using IP address for remaining operations due to DNS issues"
+                # Update SERVER_HOST to use IP for remaining operations
+                echo "SERVER_HOST=${{ env.SERVER_IP }}" >> $GITHUB_ENV
+                CONNECTION_SUCCESS=true
+                break
+              else
+                echo "❌ IP connection attempt $attempt failed"
+                if [ $attempt -lt 2 ]; then
+                  echo "⏳ Waiting 5 seconds before retry..."
+                  sleep 5
+                fi
+              fi
+            done
+          fi
+
+          # Final check
+          if [ "$CONNECTION_SUCCESS" = false ]; then
+            echo "💥 All connection attempts failed (both hostname and IP)"
+            echo "🔍 Connection troubleshooting info:"
+            echo "  - Hostname: ${{ env.SERVER_HOST }}"
+            echo "  - IP Address: ${{ env.SERVER_IP }}"
+            echo "  - User: ${{ env.SERVER_USER }}"
+            echo "  - SSH key configured: $([ -f ~/.ssh/id_rsa ] && echo "YES" || echo "NO")"
+            echo "  - SSH key permissions: $([ -f ~/.ssh/id_rsa ] && stat -c "%a" ~/.ssh/id_rsa || echo "N/A")"
+            echo "  - Network test to hostname:"
+            nc -zv ${{ env.SERVER_HOST }} 22 2>&1 || echo "    Cannot connect to hostname SSH port"
+            echo "  - Network test to IP:"
+            nc -zv ${{ env.SERVER_IP }} 22 2>&1 || echo "    Cannot connect to IP SSH port"
             exit 1
-          }
+          fi
           
           # Transfer with progress and retry
           echo "📤 Transferring deployment package..."
