@@ -1,5 +1,5 @@
 # Arista Campus Workshop
-<!-- CI/CD Refresh: 2025-10-28 15:30:00 - DNS resolution fix applied -->
+<!-- CI/CD Refresh: 2025-10-28 15:40:00 - gh-pages conflict fix applied -->
 Welcome to our Arista hands-on campus workshop! 🚀
 
 <!-- CI/CD Test: Updated at $(date) -->
