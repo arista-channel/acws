@@ -1,0 +1,498 @@
+name: 🚀 Automated Campus Workshop Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'data/**'
+      - 'mkdocs.yml'
+      - 'requirements.txt'
+  workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Force deployment even if no changes detected'
+        type: boolean
+        default: false
+      skip_orlando_protection:
+        description: 'Skip Orlando protection (DANGEROUS - use only if Orlando is corrupted)'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Dry run - test without actual deployment'
+        type: boolean
+        default: false
+
+env:
+  SERVER_HOST: acws.duckdns.org
+  SERVER_USER: ubuntu
+  SERVER_PATH: /var/www/mkdocs/site
+  PYTHON_VERSION: '3.11'
+  UV_VERSION: '0.4.18'
+
+jobs:
+  # Job 1: Build and Deploy to GitHub Pages
+  build-and-deploy-pages:
+    name: 📦 Build & Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    outputs:
+      deployment-id: ${{ steps.deployment.outputs.deployment_id }}
+      pages-url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: 🔍 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python with UV
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: ⚡ Install UV Package Manager
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: 📦 Install Dependencies with UV
+        run: |
+          uv venv
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
+
+      - name: 🔧 Fix ATD Token CSV Issues
+        run: |
+          source .venv/bin/activate
+          echo "🔧 Applying ATD Token CSV fixes..."
+          
+          # Create comprehensive CSV fix script
+          cat > fix_atd_tokens.py << 'EOF'
+          import csv
+          import re
+          import sys
+          
+          def fix_csv_file(filepath):
+              print(f"🔍 Processing {filepath}...")
+              
+              try:
+                  with open(filepath, 'r', encoding='utf-8') as f:
+                      content = f.read()
+                  
+                  original_content = content
+                  
+                  # Fix 1: Double quotes in target attribute
+                  content = content.replace('""_blank""', '"_blank"')
+                  
+                  # Fix 2: Unquoted target attributes
+                  content = re.sub(r'target=_blank(?!")', 'target="_blank"', content)
+                  
+                  # Fix 3: Remove unnecessary quote wrapping around markdown links
+                  content = re.sub(r',"(\[🚀 ATD Lab.*?\})"', r',\1', content)
+                  
+                  # Fix 4: Ensure proper markdown link format
+                  content = re.sub(r'\[🚀 ATD Lab (\d+)\]\((https://testdrive\.arista\.com/[^)]+)\)\{:target="_blank"\}', 
+                                 r'[🚀 ATD Lab \1](\2){:target="_blank"}', content)
+                  
+                  if content != original_content:
+                      with open(filepath, 'w', encoding='utf-8') as f:
+                          f.write(content)
+                      print("✅ CSV fixes applied successfully")
+                      
+                      # Verify fixes
+                      with open(filepath, 'r', encoding='utf-8') as f:
+                          lines = f.readlines()
+                      
+                      atd_count = sum(1 for line in lines if '🚀 ATD Lab' in line and 'testdrive.arista.com' in line)
+                      print(f"✅ Found {atd_count} ATD Lab entries")
+                      
+                      target_blank_count = sum(1 for line in lines if 'target="_blank"' in line)
+                      print(f"✅ Found {target_blank_count} properly formatted target attributes")
+                      
+                  else:
+                      print("✅ No CSV fixes needed")
+                      
+              except Exception as e:
+                  print(f"❌ Error processing CSV: {e}")
+                  sys.exit(1)
+          
+          if __name__ == "__main__":
+              fix_csv_file("data/lab_assignment.csv")
+          EOF
+          
+          python fix_atd_tokens.py
+
+      - name: 🏗️ Build Documentation with Mike
+        run: |
+          source .venv/bin/activate
+          echo "🏗️ Building documentation with Mike versioning..."
+          
+          # Clean any existing builds
+          rm -rf site/
+          
+          # Deploy Atlanta version with Mike
+          mike deploy --push --update-aliases 2025.4.ATL latest
+          
+          # Verify Mike structure
+          echo "📋 Mike versions:"
+          mike list
+          
+          echo "✅ Documentation built successfully"
+
+      - name: 🔍 Verify ATD Token Rendering
+        run: |
+          source .venv/bin/activate
+          echo "🔍 Verifying ATD Token rendering in built site..."
+          
+          # Check if ATD page exists in the built site
+          if [ -f "2025.4.ATL/a_wired/a02_atd/index.html" ]; then
+            echo "✅ ATD lab page found"
+            
+            # Count ATD Token links
+            atd_links=$(grep -c 'href="https://testdrive.arista.com' 2025.4.ATL/a_wired/a02_atd/index.html || echo "0")
+            echo "📊 Found $atd_links ATD Token links"
+            
+            # Check target attributes
+            target_attrs=$(grep -c 'target="_blank"' 2025.4.ATL/a_wired/a02_atd/index.html || echo "0")
+            echo "📊 Found $target_attrs target='_blank' attributes"
+            
+            if [ "$atd_links" -gt "0" ] && [ "$target_attrs" -gt "0" ]; then
+              echo "✅ ATD Token links are properly rendered"
+            else
+              echo "⚠️ ATD Token links may have rendering issues"
+              echo "🔍 Sample of ATD content:"
+              grep -A2 -B2 "ATD Lab" 2025.4.ATL/a_wired/a02_atd/index.html | head -10 || echo "No ATD Lab content found"
+            fi
+          else
+            echo "⚠️ ATD lab page not found in built site"
+            echo "📋 Available pages:"
+            find . -name "index.html" | head -10
+          fi
+
+      - name: 📤 Deploy to GitHub Pages
+        id: deployment
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: .
+          publish_branch: gh-pages
+          force_orphan: true
+
+  # Job 2: Deploy to Nginx Server
+  deploy-to-nginx:
+    name: 🌐 Deploy to Nginx Server
+    runs-on: ubuntu-latest
+    needs: build-and-deploy-pages
+    if: ${{ !cancelled() && (success() || github.event.inputs.force_deploy == 'true') }}
+    
+    steps:
+      - name: 🔍 Checkout gh-pages Branch
+        uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+          fetch-depth: 1
+
+      - name: 🔧 Pre-deployment Validation
+        run: |
+          echo "🔍 Validating deployment package..."
+          
+          # Check required files
+          required_files=("index.html" "versions.json")
+          for file in "${required_files[@]}"; do
+            if [ -f "$file" ]; then
+              echo "✅ Found required file: $file"
+            else
+              echo "❌ Missing required file: $file"
+              exit 1
+            fi
+          done
+          
+          # Check version directories
+          if [ -d "2025.4.ATL" ]; then
+            echo "✅ Found Atlanta version directory"
+          else
+            echo "❌ Missing Atlanta version directory"
+            exit 1
+          fi
+          
+          # Verify index.html redirect
+          if grep -q "2025.4.ATL" index.html; then
+            echo "✅ Index.html contains proper redirect"
+          else
+            echo "❌ Index.html missing proper redirect"
+            exit 1
+          fi
+          
+          echo "✅ Pre-deployment validation passed"
+
+      - name: 📦 Create Deployment Package
+        run: |
+          echo "📦 Creating optimized deployment package..."
+          
+          # Create clean deployment directory
+          mkdir -p deployment-package
+          
+          # Copy essential files with proper structure
+          cp index.html deployment-package/
+          cp versions.json deployment-package/
+          
+          # Copy version directories (excluding unnecessary files)
+          if [ -d "2025.4.ATL" ]; then
+            echo "📁 Copying Atlanta 2025.4.ATL..."
+            cp -r 2025.4.ATL deployment-package/
+          fi
+          
+          # Create archive with better compression
+          echo "🗜️ Creating compressed archive..."
+          tar -czf nginx-deployment.tar.gz -C deployment-package .
+          
+          # Verify archive
+          archive_size=$(ls -lh nginx-deployment.tar.gz | awk '{print $5}')
+          echo "✅ Deployment package created: $archive_size"
+          
+          # Test archive integrity
+          if tar -tzf nginx-deployment.tar.gz > /dev/null 2>&1; then
+            echo "✅ Archive integrity verified"
+          else
+            echo "❌ Archive integrity check failed"
+            exit 1
+          fi
+
+      - name: 🚀 Deploy to Nginx Server
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          set -e
+          echo "🚀 Starting nginx deployment..."
+          echo "⏰ Deployment started: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          
+          # Setup SSH with enhanced security
+          echo "🔐 Setting up secure SSH connection..."
+          mkdir -p ~/.ssh
+          echo "${{ secrets.NGINX_SERVER_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          
+          # Enhanced SSH config
+          cat > ~/.ssh/config << EOF
+          Host ${{ env.SERVER_HOST }}
+            HostName ${{ env.SERVER_HOST }}
+            User ${{ env.SERVER_USER }}
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking no
+            UserKnownHostsFile /dev/null
+            ServerAliveInterval 30
+            ServerAliveCountMax 3
+            ConnectTimeout 10
+            BatchMode yes
+          EOF
+          
+          # Test connection with timeout
+          echo "🔍 Testing server connection..."
+          timeout 30 ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} "echo 'Connection successful: $(date)'" || {
+            echo "❌ Server connection failed"
+            exit 1
+          }
+          
+          # Transfer with progress and retry
+          echo "📤 Transferring deployment package..."
+          for attempt in {1..3}; do
+            echo "🔄 Transfer attempt $attempt/3..."
+            if timeout 300 scp -o ConnectTimeout=10 nginx-deployment.tar.gz ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }}:/tmp/; then
+              echo "✅ Transfer successful on attempt $attempt"
+              break
+            else
+              echo "❌ Transfer attempt $attempt failed"
+              if [ $attempt -eq 3 ]; then
+                echo "💥 All transfer attempts failed"
+                exit 1
+              fi
+              sleep 10
+            fi
+          done
+          
+          # Execute deployment with comprehensive error handling
+          echo "🔄 Executing server-side deployment..."
+          ssh ${{ env.SERVER_USER }}@${{ env.SERVER_HOST }} 'bash -s' << 'DEPLOY_SCRIPT'
+            set -e
+            
+            # Deployment configuration
+            DEPLOY_TIMESTAMP=$(date -u '+%Y%m%d_%H%M%S')
+            BACKUP_DIR="/tmp/nginx_backup_${DEPLOY_TIMESTAMP}"
+            TEMP_DIR="/tmp/nginx_deploy_${DEPLOY_TIMESTAMP}"
+            SITE_DIR="/var/www/mkdocs/site"
+            
+            echo "🚀 Server-side deployment started: $(date)"
+            echo "📋 Deployment ID: $DEPLOY_TIMESTAMP"
+            
+            # Pre-deployment checks
+            echo "🔍 Pre-deployment system checks..."
+            
+            # Check disk space (need at least 2GB free)
+            available_space=$(df /var/www | tail -1 | awk '{print $4}')
+            if [ "$available_space" -lt 2097152 ]; then  # 2GB in KB
+              echo "❌ Insufficient disk space: ${available_space}KB available"
+              exit 1
+            fi
+            echo "✅ Sufficient disk space: ${available_space}KB available"
+            
+            # Check if nginx is running
+            if systemctl is-active --quiet nginx; then
+              echo "✅ Nginx is running"
+            else
+              echo "⚠️ Nginx is not running, attempting to start..."
+              sudo systemctl start nginx || {
+                echo "❌ Failed to start nginx"
+                exit 1
+              }
+            fi
+            
+            # Verify archive exists
+            if [ ! -f "/tmp/nginx-deployment.tar.gz" ]; then
+              echo "❌ Deployment archive not found"
+              exit 1
+            fi
+            echo "✅ Deployment archive verified: $(ls -lh /tmp/nginx-deployment.tar.gz)"
+            
+            # Create comprehensive backup
+            echo "💾 Creating comprehensive backup..."
+            sudo mkdir -p "$BACKUP_DIR"
+            if [ -d "$SITE_DIR" ]; then
+              sudo cp -r "$SITE_DIR" "$BACKUP_DIR/site_backup"
+              echo "✅ Site backup created at $BACKUP_DIR"
+            else
+              echo "ℹ️ No existing site to backup"
+            fi
+            
+            # Special Orlando protection
+            ORLANDO_PROTECTED=false
+            if [ -d "$SITE_DIR/2025.1.ORL" ] && [ "${{ github.event.inputs.skip_orlando_protection }}" != "true" ]; then
+              echo "🛡️ Orlando protection: Backing up 2025.1.ORL..."
+              sudo cp -r "$SITE_DIR/2025.1.ORL" "/tmp/orlando_protected_${DEPLOY_TIMESTAMP}"
+              ORLANDO_PROTECTED=true
+              echo "✅ Orlando protected at /tmp/orlando_protected_${DEPLOY_TIMESTAMP}"
+            fi
+            
+            # Extract deployment package
+            echo "📦 Extracting deployment package..."
+            rm -rf "$TEMP_DIR"
+            mkdir -p "$TEMP_DIR"
+            cd "$TEMP_DIR"
+            tar -xzf /tmp/nginx-deployment.tar.gz
+            
+            # Validate extracted content
+            echo "🔍 Validating extracted content..."
+            if [ ! -f "index.html" ] || [ ! -f "versions.json" ] || [ ! -d "2025.4.ATL" ]; then
+              echo "❌ Invalid deployment package structure"
+              exit 1
+            fi
+            echo "✅ Deployment package structure validated"
+            
+            # Atomic deployment
+            echo "⚡ Performing atomic deployment..."
+            sudo mkdir -p "$SITE_DIR"
+            
+            # Clear existing content (except Orlando if protected)
+            if [ "$ORLANDO_PROTECTED" = true ]; then
+              echo "🛡️ Clearing site while preserving Orlando..."
+              sudo find "$SITE_DIR" -mindepth 1 -maxdepth 1 ! -name "2025.1.ORL" -exec rm -rf {} \; 2>/dev/null || true
+            else
+              echo "🧹 Clearing entire site directory..."
+              sudo rm -rf "$SITE_DIR"/*
+            fi
+            
+            # Deploy new content
+            echo "🚀 Deploying new content..."
+            sudo cp -r . "$SITE_DIR/"
+            
+            # Restore Orlando if it was protected
+            if [ "$ORLANDO_PROTECTED" = true ]; then
+              echo "🛡️ Restoring protected Orlando..."
+              sudo cp -r "/tmp/orlando_protected_${DEPLOY_TIMESTAMP}" "$SITE_DIR/2025.1.ORL"
+              sudo rm -rf "/tmp/orlando_protected_${DEPLOY_TIMESTAMP}"
+              echo "✅ Orlando restored successfully"
+            fi
+            
+            # Set proper permissions
+            echo "🔐 Setting proper permissions..."
+            sudo chown -R www-data:www-data "$SITE_DIR"
+            sudo chmod -R 755 "$SITE_DIR"
+            
+            # Test nginx configuration
+            echo "🔧 Testing nginx configuration..."
+            sudo nginx -t || {
+              echo "❌ Nginx configuration test failed"
+              exit 1
+            }
+            
+            # Reload nginx with verification
+            echo "🔄 Reloading nginx..."
+            sudo systemctl reload nginx
+            sleep 2
+            
+            if systemctl is-active --quiet nginx; then
+              echo "✅ Nginx reloaded successfully"
+            else
+              echo "❌ Nginx failed to reload properly"
+              exit 1
+            fi
+            
+            # Post-deployment verification
+            echo "🔍 Post-deployment verification..."
+            
+            # Check if files exist
+            if [ -f "$SITE_DIR/index.html" ] && [ -f "$SITE_DIR/versions.json" ] && [ -d "$SITE_DIR/2025.4.ATL" ]; then
+              echo "✅ Core files deployed successfully"
+            else
+              echo "❌ Core files missing after deployment"
+              exit 1
+            fi
+            
+            # Check Orlando protection
+            if [ "$ORLANDO_PROTECTED" = true ] && [ -d "$SITE_DIR/2025.1.ORL" ]; then
+              echo "✅ Orlando protection verified"
+            elif [ "$ORLANDO_PROTECTED" = true ]; then
+              echo "❌ Orlando protection failed"
+              exit 1
+            fi
+            
+            # Cleanup
+            echo "🧹 Cleaning up temporary files..."
+            rm -rf "$TEMP_DIR" /tmp/nginx-deployment.tar.gz
+            
+            # Keep backup for 24 hours, then auto-cleanup
+            echo "⏰ Backup will be auto-cleaned in 24 hours"
+            echo "sudo rm -rf $BACKUP_DIR" | at now + 24 hours 2>/dev/null || echo "ℹ️ Auto-cleanup scheduling not available"
+            
+            echo "🎉 Deployment completed successfully!"
+            echo "⏰ Completion time: $(date)"
+            echo "📋 Deployment ID: $DEPLOY_TIMESTAMP"
+            echo "🌐 Site should be available at: http://${{ env.SERVER_HOST }}/"
+          DEPLOY_SCRIPT
+          
+          echo "🎉 Nginx deployment completed successfully!"
+          echo "⏰ Total deployment time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+      - name: 🧪 Dry Run Simulation
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          echo "🧪 DRY RUN MODE - No actual deployment performed"
+          echo "📋 Would deploy to: ${{ env.SERVER_HOST }}"
+          echo "🛡️ Orlando protection: ${{ github.event.inputs.skip_orlando_protection != 'true' && 'ENABLED' || 'DISABLED' }}"
+          echo "📦 Package size: $(ls -lh nginx-deployment.tar.gz | awk '{print $5}')"
+          echo "✅ Dry run completed successfully"
+
+      - name: 📊 Deployment Summary
+        if: always()
+        run: |
+          echo "📊 DEPLOYMENT SUMMARY"
+          echo "===================="
+          echo "🌐 Site URL: http://${{ env.SERVER_HOST }}/"
+          echo "📅 Deployment Date: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "🔄 Trigger: ${{ github.event_name }}"
+          echo "🛡️ Orlando Protected: ${{ github.event.inputs.skip_orlando_protection != 'true' && 'YES' || 'NO' }}"
+          echo "🧪 Dry Run: ${{ github.event.inputs.dry_run == 'true' && 'YES' || 'NO' }}"
+          echo "✅ GitHub Pages: ${{ needs.build-and-deploy-pages.outputs.pages-url }}"
+          echo "📋 Available Versions:"
+          echo "  - 🎯 Atlanta 2025.4.ATL [latest] - WITH enumerated ATD Lab labels"
+          echo "  - 🛡️ Orlando 2025.1.ORL [historical] - PROTECTED"
+          echo ""
+          echo "🎊 Campus Workshop deployment completed!"

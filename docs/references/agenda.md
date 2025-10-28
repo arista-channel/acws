@@ -3,27 +3,23 @@
 | Time | Activity |
 | --- | --- |
 Day 1 | Wired and Wireless
-8:30 - 8:55 |Intros
-9:00-9:25 | Overview of Arista Campus Architecture
-9:30-10:30 | Labs: Arista CloudVision for Campus - Build the Campus Fabric
+1:00 - 1:25 |Intros
+1:30-2:00 | Overview of Arista Campus Architecture
+2:00-2:30 | Labs: Arista CloudVision for Campus - Build the Campus Fabric
 Wired Lab | A-03: Access Interface Configuration
-10:35 - 11:55 | Labs: Arista Wireless with CV-CUE - Build the Wireless Fabric
+2:30 - 3:30 | Labs: Arista Wireless with CV-CUE - Build the Wireless Fabric
 Wireless Lab | B-01: Wireless Setup
 Wireless Lab | B-02: Troubleshooting WiFi
-12:00pm - 12:50pm | Lunch-and-Learn
-Overview of Arista Zero Trust Networking Security | Remote Presentation
-1:00 - 1:25 | Q&A and Recap of the morning sessions
-1:30 - 2:25 | Labs: Guest Wireless and Hitless Upgrade
+Overview of Arista Zero Trust Networking Security
+3:30 - 5:00 | Labs: Guest Wireless and Hitless Upgrade
 Wireless Lab | B-03: Guest WiFi with AGNI
 Wireless Lab | B-04: Smart System Upgrade (SSU)
-2:30 - 3:25 | Labs: Closer look at EOS
-Wired Lab | A-01 Explore EOS
-3:30 - 4:25 | Labs: CloudVision Telemetry
+Optional Labs | CloudVision Telemetry and EOS CLI
 Wired Lab | A-04: Operations, Dashboards and Events
-4:30 - 5:00 | Q&A and Recap of the afternoon session
+Wired Lab | A-01: Explore EOS
 5:00 - 6:00 | Happy Hour - Location TBD
 6:00 - 8:00 | Team Dinner
-Day 2 | Security, Design and Competition
+Day 2 | Security and Design
 8:30 - 8:55 | Q&A and Recap of Day 1 
 9:00 - 9:25 | Overview of Arista Network Access Control (NAC) with AGNI
 9:30 - 10:25 | Labs: AGNI - Enforce Network Access Policies - Wireless
