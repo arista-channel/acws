@@ -35,6 +35,46 @@ jobs:
           ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || 'gh-pages' }}
           fetch-depth: 0
 
+      - name: Fix ATD Token CSV formatting (for gh-pages)
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          echo "🔧 Fixing ATD Token CSV formatting for gh-pages deployment..."
+
+          # For gh-pages deployment, we need to check if we're dealing with built content
+          # that might have CSV data embedded in HTML files
+          if [ -f "a_wired/a02_atd/index.html" ]; then
+            echo "✅ Found built HTML content, checking for ATD Token rendering issues..."
+
+            # Check if there are any malformed target attributes in HTML
+            if grep -q 'target="_blank&quot;"' a_wired/a02_atd/index.html 2>/dev/null; then
+              echo "🔧 Found HTML encoding issues, fixing..."
+              # Fix HTML encoding issues in the built files
+              find . -name "*.html" -type f -exec sed -i 's/target="_blank&quot;"/target="_blank"/g' {} \;
+              echo "✅ HTML encoding issues fixed"
+            else
+              echo "✅ No HTML encoding issues found"
+            fi
+          else
+            echo "ℹ️ No built HTML content found, this might be source content"
+
+            # If we have source CSV, apply the same fixes as manual deployment
+            if [ -f "data/lab_assignment.csv" ]; then
+              echo "✅ Found source CSV, applying fixes..."
+
+              # Fix double quotes in target attribute
+              sed -i 's/""_blank""/"_blank"/g' data/lab_assignment.csv
+
+              # Remove unnecessary quote wrapping
+              sed -i 's/,"\[🚀 ATD Lab\]/,\[🚀 ATD Lab\]/g' data/lab_assignment.csv
+              sed -i 's/\}",/\},/g' data/lab_assignment.csv
+
+              # Fix target=_blank without quotes
+              sed -i 's/target=_blank/target="_blank"/g' data/lab_assignment.csv
+
+              echo "✅ Source CSV formatting fixed"
+            fi
+          fi
+
       - name: Setup Python (for manual builds)
         if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/setup-python@v4
@@ -46,6 +86,32 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Fix ATD Token CSV formatting
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "🔧 Fixing ATD Token CSV formatting..."
+
+          # Check if CSV file exists
+          if [ -f "data/lab_assignment.csv" ]; then
+            echo "✅ Found lab_assignment.csv, applying fixes..."
+
+            # Fix double quotes in target attribute: ""_blank"" → "_blank"
+            sed -i 's/""_blank""/"_blank"/g' data/lab_assignment.csv
+
+            # Remove unnecessary quote wrapping around markdown links
+            sed -i 's/,"\[🚀 ATD Lab\]/,\[🚀 ATD Lab\]/g' data/lab_assignment.csv
+            sed -i 's/\}",/\},/g' data/lab_assignment.csv
+
+            # Fix any remaining target=_blank without quotes
+            sed -i 's/target=_blank/target="_blank"/g' data/lab_assignment.csv
+
+            echo "✅ ATD Token CSV formatting fixed"
+            echo "🔍 Verifying fix..."
+            grep -n "target=" data/lab_assignment.csv | head -3 || echo "No target attributes found"
+          else
+            echo "ℹ️ No lab_assignment.csv found, skipping ATD Token fix"
+          fi
 
       - name: Build site for nginx deployment
         if: ${{ github.event_name == 'workflow_dispatch' }}
@@ -62,6 +128,23 @@ jobs:
           
           echo "Site built successfully"
           ls -la deploy_site/
+
+          # Verify ATD Token links are rendering correctly
+          echo "🔍 Verifying ATD Token link rendering..."
+          if [ -f "deploy_site/2025.4.ATL/a_wired/a02_atd/index.html" ]; then
+            if grep -q 'href="https://testdrive.arista.com/topology' deploy_site/2025.4.ATL/a_wired/a02_atd/index.html; then
+              echo "✅ ATD Token links found in built HTML"
+              if grep -q 'target="_blank"' deploy_site/2025.4.ATL/a_wired/a02_atd/index.html; then
+                echo "✅ ATD Token links have correct target='_blank' attribute"
+              else
+                echo "⚠️ ATD Token links missing target='_blank' attribute"
+              fi
+            else
+              echo "⚠️ No ATD Token links found in built HTML"
+            fi
+          else
+            echo "ℹ️ ATD lab page not found in built site"
+          fi
 
       - name: Deploy to nginx server (detailed diagnostics)
         if: ${{ github.event.inputs.dry_run != 'true' }}
