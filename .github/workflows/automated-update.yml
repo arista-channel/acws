@@ -35,6 +35,10 @@ jobs:
   build-and-deploy-pages:
     name: 📦 Build & Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     outputs:
       deployment-id: ${{ steps.deployment.outputs.deployment_id }}
       pages-url: ${{ steps.deployment.outputs.page_url }}
@@ -60,6 +64,12 @@ jobs:
           uv venv
           source .venv/bin/activate
           uv pip install -r requirements.txt
+
+      - name: 🔧 Configure Git for Mike
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git config --global init.defaultBranch main
 
       - name: 🔧 Fix ATD Token CSV Issues
         run: |
@@ -123,20 +133,25 @@ jobs:
           python fix_atd_tokens.py
 
       - name: 🏗️ Build Documentation with Mike
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           source .venv/bin/activate
           echo "🏗️ Building documentation with Mike versioning..."
-          
+
           # Clean any existing builds
           rm -rf site/
-          
+
+          # Configure git remote with token for Mike
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+
           # Deploy Atlanta version with Mike
           mike deploy --push --update-aliases 2025.4.ATL latest
-          
+
           # Verify Mike structure
           echo "📋 Mike versions:"
           mike list
-          
+
           echo "✅ Documentation built successfully"
 
       - name: 🔍 Verify ATD Token Rendering
@@ -169,19 +184,30 @@ jobs:
             find . -name "index.html" | head -10
           fi
 
-      - name: 📤 Deploy to GitHub Pages
+      - name: 📤 Verify GitHub Pages Deployment
         id: deployment
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .
-          publish_branch: gh-pages
-          force_orphan: true
+        run: |
+          source .venv/bin/activate
+          echo "📤 Mike has deployed to GitHub Pages automatically"
+          echo "🔍 Verifying deployment..."
+
+          # Get the latest commit on gh-pages
+          git fetch origin gh-pages
+          latest_commit=$(git rev-parse origin/gh-pages)
+          echo "📋 Latest gh-pages commit: $latest_commit"
+
+          # Set outputs for next job
+          echo "deployment_id=$latest_commit" >> $GITHUB_OUTPUT
+          echo "page_url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" >> $GITHUB_OUTPUT
+
+          echo "✅ GitHub Pages deployment verified"
 
   # Job 2: Deploy to Nginx Server
   deploy-to-nginx:
     name: 🌐 Deploy to Nginx Server
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: build-and-deploy-pages
     if: ${{ !cancelled() && (success() || github.event.inputs.force_deploy == 'true') }}
     

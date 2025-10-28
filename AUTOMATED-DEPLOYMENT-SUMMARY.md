@@ -247,3 +247,11 @@ git push origin main
 **Simply make your changes, commit, and push - the system handles everything else!** 🎊✨
 
 **Your students will always have access to properly formatted, up-to-date documentation with their enumerated ATD Lab labels working perfectly!**
+
+---
+
+## 🔧 **Recent Fix: GitHub Actions Workflow**
+
+**Issue Resolved**: The GitHub Actions workflow was failing with "error getting config 'user.name'" - this has been completely fixed with proper Git configuration and permissions.
+
+**Status**: ✅ **FULLY OPERATIONAL** - Automated deployment now works perfectly from commit to live nginx server.

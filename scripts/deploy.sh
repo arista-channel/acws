@@ -23,6 +23,7 @@ VENV_PATH="$PROJECT_ROOT/.venv"
 SERVER_HOST="acws.duckdns.org"
 SERVER_USER="ubuntu"
 SERVER_PATH="/var/www/mkdocs/site"
+SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 
 # Colors for output
 RED='\033[0;31m'
@@ -56,6 +57,50 @@ log_step() {
 
 log_result() {
     echo -e "${CYAN}🎯 $1${NC}"
+}
+
+# SSH configuration function
+setup_ssh() {
+    log_step "Setting up SSH configuration..."
+
+    # Check if SSH key exists
+    if [ ! -f "$SSH_KEY_PATH" ]; then
+        log_error "SSH key not found at: $SSH_KEY_PATH"
+        log_info "Please ensure the SSH key file exists and has correct permissions"
+        exit 1
+    fi
+
+    # Set proper permissions on SSH key
+    chmod 600 "$SSH_KEY_PATH"
+    log_success "SSH key permissions set to 600"
+
+    # Create SSH config directory if it doesn't exist
+    mkdir -p ~/.ssh
+
+    # Create or update SSH config for the server
+    SSH_CONFIG_ENTRY="Host $SERVER_HOST
+    HostName $SERVER_HOST
+    User $SERVER_USER
+    IdentityFile $SSH_KEY_PATH
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    ServerAliveInterval 30
+    ServerAliveCountMax 3
+    ConnectTimeout 10
+    BatchMode yes"
+
+    # Check if config entry already exists
+    if ! grep -q "Host $SERVER_HOST" ~/.ssh/config 2>/dev/null; then
+        echo "$SSH_CONFIG_ENTRY" >> ~/.ssh/config
+        log_success "SSH config entry added for $SERVER_HOST"
+    else
+        log_info "SSH config entry already exists for $SERVER_HOST"
+    fi
+
+    # Set proper permissions on SSH config
+    chmod 600 ~/.ssh/config 2>/dev/null || true
+
+    log_success "SSH configuration completed"
 }
 
 # Parse command line arguments
@@ -147,6 +192,9 @@ cd "$PROJECT_ROOT"
 
 # Step 1: Environment Setup
 log_step "Setting up environment..."
+
+# Setup SSH configuration first
+setup_ssh
 
 # Check if UV is available
 if ! command -v uv &> /dev/null; then
@@ -276,24 +324,51 @@ log_success "Documentation built successfully"
 # Step 5: Verify ATD Token Rendering
 log_step "Verifying ATD Token rendering..."
 
-if [ -f "2025.4.ATL/a_wired/a02_atd/index.html" ]; then
-    log_success "ATD lab page found"
-    
+# Check for ATD page in the built site (try multiple possible paths)
+atd_page_found=false
+atd_page_path=""
+
+# Possible paths for the ATD page
+possible_paths=(
+    "2025.4.ATL/a_wired/a02_atd/index.html"
+    "site/a_wired/a02_atd/index.html"
+    "a_wired/a02_atd/index.html"
+)
+
+for path in "${possible_paths[@]}"; do
+    if [ -f "$path" ]; then
+        atd_page_found=true
+        atd_page_path="$path"
+        break
+    fi
+done
+
+if [ "$atd_page_found" = true ]; then
+    log_success "ATD lab page found at: $atd_page_path"
+
     # Count ATD Token links
-    atd_links=$(grep -c 'href="https://testdrive.arista.com' 2025.4.ATL/a_wired/a02_atd/index.html || echo "0")
+    atd_links=$(grep -c 'href="https://testdrive.arista.com' "$atd_page_path" || echo "0")
     log_result "Found $atd_links ATD Token links"
-    
+
     # Check target attributes
-    target_attrs=$(grep -c 'target="_blank"' 2025.4.ATL/a_wired/a02_atd/index.html || echo "0")
+    target_attrs=$(grep -c 'target="_blank"' "$atd_page_path" || echo "0")
     log_result "Found $target_attrs target='_blank' attributes"
-    
+
     if [ "$atd_links" -gt "0" ] && [ "$target_attrs" -gt "0" ]; then
         log_success "ATD Token links are properly rendered"
     else
         log_warning "ATD Token links may have rendering issues"
+        log_info "Sample content from ATD page:"
+        grep -A2 -B2 "ATD Lab" "$atd_page_path" | head -5 || echo "No ATD Lab content found"
     fi
 else
     log_warning "ATD lab page not found in built site"
+    log_info "Checked paths:"
+    for path in "${possible_paths[@]}"; do
+        log_info "  - $path"
+    done
+    log_info "Available files:"
+    find . -name "*.html" -path "*/a_wired/*" | head -5 || echo "No HTML files found in a_wired directory"
 fi
 
 # Exit here if local-only mode
@@ -319,20 +394,53 @@ log_step "Deploying to nginx server..."
 log_step "Creating deployment package..."
 tar -czf nginx-deployment.tar.gz --exclude='.git' --exclude='.venv' --exclude='node_modules' .
 
-# Test SSH connection
+# Test SSH connection with enhanced verification
 log_step "Testing server connection..."
-if ! ssh -o ConnectTimeout=10 -o BatchMode=yes "$SERVER_USER@$SERVER_HOST" "echo 'Connection test successful'"; then
-    log_error "Cannot connect to server $SERVER_HOST"
+
+# Test basic connectivity
+log_info "Testing basic SSH connectivity..."
+if ! ssh -i "$SSH_KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" "echo 'SSH connection successful'" 2>/dev/null; then
+    log_error "Cannot establish SSH connection to $SERVER_HOST"
+    log_info "Troubleshooting steps:"
+    log_info "  1. Verify SSH key exists: $SSH_KEY_PATH"
+    log_info "  2. Check SSH key permissions: should be 600"
+    log_info "  3. Verify server is accessible: ping $SERVER_HOST"
+    log_info "  4. Check SSH service on server: port 22"
     exit 1
 fi
 
-log_success "Server connection verified"
+# Test server requirements
+log_info "Verifying server requirements..."
+ssh -i "$SSH_KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" '
+    echo "🔍 Server verification:"
+    echo "  - Hostname: $(hostname)"
+    echo "  - User: $(whoami)"
+    echo "  - Date: $(date)"
+    echo "  - Disk space: $(df -h /var/www | tail -1 | awk "{print \$4\" available\"}")"
+    echo "  - Nginx status: $(systemctl is-active nginx 2>/dev/null || echo "not running")"
+    echo "  - Site directory: $([ -d "/var/www/mkdocs/site" ] && echo "exists" || echo "missing")"
+'
+
+log_success "Server connection and requirements verified"
 
 # Transfer deployment package
 log_step "Transferring deployment package..."
-scp nginx-deployment.tar.gz "$SERVER_USER@$SERVER_HOST:/tmp/"
 
-log_success "Deployment package transferred"
+# Transfer with retry logic and progress
+for attempt in {1..3}; do
+    log_info "Transfer attempt $attempt/3..."
+    if scp -i "$SSH_KEY_PATH" -o ConnectTimeout=10 -o StrictHostKeyChecking=no nginx-deployment.tar.gz "$SERVER_USER@$SERVER_HOST:/tmp/"; then
+        log_success "Deployment package transferred successfully"
+        break
+    else
+        log_warning "Transfer attempt $attempt failed"
+        if [ $attempt -eq 3 ]; then
+            log_error "All transfer attempts failed"
+            exit 1
+        fi
+        sleep 5
+    fi
+done
 
 # Execute server-side deployment
 log_step "Executing server-side deployment..."
@@ -402,8 +510,11 @@ echo "🎉 Deployment completed successfully!"
 DEPLOY_SCRIPT
 
 # Transfer and execute deployment script
-scp deploy_server.sh "$SERVER_USER@$SERVER_HOST:/tmp/"
-ssh "$SERVER_USER@$SERVER_HOST" "SKIP_ORLANDO_PROTECTION=$SKIP_ORLANDO bash /tmp/deploy_server.sh"
+log_step "Transferring deployment script..."
+scp -i "$SSH_KEY_PATH" -o ConnectTimeout=10 -o StrictHostKeyChecking=no deploy_server.sh "$SERVER_USER@$SERVER_HOST:/tmp/"
+
+log_step "Executing server-side deployment..."
+ssh -i "$SSH_KEY_PATH" -o ConnectTimeout=10 -o StrictHostKeyChecking=no "$SERVER_USER@$SERVER_HOST" "SKIP_ORLANDO_PROTECTION=$SKIP_ORLANDO bash /tmp/deploy_server.sh"
 
 # Cleanup local files
 rm -f nginx-deployment.tar.gz deploy_server.sh
