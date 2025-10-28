@@ -146,14 +146,34 @@ jobs:
           # Configure git remote with token for Mike
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          # Deploy Atlanta version with Mike
-          mike deploy --push --update-aliases 2025.4.ATL latest
+          # Comprehensive gh-pages branch handling
+          echo "🔄 Handling gh-pages branch conflicts..."
+
+          # Fetch all branches
+          git fetch origin --prune
+
+          # Reset gh-pages branch to avoid conflicts
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            echo "📋 Remote gh-pages branch exists, syncing..."
+            git branch -D gh-pages 2>/dev/null || true
+            git checkout -b gh-pages origin/gh-pages
+            git checkout main
+          else
+            echo "📋 No remote gh-pages branch found"
+          fi
+
+          # Deploy with Mike using force to handle any conflicts
+          echo "🚀 Deploying with Mike (force mode to handle conflicts)..."
+          mike deploy --push --update-aliases --force 2025.4.ATL latest
 
           # Verify Mike structure
-          echo "📋 Mike versions:"
+          echo "📋 Mike versions after deployment:"
+          git fetch origin gh-pages
+          git checkout gh-pages
           mike list
+          git checkout main
 
-          echo "✅ Documentation built successfully"
+          echo "✅ Documentation built and deployed successfully"
 
       - name: 🔍 Verify ATD Token Rendering
         run: |
@@ -196,6 +216,31 @@ jobs:
           git fetch origin gh-pages
           latest_commit=$(git rev-parse origin/gh-pages)
           echo "📋 Latest gh-pages commit: $latest_commit"
+
+          # Verify deployment structure
+          git checkout gh-pages
+          echo "📋 Deployment structure verification:"
+          if [ -f "index.html" ]; then
+            echo "✅ Root index.html exists"
+          else
+            echo "❌ Root index.html missing"
+          fi
+
+          if [ -f "versions.json" ]; then
+            echo "✅ versions.json exists"
+            echo "📋 Available versions:"
+            cat versions.json | grep -o '"version":"[^"]*"' | cut -d'"' -f4 || echo "Cannot parse versions"
+          else
+            echo "❌ versions.json missing"
+          fi
+
+          if [ -d "2025.4.ATL" ]; then
+            echo "✅ Atlanta 2025.4.ATL directory exists"
+          else
+            echo "❌ Atlanta 2025.4.ATL directory missing"
+          fi
+
+          git checkout main
 
           # Set outputs for next job
           echo "deployment_id=$latest_commit" >> $GITHUB_OUTPUT
