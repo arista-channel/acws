@@ -35,44 +35,54 @@ jobs:
           ref: ${{ github.event_name == 'workflow_dispatch' && 'main' || 'gh-pages' }}
           fetch-depth: 0
 
-      - name: Fix ATD Token CSV formatting (for gh-pages)
+      - name: Fix ATD Token HTML rendering (for gh-pages)
         if: ${{ github.event_name == 'push' }}
         run: |
-          echo "🔧 Fixing ATD Token CSV formatting for gh-pages deployment..."
+          echo "🔧 Fixing ATD Token HTML rendering for gh-pages deployment..."
 
-          # For gh-pages deployment, we need to check if we're dealing with built content
-          # that might have CSV data embedded in HTML files
+          # For gh-pages deployment, we're dealing with built HTML content
+          # Check if the ATD lab page exists
           if [ -f "a_wired/a02_atd/index.html" ]; then
-            echo "✅ Found built HTML content, checking for ATD Token rendering issues..."
+            echo "✅ Found ATD lab page, checking for rendering issues..."
 
-            # Check if there are any malformed target attributes in HTML
+            # Check for various HTML encoding issues and fix them
+            FIXED=false
+
+            # Fix HTML entity encoding issues
             if grep -q 'target="_blank&quot;"' a_wired/a02_atd/index.html 2>/dev/null; then
-              echo "🔧 Found HTML encoding issues, fixing..."
-              # Fix HTML encoding issues in the built files
-              find . -name "*.html" -type f -exec sed -i 's/target="_blank&quot;"/target="_blank"/g' {} \;
-              echo "✅ HTML encoding issues fixed"
+              echo "🔧 Fixing HTML entity encoding: target=\"_blank&quot;\" → target=\"_blank\""
+              find . -name "*.html" -type f -exec sed -i 's/target="_blank&quot;"/target="_blank"/g' {} \; 2>/dev/null || true
+              FIXED=true
+            fi
+
+            # Fix malformed target attributes
+            if grep -q 'target=_blank' a_wired/a02_atd/index.html 2>/dev/null; then
+              echo "🔧 Fixing unquoted target attributes: target=_blank → target=\"_blank\""
+              find . -name "*.html" -type f -exec sed -i 's/target=_blank/target="_blank"/g' {} \; 2>/dev/null || true
+              FIXED=true
+            fi
+
+            # Check if ATD links exist at all
+            if grep -q 'testdrive.arista.com' a_wired/a02_atd/index.html 2>/dev/null; then
+              echo "✅ ATD Token links found in HTML"
+
+              # Verify they have proper target attributes
+              if grep -q 'target="_blank"' a_wired/a02_atd/index.html 2>/dev/null; then
+                echo "✅ ATD Token links have proper target attributes"
+              else
+                echo "⚠️ ATD Token links missing target attributes"
+              fi
             else
-              echo "✅ No HTML encoding issues found"
+              echo "⚠️ No ATD Token links found in HTML - this might indicate a CSV processing issue"
+            fi
+
+            if [ "$FIXED" = true ]; then
+              echo "✅ HTML rendering issues fixed"
+            else
+              echo "✅ No HTML rendering issues found"
             fi
           else
-            echo "ℹ️ No built HTML content found, this might be source content"
-
-            # If we have source CSV, apply the same fixes as manual deployment
-            if [ -f "data/lab_assignment.csv" ]; then
-              echo "✅ Found source CSV, applying fixes..."
-
-              # Fix double quotes in target attribute
-              sed -i 's/""_blank""/"_blank"/g' data/lab_assignment.csv
-
-              # Remove unnecessary quote wrapping
-              sed -i 's/,"\[🚀 ATD Lab\]/,\[🚀 ATD Lab\]/g' data/lab_assignment.csv
-              sed -i 's/\}",/\},/g' data/lab_assignment.csv
-
-              # Fix target=_blank without quotes
-              sed -i 's/target=_blank/target="_blank"/g' data/lab_assignment.csv
-
-              echo "✅ Source CSV formatting fixed"
-            fi
+            echo "ℹ️ No ATD lab page found - skipping HTML fixes"
           fi
 
       - name: Setup Python (for manual builds)
@@ -96,17 +106,36 @@ jobs:
           if [ -f "data/lab_assignment.csv" ]; then
             echo "✅ Found lab_assignment.csv, applying fixes..."
 
-            # Fix double quotes in target attribute: ""_blank"" → "_blank"
-            sed -i 's/""_blank""/"_blank"/g' data/lab_assignment.csv
+            # Create a Python script to handle CSV fixes more reliably
+            cat > fix_csv.py << 'EOF'
+          import csv
+          import re
 
-            # Remove unnecessary quote wrapping around markdown links
-            sed -i 's/,"\[🚀 ATD Lab\]/,\[🚀 ATD Lab\]/g' data/lab_assignment.csv
-            sed -i 's/\}",/\},/g' data/lab_assignment.csv
+          # Read the CSV file
+          with open('data/lab_assignment.csv', 'r', encoding='utf-8') as f:
+              content = f.read()
 
-            # Fix any remaining target=_blank without quotes
-            sed -i 's/target=_blank/target="_blank"/g' data/lab_assignment.csv
+          # Apply fixes
+          # Fix double quotes in target attribute
+          content = content.replace('""_blank""', '"_blank"')
 
-            echo "✅ ATD Token CSV formatting fixed"
+          # Fix target=_blank without quotes
+          content = re.sub(r'target=_blank(?!")', 'target="_blank"', content)
+
+          # Remove unnecessary quote wrapping around entire markdown links
+          content = re.sub(r',"(\[🚀 ATD Lab\].*?\})"', r',\1', content)
+
+          # Write back the fixed content
+          with open('data/lab_assignment.csv', 'w', encoding='utf-8') as f:
+              f.write(content)
+
+          print("✅ CSV fixes applied successfully")
+          EOF
+
+            # Run the Python fix script
+            python3 fix_csv.py
+
+            echo "✅ ATD Token CSV formatting fixed using Python"
             echo "🔍 Verifying fix..."
             grep -n "target=" data/lab_assignment.csv | head -3 || echo "No target attributes found"
           else
