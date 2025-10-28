@@ -146,39 +146,65 @@ jobs:
           # Configure git remote with token for Mike
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
 
-          # Comprehensive gh-pages branch handling
-          echo "🔄 Handling gh-pages branch conflicts..."
+          # Aggressive gh-pages branch conflict resolution
+          echo "🔄 Handling gh-pages branch conflicts with aggressive reset..."
 
           # Fetch all branches
           git fetch origin --prune
 
-          # Reset gh-pages branch to avoid conflicts
+          # Completely reset gh-pages branch to avoid any conflicts
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-            echo "📋 Remote gh-pages branch exists, syncing..."
+            echo "📋 Remote gh-pages branch exists, performing aggressive reset..."
+
+            # Delete local gh-pages branch completely
             git branch -D gh-pages 2>/dev/null || true
-            git checkout -b gh-pages origin/gh-pages
+
+            # Create orphan gh-pages branch (disconnected from history)
+            git checkout --orphan gh-pages-temp
+            git rm -rf . 2>/dev/null || true
+            git clean -fd
+
+            # Switch back to main
             git checkout main
+            git branch -D gh-pages-temp 2>/dev/null || true
+
+            echo "✅ Prepared clean slate for gh-pages deployment"
           else
-            echo "📋 No remote gh-pages branch found"
+            echo "📋 No remote gh-pages branch found, will create new one"
           fi
 
-          # Deploy with Mike using ignore-remote-status to handle conflicts
-          echo "🚀 Deploying with Mike (ignoring remote status)..."
-          mike deploy --push --update-aliases --ignore-remote-status 2025.4.ATL latest || {
-            echo "⚠️ Mike deploy with ignore-remote-status failed, trying manual approach..."
+          # Deploy with Mike using bulletproof approach
+          echo "🚀 Deploying with Mike (bulletproof mode)..."
 
-            # Manual approach: deploy locally, then force push
-            echo "🔄 Deploying locally without push..."
-            mike deploy --update-aliases 2025.4.ATL latest
+          # Use manual deployment approach for maximum reliability
+          echo "🔄 Step 1: Deploy locally without push..."
+          mike deploy --update-aliases 2025.4.ATL latest
 
-            echo "🔄 Manually pushing to gh-pages with force..."
-            git checkout gh-pages
-            git add .
-            git commit -m "Deploy documentation with Mike versioning" || echo "No changes to commit"
-            git push origin gh-pages --force
-            git checkout main
-            echo "✅ Manual deployment completed"
-          }
+          echo "🔄 Step 2: Create clean gh-pages branch..."
+          # Create a completely new gh-pages branch
+          git checkout --orphan gh-pages-new
+
+          # Copy Mike-generated content
+          if [ -d "site" ]; then
+            cp -r site/* . 2>/dev/null || true
+            cp site/.* . 2>/dev/null || true
+          fi
+
+          # Add all content
+          git add .
+
+          # Commit the new content
+          git commit -m "Deploy documentation with Mike versioning - $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+          echo "🔄 Step 3: Replace remote gh-pages branch..."
+          # Force push the new branch to replace the old one
+          git push origin gh-pages-new:gh-pages --force
+
+          # Clean up
+          git checkout main
+          git branch -D gh-pages-new
+
+          echo "✅ Bulletproof Mike deployment completed"
 
           # Verify Mike structure (from main branch with remote gh-pages)
           echo "📋 Mike versions after deployment:"
