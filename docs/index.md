@@ -1,5 +1,5 @@
 # Arista Campus Workshop
-<!-- CI/CD Refresh: 2025-10-28 16:40:00 - Bulletproof gh-pages deployment -->
+<!-- CI/CD Refresh: 2025-10-28 16:50:00 - Simple fresh branch approach -->
 Welcome to our Arista hands-on campus workshop! 🚀
 
 <!-- CI/CD Test: Updated at $(date) -->
