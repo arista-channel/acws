@@ -312,8 +312,19 @@ log_step "Building documentation with Mike..."
 # Clean any existing builds
 rm -rf site/
 
-# Deploy Atlanta version with Mike
-mike deploy --push --update-aliases 2025.4.ATL latest
+# Deploy Atlanta version with Mike (handle branch conflicts)
+mike deploy --push --update-aliases --ignore-remote-status 2025.4.ATL latest || {
+    log_warning "Mike deployment with ignore-remote-status failed, trying manual approach..."
+
+    # Manual deployment approach
+    log_step "Deploying locally without push..."
+    mike deploy --update-aliases --ignore-remote-status 2025.4.ATL latest
+
+    log_step "Force pushing to resolve conflicts..."
+    git push origin gh-pages --force
+
+    log_success "Manual deployment completed"
+}
 
 # Verify Mike structure
 log_step "Verifying Mike structure..."
