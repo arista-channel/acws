@@ -180,12 +180,10 @@ jobs:
             echo "✅ Manual deployment completed"
           }
 
-          # Verify Mike structure
+          # Verify Mike structure (from main branch with remote gh-pages)
           echo "📋 Mike versions after deployment:"
           git fetch origin gh-pages
-          git checkout gh-pages
-          mike list
-          git checkout main
+          mike list --remote origin --branch gh-pages
 
           echo "✅ Documentation built and deployed successfully"
 
@@ -231,30 +229,30 @@ jobs:
           latest_commit=$(git rev-parse origin/gh-pages)
           echo "📋 Latest gh-pages commit: $latest_commit"
 
-          # Verify deployment structure
-          git checkout gh-pages
+          # Verify deployment structure (using git show to check files on gh-pages)
           echo "📋 Deployment structure verification:"
-          if [ -f "index.html" ]; then
-            echo "✅ Root index.html exists"
+
+          # Check if files exist on gh-pages branch without switching to it
+          if git show origin/gh-pages:index.html >/dev/null 2>&1; then
+            echo "✅ Root index.html exists on gh-pages"
           else
-            echo "❌ Root index.html missing"
+            echo "❌ Root index.html missing on gh-pages"
           fi
 
-          if [ -f "versions.json" ]; then
-            echo "✅ versions.json exists"
+          if git show origin/gh-pages:versions.json >/dev/null 2>&1; then
+            echo "✅ versions.json exists on gh-pages"
             echo "📋 Available versions:"
-            cat versions.json | grep -o '"version":"[^"]*"' | cut -d'"' -f4 || echo "Cannot parse versions"
+            git show origin/gh-pages:versions.json | grep -o '"version":"[^"]*"' | cut -d'"' -f4 || echo "Cannot parse versions"
           else
-            echo "❌ versions.json missing"
+            echo "❌ versions.json missing on gh-pages"
           fi
 
-          if [ -d "2025.4.ATL" ]; then
-            echo "✅ Atlanta 2025.4.ATL directory exists"
+          # Check if Atlanta directory exists
+          if git ls-tree origin/gh-pages | grep -q "2025.4.ATL"; then
+            echo "✅ Atlanta 2025.4.ATL directory exists on gh-pages"
           else
-            echo "❌ Atlanta 2025.4.ATL directory missing"
+            echo "❌ Atlanta 2025.4.ATL directory missing on gh-pages"
           fi
-
-          git checkout main
 
           # Set outputs for next job
           echo "deployment_id=$latest_commit" >> $GITHUB_OUTPUT
