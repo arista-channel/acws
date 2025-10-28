@@ -162,9 +162,23 @@ jobs:
             echo "📋 No remote gh-pages branch found"
           fi
 
-          # Deploy with Mike using force to handle any conflicts
-          echo "🚀 Deploying with Mike (force mode to handle conflicts)..."
-          mike deploy --push --update-aliases --force 2025.4.ATL latest
+          # Deploy with Mike using ignore-remote-status to handle conflicts
+          echo "🚀 Deploying with Mike (ignoring remote status)..."
+          mike deploy --push --update-aliases --ignore-remote-status 2025.4.ATL latest || {
+            echo "⚠️ Mike deploy with ignore-remote-status failed, trying manual approach..."
+
+            # Manual approach: deploy locally, then force push
+            echo "🔄 Deploying locally without push..."
+            mike deploy --update-aliases 2025.4.ATL latest
+
+            echo "🔄 Manually pushing to gh-pages with force..."
+            git checkout gh-pages
+            git add .
+            git commit -m "Deploy documentation with Mike versioning" || echo "No changes to commit"
+            git push origin gh-pages --force
+            git checkout main
+            echo "✅ Manual deployment completed"
+          }
 
           # Verify Mike structure
           echo "📋 Mike versions after deployment:"
