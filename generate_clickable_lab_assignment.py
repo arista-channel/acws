@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-Enhanced Lab Assignment Generator with Clickable ATD Tokens
+Enhanced Lab Assignment Generator with Clickable ATD Tokens and AP Data Merging
 
 This script generates an enhanced lab_assignment.md file with clickable ATD Token URLs
-that open in new browser tabs. It processes the CSV data and creates professional
-markdown tables with interactive elements.
+that open in new browser tabs. It also automatically merges AP#1 and AP#2 data from
+the Atlanta lab assignment file into the main lab assignment file.
 
 Features:
+- Automatic AP data merging from Atlanta lab assignment file
 - Clickable ATD Token URLs that open in new browser tabs
 - Professional table formatting with proper alignment
 - Automatic backup creation before modifications
@@ -20,14 +21,14 @@ import csv
 import os
 import shutil
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 def read_lab_assignment_data(csv_file: str) -> List[Dict[str, Any]]:
     """Read lab assignment data from CSV file"""
-    
+
     if not os.path.exists(csv_file):
         raise FileNotFoundError(f"CSV file not found: {csv_file}")
-    
+
     data = []
     with open(csv_file, 'r', newline='', encoding='utf-8') as file:
         reader = csv.DictReader(file)
@@ -37,8 +38,64 @@ def read_lab_assignment_data(csv_file: str) -> List[Dict[str, Any]]:
             for key, value in row.items():
                 cleaned_row[key] = value.strip() if value.strip() else '-'
             data.append(cleaned_row)
-    
+
     return data
+
+def merge_ap_data_from_atlanta(main_csv: str, atlanta_csv: str) -> bool:
+    """Merge AP#1 and AP#2 data from Atlanta lab assignment file into main file"""
+
+    try:
+        print(f"🔄 Merging AP data from {atlanta_csv} into {main_csv}...")
+
+        # Check if Atlanta file exists
+        if not os.path.exists(atlanta_csv):
+            print(f"⚠️  Atlanta file not found: {atlanta_csv}")
+            return False
+
+        # Read both files
+        main_data = read_lab_assignment_data(main_csv)
+        atlanta_data = read_lab_assignment_data(atlanta_csv)
+
+        # Create a mapping of student assignments to AP data
+        atlanta_ap_map = {}
+        for row in atlanta_data:
+            student_assignment = row.get('Lab Assignment', '')
+            if student_assignment and student_assignment != '-':
+                atlanta_ap_map[student_assignment] = {
+                    'AP#1': row.get('AP#1', '-'),
+                    'AP#2': row.get('AP#2', '-')
+                }
+
+        # Update main data with AP information
+        updated_count = 0
+        for row in main_data:
+            student_assignment = row.get('Lab Assignment', '')
+            if student_assignment in atlanta_ap_map:
+                ap_data = atlanta_ap_map[student_assignment]
+                if ap_data['AP#1'] != '-' or ap_data['AP#2'] != '-':
+                    row['AP#1'] = ap_data['AP#1']
+                    row['AP#2'] = ap_data['AP#2']
+                    updated_count += 1
+
+        # Create backup of main file
+        backup_file = f"{main_csv}.backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        shutil.copy2(main_csv, backup_file)
+        print(f"📋 Backup created: {backup_file}")
+
+        # Write updated data back to main file
+        with open(main_csv, 'w', newline='', encoding='utf-8') as file:
+            if main_data:
+                fieldnames = main_data[0].keys()
+                writer = csv.DictWriter(file, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(main_data)
+
+        print(f"✅ Successfully merged AP data for {updated_count} students")
+        return True
+
+    except Exception as e:
+        print(f"❌ Error merging AP data: {str(e)}")
+        return False
 
 def create_clickable_atd_table(data: List[Dict[str, Any]]) -> str:
     """Create a markdown table with clickable ATD Token URLs"""
@@ -189,24 +246,40 @@ def update_lab_assignment_file(csv_file: str, md_file: str) -> bool:
 
 def main():
     """Main function"""
-    
+
     # File paths
     csv_file = 'data/lab_assignment.csv'
+    atlanta_csv_file = 'data/atlanta_lab_assignment.csv'
     md_file = 'docs/references/lab_assignment.md'
-    
+
     print("🎯 Starting Enhanced Lab Assignment Generation...")
     print()
-    
-    # Generate enhanced lab assignment
+
+    # Step 1: Merge AP data from Atlanta file if it exists
+    if os.path.exists(atlanta_csv_file):
+        print("📡 Step 1: Merging AP data from Atlanta lab assignment...")
+        merge_success = merge_ap_data_from_atlanta(csv_file, atlanta_csv_file)
+        if merge_success:
+            print("✅ AP data merge completed successfully!")
+        else:
+            print("⚠️  AP data merge failed, continuing with existing data...")
+        print()
+    else:
+        print("ℹ️  Atlanta lab assignment file not found, skipping AP data merge...")
+        print()
+
+    # Step 2: Generate enhanced lab assignment
+    print("📝 Step 2: Generating enhanced lab assignment markdown...")
     success = update_lab_assignment_file(csv_file, md_file)
-    
+
     if success:
         print("\n🎉 Enhancement completed successfully!")
         print("\n💡 Next Steps:")
         print("1. Review the enhanced lab_assignment.md file")
         print("2. Test the clickable ATD Token links")
-        print("3. Deploy changes: git add . && git commit -m 'Add clickable ATD tokens' && git push")
-        print("4. Verify on live site that links open in new browser tabs")
+        print("3. Verify AP#1 and AP#2 data is properly populated")
+        print("4. Deploy changes: git add . && git commit -m 'Update lab assignment with AP data' && git push")
+        print("5. Verify on live site that links open in new browser tabs")
     else:
         print("\n❌ Enhancement failed. Please check the error messages above.")
 
