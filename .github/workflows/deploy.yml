@@ -1,0 +1,127 @@
+name: 🚀 Deploy Campus Workshop
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'docs/**'
+      - 'mkdocs.yml'
+      - 'data/**'
+      - '.github/workflows/deploy.yml'
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: 'Deployment target'
+        required: true
+        default: 'github-pages'
+        type: choice
+        options:
+        - github-pages
+        - nginx-server
+        - both
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: 🐍 Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: 📦 Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mkdocs-material mkdocs-glightbox mike
+
+    - name: 🔧 Configure git
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+
+    - name: 🏗️ Build and deploy to GitHub Pages
+      if: ${{ github.event.inputs.deploy_target == 'github-pages' || github.event.inputs.deploy_target == 'both' || github.event.inputs.deploy_target == '' }}
+      run: |
+        echo "🚀 Deploying Atlanta version to GitHub Pages..."
+        
+        # Deploy Atlanta version with protection for Orlando
+        mike deploy --push --update-aliases --ignore-remote-status 2025.4.ATL latest
+        
+        # Verify Orlando version exists and restore if missing
+        if ! mike list --branch gh-pages | grep -q "2025.1.ORL"; then
+          echo "⚠️ Orlando version missing - this should not happen!"
+          echo "Orlando version protection failed - manual intervention required"
+          exit 1
+        fi
+        
+        echo "✅ GitHub Pages deployment completed"
+
+    - name: 🌐 Deploy to nginx server
+      if: ${{ github.event.inputs.deploy_target == 'nginx-server' || github.event.inputs.deploy_target == 'both' }}
+      env:
+        NGINX_HOST: ${{ secrets.NGINX_HOST }}
+        NGINX_USER: ${{ secrets.NGINX_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+      run: |
+        echo "🔑 Setting up SSH key..."
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $NGINX_HOST >> ~/.ssh/known_hosts
+
+        echo "🔍 Validating SSH connection..."
+        if ssh -o ConnectTimeout=10 -o BatchMode=yes $NGINX_USER@$NGINX_HOST "echo 'SSH connection successful'"; then
+          echo "✅ SSH connection validated"
+        else
+          echo "❌ SSH connection failed!"
+          echo "Please check GitHub secrets configuration:"
+          echo "  - NGINX_HOST: $NGINX_HOST"
+          echo "  - NGINX_USER: $NGINX_USER"
+          echo "  - SSH_PRIVATE_KEY: [configured]"
+          exit 1
+        fi
+        
+        echo "📦 Creating deployment package..."
+        git checkout gh-pages
+        tar -czf deployment.tar.gz --exclude='.git' --exclude='.DS_Store' .
+        
+        echo "🚀 Deploying to nginx server..."
+        scp deployment.tar.gz $NGINX_USER@$NGINX_HOST:/tmp/
+        
+        ssh $NGINX_USER@$NGINX_HOST '
+          echo "🧹 Backing up current site..."
+          sudo rm -rf /var/www/mkdocs/site.backup
+          sudo mv /var/www/mkdocs/site /var/www/mkdocs/site.backup
+          sudo mkdir -p /var/www/mkdocs/site
+          
+          echo "📦 Extracting new content..."
+          cd /tmp
+          sudo tar -xzf deployment.tar.gz -C /var/www/mkdocs/site
+          
+          echo "🔧 Setting permissions..."
+          sudo chown -R www-data:www-data /var/www/mkdocs/site
+          sudo chmod -R 755 /var/www/mkdocs/site
+          
+          echo "✅ nginx deployment completed"
+          rm -f /tmp/deployment.tar.gz
+        '
+        
+        echo "✅ nginx server deployment completed"
+
+    - name: 📋 Deployment summary
+      run: |
+        echo "## 🎊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### ✅ Successfully deployed:" >> $GITHUB_STEP_SUMMARY
+        echo "- **Atlanta 2025.4.ATL** (latest version)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Orlando 2025.1.ORL** (protected historical version)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### 🌐 Access URLs:" >> $GITHUB_STEP_SUMMARY
+        echo "- **GitHub Pages**: https://mbalagot12.github.io/campus-workshop/" >> $GITHUB_STEP_SUMMARY
+        echo "- **nginx Server**: https://acws.duckdns.org/" >> $GITHUB_STEP_SUMMARY

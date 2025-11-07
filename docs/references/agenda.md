@@ -3,18 +3,19 @@
 | Time | Activity |
 | --- | --- |
 Day 1 | Wired and Wireless
-1:00 - 1:25 |Intros
-1:30-2:00 | Overview of Arista Campus Architecture
-2:00-2:30 | Labs: Arista CloudVision for Campus - Build the Campus Fabric
+9:00 - 9:25 |Intros
+9:30-10:00 | Overview of Arista Campus Architecture
+10:00-10:30 | Labs: Arista CloudVision for Campus - Build the Campus Fabric
 Wired Lab | A-03: Access Interface Configuration
-2:30 - 3:30 | Labs: Arista Wireless with CV-CUE - Build the Wireless Fabric
+10:30 - 12:00 | Labs: Arista Wireless with CV-CUE - Build the Wireless Fabric
 Wireless Lab | B-01: Wireless Setup
 Wireless Lab | B-02: Troubleshooting WiFi
+12:00 - 12:50 | Lunch and Learn
 Overview of Arista Zero Trust Networking Security
-3:30 - 5:00 | Labs: Guest Wireless and Hitless Upgrade
+1:00 - 5:00 | Labs: Guest Wireless and Hitless Upgrade
 Wireless Lab | B-03: Guest WiFi with AGNI
 Wireless Lab | B-04: Smart System Upgrade (SSU)
-Optional Labs | CloudVision Telemetry and EOS CLI
+Labs | CloudVision Telemetry and EOS CLI
 Wired Lab | A-04: Operations, Dashboards and Events
 Wired Lab | A-01: Explore EOS
 5:00 - 6:00 | Happy Hour - Location TBD
