@@ -70,57 +70,59 @@ jobs:
         echo "📋 Deployed versions:"
         mike list --branch gh-pages
 
-    - name: 🌐 Deploy to nginx server
-      if: ${{ github.event.inputs.deploy_target == 'nginx-server' || github.event.inputs.deploy_target == 'both' }}
-      env:
-        NGINX_HOST: ${{ secrets.NGINX_HOST }}
-        NGINX_USER: ${{ secrets.NGINX_USER }}
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-      run: |
-        echo "🔑 Setting up SSH key..."
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H $NGINX_HOST >> ~/.ssh/known_hosts
-
-        echo "🔍 Validating SSH connection..."
-        if ssh -o ConnectTimeout=10 -o BatchMode=yes $NGINX_USER@$NGINX_HOST "echo 'SSH connection successful'"; then
-          echo "✅ SSH connection validated"
-        else
-          echo "❌ SSH connection failed!"
-          echo "Please check GitHub secrets configuration:"
-          echo "  - NGINX_HOST: $NGINX_HOST"
-          echo "  - NGINX_USER: $NGINX_USER"
-          echo "  - SSH_PRIVATE_KEY: [configured]"
-          exit 1
-        fi
-        
-        echo "📦 Creating deployment package..."
-        git checkout gh-pages
-        tar -czf deployment.tar.gz --exclude='.git' --exclude='.DS_Store' .
-        
-        echo "🚀 Deploying to nginx server..."
-        scp deployment.tar.gz $NGINX_USER@$NGINX_HOST:/tmp/
-        
-        ssh $NGINX_USER@$NGINX_HOST '
-          echo "🧹 Backing up current site..."
-          sudo rm -rf /var/www/mkdocs/site.backup
-          sudo mv /var/www/mkdocs/site /var/www/mkdocs/site.backup
-          sudo mkdir -p /var/www/mkdocs/site
-          
-          echo "📦 Extracting new content..."
-          cd /tmp
-          sudo tar -xzf deployment.tar.gz -C /var/www/mkdocs/site
-          
-          echo "🔧 Setting permissions..."
-          sudo chown -R www-data:www-data /var/www/mkdocs/site
-          sudo chmod -R 755 /var/www/mkdocs/site
-          
-          echo "✅ nginx deployment completed"
-          rm -f /tmp/deployment.tar.gz
-        '
-        
-        echo "✅ nginx server deployment completed"
+    # Nginx deployment disabled - only deploying to GitHub Pages
+    # Uncomment below to re-enable nginx deployment
+    # - name: 🌐 Deploy to nginx server
+    #   if: ${{ github.event.inputs.deploy_target == 'nginx-server' || github.event.inputs.deploy_target == 'both' }}
+    #   env:
+    #     NGINX_HOST: ${{ secrets.NGINX_HOST }}
+    #     NGINX_USER: ${{ secrets.NGINX_USER }}
+    #     SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+    #   run: |
+    #     echo "🔑 Setting up SSH key..."
+    #     mkdir -p ~/.ssh
+    #     echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+    #     chmod 600 ~/.ssh/id_rsa
+    #     ssh-keyscan -H $NGINX_HOST >> ~/.ssh/known_hosts
+    #
+    #     echo "🔍 Validating SSH connection..."
+    #     if ssh -o ConnectTimeout=10 -o BatchMode=yes $NGINX_USER@$NGINX_HOST "echo 'SSH connection successful'"; then
+    #       echo "✅ SSH connection validated"
+    #     else
+    #       echo "❌ SSH connection failed!"
+    #       echo "Please check GitHub secrets configuration:"
+    #       echo "  - NGINX_HOST: $NGINX_HOST"
+    #       echo "  - NGINX_USER: $NGINX_USER"
+    #       echo "  - SSH_PRIVATE_KEY: [configured]"
+    #       exit 1
+    #     fi
+    #
+    #     echo "📦 Creating deployment package..."
+    #     git checkout gh-pages
+    #     tar -czf deployment.tar.gz --exclude='.git' --exclude='.DS_Store' .
+    #
+    #     echo "🚀 Deploying to nginx server..."
+    #     scp deployment.tar.gz $NGINX_USER@$NGINX_HOST:/tmp/
+    #
+    #     ssh $NGINX_USER@$NGINX_HOST '
+    #       echo "🧹 Backing up current site..."
+    #       sudo rm -rf /var/www/mkdocs/site.backup
+    #       sudo mv /var/www/mkdocs/site /var/www/mkdocs/site.backup
+    #       sudo mkdir -p /var/www/mkdocs/site
+    #
+    #       echo "📦 Extracting new content..."
+    #       cd /tmp
+    #       sudo tar -xzf deployment.tar.gz -C /var/www/mkdocs/site
+    #
+    #       echo "🔧 Setting permissions..."
+    #       sudo chown -R www-data:www-data /var/www/mkdocs/site
+    #       sudo chmod -R 755 /var/www/mkdocs/site
+    #
+    #       echo "✅ nginx deployment completed"
+    #       rm -f /tmp/deployment.tar.gz
+    #     '
+    #
+    #     echo "✅ nginx server deployment completed"
 
     - name: 📋 Deployment summary
       run: |
@@ -129,6 +131,5 @@ jobs:
         echo "### ✅ Successfully deployed:" >> $GITHUB_STEP_SUMMARY
         echo "- **Atlanta 2025.4.ATL** (latest version)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "### 🌐 Access URLs:" >> $GITHUB_STEP_SUMMARY
+        echo "### 🌐 Access URL:" >> $GITHUB_STEP_SUMMARY
         echo "- **GitHub Pages**: https://arista-channel.github.io/acws/" >> $GITHUB_STEP_SUMMARY
-        echo "- **nginx Server**: https://acws.duckdns.org/" >> $GITHUB_STEP_SUMMARY
