@@ -62,6 +62,9 @@ jobs:
         # Deploy Atlanta version locally (without pushing)
         mike deploy --update-aliases 2025.4.ATL latest
 
+        # Set latest as the default version (creates root index.html)
+        mike set-default latest
+
         # Push to gh-pages with force to handle conflicts
         echo "📤 Pushing to gh-pages branch..."
         git push origin gh-pages --force
