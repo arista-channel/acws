@@ -2,27 +2,28 @@
 
 ## Overview
 
-In this lab, you'll learn about Arista Vantage Professional Services and how it provides comprehensive network visibility, analytics, and insights. Vantage helps organizations optimize network performance, troubleshoot issues, and make data-driven decisions.
+In this lab, you'll learn about Arista Vantage Professional Services, an in-house developed application suite designed to generate a variety of deliverables for Arista Professional Services and channel partners. Vantage streamlines the delivery process of projects and delivers consistent artifacts efficiently, allowing users to input minimum data and generate documents, configurations, and the whole deployment pipeline.
 
 ## Learning Objectives
 
 By the end of this lab, you will be able to:
 
-- Understand Arista Vantage architecture and components
+- Understand Arista Vantage Professional Services platform and its purpose
 - Navigate the Vantage user interface
-- Explore network visibility and analytics features
-- Review use cases and business benefits
-- Access and interpret network telemetry data
+- Generate solution designs and knowledge transfer (KT) slides
+- Create baseline AVD (Arista Validated Designs) repositories for L2LS and L3LS designs
+- Understand the deployment pipeline automation for DC and Campus networks
+- Explore the benefits of streamlined project delivery
 
 ## Lab Topology
 
 !!! info "Lab Environment"
-    This lab uses a Vantage deployment monitoring:
-    
-    - **Campus Network**: Wired and wireless infrastructure
-    - **Data Center**: Core switching and routing
-    - **WAN Edge**: SD-WAN and branch connectivity
-    - **Vantage Platform**: Centralized analytics and insights
+    This lab uses the Vantage Professional Services platform to generate:
+
+    - **Solution Design Documents**: Comprehensive network design documentation
+    - **Knowledge Transfer Slides**: Project handoff presentations
+    - **AVD Repositories**: Baseline configurations for L2LS and L3LS topologies
+    - **GitLab Integration**: Pre-configured CI/CD pipelines for deployment automation
 
 ## Prerequisites
 
@@ -32,43 +33,50 @@ Before starting this lab, ensure you have:
 - [ ] Basic understanding of network concepts
 - [ ] Familiarity with Arista CloudVision
 
-## What is Arista Vantage?
+## What is Arista Vantage Professional Services?
 
 ### Platform Overview
 
-Arista Vantage is a comprehensive network observability platform that provides:
+Arista Vantage Professional Services is an in-house developed application suite designed to streamline the delivery process of network projects and deliver consistent artifacts efficiently. The platform enables users to input minimum data and automatically generate:
 
-- **Real-Time Visibility**: Complete network topology and device inventory
-- **Advanced Analytics**: AI-powered insights and anomaly detection
-- **Performance Monitoring**: Application and network performance metrics
-- **Troubleshooting Tools**: Root cause analysis and remediation guidance
-- **Capacity Planning**: Trend analysis and forecasting
+- **Solution Design Documents**: Comprehensive technical design documentation
+- **Knowledge Transfer (KT) Slides**: Professional presentation materials for project handoff
+- **Baseline AVD Repositories**: Pre-configured Arista Validated Designs for L2LS and L3LS topologies
+- **Deployment Pipelines**: Complete CI/CD automation hosted on GitLab
+- **Configuration Files**: Ready-to-deploy network configurations
 
 ### Key Components
 
-1. **Data Collection**
-   - Streaming telemetry from network devices
-   - Flow data (NetFlow, sFlow, IPFIX)
-   - SNMP and API data collection
-   - Log aggregation and analysis
+1. **Input Interface**
+   - Simplified data entry forms
+   - Topology designer
+   - Design parameter selection
+   - Template customization options
 
-2. **Analytics Engine**
-   - Machine learning algorithms
-   - Anomaly detection
-   - Predictive analytics
-   - Correlation analysis
+2. **Document Generation Engine**
+   - Solution design document creation
+   - Knowledge transfer slide generation
+   - Bill of materials (BOM) generation
+   - Network diagrams and topology visualization
 
-3. **Visualization Layer**
-   - Interactive dashboards
-   - Custom reports
-   - Topology maps
-   - Time-series graphs
+3. **AVD Repository Generator**
+   - L2LS (Layer 2 Leaf-Spine) baseline configurations
+   - L3LS (Layer 3 Leaf-Spine) baseline configurations
+   - Data Center fabric designs
+   - Campus network designs
+   - GitLab repository creation with pre-configured pipelines
+
+4. **Deployment Automation**
+   - CI/CD pipeline configuration
+   - Automated validation and testing
+   - Configuration deployment workflows
+   - Version control integration
 
 ## Getting Started
 
 ### Step 1: Access Vantage Portal
 
-1. Login to Arista Vantage using the provided credentials:
+1. Login to Arista Vantage Professional Services platform using the provided credentials:
 
     ```yaml
     URL: https://vantage.arista.com
@@ -77,165 +85,186 @@ Arista Vantage is a comprehensive network observability platform that provides:
     ```
 
 2. Upon login, you'll see the main dashboard with:
-   - Network health summary
-   - Active alerts and notifications
-   - Top applications by bandwidth
-   - Device status overview
+   - Project creation wizard
+   - Recent projects and deliverables
+   - Template library
+   - Quick start guides
 
 ### Step 2: Navigate the User Interface
 
-1. **Main Dashboard**
-   - Overview of network health
-   - Key performance indicators (KPIs)
-   - Recent alerts and events
+1. **Project Dashboard**
+   - Overview of active projects
+   - Project status and progress
+   - Recent deliverables generated
+   - Team collaboration tools
 
-2. **Topology View**
-   - Visual representation of network
-   - Device relationships and connections
-   - Real-time status indicators
+2. **Design Input Section**
+   - Network topology designer
+   - Design parameter forms
+   - Device selection and configuration
+   - Naming conventions and standards
 
-3. **Analytics Section**
-   - Traffic analysis
-   - Application performance
-   - User experience metrics
+3. **Document Generation**
+   - Solution design templates
+   - Knowledge transfer slide templates
+   - Custom branding options
+   - Export and download options
 
-4. **Inventory**
-   - Device catalog
-   - Hardware and software versions
-   - Configuration compliance
+4. **AVD Repository Manager**
+   - L2LS design templates
+   - L3LS design templates
+   - GitLab integration settings
+   - Pipeline configuration options
 
-### Step 3: Explore Network Visibility
+### Step 3: Create Your First Project
 
-1. Navigate to **Topology > Network Map**
+1. Navigate to **Projects > New Project**
 
-2. Explore the interactive topology:
-   - Zoom in/out to view different network layers
-   - Click on devices to view details
-   - Hover over links to see utilization
+2. Enter project details:
+   - Project name and description
+   - Customer information
+   - Network topology type (DC or Campus)
+   - Design architecture (L2LS or L3LS)
 
-3. View device inventory:
-   - Navigate to **Inventory > Devices**
-   - Review device types, models, and versions
-   - Check device health status
+3. Input minimum required data:
+   - Number of spine switches
+   - Number of leaf switches
+   - IP addressing scheme
+   - VLAN/VRF requirements
 
 ## Vantage Features
 
-### Real-Time Monitoring
+### Document Generation
 
-1. **Device Health Monitoring**
+1. **Solution Design Documents**
 
-    ```yaml
-    # View device metrics
-    - CPU utilization
-    - Memory usage
-    - Interface statistics
-    - Temperature sensors
-    ```
+    Automatically generates comprehensive design documentation including:
+    - Executive summary
+    - Network architecture diagrams
+    - Design rationale and best practices
+    - Hardware and software specifications
+    - IP addressing and VLAN schemes
+    - Security and QoS policies
+    - Implementation timeline
 
-2. **Network Performance**
+2. **Knowledge Transfer Slides**
 
-    ```yaml
-    # Monitor network KPIs
-    - Bandwidth utilization
-    - Packet loss
-    - Latency and jitter
-    - Error rates
-    ```
+    Creates professional presentation materials for:
+    - Project overview and objectives
+    - Network topology and architecture
+    - Configuration highlights
+    - Operational procedures
+    - Troubleshooting guides
+    - Handoff documentation
 
-### Analytics and Insights
+### AVD Repository Generation
 
-1. **Traffic Analysis**
-   - Top talkers and listeners
-   - Application identification
-   - Protocol distribution
-   - Traffic patterns and trends
+1. **L2LS (Layer 2 Leaf-Spine) Designs**
+   - Campus network topologies
+   - Access-distribution-core architectures
+   - VLAN-based segmentation
+   - MLAG configurations
+   - Port profiles and templates
 
-2. **Anomaly Detection**
-   - Automatic detection of unusual patterns
-   - Baseline comparison
-   - Alert generation
-   - Root cause analysis
+2. **L3LS (Layer 3 Leaf-Spine) Designs**
+   - Data center fabric topologies
+   - BGP EVPN/VXLAN overlays
+   - Multi-tenancy with VRFs
+   - Anycast gateway configurations
+   - Spine-leaf routing protocols
 
-3. **Capacity Planning**
-   - Historical trend analysis
-   - Growth forecasting
-   - Resource utilization predictions
-   - Upgrade recommendations
+3. **GitLab Integration**
+   - Automated repository creation
+   - Pre-configured CI/CD pipelines
+   - Ansible playbook integration
+   - Configuration validation workflows
+   - Deployment automation scripts
 
 ## Lab Tasks
 
-!!! note "Task 1: Explore the Dashboard"
-    Navigate through the Vantage dashboard and identify:
-    
-    - [ ] Total number of monitored devices
-    - [ ] Current network health score
-    - [ ] Active alerts (if any)
-    - [ ] Top 5 applications by bandwidth
+!!! note "Task 1: Create a New Project"
+    Create your first Vantage project:
 
-!!! note "Task 2: Review Network Topology"
-    Explore the network topology view:
-    
-    - [ ] Identify core, distribution, and access layers
-    - [ ] Locate any devices with alerts
-    - [ ] Review link utilization between devices
-    - [ ] Check for any redundant paths
+    - [ ] Navigate to Projects > New Project
+    - [ ] Enter project name: "Campus Network Design - Student#"
+    - [ ] Select topology type: Campus
+    - [ ] Select design architecture: L2LS
+    - [ ] Save project
 
-!!! note "Task 3: Analyze Traffic Patterns"
-    Navigate to Analytics > Traffic Analysis:
-    
-    - [ ] Identify top applications
-    - [ ] Review traffic distribution by protocol
-    - [ ] Check for any anomalies
-    - [ ] Analyze traffic trends over the last 24 hours
+!!! note "Task 2: Input Design Parameters"
+    Enter the minimum required data for your design:
+
+    - [ ] Number of spine switches: 2
+    - [ ] Number of leaf switches: 4
+    - [ ] Management IP range: 10.1.100.0/24
+    - [ ] Loopback IP range: 10.1.0.0/24
+    - [ ] VLAN range: 100-199
+
+!!! note "Task 3: Generate Deliverables"
+    Generate project deliverables:
+
+    - [ ] Click "Generate Solution Design"
+    - [ ] Review the generated design document
+    - [ ] Click "Generate KT Slides"
+    - [ ] Download the presentation
+    - [ ] Click "Create AVD Repository"
+    - [ ] Review the GitLab repository URL
 
 ## Use Cases
 
-### Network Operations
+### Professional Services Delivery
 
-- **Proactive Monitoring**: Identify issues before they impact users
-- **Rapid Troubleshooting**: Quickly pinpoint root causes
-- **Performance Optimization**: Identify bottlenecks and optimize resources
-- **Compliance Reporting**: Generate audit-ready reports
+- **Consistent Deliverables**: Standardized documentation across all projects
+- **Rapid Project Deployment**: Reduce design and documentation time by 70%
+- **Quality Assurance**: Pre-validated configurations and best practices
+- **Customer Satisfaction**: Professional, comprehensive project deliverables
 
-### Business Intelligence
+### Channel Partner Enablement
 
-- **Application Performance**: Ensure critical applications meet SLAs
-- **User Experience**: Monitor and improve end-user experience
-- **Cost Optimization**: Identify underutilized resources
-- **Strategic Planning**: Data-driven network expansion decisions
+- **Self-Service Design**: Partners can generate designs independently
+- **Reduced Training Time**: Simplified interface requires minimal training
+- **Scalable Delivery**: Handle more projects with the same resources
+- **Brand Consistency**: Maintain Arista standards across all partner deliverables
 
 ## Benefits
 
-### Operational Benefits
+### Time Efficiency
 
-- Reduced mean time to resolution (MTTR)
-- Proactive issue detection
-- Automated root cause analysis
-- Comprehensive visibility across the network
+- **70% Faster Documentation**: Automated generation vs. manual creation
+- **Instant AVD Repository**: Pre-configured baseline in minutes
+- **Rapid Deployment**: GitLab pipelines ready to use immediately
+- **Reduced Errors**: Automated validation and consistency checks
 
-### Business Benefits
+### Quality and Consistency
 
-- Improved application performance
-- Enhanced user experience
-- Reduced operational costs
-- Better capacity planning
+- **Standardized Deliverables**: Every project follows best practices
+- **Professional Documentation**: Polished, customer-ready materials
+- **Validated Configurations**: Pre-tested AVD designs
+- **Version Control**: All artifacts tracked in GitLab
+
+### Business Impact
+
+- **Increased Project Capacity**: Deliver more projects with same resources
+- **Higher Margins**: Reduced labor costs for documentation
+- **Customer Satisfaction**: Faster delivery with higher quality
+- **Competitive Advantage**: Professional deliverables differentiate your services
 
 ## Next Steps
 
-In the next lab (E-02), you'll learn how to configure Vantage for your specific monitoring needs, including custom dashboards, alerts, and reports.
+In the next lab (E-02), you'll learn how to customize Vantage templates, configure advanced design parameters, and integrate with your organization's GitLab instance.
 
 ## Additional Resources
 
-- [Arista Vantage Documentation](https://www.arista.com/en/products/vantage)
-- [Vantage User Guide](https://www.arista.com/en/support/product-documentation)
-- [Network Observability Best Practices](https://www.arista.com/en/solutions)
+- [Arista Validated Designs (AVD) Documentation](https://avd.arista.com)
+- [Arista Professional Services](https://www.arista.com/en/services)
+- [GitLab CI/CD Integration Guide](https://docs.gitlab.com/ee/ci/)
+- [Arista Campus Design Guides](https://www.arista.com/en/solutions/campus)
 
 ## Summary
 
-In this lab, you explored Arista Vantage and its comprehensive network observability capabilities. You navigated the user interface, reviewed network topology, and learned about key features and use cases.
+In this lab, you explored Arista Vantage Professional Services, an in-house developed platform that streamlines project delivery by automatically generating solution designs, knowledge transfer slides, and baseline AVD repositories for L2LS and L3LS network designs. You learned how Vantage enables efficient, consistent, and professional deliverables for both Arista Professional Services and channel partners.
 
 ---
 
 !!! success "Lab Complete"
     You have successfully completed the Vantage Overview lab. Proceed to **E-02 - Vantage Configuration** to continue your learning journey.
-
