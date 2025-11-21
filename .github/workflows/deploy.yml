@@ -54,13 +54,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        echo "🚀 Deploying Atlanta version to GitHub Pages..."
+        echo "🚀 Deploying 2026.1 version to GitHub Pages..."
 
         # Fetch latest gh-pages branch
         git fetch origin gh-pages:gh-pages 2>/dev/null || echo "Creating new gh-pages branch"
 
-        # Deploy Atlanta version locally (without pushing)
-        mike deploy --update-aliases 2025.4.ATL latest
+        # Deploy 2026.1 version as latest (preserves all existing versions)
+        mike deploy --update-aliases 2026.1 latest
 
         # Set latest as the default version (creates root index.html)
         mike set-default latest
@@ -132,7 +132,8 @@ jobs:
         echo "## 🎊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### ✅ Successfully deployed:" >> $GITHUB_STEP_SUMMARY
-        echo "- **Atlanta 2025.4.ATL** (latest version)" >> $GITHUB_STEP_SUMMARY
+        echo "- **2026.1** (latest version)" >> $GITHUB_STEP_SUMMARY
+        echo "- **Atlanta 2025.4.ATL** (preserved historical version)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 🌐 Access URL:" >> $GITHUB_STEP_SUMMARY
         echo "- **GitHub Pages**: https://arista-channel.github.io/acws/" >> $GITHUB_STEP_SUMMARY
