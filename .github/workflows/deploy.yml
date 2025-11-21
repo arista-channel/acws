@@ -51,14 +51,19 @@ jobs:
 
     - name: 🏗️ Build and deploy to GitHub Pages
       if: ${{ github.event.inputs.deploy_target == 'github-pages' || github.event.inputs.deploy_target == 'both' || github.event.inputs.deploy_target == '' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         echo "🚀 Deploying Atlanta version to GitHub Pages..."
 
-        # Fetch latest gh-pages branch
-        git fetch origin gh-pages:gh-pages || true
+        # Configure git to use token for authentication
+        git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
 
-        # Deploy Atlanta version with protection for Orlando
-        mike deploy --push --update-aliases --rebase 2025.4.ATL latest
+        # Fetch latest gh-pages branch
+        git fetch origin gh-pages || echo "No existing gh-pages branch"
+
+        # Deploy Atlanta version (mike will handle the push)
+        mike deploy --push --update-aliases --force 2025.4.ATL latest
 
         # Verify Orlando version exists and restore if missing
         if ! mike list --branch gh-pages | grep -q "2025.1.ORL"; then
