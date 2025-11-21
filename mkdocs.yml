@@ -1,6 +1,6 @@
 site_name: Arista Campus Workshop
 site_description: Arista Campus Workshop Documentation - Nashville 2025.2 with Interactive Lab Automation
-site_url: https://mbalagot12.github.io/campus-workshop/
+site_url: https://arista-channel.github.io/acws/
 watch: ["docs", "mkdocs.yml"]
 
 nav:
