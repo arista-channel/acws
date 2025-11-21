@@ -56,21 +56,22 @@ jobs:
       run: |
         echo "🚀 Deploying Atlanta version to GitHub Pages..."
 
-        # Configure git to use token for authentication
-        git config --global url."https://x-access-token:${GITHUB_TOKEN}@github.com/".insteadOf "https://github.com/"
-
         # Fetch latest gh-pages branch
-        git fetch origin gh-pages || echo "No existing gh-pages branch"
+        git fetch origin gh-pages:gh-pages 2>/dev/null || echo "Creating new gh-pages branch"
 
-        # Deploy Atlanta version (mike will handle the push)
-        mike deploy --push --update-aliases --force 2025.4.ATL latest
+        # Deploy Atlanta version locally (without pushing)
+        mike deploy --update-aliases 2025.4.ATL latest
 
-        # Verify Orlando version exists and restore if missing
+        # Verify Orlando version exists
         if ! mike list --branch gh-pages | grep -q "2025.1.ORL"; then
           echo "⚠️ Orlando version missing - this should not happen!"
           echo "Orlando version protection failed - manual intervention required"
           exit 1
         fi
+
+        # Push to gh-pages with force to handle conflicts
+        echo "📤 Pushing to gh-pages branch..."
+        git push origin gh-pages --force
 
         echo "✅ GitHub Pages deployment completed"
 
