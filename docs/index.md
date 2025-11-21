@@ -56,9 +56,21 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
                 </div>
 
                 <div class="solution-card">
+                    <div class="solution-icon">🌐</div>
+                    <div class="solution-title">SD-WAN</div>
+                    <div class="solution-desc">Path Selection, App Routing, WAN Edge</div>
+                </div>
+
+                <div class="solution-card">
                     <div class="solution-icon">📊</div>
                     <div class="solution-title">Observability</div>
                     <div class="solution-desc">Monitoring, Analytics, AI Insights</div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-icon">🔍</div>
+                    <div class="solution-title">Vantage</div>
+                    <div class="solution-desc">Network Insights, Telemetry, Analytics</div>
                 </div>
             </div>
         </div>
@@ -204,6 +216,66 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
     Using Arista NDR to detect and respond to network anomolous behavior and unauthorized acces
 
     [:material-login: Hop into C-05](./references/under_constructions.md){ .md-button .md-button--primary } -->
+
+</div>
+
+## :material-wan: SD-WAN Lab Guides
+
+<div class="grid cards" markdown>
+
+- :material-cloud: **D01-Lab: SD-WAN Overview**
+
+    ---
+
+    Explore Arista SD-WAN architecture, components, and key benefits for distributed enterprise networks
+
+    [:material-login: Hop into D-01](./d_sdwan/d01_lab.md){ .md-button .md-button--primary }
+
+- :material-cloud: **D02-Lab: SD-WAN Configuration**
+
+    ---
+
+    Configure SD-WAN policies, traffic steering, and application-aware routing for optimal WAN connectivity
+
+    [:material-login: Hop into D-02](./d_sdwan/d02_lab.md){ .md-button .md-button--primary }
+
+- :material-cloud: **D03-Lab: SD-WAN Operations**
+
+    ---
+
+    Monitor, troubleshoot, and optimize SD-WAN deployments using CloudVision Portal analytics
+
+    [:material-login: Hop into D-03](./d_sdwan/d03_lab.md){ .md-button .md-button--primary }
+
+</div>
+
+## :material-chart-line: Vantage Professional Services
+
+<div class="grid cards" markdown>
+
+- :material-cloud: **E01-Lab: Vantage Overview**
+
+    ---
+
+    Discover Arista Vantage platform for comprehensive network visibility, analytics, and AI-powered insights
+
+    [:material-login: Hop into E-01](./e_vantage/e01_lab.md){ .md-button .md-button--primary }
+
+- :material-cloud: **E02-Lab: Vantage Configuration**
+
+    ---
+
+    Configure custom dashboards, alerts, reports, and integrations for your monitoring needs
+
+    [:material-login: Hop into E-02](./e_vantage/e02_lab.md){ .md-button .md-button--primary }
+
+- :material-cloud: **E03-Lab: Vantage Operations**
+
+    ---
+
+    Master operational tasks, troubleshooting techniques, and advanced analytics for network observability
+
+    [:material-login: Hop into E-03](./e_vantage/e03_lab.md){ .md-button .md-button--primary }
 
 </div>
 
