@@ -81,6 +81,36 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/d_sdwan/d01_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/d_sdwan/d02_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/d_sdwan/d03_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/e_vantage/e01_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/e_vantage/e02_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://arista-channel.github.io/acws/2026.1/e_vantage/e03_lab/</loc>
+         <lastmod>2025-11-21</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://arista-channel.github.io/acws/2026.1/lab/access/</loc>
          <lastmod>2025-11-21</lastmod>
          <changefreq>daily</changefreq>
