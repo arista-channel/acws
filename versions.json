@@ -1,9 +1,14 @@
 [
   {
-    "version": "2025.4.ATL",
-    "title": "2025.4.ATL",
+    "version": "2026.1",
+    "title": "2026.1",
     "aliases": [
       "latest"
     ]
+  },
+  {
+    "version": "2025.4.ATL",
+    "title": "2025.4.ATL",
+    "aliases": []
   }
 ]
