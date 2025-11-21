@@ -23,7 +23,11 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
     steps:
     - name: 📥 Checkout repository
       uses: actions/checkout@v4
@@ -38,7 +42,7 @@ jobs:
     - name: 📦 Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install mkdocs-material mkdocs-glightbox mike
+        pip install -r requirements.txt
 
     - name: 🔧 Configure git
       run: |
@@ -123,5 +127,5 @@ jobs:
         echo "- **Orlando 2025.1.ORL** (protected historical version)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 🌐 Access URLs:" >> $GITHUB_STEP_SUMMARY
-        echo "- **GitHub Pages**: https://mbalagot12.github.io/campus-workshop/" >> $GITHUB_STEP_SUMMARY
+        echo "- **GitHub Pages**: https://arista-channel.github.io/acws/" >> $GITHUB_STEP_SUMMARY
         echo "- **nginx Server**: https://acws.duckdns.org/" >> $GITHUB_STEP_SUMMARY
