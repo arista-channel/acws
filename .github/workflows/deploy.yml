@@ -53,17 +53,20 @@ jobs:
       if: ${{ github.event.inputs.deploy_target == 'github-pages' || github.event.inputs.deploy_target == 'both' || github.event.inputs.deploy_target == '' }}
       run: |
         echo "🚀 Deploying Atlanta version to GitHub Pages..."
-        
+
+        # Fetch latest gh-pages branch
+        git fetch origin gh-pages:gh-pages || true
+
         # Deploy Atlanta version with protection for Orlando
-        mike deploy --push --update-aliases --ignore-remote-status 2025.4.ATL latest
-        
+        mike deploy --push --update-aliases --rebase 2025.4.ATL latest
+
         # Verify Orlando version exists and restore if missing
         if ! mike list --branch gh-pages | grep -q "2025.1.ORL"; then
           echo "⚠️ Orlando version missing - this should not happen!"
           echo "Orlando version protection failed - manual intervention required"
           exit 1
         fi
-        
+
         echo "✅ GitHub Pages deployment completed"
 
     - name: 🌐 Deploy to nginx server
