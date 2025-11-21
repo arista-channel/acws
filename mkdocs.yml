@@ -23,10 +23,15 @@ nav:
         - C02 - AGNI UPSK Wireless Policy: c_security/c02_lab.md
         - C03 - AGNI and Wired EAP-TLS 802.1X: c_security/c03_lab.md
     
-    # - SD-WAN Lab Guides:
-    #     - D01 - SD-WAN Overview: d_sdwan/d01_lab.md
-    #     - D02 - SD-WAN Configuration: d_sdwan/d02_lab.md
-    #     - D03 - SD-WAN Operations: d_sdwan/d03_lab.md
+    - SD-WAN Lab Guides:
+        - D01 - SD-WAN Overview: d_sdwan/d01_lab.md
+        - D02 - SD-WAN Configuration: d_sdwan/d02_lab.md
+        - D03 - SD-WAN Operations: d_sdwan/d03_lab.md
+    
+    - Vantage Professional Services:
+        - E01 - Vantage Overview: e_vantage/e01_lab.md
+        - E02 - Vantage Configuration: e_vantage/e02_lab.md
+        - E03 - Vantage Operations: e_vantage/e03_lab.md
 
     - References:
         - General:
