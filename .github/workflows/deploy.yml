@@ -62,18 +62,13 @@ jobs:
         # Deploy Atlanta version locally (without pushing)
         mike deploy --update-aliases 2025.4.ATL latest
 
-        # Verify Orlando version exists
-        if ! mike list --branch gh-pages | grep -q "2025.1.ORL"; then
-          echo "⚠️ Orlando version missing - this should not happen!"
-          echo "Orlando version protection failed - manual intervention required"
-          exit 1
-        fi
-
         # Push to gh-pages with force to handle conflicts
         echo "📤 Pushing to gh-pages branch..."
         git push origin gh-pages --force
 
         echo "✅ GitHub Pages deployment completed"
+        echo "📋 Deployed versions:"
+        mike list --branch gh-pages
 
     - name: 🌐 Deploy to nginx server
       if: ${{ github.event.inputs.deploy_target == 'nginx-server' || github.event.inputs.deploy_target == 'both' }}
@@ -133,7 +128,6 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### ✅ Successfully deployed:" >> $GITHUB_STEP_SUMMARY
         echo "- **Atlanta 2025.4.ATL** (latest version)" >> $GITHUB_STEP_SUMMARY
-        echo "- **Orlando 2025.1.ORL** (protected historical version)" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### 🌐 Access URLs:" >> $GITHUB_STEP_SUMMARY
         echo "- **GitHub Pages**: https://arista-channel.github.io/acws/" >> $GITHUB_STEP_SUMMARY
