@@ -1,0 +1,112 @@
+# CODEOWNERS file for Arista Campus Workshop Documentation
+# This file defines who is responsible for reviewing changes to specific parts of the repository.
+# 
+# When a pull request is created, GitHub will automatically request reviews from the code owners
+# listed here based on the files changed in the PR.
+#
+# Syntax: <file-pattern> <owner1> <owner2> ...
+# Owners can be GitHub usernames (@username) or teams (@org/team-name)
+#
+# More info: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# ============================================================================
+# DEFAULT OWNERS
+# ============================================================================
+# These owners will be requested for review when someone opens a pull request
+# unless a later match takes precedence.
+
+* @mbalagot12 @RyanM-Arista
+
+# ============================================================================
+# DOCUMENTATION CONTENT
+# ============================================================================
+
+# All documentation files
+/docs/ @mbalagot12 @RyanM-Arista
+
+# Wired Solutions Lab Guides
+/docs/a_wired/ @mbalagot12 @drew-arista
+
+# Wireless Edge Lab Guides
+/docs/b_wireless/ @mbalagot12 @brandonmainock
+
+# Security Lab Guides
+/docs/c_security/ @mbalagot12 @RyanM-Arista
+
+# SD-WAN Lab Guides
+/docs/d_sdwan/ @mbalagot12 @RyanM-Arista
+
+# Vantage Professional Services Lab Guides
+/docs/e_vantage/ @mbalagot12 @Arista-Laban
+
+# Assets (images, videos, etc.)
+/docs/assets/ @mbalagot12
+
+# Landing page
+/docs/index.md @mbalagot12 @RyanM-Arista
+
+# ============================================================================
+# CONFIGURATION FILES
+# ============================================================================
+
+# MkDocs configuration
+mkdocs.yml @mbalagot12 @RyanM-Arista
+
+# Python dependencies
+requirements.txt @mbalagot12
+pyproject.toml @mbalagot12
+uv.lock @mbalagot12
+
+# Lab assignment data
+/data/ @mbalagot12
+
+# ============================================================================
+# CI/CD AND AUTOMATION
+# ============================================================================
+
+# GitHub Actions workflows
+/.github/workflows/ @mbalagot12 @RyanM-Arista
+
+# Deployment scripts
+/scripts/ @mbalagot12
+*.sh @mbalagot12
+
+# Automation scripts
+/automation/ @mbalagot12
+
+# ============================================================================
+# PROJECT DOCUMENTATION
+# ============================================================================
+
+# Contributing guidelines
+CONTRIBUTING.md @mbalagot12 @RyanM-Arista
+
+# README files
+README.md @mbalagot12 @RyanM-Arista
+**/README.md @mbalagot12
+
+# Deployment documentation
+DEPLOYMENT*.md @mbalagot12
+CI_CD*.md @mbalagot12
+
+# ============================================================================
+# SECURITY AND SENSITIVE FILES
+# ============================================================================
+
+# GitHub configuration
+/.github/ @mbalagot12
+
+# Configuration files
+config.json @mbalagot12
+/config/ @mbalagot12
+
+# ============================================================================
+# SPECIAL FILES
+# ============================================================================
+
+# This file itself
+/.github/CODEOWNERS @mbalagot12
+
+# Pull request template
+/.github/pull_request_template.md @mbalagot12 @RyanM-Arista
+
