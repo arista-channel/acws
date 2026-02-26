@@ -219,7 +219,7 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
 
 </div>
 
-## :material-wan: SD-WAN Lab Guides
+<!-- ## :material-wan: SD-WAN Lab Guides
 
 <div class="grid cards" markdown>
 
@@ -247,9 +247,9 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
 
     [:material-login: Hop into D-03](./d_sdwan/d03_lab.md){ .md-button .md-button--primary }
 
-</div>
+</div> -->
 
-## :material-chart-line: Vantage Professional Services
+<!-- ## :material-chart-line: Vantage Professional Services
 
 <div class="grid cards" markdown>
 
@@ -277,7 +277,7 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
 
     [:material-login: Hop into E-03](./e_vantage/e03_lab.md){ .md-button .md-button--primary }
 
-</div>
+</div> -->
 
 <!-- ## :material-eye-outline: Network Observability
 
