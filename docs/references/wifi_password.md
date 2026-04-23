@@ -19,9 +19,7 @@
 
 ## Wireless
 
-### SSID: `Arista-Workshop`
-
-### Password: `AristaRox!` (case sensitive)
+Your instructor will provide the WiFi SSID and password for the workshop.
 
 --8<--
 docs/snippets/login_cv.md

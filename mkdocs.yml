@@ -38,7 +38,7 @@ nav:
     - References:
         - General:
             - Agenda: references/agenda.md
-            - WiFi Passwords: references/wifi_password.md
+            # WiFi Passwords removed (security concern - instructor will provide)
             # Lab Assignment removed from navigation (template kept in repo)
         - Arista Configuration Tools: 
             - Intangi Iris: references/config_tools.md
