@@ -16,11 +16,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://arista-channel.github.io/acws/2026.1/a_wired/a02_lab/</loc>
-         <lastmod>2026-04-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://arista-channel.github.io/acws/2026.1/a_wired/a03_lab/</loc>
          <lastmod>2026-04-23</lastmod>
          <changefreq>daily</changefreq>
@@ -177,11 +172,6 @@
     </url>
     <url>
          <loc>https://arista-channel.github.io/acws/2026.1/references/mac_cert/</loc>
-         <lastmod>2026-04-23</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>https://arista-channel.github.io/acws/2026.1/references/orl_lab_assignment/</loc>
          <lastmod>2026-04-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
