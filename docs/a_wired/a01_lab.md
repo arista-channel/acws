@@ -1303,6 +1303,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 !!! tip "🎉 CONGRATS! You have completed this lab! 🎉"
 
-    [:material-login: LET'S GO TO THE NEXT LAB!](./a02_lab.md){ .md-button .md-button--primary }
+    [:material-login: LET'S GO TO THE NEXT LAB!](./a02_atd.md){ .md-button .md-button--primary }
 
 --8<-- "includes/abbreviations.md"

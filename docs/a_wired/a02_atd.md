@@ -19,16 +19,15 @@ To begin this lab, you'll need to access your assigned ATD (Arista Test Drive) v
 
 1. Navigate to your assigned ATD Token lab URL provided by your instructor
 
-## Student and Pod Assignment
+## Arista Test Drive Access
 
-{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center","left"), usecols=['Email','Lab Assignment','Student Pod #','ATD Token']) }}
-
-1. Login using the credentials provided for your lab instance
-2. Once logged in, you should see the ATD welcome screen similar to the example below. Click on the "Click Here to Access Topology" button to enter the lab environment.
+1. Your instructor will provide you with the ATD access link and credentials for your lab instance
+2. Login using the credentials provided for your lab instance
+3. Once logged in, you should see the ATD welcome screen similar to the example below. Click on the "Click Here to Access Topology" button to enter the lab environment.
 
     ![ATD Welcome Screen](./assets/images/a02_atd/01_atd_welcome.png){ loading=lazy }
 
-3. To access the lab guides within your virtual environment, look for the vertical navigation bar on the left side of the screen and click on "Lab Guides" as shown below. You'll also find your lab credentials provided at the bottom of the page.
+4. To access the lab guides within your virtual environment, look for the vertical navigation bar on the left side of the screen and click on "Lab Guides" as shown below. You'll also find your lab credentials provided at the bottom of the page.
 
     > ![ATD Lab Environment](./assets/images/a02_atd/02_atd_lab_environment.png){ loading=lazy }
     > ![ATD Lab Environment](./assets/images/a02_atd/02_atd_lab_environment.png){ loading=lazy }
@@ -36,7 +35,7 @@ To begin this lab, you'll need to access your assigned ATD (Arista Test Drive) v
     ![ATD Virtual Lab Guides](./assets/images/a02_atd/03_atd_virtual_lab_guides.png){ loading=lazy }
     ![ATD Campus Labs](./assets/images/a02_atd/04_atd_campus_labs.png){ loading=lazy }
 
-4. Choose the "CloudVision Studios - L2LS" labs to access the specific lab instructions for this exercise. Follow the lab instructions to complete all the steps required to create a campus fabric.
+5. Choose the "CloudVision Studios - L2LS" labs to access the specific lab instructions for this exercise. Follow the lab instructions to complete all the steps required to create a campus fabric.
 
     ![ATD Campus Labs](./assets/images/a02_atd/04_atd_campus_labs.png){ loading=lazy }
 
