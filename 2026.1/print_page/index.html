@@ -2423,10 +2423,10 @@
 <li>
 <p>Let's explore the interfaces and what's connected. Take note</p>
 <ol class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Your pod has one connection to the spine (we're not in a full mesh)</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Workshop access point and raspberry pi (lab guides) are connected</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> <abbr title="Multi-Chassis Link Aggregation">MLAG</abbr> interfaces</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Your POD is configured as part of a Port-Channel</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Your pod has one connection to the spine (we're not in a full mesh)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Workshop access point and raspberry pi (lab guides) are connected</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> <abbr title="Multi-Chassis Link Aggregation">MLAG</abbr> interfaces</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Your POD is configured as part of a Port-Channel</li>
 </ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#a_wired-a01_lab-__codelineno-5-1"></a><span class="l l-Scalar l-Scalar-Plain">show interfaces status</span>
 </code></pre></div>
@@ -3040,7 +3040,7 @@
             </select>
 
             <button id="connect-btn" class="agent-btn primary">🔌 Connect &amp; Start Lab</button>
-            <button id="stop-btn" class="agent-btn secondary" disabled>⏹️ Stop</button>
+            <button id="stop-btn" class="agent-btn secondary" disabled="">⏹️ Stop</button>
         </div>
 
         <div class="progress-section">
@@ -3704,7 +3704,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>Under the Campus Type, click on <code>Select</code> and select <code>L2</code> from the dropdown</li>
 <li>Scroll down to <code>+ Add Access Pod</code>. Type <code>IDF1</code> and click <code>+ Create "IDF1"</code></li>
 <li>Click on <code>&gt;</code> to expand the <code>IDF1</code> access pod</li>
-<li>At the bottom of the page, <code>Updating tag Campus Fabric</code>, click <img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f50d.svg" title=":mag:"> <code>Review</code></li>
+<li>At the bottom of the page, <code>Updating tag Campus Fabric</code>, click <img alt="🔍" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f50d.svg" title=":mag:"> <code>Review</code></li>
 <li>On Workspace Review, click <code>Submit Workspace</code></li>
 <li>On <code>Workspace Submitted</code>, click <code>Clear Workspace</code></li>
 </ol>
@@ -5065,7 +5065,7 @@ On Windows, use your favorite snip program to capture the image below and save i
 </li>
 <li>
 <p>Hover over the AP image to get more information and then <code>right-click on the AP</code> image to see more options.</p>
-<div class="grid cards" markdown>
+<div class="grid cards" markdown="">
 <ul>
 <li><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../b_wireless/assets/images/b01/config/18a_config.png" data-desc-position="bottom"><img alt="Campus Studio" src="../b_wireless/assets/images/b01/config/18a_config.png"></a></li>
 <li><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../b_wireless/assets/images/b01/config/19a_config.png" data-desc-position="bottom"><img alt="Campus Studio" src="../b_wireless/assets/images/b01/config/19a_config.png"></a></li>
@@ -5260,7 +5260,7 @@ We are using <code>Bridged</code> mode in this lab. You could use the following 
 </li>
 <li>
 <p>Once your device has successfully connected to the AP, click on the client name to learn more about the client (on the previous browser tab).</p>
-<div class="grid cards" markdown>
+<div class="grid cards" markdown="">
 <ul>
 <li><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../b_wireless/assets/images/b01/tshoot/07_tshoot.png" data-desc-position="bottom"><img alt="Campus Studio" src="../b_wireless/assets/images/b01/tshoot/07_tshoot.png"></a></li>
 <li><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../b_wireless/assets/images/b01/tshoot/08_tshoot.png" data-desc-position="bottom"><img alt="Campus Studio" src="../b_wireless/assets/images/b01/tshoot/08_tshoot.png"></a></li>
@@ -5358,7 +5358,7 @@ We are using <code>Bridged</code> mode in this lab. You could use the following 
             </select>
 
             <button id="connect-btn" class="agent-btn primary">🔌 Connect &amp; Start Lab</button>
-            <button id="stop-btn" class="agent-btn secondary" disabled>⏹️ Stop</button>
+            <button id="stop-btn" class="agent-btn secondary" disabled="">⏹️ Stop</button>
         </div>
 
         <div class="progress-section">
@@ -5990,12 +5990,12 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>
 <p>Click the Customization tab to customize the portal settings, and notice the elements. When done, click <code>Add Guest Portal</code>. The portal gets listed in the portal listing.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Page</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Login Toggle</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Terms of Use and Privacy Policy</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Logo</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Guest Login Submit Button</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Etc</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Page</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Login Toggle</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Terms of Use and Privacy Policy</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Logo</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Guest Login Submit Button</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Etc</li>
 </ul>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../b_wireless/assets/images/b02/portal/03_portal.png" data-desc-position="bottom"><img alt="Campus Studio" src="../b_wireless/assets/images/b02/portal/03_portal.png"></a></p>
 </li>
@@ -6511,19 +6511,19 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>In our workshop lab topology you will see that each leaf in your pod is directly connected to the access point and RaspberryPi client. Traditionally, a firmware upgrade on the lead in the pod would cause the access point, wireless clients connected to the access point, and the raspberry pi client to lose network connectivity. In this lab, we will use Arista <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> on the leaf switch in your pod to perform a firmware upgrade minimizing any network disruptions for both wired and wireless clients.</p>
 <h2 id="b_wireless-b04_lab-prerequisites">Prerequisites<a class="headerlink" href="#b_wireless-b04_lab-prerequisites" title="Permanent link">¶</a></h2>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Continuous POE should be configured to maintain POE power delivery to connected devices.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Must be running an <abbr title="Arista's Extensible Operating System">EOS</abbr> version that includes the <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> feature.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Must be upgrading to a new <abbr title="Arista's Extensible Operating System">EOS</abbr> version that also includes the <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> feature.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Spanning-tree must be running in <abbr title="Multiple Spanning Tree">MST</abbr> mode or disabled.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Spanning-tree edge ports must have portfast and BPDUGuard enabled.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Switches running BGP must be configured with <code>graceful-restart</code> otherwise routes are lost and the hardware may fail to forward traffic.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Continuous POE should be configured to maintain POE power delivery to connected devices.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Must be running an <abbr title="Arista's Extensible Operating System">EOS</abbr> version that includes the <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> feature.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Must be upgrading to a new <abbr title="Arista's Extensible Operating System">EOS</abbr> version that also includes the <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> feature.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Spanning-tree must be running in <abbr title="Multiple Spanning Tree">MST</abbr> mode or disabled.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Spanning-tree edge ports must have portfast and BPDUGuard enabled.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Switches running BGP must be configured with <code>graceful-restart</code> otherwise routes are lost and the hardware may fail to forward traffic.</li>
 </ul>
 <h2 id="b_wireless-b04_lab-caveats">Caveats<a class="headerlink" href="#b_wireless-b04_lab-caveats" title="Permanent link">¶</a></h2>
 <p>As you can imagine, disconnecting the Control and Management plane off the data plane will come with some caveats depending on what features you are running! While that's the case, most instances where <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> is valuable is where we have no resiliency or ability to "route around" the switch in maintenance.</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> only supports upgrades. Hitless image downgrades are not supported.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> If a new <abbr title="Arista's Extensible Operating System">EOS</abbr> version includes an FPGA upgrade, the FPGA upgrade will be suppressed. FPGA upgrades require a full reboot of a switch to apply.</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Some switch features, when in use, will prevent <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> from starting. See the <a href="https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations" target="_blank">Arista TOI</a> for more details</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> only supports upgrades. Hitless image downgrades are not supported.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> If a new <abbr title="Arista's Extensible Operating System">EOS</abbr> version includes an FPGA upgrade, the FPGA upgrade will be suppressed. FPGA upgrades require a full reboot of a switch to apply.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Some switch features, when in use, will prevent <abbr title="Smart System Upgrade (or ASU)">SSU</abbr> from starting. See the <a href="https://www.arista.com/en/support/toi/eos-4-15-2f/13710-hitless-ssu#limitations" target="_blank">Arista TOI</a> for more details</li>
 </ul>
 <div class="admonition tip">
 <p class="admonition-title">First, download the desired <abbr title="Arista's Extensible Operating System">EOS</abbr> image to the switch flash storage using CloudVision Change Control.</p>
@@ -6891,7 +6891,7 @@ write</p>
             </select>
 
             <button id="connect-btn" class="agent-btn primary">🔌 Connect &amp; Start Lab</button>
-            <button id="stop-btn" class="agent-btn secondary" disabled>⏹️ Stop</button>
+            <button id="stop-btn" class="agent-btn secondary" disabled="">⏹️ Stop</button>
         </div>
 
         <div class="progress-section">
@@ -8077,10 +8077,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <h2 id="c_security-c03_lab-overview">Overview<a class="headerlink" href="#c_security-c03_lab-overview" title="Permanent link">¶</a></h2>
 <p>In this lab we enhance the port security to our Raspberry Pi! We will do the following:</p>
 <ul class="task-list">
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Update our port profile</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Configure our switch to communicate over RadSec to AGNI</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Configure the AGNI EAP-TLS wired policy</li>
-<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked><span class="task-list-indicator"></span></label> Verify it all works!</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Update our port profile</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Configure our switch to communicate over RadSec to AGNI</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Configure the AGNI EAP-TLS wired policy</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled="" checked=""><span class="task-list-indicator"></span></label> Verify it all works!</li>
 </ul>
 <h1 id="c_security-c03_lab-topology">Topology<a class="headerlink" href="#c_security-c03_lab-topology" title="Permanent link">¶</a></h1>
 <details class="example">
@@ -9918,7 +9918,7 @@ The following steps assume you have already downloaded the certificates to your 
 </code></pre></div>
 </li>
 <li>
-<p>You can look in AGNI under the <code>Access Devices &gt; Cloud Gateways</code> and now see the status is green <img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f7e2.svg" title=":green_circle:"></p>
+<p>You can look in AGNI under the <code>Access Devices &gt; Cloud Gateways</code> and now see the status is green <img alt="🟢" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg" title=":green_circle:"></p>
 </li>
 </ol>
 <h2 id="references-agni_tacacs-tacacs-configuration">TACACS Configuration<a class="headerlink" href="#references-agni_tacacs-tacacs-configuration" title="Permanent link">¶</a></h2>
