@@ -20,7 +20,7 @@ set -euo pipefail  # Exit on error, undefined vars, pipe failures
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
 VENV_PATH="$PROJECT_ROOT/.venv"
-SERVER_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
+SERVER_HOST="ec2-3-148-13-216.us-east-2.compute.amazonaws.com"
 SERVER_USER="ubuntu"
 SERVER_PATH="/var/www/mkdocs/site"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"

@@ -10,7 +10,7 @@
 set -euo pipefail
 
 # Configuration
-SERVER_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
+SERVER_HOST="ec2-3-148-13-216.us-east-2.compute.amazonaws.com"
 SERVER_USER="ubuntu"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 

@@ -57,15 +57,13 @@ fi
 # Test SSH connection
 echo ""
 print_info "Testing SSH connection to AWS instance..."
-print_warning "Update this script with your AWS instance FQDN before testing"
 
-# Uncomment and update with your AWS FQDN:
-# if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@YOUR_AWS_INSTANCE_FQDN "echo 'Connection test successful'" 2>/dev/null; then
-#     print_status "SSH connection successful!"
-# else
-#     print_warning "SSH connection failed (server may be down or network issue)"
-#     print_info "This is normal if the server is not currently running"
-# fi
+if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@ec2-3-148-13-216.us-east-2.compute.amazonaws.com "echo 'Connection test successful'" 2>/dev/null; then
+    print_status "SSH connection successful!"
+else
+    print_warning "SSH connection failed (server may be down or network issue)"
+    print_info "This is normal if the server is not currently running"
+fi
 
 # Display key content for copying
 echo ""
@@ -136,7 +134,7 @@ echo ""
 echo "🖥️  Server Information"
 echo "====================="
 echo ""
-echo "Server: YOUR_AWS_INSTANCE_FQDN (update with your AWS public DNS)"
+echo "Server: ec2-3-148-13-216.us-east-2.compute.amazonaws.com"
 echo "User: ubuntu"
 echo "Key: mb-partner-kp.pem"
 echo "Deployment Path: /var/www/mkdocs/site (operational Mike site)"

@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 ATLANTA_VERSION="2025.4.ATL"
 ORLANDO_VERSION="2025.1.ORL"
-NGINX_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
+NGINX_HOST="ec2-3-148-13-216.us-east-2.compute.amazonaws.com"
 NGINX_USER="ubuntu"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 
@@ -211,7 +211,7 @@ main() {
     echo ""
     echo "🌐 Access URLs:"
     echo "   • GitHub Pages: https://arista-channel.github.io/acws/"
-    echo "   • nginx Server: http://YOUR_AWS_INSTANCE_FQDN/"
+    echo "   • nginx Server: http://ec2-3-148-13-216.us-east-2.compute.amazonaws.com/"
 }
 
 # Run main function with all arguments
