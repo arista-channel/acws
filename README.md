@@ -1,12 +1,10 @@
 # 🚀 Arista Campus Workshop Documentation
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://mbalagot12.github.io/campus-workshop/)
-[![Operational Site](https://img.shields.io/badge/Operational%20Site-Live-success)](http://acws.duckdns.org/)
+[![Live Documentation](https://img.shields.io/badge/Live%20Documentation-GitHub%20Pages-brightgreen)](https://arista-channel.github.io/acws/)
 [![MkDocs](https://img.shields.io/badge/MkDocs-Material-blue)](https://squidfunk.github.io/mkdocs-material/)
 [![Python](https://img.shields.io/badge/Python-3.11+-blue)](https://www.python.org/)
 [![Mobile Responsive](https://img.shields.io/badge/Mobile-Responsive-success)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Responsive/responsive_design_building_blocks)
-[![CI/CD](https://img.shields.io/badge/CI%2FCD-Automated-green)](https://github.com/mbalagot12/campus-workshop/actions)
-[![Version Protected](https://img.shields.io/badge/Orlando%202025.1.ORL-Protected-red)](http://acws.duckdns.org/2025.1.ORL/)
+[![CI/CD](https://img.shields.io/badge/CI%2FCD-Automated-green)](https://github.com/arista-channel/acws/actions)
 
 **Enterprise-grade documentation platform** for Arista Campus Workshop featuring immersive hands-on labs, interactive GIF demonstrations, and professional deployment automation. Built with modern web technologies and comprehensive mobile responsiveness.
 
@@ -25,10 +23,10 @@
 - **Centralized CSS/JavaScript** architecture
 
 🛡️ **Enterprise-Grade Deployment**
-- **Production nginx server**: `acws.duckdns.org`
-- **GitHub Pages backup**: Automatic synchronization
-- **Version protection**: Orlando 2025.1.ORL historically preserved
-- **Automated backups**: Before every deployment
+- **GitHub Pages**: https://arista-channel.github.io/acws/
+- **AWS EC2 nginx server**: `ec2-3-148-13-216.us-east-2.compute.amazonaws.com`
+- **Mike versioning**: Single version (2026.1) deployment
+- **Automated deployments**: Via GitHub Actions
 
 ## 🏗️ **Modern Architecture & Technology Stack**
 
@@ -58,22 +56,17 @@
 - **Backup System**: Automatic backups before every deployment
 - **Cache Management**: Browser cache-busting for immediate updates
 
-## 🌐 **Live Deployment Sites**
+## 🌐 **Live Deployment Site**
 
 ### **🚀 Production Environment**
-- **Primary Site**: [acws.duckdns.org](http://acws.duckdns.org/) - Production nginx server
-- **Current Version**: Atlanta 2025.4.ATL (Enhanced with interactive features)
-- **Status**: ✅ **Fully synchronized with all enhancements**
+- **Live Documentation**: [arista-channel.github.io/acws](https://arista-channel.github.io/acws/)
+- **Current Version**: 2026.1 (Latest)
+- **Status**: ✅ **Publicly accessible on GitHub Pages**
 
-### **📖 Backup & Development**
-- **GitHub Pages**: [mbalagot12.github.io/campus-workshop](https://mbalagot12.github.io/campus-workshop/)
-- **Status**: ✅ **Auto-synchronized via CI/CD pipeline**
-- **Purpose**: Backup site and development testing
-
-### **🛡️ Historical Protection**
-- **Orlando 2025.1.ORL**: [acws.duckdns.org/2025.1.ORL](http://acws.duckdns.org/2025.1.ORL/)
-- **Status**: 🔒 **PERMANENTLY PROTECTED** - Never modified by CI/CD
-- **Purpose**: Historical reference and content preservation
+### **🖥️ AWS Infrastructure**
+- **nginx Server**: `ec2-3-148-13-216.us-east-2.compute.amazonaws.com`
+- **Purpose**: Optional nginx deployment for internal/private access
+- **Status**: Available for manual deployment
 
 ### **📱 Mobile Responsiveness**
 All sites now feature:
@@ -148,8 +141,8 @@ Large (>1024px):    Enhanced desktop with animations
 
 ```bash
 # Clone the repository
-git clone https://github.com/mbalagot12/campus-workshop.git
-cd campus-workshop
+git clone https://github.com/arista-channel/acws.git
+cd acws
 
 # Install uv (if not already installed)
 curl -LsSf https://astral.sh/uv/install.sh | sh  # macOS/Linux
@@ -283,26 +276,23 @@ This project uses **Mike** for documentation versioning with **safe CI/CD automa
 mike deploy 2025.2.NAS --title "Nashville 2025.2" --update-aliases
 git add . && git commit -m "Update Nashville content" && git push
 
-# ✅ Automated CI/CD will safely deploy to:
-# - GitHub Pages: https://mbalagot12.github.io/campus-workshop/2025.2.NAS/
-# - Operational Site: http://acws.duckdns.org/2025.2.NAS/
-# - Orlando 2025.1.ORL remains protected (never updated)
+# ✅ Automated CI/CD will deploy to:
+# - GitHub Pages: https://arista-channel.github.io/acws/
 ```
 
-#### **🔒 Orlando Protection**
+#### **📦 Version Management**
 
 ```bash
-# ❌ PROTECTED - Orlando version is never updated by CI/CD
-# ✅ Historical content preserved at: http://acws.duckdns.org/2025.1.ORL/
+# Current version: 2026.1 (latest)
+# Deployed to: https://arista-channel.github.io/acws/
 ```
 
 #### **📋 CI/CD Pipeline Features**
 
-- **🛡️ Operational Site Protection** - Never overwrites existing Mike site
-- **🔒 Orlando 2025.1.ORL Protection** - Triple-layer protection for historical content
-- **💾 Automatic Backups** - Created before any deployment
-- **🧪 Dry Run Testing** - Verify deployments before going live
-- **📊 Selective Updates** - Only updates specified version directories
+- **🚀 Automated Deployments** - GitHub Actions for continuous deployment
+- **📦 Version Management** - Mike-based versioning system
+- **🌐 GitHub Pages** - Public documentation hosting
+- **🔧 Manual Deployment** - Scripts for AWS EC2 nginx deployment
 
 For detailed CI/CD documentation, see: **[CI_CD_README.md](./CI_CD_README.md)**
 
@@ -314,23 +304,21 @@ Our enterprise-grade CI/CD pipeline provides **safe, automated deployment** with
 ```mermaid
 graph LR
     A[Push to main] --> B[GitHub Actions]
-    B --> C[Deploy to GitHub Pages]
-    C --> D[Trigger nginx Deployment]
-    D --> E[Update acws.duckdns.org]
-    E --> F[All Sites Synchronized]
+    B --> C[Build with MkDocs + Mike]
+    C --> D[Deploy to gh-pages]
+    D --> E[Live on GitHub Pages]
 ```
 
-#### **🛡️ Safety Features**
-- **Orlando Protection**: 2025.1.ORL version permanently protected
-- **Backup Creation**: Automatic backups before every deployment
-- **Selective Updates**: Only updates latest and new versions
-- **Dry Run Testing**: Test deployments without going live
-- **Cache Busting**: Forces browser refresh for immediate updates
+#### **🛡️ Deployment Features**
+- **Automated CI/CD**: GitHub Actions workflow
+- **Version Control**: Mike-based versioning
+- **Public Access**: GitHub Pages hosting
+- **AWS Deployment**: Optional nginx deployment scripts
 
-#### **📊 Deployment Targets**
-1. **GitHub Pages**: `mbalagot12.github.io/campus-workshop/`
-2. **Production nginx**: `acws.duckdns.org` (EC2: us-east-2)
-3. **Version Management**: Mike-based versioning with aliases
+#### **📊 Deployment Target**
+- **GitHub Pages**: https://arista-channel.github.io/acws/
+- **Version**: 2026.1 (latest)
+- **Optional**: AWS EC2 nginx server (manual deployment)
 
 ### **🎯 Enhanced User Experience Features**
 
@@ -357,17 +345,16 @@ The project features a **safe CI/CD pipeline** that automatically deploys to bot
 - Push to `main` branch
 - Manual GitHub Actions workflow dispatch
 
-**Deployment Targets:**
+**Deployment Target:**
 
-- **GitHub Pages**: [mbalagot12.github.io/campus-workshop](https://mbalagot12.github.io/campus-workshop/)
-- **Operational Site**: [acws.duckdns.org](http://acws.duckdns.org/)
+- **GitHub Pages**: [arista-channel.github.io/acws](https://arista-channel.github.io/acws/)
 
-**Safety Features:**
+**Deployment Features:**
 
-- ✅ **Non-destructive updates** - Never overwrites operational site
-- ✅ **Orlando protection** - 2025.1.ORL version never touched
-- ✅ **Automatic backups** - Created before any changes
-- ✅ **Dry run testing** - Test deployments before going live
+- ✅ **Automated CI/CD** - GitHub Actions workflow
+- ✅ **Version management** - Mike-based versioning (2026.1)
+- ✅ **Public access** - Free GitHub Pages hosting
+- ✅ **AWS scripts** - Optional nginx deployment to EC2
 
 ### Manual Deployment (Advanced)
 
@@ -406,12 +393,12 @@ When updating workshop content, the CI/CD pipeline ensures safe deployment:
 3. **Commit & Push**: `git add . && git commit -m "Update content" && git push`
 4. **Automated Deployment**: Pipeline safely updates both sites
 
-### **Protection Guarantees**
+### **Deployment Information**
 
-- **🛡️ Orlando 2025.1.ORL**: Historical content never modified
-- **🏠 Operational Site**: `acws.duckdns.org` never overwritten
-- **💾 Backups**: Automatic backup creation before changes
-- **🧪 Testing**: Dry run capability for safe testing
+- **🌐 Live Site**: https://arista-channel.github.io/acws/
+- **📦 Version**: 2026.1 (latest)
+- **🚀 Platform**: GitHub Pages
+- **🖥️ Optional**: AWS EC2 nginx server deployment
 
 ### **For Detailed CI/CD Documentation**
 
@@ -458,11 +445,11 @@ See: **[CI_CD_README.md](./CI_CD_README.md)** for complete pipeline documentatio
 - ✅ **Helper Scripts** for easy deployment and testing
 
 #### **Enterprise Features**
-- ✅ **Production nginx Server** at acws.duckdns.org
-- ✅ **GitHub Pages Backup** with auto-synchronization
+- ✅ **GitHub Pages Hosting** at https://arista-channel.github.io/acws/
+- ✅ **AWS EC2 Deployment** scripts for optional nginx hosting
 - ✅ **Comprehensive Documentation** with setup guides
 - ✅ **Mobile Testing Framework** with responsive validation
-- ✅ **Safe Deployment Process** with backup and rollback capabilities
+- ✅ **Automated CI/CD Pipeline** with GitHub Actions
 
 ## 📄 License
 
