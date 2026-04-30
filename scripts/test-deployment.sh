@@ -18,7 +18,7 @@ set -euo pipefail
 # Configuration
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-SERVER_HOST="acws.duckdns.org"
+SERVER_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
 SERVER_USER="ubuntu"
 
 # Colors

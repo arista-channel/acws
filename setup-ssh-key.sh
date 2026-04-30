@@ -56,14 +56,16 @@ fi
 
 # Test SSH connection
 echo ""
-print_info "Testing SSH connection to acws.duckdns.org..."
+print_info "Testing SSH connection to AWS instance..."
+print_warning "Update this script with your AWS instance FQDN before testing"
 
-if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@acws.duckdns.org "echo 'Connection test successful'" 2>/dev/null; then
-    print_status "SSH connection successful!"
-else
-    print_warning "SSH connection failed (server may be down or network issue)"
-    print_info "This is normal if the server is not currently running"
-fi
+# Uncomment and update with your AWS FQDN:
+# if ssh -i "$KEY_PATH" -o ConnectTimeout=10 -o BatchMode=yes ubuntu@YOUR_AWS_INSTANCE_FQDN "echo 'Connection test successful'" 2>/dev/null; then
+#     print_status "SSH connection successful!"
+# else
+#     print_warning "SSH connection failed (server may be down or network issue)"
+#     print_info "This is normal if the server is not currently running"
+# fi
 
 # Display key content for copying
 echo ""
@@ -134,7 +136,7 @@ echo ""
 echo "🖥️  Server Information"
 echo "====================="
 echo ""
-echo "Server: acws.duckdns.org"
+echo "Server: YOUR_AWS_INSTANCE_FQDN (update with your AWS public DNS)"
 echo "User: ubuntu"
 echo "Key: mb-partner-kp.pem"
 echo "Deployment Path: /var/www/mkdocs/site (operational Mike site)"

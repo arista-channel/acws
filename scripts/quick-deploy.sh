@@ -15,7 +15,7 @@ NC='\033[0m' # No Color
 # Configuration
 ATLANTA_VERSION="2025.4.ATL"
 ORLANDO_VERSION="2025.1.ORL"
-NGINX_HOST="acws.duckdns.org"
+NGINX_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
 NGINX_USER="ubuntu"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 
@@ -210,8 +210,8 @@ main() {
     log_success "🎊 Deployment completed successfully!"
     echo ""
     echo "🌐 Access URLs:"
-    echo "   • GitHub Pages: https://mbalagot12.github.io/campus-workshop/"
-    echo "   • nginx Server: https://acws.duckdns.org/"
+    echo "   • GitHub Pages: https://arista-channel.github.io/acws/"
+    echo "   • nginx Server: http://YOUR_AWS_INSTANCE_FQDN/"
 }
 
 # Run main function with all arguments

@@ -10,7 +10,7 @@
 set -euo pipefail
 
 # Configuration
-SERVER_HOST="acws.duckdns.org"
+SERVER_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
 SERVER_USER="ubuntu"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 

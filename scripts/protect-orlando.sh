@@ -13,7 +13,7 @@ NC='\033[0m'
 
 ORLANDO_VERSION="2025.1.ORL"
 BACKUP_BRANCH="backup-gh-pages-20250914-162844"
-NGINX_HOST="acws.duckdns.org"
+NGINX_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
 NGINX_USER="ubuntu"
 SSH_KEY_PATH="/Users/miguelbalagot/Documents/MyKeyPairs/mb-partner-kp.pem"
 

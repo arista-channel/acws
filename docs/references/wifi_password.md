@@ -15,7 +15,7 @@
 
 ### Accesible from your browser
 
-1. On the web [Arista Campus Workshop Lab Guides](https://acws.duckdns.org/){target="_blank"}
+1. On the web [Arista Campus Workshop Lab Guides](https://arista-channel.github.io/acws/){target="_blank"}
 
 ## Wireless
 

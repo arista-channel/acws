@@ -5,7 +5,7 @@
 
 set -e
 
-SERVER_HOST="acws.duckdns.org"
+SERVER_HOST="YOUR_AWS_INSTANCE_FQDN"  # Update with your AWS public DNS
 SERVER_USER="ubuntu"
 SITE_SOURCE="."
 
