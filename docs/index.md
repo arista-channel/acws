@@ -70,7 +70,7 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
                 <div class="solution-card">
                     <div class="solution-icon">🔍</div>
                     <div class="solution-title">Vantage</div>
-                    <div class="solution-desc">Network Insights, Telemetry, Analytics</div>
+                    <div class="solution-desc">Professional Services Tools for Customer Networks</div>
                 </div>
             </div>
         </div>
