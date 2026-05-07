@@ -9,6 +9,72 @@ resolution-markers = [
 ]
 
 [[package]]
+name = "acws"
+version = "2026.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "black" },
+    { name = "flake8" },
+    { name = "isort" },
+    { name = "jinja2" },
+    { name = "markdown" },
+    { name = "mike" },
+    { name = "mkdocs" },
+    { name = "mkdocs-git-revision-date-plugin" },
+    { name = "mkdocs-glightbox" },
+    { name = "mkdocs-material" },
+    { name = "mkdocs-material-extensions" },
+    { name = "mkdocs-print-site-plugin" },
+    { name = "mkdocs-table-reader-plugin" },
+    { name = "pre-commit" },
+    { name = "pymdown-extensions" },
+    { name = "yamllint" },
+]
+
+[package.optional-dependencies]
+automation = [
+    { name = "asyncssh" },
+    { name = "pydantic" },
+    { name = "rich" },
+    { name = "typer" },
+]
+dev = [
+    { name = "mypy" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "asyncssh", marker = "extra == 'automation'", specifier = ">=2.13.0" },
+    { name = "black", specifier = ">=23.0.0" },
+    { name = "flake8", specifier = ">=6.0.0" },
+    { name = "isort", specifier = ">=5.12.0" },
+    { name = "jinja2", specifier = ">=3.1.2" },
+    { name = "markdown", specifier = ">=3.4.4" },
+    { name = "mike", specifier = ">=2.0.0" },
+    { name = "mkdocs", specifier = ">=1.5.0" },
+    { name = "mkdocs-git-revision-date-plugin", specifier = ">=0.3.2" },
+    { name = "mkdocs-glightbox", specifier = ">=0.3.4" },
+    { name = "mkdocs-material", specifier = ">=9.5.17" },
+    { name = "mkdocs-material-extensions", specifier = ">=1.3.1" },
+    { name = "mkdocs-print-site-plugin", specifier = ">=2.3.4" },
+    { name = "mkdocs-table-reader-plugin", specifier = ">=2.0.3" },
+    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.5.0" },
+    { name = "pre-commit", specifier = ">=3.3.0" },
+    { name = "pydantic", marker = "extra == 'automation'", specifier = ">=2.0.0" },
+    { name = "pymdown-extensions", specifier = ">=10.2.1" },
+    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.0" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1.0" },
+    { name = "rich", marker = "extra == 'automation'", specifier = ">=13.0.0" },
+    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.0.287" },
+    { name = "typer", marker = "extra == 'automation'", specifier = ">=0.9.0" },
+    { name = "yamllint", specifier = ">=1.32.0" },
+]
+provides-extras = ["dev", "automation"]
+
+[[package]]
 name = "annotated-types"
 version = "0.7.0"
 source = { registry = "https://pypi.org/simple" }
@@ -91,72 +157,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/ce/e9/2cb0a017eb7024f70e0d2e9bdb8c5a5b078c5740c7f8816065d06f04c557/black-25.1.0-cp39-cp39-win_amd64.whl", hash = "sha256:bacabb307dca5ebaf9c118d2d2f6903da0d62c9faa82bd21a33eecc319559355", size = 1419419 },
     { url = "https://files.pythonhosted.org/packages/09/71/54e999902aed72baf26bca0d50781b01838251a462612966e9fc4891eadd/black-25.1.0-py3-none-any.whl", hash = "sha256:95e8176dae143ba9097f351d174fdaf0ccd29efb414b362ae3fd72bf0f710717", size = 207646 },
 ]
-
-[[package]]
-name = "campus-workshop"
-version = "2025.3.0"
-source = { editable = "." }
-dependencies = [
-    { name = "black" },
-    { name = "flake8" },
-    { name = "isort" },
-    { name = "jinja2" },
-    { name = "markdown" },
-    { name = "mike" },
-    { name = "mkdocs" },
-    { name = "mkdocs-git-revision-date-plugin" },
-    { name = "mkdocs-glightbox" },
-    { name = "mkdocs-material" },
-    { name = "mkdocs-material-extensions" },
-    { name = "mkdocs-print-site-plugin" },
-    { name = "mkdocs-table-reader-plugin" },
-    { name = "pre-commit" },
-    { name = "pymdown-extensions" },
-    { name = "yamllint" },
-]
-
-[package.optional-dependencies]
-automation = [
-    { name = "asyncssh" },
-    { name = "pydantic" },
-    { name = "rich" },
-    { name = "typer" },
-]
-dev = [
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "pytest-cov" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "asyncssh", marker = "extra == 'automation'", specifier = ">=2.13.0" },
-    { name = "black", specifier = ">=23.0.0" },
-    { name = "flake8", specifier = ">=6.0.0" },
-    { name = "isort", specifier = ">=5.12.0" },
-    { name = "jinja2", specifier = ">=3.1.2" },
-    { name = "markdown", specifier = ">=3.4.4" },
-    { name = "mike", specifier = ">=2.0.0" },
-    { name = "mkdocs", specifier = ">=1.5.0" },
-    { name = "mkdocs-git-revision-date-plugin", specifier = ">=0.3.2" },
-    { name = "mkdocs-glightbox", specifier = ">=0.3.4" },
-    { name = "mkdocs-material", specifier = ">=9.5.17" },
-    { name = "mkdocs-material-extensions", specifier = ">=1.3.1" },
-    { name = "mkdocs-print-site-plugin", specifier = ">=2.3.4" },
-    { name = "mkdocs-table-reader-plugin", specifier = ">=2.0.3" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.5.0" },
-    { name = "pre-commit", specifier = ">=3.3.0" },
-    { name = "pydantic", marker = "extra == 'automation'", specifier = ">=2.0.0" },
-    { name = "pymdown-extensions", specifier = ">=10.2.1" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.0" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=4.1.0" },
-    { name = "rich", marker = "extra == 'automation'", specifier = ">=13.0.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.0.287" },
-    { name = "typer", marker = "extra == 'automation'", specifier = ">=0.9.0" },
-    { name = "yamllint", specifier = ">=1.32.0" },
-]
-provides-extras = ["dev", "automation"]
 
 [[package]]
 name = "certifi"
@@ -547,7 +547,7 @@ name = "exceptiongroup"
 version = "1.3.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/0b/9f/a65090624ecf468cdca03533906e7c69ed7588582240cfe7cc9e770b50eb/exceptiongroup-1.3.0.tar.gz", hash = "sha256:b241f5885f560bc56a59ee63ca4c6a8bfa46ae4ad651af316d4e81817bb9fd88", size = 29749 }
 wheels = [

@@ -1,6 +1,6 @@
 [project]
-name = "campus-workshop"
-version = "2025.3.0"
+name = "acws"
+version = "2026.1.0"
 description = "Arista Campus Workshop Documentation with Interactive AI Lab Automation"
 readme = "README.md"
 license = { text = "Proprietary - Arista Networks" }
@@ -70,10 +70,10 @@ automation = [
 ]
 
 [project.urls]
-Homepage = "https://mbalagot12.github.io/campus-workshop/"
-Repository = "https://github.com/mbalagot12/campus-workshop"
-Documentation = "https://mbalagot12.github.io/campus-workshop/"
-"Bug Tracker" = "https://github.com/mbalagot12/campus-workshop/issues"
+Homepage = "https://arista-channel.github.io/acws/"
+Repository = "https://github.com/arista-channel/acws"
+Documentation = "https://arista-channel.github.io/acws/"
+"Bug Tracker" = "https://github.com/arista-channel/acws/issues"
 
 [build-system]
 requires = ["hatchling"]
