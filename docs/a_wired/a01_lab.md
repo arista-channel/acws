@@ -33,22 +33,22 @@ Let's log into the workshop spine switches.
     ???+ quote "Example Output"
 
         ```yaml title="Example Output" hl_lines="1 3 7-8 14"
-        Arista CCS-722XPM-48ZY8-F #(1)!
-        Hardware version: 11.01
-        Serial number: HBG23270736 #(2)!
-        Hardware MAC address: ac3d.9450.afc6
-        System MAC address: ac3d.9450.afc6
+        Arista CCS-720XP-24ZY4-F
+        Hardware version: 11.22
+        Serial number: HBG232901HT
+        Hardware MAC address: fc59.c0ff.0e17
+        System MAC address: fc59.c0ff.0e17
 
-        Software image version: 4.31.5M #(3)!
-        Architecture: i686 #(4)!
-        Internal build version: 4.31.5M-38783123.4315M
-        Internal build ID: a514fb70-598b-4084-975c-4f5978421b10
+        Software image version: 4.34.0F
+        Architecture: i686
+        Internal build version: 4.34.0F-41661064.4340F
+        Internal build ID: 8346ed5e-061a-4a70-9c36-b6eee6fc0848
         Image format version: 3.0
         Image optimization: Strata-4GB
 
-        Uptime: 4 hours and 58 minutes #(5)!
-        Total memory: 3952960 kB
-        Free memory: 2054376 kB
+        Uptime: 2 days, 2 hours and 39 minutes
+        Total memory: 3952928 kB
+        Free memory: 2029952 kB
         ```
 
         1. The full switch model
@@ -66,57 +66,75 @@ Let's log into the workshop spine switches.
 
     ??? quote "Example Output"
 
-        ```yaml title="Example Output" hl_lines="4 8 13 16 37 39"
+```yaml title="Example Output" hl_lines="4 8 13 16 37 39"
         System information
-            Model                    Description
-            ------------------------ ----------------------------------------------------
-            CCS-722XPM-48ZY8         48 2.5GBase-T PoE & 8-port SFP28 MacSec Switch #(1)!
+  Model                    Description                                         
+  ------------------------ ----------------------------------------------------
+  CCS-720XP-24ZY4          24 MGig Base-T PoE & 4-port SFP28 Switch            
 
-            HW Version  Serial Number  Mfg Date   Epoch
-            ----------- -------------- ---------- -----
-            11.01       HBG23270736    2023-07-14 01.00 #(2)!
+  HW Version  Serial Number  Mfg Date   Epoch
+  ----------- -------------- ---------- -----
+  11.22       HBG232901HT    2023-07-26 01.00
 
-        System has 2 power supply slots
-            Slot Model            Serial Number
-            ---- ---------------- ----------------
-            1    PWR-1021-AC-RED  GGJT36P13J0 #(3)!
-            2    Not Inserted
+System has 2 power supply slots
+  Slot Model            Serial Number   
+  ---- ---------------- ----------------
+  1    PWR-621-AC-RED   FFKT96307BE     
+  2    PWR-621-AC-RED   FFKT96307CT     
 
-        System has 3 fan modules
-            Module  Number of Fans  Model            Serial Number
-            ------- --------------- ---------------- ----------------
-            1       1               FAN-7000-F       N/A
-            2       1               FAN-7000-F       N/A
-            3       1               FAN-7000-F       N/A
+System has 3 fan modules
+  Module  Number of Fans  Model            Serial Number   
+  ------- --------------- ---------------- ----------------
+  1       1               FAN-7000-F       N/A             
+  2       1               FAN-7000-F       N/A             
+  3       1               FAN-7000-F       N/A             
 
-        System has 65 ports
-            Type               Count
-            ------------------ ----
-            Management         1
-            Switched           52
-            SwitchedBootstrap  4
-            Fabric             8
+System has 29 ports
+  Type               Count
+  ------------------ ----
+  Management         1   
+  Switched           24  
+  SwitchedBootstrap  4   
 
-        System has 56 switched transceiver slots
-            Port Manufacturer     Model            Serial Number    Rev
-            ---- ---------------- ---------------- ---------------- ----
-            1    Arista Networks  CCS-722XPM-48ZY8
-            2    Arista Networks  CCS-722XPM-48ZY8
-            ...
-            49   Arista Networks  SFP-10G-SR       ACW1710002F0     20
-            50   Not Present
-            51   Arista Networks  SFP-10G-SR       XTH16080010E     0002 #(5)!
-            52   Not Present
-            53   Not Present
-            54   Not Present
-            55   Not Present
-            56   Not Present
+System has 28 switched transceiver slots
+  Port Manufacturer     Model            Serial Number    Rev 
+  ---- ---------------- ---------------- ---------------- ----
+  1    Arista Networks  CCS-720XP-24ZY4                       
+  2    Arista Networks  CCS-720XP-24ZY4                       
+  3    Arista Networks  CCS-720XP-24ZY4                       
+  4    Arista Networks  CCS-720XP-24ZY4                       
+  5    Arista Networks  CCS-720XP-24ZY4                       
+  6    Arista Networks  CCS-720XP-24ZY4                       
+  7    Arista Networks  CCS-720XP-24ZY4                       
+  8    Arista Networks  CCS-720XP-24ZY4                       
+  9    Arista Networks  CCS-720XP-24ZY4                       
+  10   Arista Networks  CCS-720XP-24ZY4                       
+  11   Arista Networks  CCS-720XP-24ZY4                       
+  12   Arista Networks  CCS-720XP-24ZY4                       
+  13   Arista Networks  CCS-720XP-24ZY4                       
+  14   Arista Networks  CCS-720XP-24ZY4                       
+  15   Arista Networks  CCS-720XP-24ZY4                       
+  16   Arista Networks  CCS-720XP-24ZY4                       
+  17   Arista Networks  CCS-720XP-24ZY4                       
+  18   Arista Networks  CCS-720XP-24ZY4                       
+  19   Arista Networks  CCS-720XP-24ZY4                       
+  20   Arista Networks  CCS-720XP-24ZY4                       
+  21   Arista Networks  CCS-720XP-24ZY4                       
+  22   Arista Networks  CCS-720XP-24ZY4                       
+  23   Arista Networks  CCS-720XP-24ZY4                       
+  24   Arista Networks  CCS-720XP-24ZY4                       
+  25   MergeOptics GmbH 10119467-2010LF  CN81KBZ01C       F   
+  26   Arista Networks  CAB-S-S-25G-1M   XPK221730456     20  
+  27   Not Present                                            
+  28   Not Present                                            
 
-        System has 1 storage device
-            Mount      Type Model                Serial Number Rev Size (GB)
-            ---------- ---- -------------------- ------------- --- ---------
-            /mnt/flash eMMC Smart Modular 16GP1A 801f4198      1.0 8
-        ```
+System has 1 storage device
+  Mount      Type Model                Serial Number Rev Size (GB)
+  ---------- ---- -------------------- ------------- --- ---------
+  /mnt/flash eMMC Smart Modular 08GP1A 80199f4c      1.0 8        
+
+
+```
 
         1. More information about this switch platform capabilities
         2. You can see when this switch was manufactured and hardware versioning
@@ -137,54 +155,64 @@ Let's log into the workshop spine switches.
     ??? quote "Example Output"
 
         ```yaml title="Example Output" hl_lines="2-3 29-30 32-33 35"
-        Port       Name       Status       Vlan      Duplex Speed  Type         Flags Encapsulation
-        Et1        POD01      connected    in Po101  a-full a-1G   2.5GBASE-T
-        Et2        POD01      notconnect   in Po101  auto   auto   2.5GBASE-T
-        Et3        POD02      connected    trunk     auto   auto   2.5GBASE-T
-        Et4        POD02      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et5        POD03      connected    trunk     auto   auto   2.5GBASE-T
-        Et6        POD03      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et7        POD04      connected    trunk     auto   auto   2.5GBASE-T
-        Et8        POD04      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et9        POD05      connected    trunk     auto   auto   2.5GBASE-T
-        Et10       POD05      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et11       POD06      connected    trunk     auto   auto   2.5GBASE-T
-        Et12       POD06      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et13       POD07      connected    trunk     auto   auto   2.5GBASE-T
-        Et14       POD07      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et15       POD08      connected    trunk     auto   auto   2.5GBASE-T
-        Et16       POD08      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et17       POD09      connected    trunk     auto   auto   2.5GBASE-T
-        Et18       POD09      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et19       POD10      connected    trunk     auto   auto   2.5GBASE-T
-        Et20       POD10      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et21       POD11      connected    trunk     auto   auto   2.5GBASE-T
-        Et22       POD11      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et23       POD12      connected    trunk     auto   auto   2.5GBASE-T
-        Et24       POD12      notconnect   trunk     auto   auto   2.5GBASE-T
-        Et25       POD13      connected    trunk     auto   auto   2.5GBASE-T
-        Et26       POD13      notconnect   trunk     auto   auto   2.5GBASE-T
-        ...
-        Et33       ATD_WiFi   disabled     100       auto   auto   2.5GBASE-T
-        Et34       ATD_PI     disabled     100       auto   auto   2.5GBASE-T
-        ...
-        Et47       MLAG       connected    in Po1000 auto   auto   5GBASE-T
-        Et48       MLAG       connected    in Po1000 auto   auto   5GBASE-T
-        ...
-        Po101      POD01      connected    trunk     full   2G     N/A
-        Po102      POD02      connected    trunk     full   unconf N/A
-        Po103      POD03      connected    trunk     full   unconf N/A
-        Po104      POD04      connected    trunk     full   unconf N/A
-        Po105      POD05      connected    trunk     full   unconf N/A
-        Po106      POD06      connected    trunk     full   unconf N/A
-        Po107      POD07      connected    trunk     full   unconf N/A
-        Po108      POD08      connected    trunk     full   unconf N/A
-        Po109      POD09      connected    trunk     full   unconf N/A
-        Po110      POD10      connected    trunk     full   unconf N/A
-        Po111      POD11      connected    trunk     full   unconf N/A
-        Po112      POD12      connected    trunk     full   unconf N/A
-        Po113      POD13      connected    trunk     full   unconf N/A
-        Po1000     MLAG       connected    trunk     full   20G    N/A
+        Port       Name                               Status       Vlan     Duplex Speed  Type         Flags Encapsulation
+         Et1        POD01-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et2        POD02-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et3        POD03-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et4        POD04-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et5        POD05-LEAF1A                       connected    in Po105 a-full a-1G   2.5GBASE-T                     
+         Et6        POD06-LEAF1A                       connected    in Po106 a-full a-1G   2.5GBASE-T                     
+         Et7        POD07-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et8        POD08-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et9        POD09-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et10       POD10-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et11       POD11-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et12       POD12-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et13       POD13-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et14       POD014LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et15       POD015-LEAF1A                      notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et16       POD16-LEAF1A                       notconnect   trunk    auto   auto   2.5GBASE-T                     
+         Et17       POD17-LEAF1A                       notconnect   trunk    auto   auto   5GBASE-T                       
+         Et18       POD18-LEAF1A                       notconnect   trunk    auto   auto   5GBASE-T                       
+         Et19       POD19-LEAF1A                       notconnect   trunk    auto   auto   5GBASE-T                       
+         Et20       POD20-LEAF1A                       notconnect   trunk    auto   auto   5GBASE-T                       
+         Et21       POD00-LEAF1A                       notconnect   trunk    auto   auto   5GBASE-T                       
+         Et22       AP C-330 LAN1                      notconnect   trunk    auto   auto   5GBASE-T                       
+         Et23       Trunk Group to NAT inside networks connected    trunk    a-full a-1G   5GBASE-T                       
+         Et24       RasPi5                             notconnect   100      auto   auto   5GBASE-T                       
+         Et25       MLAG_spine2_Ethernet25             connected    in Po25  full   10G    10GBASE-CR                     
+         Et26       MLAG_spine2_Ethernet26             connected    in Po25  full   25G    25GBASE-CR                     
+         Et27                                          notconnect   1        full   25G    Not Present                    
+         Et28                                          notconnect   1        full   25G    Not Present                    
+         Ma1                                           disabled     routed   unconf unconf 10/100/1000                    
+         Po1        JS-LEAFA_Po10                      notconnect   trunk    full   unconf N/A                            
+         Po2        POD02-LEAF1A_Po10                  notconnect   trunk    full   unconf N/A                            
+         Po3        POD03-LEAF1A_Po10                  notconnect   trunk    full   unconf N/A                            
+         Po7        SW-10.1.7.42_Po10                  notconnect   trunk    full   unconf N/A                            
+         Po18                                          notconnect   1        full   unconf N/A                            
+         Po25       MLAG_PEER_spine2_Po25              connected    trunk    full   25G    N/A                            
+         Po100      POD00-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po101      POD01-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po102      POD02-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po103      POD03-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po104      POD04-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po105      POD05-LEAF1A                       connected    trunk    full   2G     N/A                            
+         Po106      POD06-LEAF1A                       connected    trunk    full   2G     N/A                            
+         Po107      POD07-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po108      POD08-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po109      POD09-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po110      POD10-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po111      POD11-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po112      POD12-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po113      POD13-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po114      POD014LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po115      POD015-LEAF1A                      notconnect   trunk    full   unconf N/A                            
+         Po116      POD16-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po117      POD17-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po118      POD18-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po119      POD19-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po120      POD20-LEAF1A                       notconnect   trunk    full   unconf N/A                            
+         Po122      AP C-330 LAN1                      notconnect   trunk    full   unconf N/A                            
         ```
 
 5. Try some filtering of our output, there are some familiar filtering options like `include`, `exclude`, `begin`, etc, but as we go through this workshop we will explore further!
@@ -284,32 +312,7 @@ Let's log into the workshop spine switches.
     ??? quote "Example Output"
 
         ```yaml title="Example Output: LLDP Detail"
-        Last table change time   : 0:00:02 ago
-
-        Number of table inserts  : 51
-        Number of table deletes  : 35
-        Number of table drops    : 0
-        Number of table age-outs : 0
-
-        Port          Neighbor Device ID       Neighbor Port ID    TTL
-        ---------- ------------------------ ---------------------- ---
-        Et1           sw-10.1.1.51             Ethernet15          120
-        Et3           sw-10.1.2.42             Ethernet15          120
-        Et5           sw-10.1.3.40             Ethernet15          120
-        Et7           sw-10.1.4.41             Ethernet15          120
-        Et9           sw-10.1.5.40             Ethernet15          120
-        Et11          sw-10.1.6.41             Ethernet15          120
-        Et13          sw-10.1.7.41             Ethernet15          120
-        Et15          sw-10.1.8.40             Ethernet15          120
-        Et17          sw-10.1.9.41             Ethernet15          120
-        Et19          sw-10.1.10.41            Ethernet15          120
-        Et21          sw-10.1.11.40            Ethernet15          120
-        Et23          sw-10.1.12.40            Ethernet15          120
-        Et25          sw-10.1.13.40            Ethernet15          120
-        Et33          Arista_18:66:BF          3086.2d18.66bf      120
-        Et47          SPINE02                  Ethernet47          120
-        Et48          SPINE02                  Ethernet48          120
-        Et49          CORE01                   Ethernet49          120
+        
         ```
 
         ```yaml title="Example Output: atdpods"
