@@ -109,29 +109,21 @@ Through direct interaction with Arista's CloudVision platform, EOS operating sys
 
     [:material-login: Hop into A-02](./a_wired/a02_lab.md){ .md-button .md-button--primary } -->
 
-- :material-cloud: **A02-ATD-Lab: Day 1 Operations - Virtual Lab**
-
-    ---
-
-    Experience campus fabric provisioning using Arista Test Drive (ATD) virtual lab environment with CloudVision Studios.
-
-    [:material-login: Hop into A-02-ATD](./a_wired/a02_atd.md){ .md-button .md-button--primary }
-
-- :material-cloud: **A03-Lab: Day 2 Operations**
+- :material-cloud: **A02-Lab: Day 2 Operations**
 
     ---
 
     Continue with day 2 operations, using CloudVision to manage campus port profiles, access port configuration, and streamlined task execution.
 
-    [:material-login: Hop into A-03](./a_wired/a03_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-02](./a_wired/a02_lab.md){ .md-button .md-button--primary }
 
-- :material-cloud: **A04-Lab: Operations and Monitoring**
+- :material-cloud: **A03-Lab: Operations and Monitoring**
 
     ---
 
     The campus is deployed, explore the CloudVision observability, altering, troubleshooting, and more!
 
-    [:material-login: Hop into A-04](./a_wired/a04_lab.md){ .md-button .md-button--primary }
+    [:material-login: Hop into A-03](./a_wired/a03_lab_prior_a04.md){ .md-button .md-button--primary }
 
 </div>
 

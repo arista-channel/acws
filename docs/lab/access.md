@@ -28,6 +28,10 @@ Your instructor will provide you with the necessary credentials to access:
 
 ![ATD Student Topology](../assets/images/topology/atd_student-light.png)
 
+## Lab Assignment
+
+{{ read_csv('data/lab_assignment.csv',colalign=("left","center","center"), usecols=['Email','Lab Assignment','Student Pod #']) }}
+
 --8<--
 "snippets/workspace.md"
 --8<--
