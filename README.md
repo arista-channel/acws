@@ -219,11 +219,13 @@ campus-workshop/
 ├── data/                          # 📊 Lab Assignment Data (CSV files)
 ├── automation/                    # 🤖 AI Lab Automation Agents
 ├── includes/                      # 📝 MkDocs Includes (abbreviations, etc.)
-├── 📋 Helper Scripts & Documentation
-│   ├── refresh-github-actions.sh  # 🔄 CI/CD Pipeline Trigger Script
-│   ├── mobile-testing-guide.md    # 📱 Mobile Responsiveness Testing Guide
-│   ├── setup-github-secrets.md    # 🔐 GitHub Actions Setup Instructions
-│   └── CI_CD_*.md                 # 📚 CI/CD Pipeline Documentation
+├── tools/                         # 🔧 Deployment and Utility Scripts
+│   ├── deployment/                # Manual deployment tools
+│   ├── testing/                   # Testing utilities
+│   ├── legacy/                    # Archived one-off scripts
+│   └── README.md                  # Tools documentation
+├── .archive/                      # 📦 Historical Documentation
+│   └── *.md                       # Legacy guides and documentation
 ├── mkdocs.yml                     # ⚙️ MkDocs Configuration
 ├── pyproject.toml                 # 🐍 Python Project Configuration
 ├── requirements.txt               # 📦 Python Dependencies
@@ -243,10 +245,10 @@ campus-workshop/
 - **Change Control workflows**: Step-by-step visual guides
 - **Optimized performance**: Lazy loading and efficient rendering
 
-#### **Helper Scripts & Documentation**
-- **`refresh-github-actions.sh`**: Automated CI/CD trigger utility
-- **`mobile-testing-guide.md`**: Comprehensive responsive design testing
-- **`setup-github-secrets.md`**: Complete deployment setup instructions
+#### **Helper Scripts & Tools**
+- **`scripts/`**: Active deployment and version management scripts
+- **`tools/`**: Organized utility scripts (deployment, testing, legacy)
+- **`.archive/`**: Historical documentation and legacy guides
 
 ## 🔧 Development Guidelines
 

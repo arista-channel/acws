@@ -4,6 +4,9 @@
 site/
 .mkdocs_cache/
 
+# Local-only archive (not pushed to repository)
+.archive/
+
 # uv package manager
 .uv/
 
