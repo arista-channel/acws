@@ -31,26 +31,26 @@
 /docs/b_wireless/ @mbalagot12 @brandonmainock
 
 # Security Lab Guides
-/docs/c_security/ @mbalagot12 @RyanM-Arista
+/docs/c_security/ @mbalagot12 
 
 # SD-WAN Lab Guides
-/docs/d_sdwan/ @mbalagot12 @RyanM-Arista
+/docs/d_sdwan/ @mbalagot12
 
 # Vantage Professional Services Lab Guides
 /docs/e_vantage/ @mbalagot12 @Arista-Laban
 
 # Assets (images, videos, etc.)
-/docs/assets/ @mbalagot12
+/docs/assets/ @mbalagot12 @brandonmainock
 
 # Landing page
-/docs/index.md @mbalagot12 @RyanM-Arista
+/docs/index.md @mbalagot12 @brandonmainock
 
 # ============================================================================
 # CONFIGURATION FILES
 # ============================================================================
 
 # MkDocs configuration
-mkdocs.yml @mbalagot12 @RyanM-Arista
+mkdocs.yml @mbalagot12 @brandonmainock
 
 # Python dependencies
 requirements.txt @mbalagot12
@@ -79,10 +79,10 @@ uv.lock @mbalagot12
 # ============================================================================
 
 # Contributing guidelines
-CONTRIBUTING.md @mbalagot12 @RyanM-Arista
+CONTRIBUTING.md @mbalagot12 
 
 # README files
-README.md @mbalagot12 @RyanM-Arista
+README.md @mbalagot12 
 **/README.md @mbalagot12
 
 # Deployment documentation
@@ -108,5 +108,5 @@ config.json @mbalagot12
 /.github/CODEOWNERS @mbalagot12
 
 # Pull request template
-/.github/pull_request_template.md @mbalagot12 @RyanM-Arista
+/.github/pull_request_template.md @mbalagot12 
 
